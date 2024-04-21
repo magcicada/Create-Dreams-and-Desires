@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "tag": "forge:ingots/tin"
-  },
-  "result": "create_dd:tin_scaffolding",
-  "count": 2
-}

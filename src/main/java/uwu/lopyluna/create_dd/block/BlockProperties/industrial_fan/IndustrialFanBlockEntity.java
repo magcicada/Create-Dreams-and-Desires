@@ -1,6 +1,8 @@
 package uwu.lopyluna.create_dd.block.BlockProperties.industrial_fan;
 
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
+import com.simibubi.create.content.kinetics.fan.AirCurrent;
+import com.simibubi.create.content.kinetics.fan.IAirCurrentSource;
 import com.simibubi.create.content.logistics.chute.ChuteBlockEntity;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.foundation.advancement.AllAdvancements;
@@ -22,9 +24,9 @@ import uwu.lopyluna.create_dd.configs.DDConfigs;
 import java.util.List;
 
 @SuppressWarnings({"all"})
-public class IndustrialFanBlockEntity extends GeneratingKineticBlockEntity implements IndustrialAirCurrentSource {
+public class IndustrialFanBlockEntity extends GeneratingKineticBlockEntity implements IAirCurrentSource {
 
-    public IndustrialAirCurrent airCurrent;
+    public AirCurrent airCurrent;
     protected static int airCurrentUpdateCooldown;
     protected int entitySearchCooldown;
     protected boolean updateAirFlow;
@@ -35,13 +37,13 @@ public class IndustrialFanBlockEntity extends GeneratingKineticBlockEntity imple
     public IndustrialFanBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
         isGenerator = false;
-        airCurrent = new IndustrialAirCurrent(this);
+        airCurrent = new AirCurrent(this);
         updateAirFlow = true;
         updateGenerator = false;
     }
     
     @Nullable
-    public IndustrialAirCurrent getAirCurrent() {
+    public AirCurrent getAirCurrent() {
         return airCurrent;
     }
 

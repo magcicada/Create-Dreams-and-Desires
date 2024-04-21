@@ -1,0 +1,15 @@
+
+{
+  "required": true,
+  "minVersion": 0.8,
+  "priority": 1500,
+  "package": "uwu.lopyluna.create_dd.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "create_dd.refmap.json",
+  "mixins": [
+    "MixinTransportedItemStack"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

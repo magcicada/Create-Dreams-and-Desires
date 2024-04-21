@@ -19,7 +19,7 @@ public class DDPonderTags {
     }
 
     public static final PonderTag
-    CREATEDD = create("create_dd").item(DDItems.spectral_ruby.get())
+    CREATEDD = create("create_dd").item(DDItems.inductive_mechanism.get())
             .defaultLang("Create: Dreams n' Desires", "Where Dreams & also Desires come true!")
 		.addToIndex(),
     FAN_HEATER = create("fan_heater").item(AllBlocks.BLAZE_BURNER.get())
@@ -43,31 +43,13 @@ public class DDPonderTags {
                 .add(Items.SOUL_SAND)
                 .add(AllFluids.HONEY.get().getBucket())
                 .add(AllFluids.CHOCOLATE.get().getBucket())
-                .add(DDFluids.CHROMATIC_WASTE.get().getBucket())
                 .add(DDFluids.SAP.get().getBucket())
-                .add(DDFluids.SHIMMER.get().getBucket())
-                .add(DDFluids.VANILLA_MILKSHAKE.get().getBucket())
-                .add(DDFluids.VANILLA.get().getBucket())
-                .add(DDFluids.CARAMEL.get().getBucket())
-                .add(DDFluids.CARAMEL_MILKSHAKE.get().getBucket())
-                .add(DDFluids.CHOCOLATE_MILKSHAKE.get().getBucket())
-                .add(DDFluids.HOT_CHOCOLATE.get().getBucket())
-                .add(DDFluids.GLOWBERRY.get().getBucket())
-                .add(DDFluids.GLOWBERRY_MILKSHAKE.get().getBucket())
-                .add(DDFluids.STRAWBERRY.get().getBucket())
-                .add(DDFluids.STRAWBERRY_MILKSHAKE.get().getBucket())
-                .add(DDFluids.CREAM.get().getBucket())
-                .add(DDFluids.CONDENSE_MILK.get().getBucket())
-                .add(DDBlocks.ponder_stone_generation)
         ;
 
         PonderRegistry.TAGS.forTag(CREATEDD)
                 .add(DDBlocks.industrial_fan)
                 .add(DDBlocks.hydraulic_press)
-                .add(DDBlocks.BRONZE_DRILL)
-                .add(DDBlocks.SHADOW_DRILL)
-                .add(DDBlocks.RADIANT_DRILL)
-                .add(DDBlocks.BRONZE_SAW)
+                //.add(DDBlocks.BRONZE_SAW)
                 .add(DDBlocks.cogCrank)
                 .add(DDBlocks.ACCELERATOR_MOTOR)
                 .add(DDBlocks.KINETIC_MOTOR)
@@ -85,22 +67,16 @@ public class DDPonderTags {
         PonderRegistry.TAGS.forTag(KINETIC_APPLIANCES)
                 .add(DDBlocks.industrial_fan)
                 .add(DDBlocks.hydraulic_press)
-                .add(DDBlocks.BRONZE_DRILL)
-                .add(DDBlocks.SHADOW_DRILL)
-                .add(DDBlocks.RADIANT_DRILL)
-                .add(DDBlocks.BRONZE_SAW)
+                //.add(DDBlocks.BRONZE_SAW)
                 ;
 
-        PonderRegistry.TAGS.forTag(CONTRAPTION_ACTOR)
-                .add(DDBlocks.BRONZE_DRILL)
-                .add(DDBlocks.SHADOW_DRILL)
-                .add(DDBlocks.RADIANT_DRILL)
-                .add(DDBlocks.BRONZE_SAW)
-        ;
+        //PonderRegistry.TAGS.forTag(CONTRAPTION_ACTOR)
+        //        .add(DDBlocks.BRONZE_SAW)
+        //;
 
-        PonderRegistry.TAGS.forTag(ARM_TARGETS)
-                .add(DDBlocks.BRONZE_SAW)
-        ;
+        //PonderRegistry.TAGS.forTag(ARM_TARGETS)
+        //        .add(DDBlocks.BRONZE_SAW)
+        //;
 
         PonderRegistry.TAGS.forTag(KINETIC_SOURCES)
                 .add(DDBlocks.industrial_fan)
@@ -123,10 +99,5 @@ public class DDPonderTags {
                 .add(DDBlocks.superheating_sail)
                 .add(DDBlocks.haunting_sail)
         ;
-
-        PonderRegistry.TAGS.forTag(REDSTONE)
-                .add(DDBlocks.SPECTRAL_RUBY_LAMP)
-        ;
-
     }
 }

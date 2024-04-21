@@ -39,7 +39,6 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import uwu.lopyluna.create_dd.DDTags;
-import uwu.lopyluna.create_dd.block.BlockProperties.drill.bronze.BronzeDrillBlock;
 import uwu.lopyluna.create_dd.configs.DDConfigs;
 
 import java.util.ArrayList;
@@ -116,7 +115,7 @@ public class BronzeSawBlockEntity extends SawBlockEntity {
 
 
     @Override
-    protected BlockPos getBreakingPos() {return getBlockPos().relative(getBlockState().getValue(BronzeDrillBlock.FACING));}
+    protected BlockPos getBreakingPos() {return getBlockPos().relative(getBlockState().getValue(BronzeSawBlock.FACING));}
 
     @Override
     protected float getBreakSpeed() {return Math.abs(getSpeed() / 35f);}

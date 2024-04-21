@@ -15,63 +15,35 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.DDCreate;
 import uwu.lopyluna.create_dd.DDTags;
 import uwu.lopyluna.create_dd.block.BlockProperties.*;
-import uwu.lopyluna.create_dd.block.BlockProperties.bell.BellBlock;
 import uwu.lopyluna.create_dd.block.BlockProperties.accelerator_motor.AcceleratorMotorBlock;
-import uwu.lopyluna.create_dd.block.BlockProperties.bell.BellBlockStructure;
-import uwu.lopyluna.create_dd.block.BlockProperties.bronze_saw.BronzeSawGenerator;
 import uwu.lopyluna.create_dd.block.BlockProperties.cog_crank.CogCrankBlock;
-import uwu.lopyluna.create_dd.block.BlockProperties.drill.bronze.BronzeDrillBlock;
-import uwu.lopyluna.create_dd.block.BlockProperties.drill.bronze.BronzeDrillMovementBehaviour;
 import uwu.lopyluna.create_dd.block.BlockProperties.flywheel.FlywheelBlock;
 import uwu.lopyluna.create_dd.block.BlockProperties.flywheel.FlywheelGenerator;
 import uwu.lopyluna.create_dd.block.BlockProperties.flywheel.engine.FurnaceEngineBlock;
 import uwu.lopyluna.create_dd.block.BlockProperties.industrial_fan.IndustrialFanBlock;
-import uwu.lopyluna.create_dd.block.BlockProperties.bronze_saw.BronzeSawBlock;
-import uwu.lopyluna.create_dd.block.BlockProperties.bronze_saw.BronzeSawMovementBehaviour;
 import uwu.lopyluna.create_dd.block.BlockProperties.copycat.BlockcopycatBlock;
 import uwu.lopyluna.create_dd.block.BlockProperties.copycat.BlockcopycatBlockModel;
 import uwu.lopyluna.create_dd.block.BlockProperties.copycat.BlockcopycatSlab;
 import uwu.lopyluna.create_dd.block.BlockProperties.copycat.BlockcopycatSlabModel;
 import uwu.lopyluna.create_dd.block.BlockProperties.door.YIPPEESlidingDoorBlock;
-import uwu.lopyluna.create_dd.block.BlockProperties.drill.radiant.RadiantDrillBlock;
-import uwu.lopyluna.create_dd.block.BlockProperties.drill.radiant.RadiantDrillMovementBehaviour;
-import uwu.lopyluna.create_dd.block.BlockProperties.drill.shadow.ShadowDrillBlock;
-import uwu.lopyluna.create_dd.block.BlockProperties.drill.shadow.ShadowDrillMovementBehaviour;
-import uwu.lopyluna.create_dd.block.BlockProperties.fan.EightBladeFanBlock;
-import uwu.lopyluna.create_dd.block.BlockProperties.fan.FourBladeFanBlock;
-import uwu.lopyluna.create_dd.block.BlockProperties.fan.TwoBladeFanBlock;
 import uwu.lopyluna.create_dd.block.BlockProperties.hydraulic_press.HydraulicPressBlock;
 import uwu.lopyluna.create_dd.block.BlockProperties.kinetic_motor.KineticMotorBlock;
-import uwu.lopyluna.create_dd.block.BlockProperties.magic.*;
-import uwu.lopyluna.create_dd.block.BlockProperties.panels.RadiantPanelBlock;
-import uwu.lopyluna.create_dd.block.BlockProperties.panels.ShadowPanelBlock;
-import uwu.lopyluna.create_dd.block.BlockProperties.ponder_box.PonderBoxBlock;
-import uwu.lopyluna.create_dd.block.BlockProperties.potato_turret.PotatoTurretBlock;
-import uwu.lopyluna.create_dd.block.BlockProperties.secondary_encased_chain_drive.ChainDriveBlock2;
-import uwu.lopyluna.create_dd.block.BlockProperties.secondary_encased_chain_drive.ChainDriveBlockGen;
-import uwu.lopyluna.create_dd.block.BlockProperties.secondary_encased_chain_drive.ChainGearshiftBlock2;
 import uwu.lopyluna.create_dd.block.BlockProperties.wood.*;
 import uwu.lopyluna.create_dd.block.BlockResources.DDBlockSpriteShifts;
 import uwu.lopyluna.create_dd.creative.DDItemTab;
-import uwu.lopyluna.create_dd.item.BlockItemProperties.ChromaticBlockItem;
-import uwu.lopyluna.create_dd.item.BlockItemProperties.RemovaAndNonGravitylBlockItem;
 import uwu.lopyluna.create_dd.sounds.DDSoundEvents;
 import uwu.lopyluna.create_dd.worldgen.Features.tree.RubberTreeGrower;
 
-import static com.simibubi.create.AllMovementBehaviours.movementBehaviour;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.*;
 import static uwu.lopyluna.create_dd.DDCreate.REGISTRATE;
@@ -84,287 +56,6 @@ public class DDBlocks {
     static {
         REGISTRATE.creativeModeTab(() -> DDItemTab.BASE_CREATIVE_TAB);
     }
-
-    public static final BlockEntry<Block> ponder_stone_generation =
-            REGISTRATE.block("ponder_stone_generation", Block::new)
-                    .simpleItem()
-                    .register();
-
-
-    public static final BlockEntry<Block> mithril_block = REGISTRATE.block("mithril_block", Block::new)
-            .initialProperties(SharedProperties::netheriteMetal)
-            .properties(p -> p.color(MaterialColor.WARPED_NYLIUM))
-            .properties(p -> p.sound(new ForgeSoundType(0.75f, .7f, () -> DDSoundEvents.magical_metal_break.get(),
-                    () -> DDSoundEvents.magical_metal_step.get(), () -> DDSoundEvents.magical_metal_place.get(),
-                    () -> DDSoundEvents.magical_metal_hit.get(), () -> DDSoundEvents.magical_metal_fall.get())))
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .properties(p -> p.strength(16f,48f))
-            .lang("Block of Mithril")
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> bronze_block = REGISTRATE.block("bronze_block", Block::new)
-            .initialProperties(SharedProperties::netheriteMetal)
-            .properties(p -> p.color(MaterialColor.COLOR_ORANGE))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.NETHERITE_BLOCK))
-            .properties(p -> p.strength(12f,10f))
-            .lang("Block of Bronze")
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> steel_block = REGISTRATE.block("steel_block", Block::new)
-            .initialProperties(SharedProperties::netheriteMetal)
-            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.NETHERITE_BLOCK))
-            .properties(p -> p.strength(6f,16f))
-            .lang("Block of Steel")
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> industrial_iron_block = REGISTRATE.block("industrial_iron_block", Block::new)
-            .initialProperties(SharedProperties::softMetal)
-            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
-            .properties(p -> p.sound(SoundType.NETHERITE_BLOCK))
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .transform(pickaxeOnly())
-            .tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
-            .lang("Solid Block of Industrial Iron")
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> tin_ore = REGISTRATE.block("tin_ore", Block::new)
-            .initialProperties(() -> Blocks.STONE)
-            .properties(p -> p.color(MaterialColor.STONE))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.STONE))
-            .properties(p -> p.strength(3f,3f))
-            .lang("Tin Ore")
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> deepslate_tin_ore = REGISTRATE.block("deepslate_tin_ore", Block::new)
-            .initialProperties(() -> Blocks.DEEPSLATE_GOLD_ORE)
-            .properties(p -> p.color(MaterialColor.DEEPSLATE))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE))
-            .properties(p -> p.strength(4.5f,3f))
-            .lang("Deepslate Tin Ore")
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> tin_block = REGISTRATE.block("tin_block", Block::new)
-            .initialProperties(() -> Blocks.STONE)
-            .properties(p -> p.color(MaterialColor.QUARTZ))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.METAL))
-            .properties(p -> p.strength(3f,6f))
-            .lang("Block of Tin")
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> raw_tin_block = REGISTRATE.block("raw_tin_block", Block::new)
-            .initialProperties(() -> Blocks.STONE)
-            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.STONE))
-            .properties(p -> p.strength(1f,1.6f))
-            .lang("Block of Raw Tin")
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> leather_block = REGISTRATE.block("leather_block", Block::new)
-            .initialProperties(() -> Blocks.HAY_BLOCK)
-            .properties(p -> p.color(MaterialColor.COLOR_ORANGE))
-            .properties(p -> p.sound(SoundType.WOOL))
-            .properties(p -> p.strength(0.5f,1f))
-            .tag(Tags.Blocks.STORAGE_BLOCKS)
-            .transform(tagBlockAndItem("storage_blocks/leather"))
-            .tag(Tags.Items.STORAGE_BLOCKS)
-            .build()
-            .lang("Block of Leather")
-            .register();
-
-    public static final BlockEntry<Block> lapis_alloy_block = REGISTRATE.block("lapis_alloy_block", Block::new)
-            .initialProperties(() -> Blocks.ANDESITE)
-            .properties(p -> p.color(MaterialColor.STONE))
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .transform(pickaxeOnly())
-            .tag(Tags.Blocks.STORAGE_BLOCKS)
-            .transform(tagBlockAndItem("storage_blocks/lapis_alloy"))
-            .tag(Tags.Items.STORAGE_BLOCKS)
-            .build()
-            .lang("Block of Lapis Alloy")
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> ember_alloy_block = REGISTRATE.block("ember_alloy_block", Block::new)
-            .initialProperties(() -> Blocks.BROWN_TERRACOTTA)
-            .properties(p -> p.color(MaterialColor.STONE))
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .transform(pickaxeOnly())
-            .tag(Tags.Blocks.STORAGE_BLOCKS)
-            .transform(tagBlockAndItem("storage_blocks/ember_alloy"))
-            .tag(Tags.Items.STORAGE_BLOCKS)
-            .build()
-            .lang("Block of Ember Alloy")
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> chromatic_block = REGISTRATE.block("chromatic_block", Block::new)
-            .initialProperties(() -> Blocks.NETHERITE_BLOCK)
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_PURPLE))
-            .properties(p -> p.sound(new ForgeSoundType(1, 1.2f, () -> SoundEvents.POLISHED_DEEPSLATE_BREAK,
-                    () -> SoundEvents.POLISHED_DEEPSLATE_STEP, () -> SoundEvents.POLISHED_DEEPSLATE_PLACE,
-                    () -> SoundEvents.POLISHED_DEEPSLATE_HIT, () -> SoundEvents.POLISHED_DEEPSLATE_FALL)))
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .properties(p -> p.strength(12f,25f))
-            .transform(pickaxeOnly())
-            .lang("Block of Chromatic Compound")
-            .simpleItem()
-            .item(ChromaticBlockItem::new)
-            .properties(p -> p.rarity(Rarity.UNCOMMON))
-            .build()
-            .register();
-
-    public static final BlockEntry<RadiantBlock> refined_radiance_block = REGISTRATE.block("refined_radiance_block", RadiantBlock::new)
-            .initialProperties(() -> Blocks.NETHERITE_BLOCK)
-            .properties(p -> p.color(MaterialColor.SNOW))
-            .properties(p -> p.sound(new ForgeSoundType(1, 1.25f, () -> SoundEvents.AMETHYST_BLOCK_BREAK,
-                    () -> SoundEvents.AMETHYST_BLOCK_STEP, () -> SoundEvents.AMETHYST_BLOCK_PLACE,
-                    () -> SoundEvents.AMETHYST_BLOCK_HIT, () -> SoundEvents.AMETHYST_BLOCK_FALL)))
-            .properties(p -> p.lightLevel($ -> 12))
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .properties(p -> p.strength(16f,48f))
-            .transform(pickaxeOnly())
-            .lang("Block of Refined Radiance")
-            .simpleItem()
-            .item(RemovaAndNonGravitylBlockItem::RefinedRadiance)
-            .properties(p -> p.rarity(Rarity.UNCOMMON))
-            .build()
-            .register();
-
-    public static final BlockEntry<ShadowBlock> shadow_steel_block = REGISTRATE.block("shadow_steel_block", ShadowBlock::new)
-            .initialProperties(() -> Blocks.NETHERITE_BLOCK)
-            .properties(p -> p.color(MaterialColor.COLOR_BLACK))
-            .properties(p -> p.sound(new ForgeSoundType(1, .25f, () -> SoundEvents.AMETHYST_CLUSTER_BREAK,
-                    () -> SoundEvents.AMETHYST_CLUSTER_STEP, () -> SoundEvents.AMETHYST_CLUSTER_PLACE,
-                    () -> SoundEvents.AMETHYST_CLUSTER_HIT, () -> SoundEvents.AMETHYST_CLUSTER_FALL)))
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .properties(p -> p.strength(16f,48f))
-            .transform(pickaxeOnly())
-            .lang("Block of Shadow Steel")
-            .simpleItem()
-            .item(RemovaAndNonGravitylBlockItem::ShadowSteel)
-            .properties(p -> p.rarity(Rarity.UNCOMMON))
-            .build()
-            .register();
-
-    public static final BlockEntry<OverchargedAlloyBlock> overcharged_alloy_block = REGISTRATE.block("overcharged_alloy_block", OverchargedAlloyBlock::new)
-            .initialProperties(() -> Blocks.NETHERITE_BLOCK)
-            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_BLUE))
-            .properties(p -> p.sound(new ForgeSoundType(1, 1.25f, () -> SoundEvents.AMETHYST_CLUSTER_BREAK,
-                    () -> SoundEvents.AMETHYST_CLUSTER_STEP, () -> SoundEvents.AMETHYST_CLUSTER_PLACE,
-                    () -> SoundEvents.AMETHYST_CLUSTER_HIT, () -> SoundEvents.AMETHYST_CLUSTER_FALL)))
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .properties(p -> p.strength(12f,32f))
-            .transform(pickaxeOnly())
-            .simpleItem()
-            .item(RemovaAndNonGravitylBlockItem::CCA)
-            .properties(p -> p.rarity(Rarity.UNCOMMON))
-            .build()
-            .register();
-
-    public static final BlockEntry<BlazeGoldBlock> blaze_gold_block = REGISTRATE.block("blaze_gold_block", BlazeGoldBlock::new)
-            .initialProperties(() -> Blocks.NETHERITE_BLOCK)
-            .properties(p -> p.color(MaterialColor.COLOR_YELLOW))
-            .properties(p -> p.sound(new ForgeSoundType(1, 1f, () -> SoundEvents.AMETHYST_CLUSTER_BREAK,
-                    () -> SoundEvents.AMETHYST_CLUSTER_STEP, () -> SoundEvents.AMETHYST_CLUSTER_PLACE,
-                    () -> SoundEvents.AMETHYST_CLUSTER_HIT, () -> SoundEvents.AMETHYST_CLUSTER_FALL)))
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .properties(p -> p.strength(8f,24f))
-            .transform(pickaxeOnly())
-            .simpleItem()
-            .item(RemovaAndNonGravitylBlockItem::BlazeBrass)
-            .properties(p -> p.rarity(Rarity.UNCOMMON))
-            .build()
-            .register();
-
-    public static final BlockEntry<StargazeBlock> stargaze_singularity_block = REGISTRATE.block("stargaze_singularity_block", StargazeBlock::new)
-            .initialProperties(() -> Blocks.NETHERITE_BLOCK)
-            .properties(p -> p.color(MaterialColor.COLOR_BLACK))
-            .properties(p -> p.sound(new ForgeSoundType(1, .75f, () -> SoundEvents.AMETHYST_CLUSTER_BREAK,
-                    () -> SoundEvents.AMETHYST_CLUSTER_STEP, () -> SoundEvents.AMETHYST_CLUSTER_PLACE,
-                    () -> SoundEvents.AMETHYST_CLUSTER_HIT, () -> SoundEvents.AMETHYST_CLUSTER_FALL)))
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .properties(p -> p.strength(32f,512f))
-            .transform(pickaxeOnly())
-            .simpleItem()
-            .item(RemovaAndNonGravitylBlockItem::StargazeSingularity)
-            .properties(p -> p.rarity(Rarity.EPIC))
-            .build()
-            .register();
-
-    public static final BlockEntry<Block> mossy_andesite_alloy_block = REGISTRATE.block("mossy_andesite_alloy_block", Block::new)
-            .initialProperties(() -> Blocks.ANDESITE)
-            .properties(p -> p.color(MaterialColor.STONE))
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .transform(pickaxeOnly())
-            .lang("Mossy Block of Andesite Alloy")
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<CasingBlock> mithril_casing = REGISTRATE.block("mithril_casing", CasingBlock::new)
-            .transform(BuilderTransformers.casing(() -> DDBlockSpriteShifts.MITHRIL_CASING))
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN))
-            .properties(p -> p.sound(new ForgeSoundType(0.9f, .7f, () -> DDSoundEvents.magical_metal_break.get(),
-                    () -> DDSoundEvents.magical_metal_step.get(), () -> DDSoundEvents.magical_metal_place.get(),
-                    () -> DDSoundEvents.magical_metal_hit.get(), () -> DDSoundEvents.magical_metal_fall.get())))
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .lang("Mithril Casing")
-            .register();
-
-    public static final BlockEntry<CasingBlock> bronze_casing = REGISTRATE.block("bronze_casing", CasingBlock::new)
-            .transform(BuilderTransformers.casing(() -> DDBlockSpriteShifts.BRONZE_CASING))
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_RED))
-            .properties(p -> p.sound(SoundType.WOOD))
-            .lang("Bronze Casing")
-            .register();
-
-    public static final BlockEntry<CasingBlock> zinc_casing = REGISTRATE.block("zinc_casing", CasingBlock::new)
-            .transform(BuilderTransformers.casing(() -> DDBlockSpriteShifts.ZINC_CASING))
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_BROWN))
-            .properties(p -> p.sound(SoundType.WOOD))
-            .lang("Zinc Casing")
-            .register();
-
-    public static final BlockEntry<CasingBlock> tin_casing = REGISTRATE.block("tin_casing", CasingBlock::new)
-            .transform(BuilderTransformers.casing(() -> DDBlockSpriteShifts.TIN_CASING))
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_BROWN))
-            .properties(p -> p.sound(SoundType.WOOD))
-            .lang("Tin Casing")
-            .register();
-
-    public static final BlockEntry<CasingBlock> netherite_casing = REGISTRATE.block("netherite_casing", CasingBlock::new)
-            .transform(BuilderTransformers.casing(() -> DDBlockSpriteShifts.NETHERITE_CASING))
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_BROWN))
-            .properties(p -> p.sound(SoundType.WOOD))
-            .lang("Netherite Casing")
-            .register();
-
-    public static final BlockEntry<CasingBlock> brick_casing = REGISTRATE.block("brick_casing", CasingBlock::new)
-            .transform(BuilderTransformers.casing(() -> DDBlockSpriteShifts.BRICK_CASING))
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_BROWN))
-            .properties(p -> p.sound(SoundType.MUD_BRICKS))
-            .register();
-
-    public static final BlockEntry<CasingBlock> nether_brick_casing = REGISTRATE.block("nether_brick_casing", CasingBlock::new)
-            .transform(BuilderTransformers.casing(() -> DDBlockSpriteShifts.NETHER_BRICK_CASING))
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_BROWN))
-            .properties(p -> p.sound(SoundType.NETHER_BRICKS))
-            .register();
-
-    public static final BlockEntry<CasingBlock> mossy_andesite_casing = REGISTRATE.block("mossy_andesite_casing", CasingBlock::new)
-            .transform(BuilderTransformers.casing(() -> DDBlockSpriteShifts.MOSSY_ANDESITE_CASING))
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_BROWN))
-            .properties(p -> p.sound(SoundType.WOOD))
-            .lang("Mossy Andesite Casing")
-            .register();
 
     public static final BlockEntry<CasingBlock> hydraulic_casing = REGISTRATE.block("hydraulic_casing", CasingBlock::new)
             .transform(BuilderTransformers.casing(() -> DDBlockSpriteShifts.HYDRAULIC_CASING))
@@ -387,144 +78,7 @@ public class DDBlocks {
             .lang("Overburden Casing")
             .register();
 
-    public static final BlockEntry<CasingBlock> steel_casing = REGISTRATE.block("steel_casing", CasingBlock::new)
-            .transform(BuilderTransformers.casing(() -> DDBlockSpriteShifts.STEEL_CASING))
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.NETHERITE_BLOCK))
-            .lang("Steel Casing")
-            .register();
-
-    public static final BlockEntry<ShadowBlockcasing> shadow_steel_casing = REGISTRATE.block("shadow_steel_casing", ShadowBlockcasing::new)
-            .transform(BuilderTransformers.casing(() -> DDBlockSpriteShifts.SHADOW_STEEL_CASING))
-            .properties(p -> p.color(MaterialColor.COLOR_BLACK))
-            .properties(p -> p.sound(new ForgeSoundType(1f, .4f, () -> DDSoundEvents.magic_casing_break.get(),
-                    () -> DDSoundEvents.magic_casing_step.get(), () -> DDSoundEvents.magic_casing_place.get(),
-                    () -> DDSoundEvents.magic_casing_hit.get(), () -> DDSoundEvents.magic_casing_fall.get())))
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .properties(p -> p.strength(8f,24f))
-            .lang("Shadow Casing")
-            .item(RemovaAndNonGravitylBlockItem::ShadowSteel)
-            .properties(p -> p.rarity(Rarity.UNCOMMON))
-            .build()
-            .register();
-
-    public static final BlockEntry<RadiantBlockcasing> refined_radiance_casing = REGISTRATE.block("refined_radiance_casing", RadiantBlockcasing::new)
-            .transform(BuilderTransformers.casing(() -> DDBlockSpriteShifts.REFINED_RADIANCE_CASING))
-            .properties(p -> p.color(MaterialColor.SNOW))
-            .properties(p -> p.sound(new ForgeSoundType(1f, 1.25f, () -> DDSoundEvents.magic_casing_break.get(),
-                    () -> DDSoundEvents.magic_casing_step.get(), () -> DDSoundEvents.magic_casing_place.get(),
-                    () -> DDSoundEvents.magic_casing_hit.get(), () -> DDSoundEvents.magic_casing_fall.get())))
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .properties(p -> p.strength(8f,24f))
-            .properties(p -> p.lightLevel($ -> 12))
-            .item(RemovaAndNonGravitylBlockItem::RefinedRadiance)
-            .properties(p -> p.rarity(Rarity.UNCOMMON))
-            .build()
-            .lang("Radiant Casing")
-            .register();
-
-    public static final BlockEntry<OverchargedBlockcasing> overcharged_casing = REGISTRATE.block("overcharged_casing", OverchargedBlockcasing::new)
-            .transform(BuilderTransformers.casing(() -> DDBlockSpriteShifts.OVERCHARGED_CASING))
-            .properties(p -> p.color(MaterialColor.COLOR_BLACK))
-            .properties(p -> p.sound(new ForgeSoundType(1f, 1f, () -> DDSoundEvents.magic_casing_break.get(),
-                    () -> DDSoundEvents.magic_casing_step.get(), () -> DDSoundEvents.magic_casing_place.get(),
-                    () -> DDSoundEvents.magic_casing_hit.get(), () -> DDSoundEvents.magic_casing_fall.get())))
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .properties(p -> p.strength(6f,32f))
-            .item(RemovaAndNonGravitylBlockItem::CCA)
-            .properties(p -> p.rarity(Rarity.UNCOMMON))
-            .build()
-            .register();
-
-    public static final BlockEntry<BlazeGoldBlockcasing> blaze_gold_casing = REGISTRATE.block("blaze_gold_casing", BlazeGoldBlockcasing::new)
-            .transform(BuilderTransformers.casing(() -> DDBlockSpriteShifts.BLAZE_GOLD_CASING))
-            .properties(p -> p.color(MaterialColor.COLOR_BLACK))
-            .properties(p -> p.sound(new ForgeSoundType(1f, 1.1f, () -> DDSoundEvents.magical_metal_break.get(),
-                    () -> DDSoundEvents.magical_metal_step.get(), () -> DDSoundEvents.magical_metal_place.get(),
-                    () -> DDSoundEvents.magical_metal_hit.get(), () -> DDSoundEvents.magical_metal_fall.get())))
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .properties(p -> p.strength(5f,24f))
-            .item(RemovaAndNonGravitylBlockItem::BlazeBrass)
-            .properties(p -> p.rarity(Rarity.UNCOMMON))
-            .build()
-            .register();
-
-    public static final BlockEntry<StargazeBlockcasing> stargaze_singularity_casing = REGISTRATE.block("stargaze_singularity_casing", StargazeBlockcasing::new)
-            .transform(BuilderTransformers.casing(() -> DDBlockSpriteShifts.STARGAZE_SINGULARITY_CASING))
-            .properties(p -> p.color(MaterialColor.SNOW))
-            .properties(p -> p.sound(new ForgeSoundType(1f, 0.8f, () -> DDSoundEvents.magic_casing_break.get(),
-                    () -> DDSoundEvents.magic_casing_step.get(), () -> DDSoundEvents.magic_casing_place.get(),
-                    () -> DDSoundEvents.magic_casing_hit.get(), () -> DDSoundEvents.magic_casing_fall.get())))
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .properties(p -> p.strength(12f,250f))
-            .properties(p -> p.lightLevel($ -> 8))
-            .item(RemovaAndNonGravitylBlockItem::StargazeSingularity)
-            .properties(p -> p.rarity(Rarity.EPIC))
-            .build()
-            .register();
-
-    public static final BlockEntry<CasingBlock> reinforcement_plating = REGISTRATE.block("reinforcement_plating", CasingBlock::new)
-                    .transform(BuilderTransformers.casing(() -> DDBlockSpriteShifts.reinforcement_plating))
-                    .initialProperties(SharedProperties::netheriteMetal)
-                    .properties(p -> p.color(MaterialColor.TERRACOTTA_GRAY))
-                    .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.NETHERITE_BLOCK))
-                    .properties(p -> p.strength(24f,32f))
-                    .simpleItem()
-                    .register();
-
-    public static final BlockEntry<Block> pondering_block_light = REGISTRATE.block("pondering_block_light", Block::new)
-                    .initialProperties(SharedProperties::stone)
-                    .properties(p -> p.color(MaterialColor.TERRACOTTA_GRAY))
-                    .properties(p -> p.sound(new ForgeSoundType(1, 2f, () -> SoundEvents.AMETHYST_BLOCK_BREAK,
-                            () -> SoundEvents.SNOW_STEP, () -> SoundEvents.DEEPSLATE_BRICKS_PLACE,
-                            () -> SoundEvents.NETHERITE_BLOCK_HIT, () -> SoundEvents.NETHERITE_BLOCK_FALL)))
-                    .properties(p -> p.strength(1f,5000f))
-                    .simpleItem()
-                    .register();
-
-    public static final BlockEntry<Block> pondering_block_dark = REGISTRATE.block("pondering_block_dark", Block::new)
-                    .initialProperties(SharedProperties::stone)
-                    .properties(p -> p.color(MaterialColor.TERRACOTTA_GRAY))
-                    .properties(p -> p.sound(new ForgeSoundType(1, 2f, () -> SoundEvents.AMETHYST_BLOCK_BREAK,
-                            () -> SoundEvents.SNOW_STEP, () -> SoundEvents.DEEPSLATE_BRICKS_PLACE,
-                            () -> SoundEvents.NETHERITE_BLOCK_HIT, () -> SoundEvents.NETHERITE_BLOCK_FALL)))
-                    .properties(p -> p.strength(1f,5000f))
-                    .simpleItem()
-                    .register();
-
     //MECHANICAL BLOCKS
-
-    public static final BlockEntry<PonderBoxBlock> ponder_in_a_box = REGISTRATE.block("ponder_in_a_box", PonderBoxBlock::new)
-                    .initialProperties(SharedProperties::netheriteMetal)
-                    .properties(p -> p.color(MaterialColor.TERRACOTTA_GRAY))
-                    .properties(p -> p.noOcclusion()
-                    .noCollission())
-                    .properties(p -> p.sound(new ForgeSoundType(1, 1.5f, () -> SoundEvents.AMETHYST_BLOCK_BREAK,
-                            () -> SoundEvents.AMETHYST_BLOCK_CHIME, () -> SoundEvents.SMALL_AMETHYST_BUD_PLACE,
-                            () -> SoundEvents.AMETHYST_CLUSTER_STEP, () -> SoundEvents.AMETHYST_BLOCK_CHIME)))
-                    .properties(p -> p.strength(50f,5000f))
-                    .simpleItem()
-                    .register();
-
-    public static final BlockEntry<BellBlock> BRONZE_BELL =
-            REGISTRATE.block("bronze_bell", BellBlock::new)
-                    .initialProperties(() -> Blocks.BELL)
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .properties(p -> p.color(MaterialColor.COLOR_ORANGE))
-                    .addLayer(() -> RenderType::cutoutMipped)
-                    .transform(pickaxeOnly())
-                    .item()
-                    .transform(customItemModel())
-                    .register();
-
-    public static final BlockEntry<BellBlockStructure> BRONZE_BELL_STRUCTURE =
-            REGISTRATE.block("bronze_bell_structure", BellBlockStructure::new)
-                    .initialProperties(() -> Blocks.BELL)
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .properties(p -> p.color(MaterialColor.COLOR_ORANGE))
-                    .addLayer(() -> RenderType::cutoutMipped)
-                    .transform(pickaxeOnly())
-                    .register();
 
     public static final BlockEntry<ReversedGearboxBlock> REVERSED_GEARSHIFT =
             REGISTRATE.block("reversed_gearshift", ReversedGearboxBlock::new)
@@ -538,60 +92,6 @@ public class DDBlocks {
                     .transform(customItemModel())
                     .register();
 
-    public static final BlockEntry<BronzeSawBlock> BRONZE_SAW =
-            REGISTRATE.block("bronze_saw", BronzeSawBlock::new)
-                    .initialProperties(SharedProperties::stone)
-                    .addLayer(() -> RenderType::cutoutMipped)
-                    .properties(p -> p.color(MaterialColor.PODZOL))
-                    .transform(axeOrPickaxe())
-                    .blockstate(new BronzeSawGenerator()::generate)
-                    .transform(BlockStressDefaults.setImpact(12.0))
-                    .onRegister(movementBehaviour(new BronzeSawMovementBehaviour()))
-                    .addLayer(() -> RenderType::cutoutMipped)
-                    .simpleItem()
-                    .register();
-
-    public static final BlockEntry<BronzeDrillBlock> BRONZE_DRILL =
-            REGISTRATE.block("bronze_drill", BronzeDrillBlock::new)
-                    .initialProperties(SharedProperties::stone)
-                    .properties(p -> p.color(MaterialColor.PODZOL))
-                    .transform(axeOrPickaxe())
-                    .blockstate(BlockStateGen.directionalBlockProvider(true))
-                    .transform(BlockStressDefaults.setImpact(12.0))
-                    .onRegister(movementBehaviour(new BronzeDrillMovementBehaviour()))
-                    .simpleItem()
-                    .register();
-
-    public static final BlockEntry<RadiantDrillBlock> RADIANT_DRILL =
-            REGISTRATE.block("radiant_drill", RadiantDrillBlock::new)
-                    .initialProperties(SharedProperties::netheriteMetal)
-                    .properties(p -> p.color(MaterialColor.PODZOL))
-                    .properties(p -> p.sound(new ForgeSoundType(0.9f, 1.0f, () -> DDSoundEvents.magical_metal_break.get(),
-                            () -> DDSoundEvents.magical_metal_step.get(), () -> DDSoundEvents.magical_metal_place.get(),
-                            () -> DDSoundEvents.magical_metal_hit.get(), () -> DDSoundEvents.magical_metal_fall.get())))
-                    .properties(p -> p.lightLevel($ -> 12))
-                    .addLayer(() -> RenderType::translucent)
-                    .transform(axeOrPickaxe())
-                    .blockstate(BlockStateGen.directionalBlockProvider(true))
-                    .transform(BlockStressDefaults.setImpact(24.0))
-                    .onRegister(movementBehaviour(new RadiantDrillMovementBehaviour()))
-                    .simpleItem()
-                    .register();
-
-    public static final BlockEntry<ShadowDrillBlock> SHADOW_DRILL =
-            REGISTRATE.block("shadow_drill", ShadowDrillBlock::new)
-                    .initialProperties(SharedProperties::netheriteMetal)
-                    .properties(p -> p.color(MaterialColor.PODZOL))
-                    .properties(p -> p.sound(new ForgeSoundType(0.9f, 1.0f, () -> DDSoundEvents.magical_metal_break.get(),
-                            () -> DDSoundEvents.magical_metal_step.get(), () -> DDSoundEvents.magical_metal_place.get(),
-                            () -> DDSoundEvents.magical_metal_hit.get(), () -> DDSoundEvents.magical_metal_fall.get())))
-                    .transform(axeOrPickaxe())
-                    .blockstate(BlockStateGen.directionalBlockProvider(true))
-                    .transform(BlockStressDefaults.setImpact(24.0))
-                    .onRegister(movementBehaviour(new ShadowDrillMovementBehaviour()))
-                    .simpleItem()
-                    .register();
-
     public static final BlockEntry<IndustrialFanBlock> industrial_fan =
             REGISTRATE.block("industrial_fan", IndustrialFanBlock::new)
                     .initialProperties(SharedProperties::stone)
@@ -603,33 +103,6 @@ public class DDBlocks {
                     .transform(axeOrPickaxe())
                     .transform(BlockStressDefaults.setImpact(4.0))
                     .transform(BlockStressDefaults.setCapacity(16))
-                    .simpleItem()
-                    .register();
-
-    public static final BlockEntry<RadiantPanelBlock> RADIANT_PANEL =
-            REGISTRATE.block("radiant_panel", RadiantPanelBlock::new)
-                    .initialProperties(SharedProperties::netheriteMetal)
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .properties(p -> p.sound(new ForgeSoundType(0.9f, 1.0f, () -> DDSoundEvents.magical_metal_break.get(),
-                            () -> DDSoundEvents.magical_metal_step.get(), () -> DDSoundEvents.magical_metal_place.get(),
-                            () -> DDSoundEvents.magical_metal_hit.get(), () -> DDSoundEvents.magical_metal_fall.get())))
-                    .properties(p -> p.lightLevel($ -> RadiantPanelBlock.getLight()))
-                    .properties(p -> p.requiresCorrectToolForDrops())
-                    .transform(BlockStressDefaults.setCapacity(12.0F))
-                    .addLayer(() -> RenderType::translucent)
-                    .simpleItem()
-                    .register();
-
-    public static final BlockEntry<ShadowPanelBlock> SHADOW_PANEL =
-            REGISTRATE.block("shadow_panel", ShadowPanelBlock::new)
-                    .initialProperties(SharedProperties::netheriteMetal)
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .properties(p -> p.sound(new ForgeSoundType(0.9f, 1.0f, () -> DDSoundEvents.magical_metal_break.get(),
-                            () -> DDSoundEvents.magical_metal_step.get(), () -> DDSoundEvents.magical_metal_place.get(),
-                            () -> DDSoundEvents.magical_metal_hit.get(), () -> DDSoundEvents.magical_metal_fall.get())))
-                    .properties(p -> p.lightLevel($ -> ShadowPanelBlock.getLight()))
-                    .properties(p -> p.requiresCorrectToolForDrops())
-                    .transform(BlockStressDefaults.setCapacity(8.0F))
                     .simpleItem()
                     .register();
 
@@ -655,22 +128,6 @@ public class DDBlocks {
                     .blockstate(new FlywheelGenerator()::generate)
                     .item()
                     .transform(customItemModel())
-                    .register();
-
-
-    public static final BlockEntry<PotatoTurretBlock> POTATO_TURRET =
-            REGISTRATE.block("potato_turret", PotatoTurretBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .properties(p -> p.color(MaterialColor.COLOR_BLUE)
-                            .sound(SoundType.NETHERITE_BLOCK))
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate((c, p) -> p.getVariantBuilder(c.get())
-                            .forAllStates(s -> ConfiguredModel.builder()
-                                    .modelFile(AssetLookup.partialBaseModel(c, p))
-                                    .build()))
-                    .transform(pickaxeOnly())
-                    .transform(BlockStressDefaults.setImpact(2.0))
-                    .simpleItem()
                     .register();
 
     public static final BlockEntry<HydraulicPressBlock> hydraulic_press =
@@ -813,39 +270,6 @@ public class DDBlocks {
                     .simpleItem()
                     .register();
 
-    public static final BlockEntry<ChainDriveBlock2> secondary_encased_chain_drive =
-            REGISTRATE.block("secondary_encased_chain_drive", ChainDriveBlock2::new)
-                    .initialProperties(SharedProperties::stone)
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .properties(p -> p.color(MaterialColor.PODZOL))
-                    .transform(BlockStressDefaults.setNoImpact())
-                    .transform(axeOrPickaxe())
-                    .blockstate((c, p) -> new ChainDriveBlockGen((state, suffix) -> p.models()
-                            .getExistingFile(p.modLoc("block/" + c.getName() + "/" + suffix))).generate(c, p))
-                    .item()
-                    .transform(customItemModel())
-                    .register();
-
-    public static final BlockEntry<ChainGearshiftBlock2> secondary_adjustable_chain_gearshift =
-            REGISTRATE.block("secondary_adjustable_chain_gearshift", ChainGearshiftBlock2::new)
-                    .initialProperties(SharedProperties::stone)
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .properties(p -> p.color(MaterialColor.NETHER))
-                    .transform(BlockStressDefaults.setNoImpact())
-                    .transform(axeOrPickaxe())
-                    .blockstate((c, p) -> new ChainDriveBlockGen((state, suffix) -> {
-                        String powered = state.getValue(ChainGearshiftBlock2.POWERED) ? "_powered" : "";
-                        return p.models()
-                                .withExistingParent(c.getName() + "_" + suffix + powered,
-                                        p.modLoc("block/secondary_encased_chain_drive/" + suffix))
-                                .texture("side", p.modLoc("block/" + c.getName() + powered));
-                    }).generate(c, p))
-                    .item()
-                    .model((c, p) -> p.withExistingParent(c.getName(), p.modLoc("block/secondary_encased_chain_drive/item"))
-                            .texture("side", p.modLoc("block/" + c.getName())))
-                    .build()
-                    .register();
-
     //Decoratives
 
     public static final BlockEntry<MetalScaffoldingBlock> TRAIN_SCAFFOLD =
@@ -872,89 +296,6 @@ public class DDBlocks {
                             () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/industrial_iron")), MaterialColor.TERRACOTTA_YELLOW,
                             DDBlockSpriteShifts.INDUSTRIAL_SCAFFOLD, DDBlockSpriteShifts.INDUSTRIAL_SCAFFOLD_INSIDE, DDBlockSpriteShifts.INDUSTRIAL_CASING))
                     .register();
-    public static final BlockEntry<MetalScaffoldingBlock> MITHRIL_SCAFFOLD =
-            REGISTRATE.block("mithril_scaffolding", MetalScaffoldingBlock::new)
-                    .transform(BuilderTransformers.scaffold("mithril",
-                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/mithril")), MaterialColor.TERRACOTTA_YELLOW,
-                            DDBlockSpriteShifts.MITHRIL_SCAFFOLD, DDBlockSpriteShifts.MITHRIL_SCAFFOLD_INSIDE, DDBlockSpriteShifts.MITHRIL_CASING))
-                    .register();
-    public static final BlockEntry<MetalScaffoldingBlock> MOSSY_ANDESITE_SCAFFOLD =
-            REGISTRATE.block("mossy_andesite_scaffolding", MetalScaffoldingBlock::new)
-                    .transform(BuilderTransformers.scaffold("mossy_andesite", () -> DataIngredient.items(AllItems.ANDESITE_ALLOY.get()),
-                            MaterialColor.STONE, DDBlockSpriteShifts.MOSSY_ANDESITE_SCAFFOLD, DDBlockSpriteShifts.MOSSY_ANDESITE_SCAFFOLD_INSIDE,
-                            DDBlockSpriteShifts.MOSSY_ANDESITE_CASING))
-                    .register();
-    public static final BlockEntry<MetalScaffoldingBlock> ZINC_SCAFFOLD =
-            REGISTRATE.block("zinc_scaffolding", MetalScaffoldingBlock::new)
-                    .transform(BuilderTransformers.scaffold("zinc",
-                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")), MaterialColor.TERRACOTTA_YELLOW,
-                            DDBlockSpriteShifts.ZINC_SCAFFOLD, DDBlockSpriteShifts.ZINC_SCAFFOLD_INSIDE, DDBlockSpriteShifts.ZINC_CASING))
-                    .register();
-    public static final BlockEntry<MetalScaffoldingBlock> TIN_SCAFFOLD =
-            REGISTRATE.block("tin_scaffolding", MetalScaffoldingBlock::new)
-                    .transform(BuilderTransformers.scaffold("tin",
-                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/tin")), MaterialColor.TERRACOTTA_YELLOW,
-                            DDBlockSpriteShifts.TIN_SCAFFOLD, DDBlockSpriteShifts.TIN_SCAFFOLD_INSIDE, DDBlockSpriteShifts.TIN_CASING))
-                    .register();
-    public static final BlockEntry<MetalScaffoldingBlock> BRONZE_SCAFFOLD =
-            REGISTRATE.block("bronze_scaffolding", MetalScaffoldingBlock::new)
-                    .transform(BuilderTransformers.scaffold("bronze",
-                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/bronze")), MaterialColor.TERRACOTTA_YELLOW,
-                            DDBlockSpriteShifts.BRONZE_SCAFFOLD, DDBlockSpriteShifts.BRONZE_SCAFFOLD_INSIDE, DDBlockSpriteShifts.BRONZE_CASING))
-                    .register();
-    public static final BlockEntry<MetalScaffoldingBlock> STEEL_SCAFFOLD =
-            REGISTRATE.block("steel_scaffolding", MetalScaffoldingBlock::new)
-                    .transform(BuilderTransformers.scaffold("steel",
-                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/steel")), MaterialColor.TERRACOTTA_YELLOW,
-                            DDBlockSpriteShifts.STEEL_SCAFFOLD, DDBlockSpriteShifts.STEEL_SCAFFOLD_INSIDE, DDBlockSpriteShifts.STEEL_CASING))
-                    .register();
-    public static final BlockEntry<MetalScaffoldingBlock> SHADOW_SCAFFOLD =
-            REGISTRATE.block("shadow_steel_scaffolding", MetalScaffoldingBlock::new)
-                    .transform(BuilderTransformers.scaffold("shadow_steel",
-                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/shadow_steel")), MaterialColor.COLOR_BLACK,
-                            DDBlockSpriteShifts.SHADOW_STEEL_SCAFFOLD, DDBlockSpriteShifts.SHADOW_STEEL_SCAFFOLD_INSIDE, DDBlockSpriteShifts.SHADOW_STEEL_CASING))
-                    .item(RemovaAndNonGravitylBlockItem::ShadowSteelScaffolding)
-                    .build()
-                    .register();
-    public static final BlockEntry<MetalScaffoldingBlock> RADIANT_SCAFFOLD =
-            REGISTRATE.block("refined_radiance_scaffolding", MetalScaffoldingBlock::new)
-                    .transform(BuilderTransformers.scaffold("refined_radiance",
-                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/refined_radiance")), MaterialColor.SNOW,
-                            DDBlockSpriteShifts.REFINED_RADIANCE_SCAFFOLD, DDBlockSpriteShifts.REFINED_RADIANCE_SCAFFOLD_INSIDE, DDBlockSpriteShifts.REFINED_RADIANCE_CASING))
-                    .properties(p -> p.lightLevel($ -> 12))
-                    .item(RemovaAndNonGravitylBlockItem::RefinedRadianceScaffolding)
-                    .build()
-                    .register();
-    public static final BlockEntry<MetalScaffoldingBlock> STARGAZE_SINGULARITY_SCAFFOLD =
-            REGISTRATE.block("stargaze_singularity_scaffolding", MetalScaffoldingBlock::new)
-                    .transform(BuilderTransformers.scaffold("stargaze_singularity",
-                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/stargaze_singularity")), MaterialColor.TERRACOTTA_BLACK,
-                            DDBlockSpriteShifts.STARGAZE_SINGULARITY_SCAFFOLD, DDBlockSpriteShifts.STARGAZE_SINGULARITY_SCAFFOLD_INSIDE, DDBlockSpriteShifts.STARGAZE_SINGULARITY_CASING))
-                    .item(RemovaAndNonGravitylBlockItem::StargazeSingularityScaffolding)
-                    .build()
-                    .register();
-    public static final BlockEntry<MetalScaffoldingBlock> BLAZE_GOLD_SCAFFOLD =
-            REGISTRATE.block("blaze_gold_scaffolding", MetalScaffoldingBlock::new)
-                    .transform(BuilderTransformers.scaffold("blaze_gold",
-                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/blaze_gold")), MaterialColor.COLOR_RED,
-                            DDBlockSpriteShifts.BLAZE_GOLD_SCAFFOLD, DDBlockSpriteShifts.BLAZE_GOLD_SCAFFOLD_INSIDE, DDBlockSpriteShifts.BLAZE_GOLD_CASING))
-                    .item(RemovaAndNonGravitylBlockItem::BlazeBrassScaffolding)
-                    .build()
-                    .register();
-    public static final BlockEntry<OverchargedScaffoldingBlock> OVERCHARGED_SCAFFOLD =
-            REGISTRATE.block("overcharged_scaffolding", OverchargedScaffoldingBlock::new)
-                    .transform(BuilderTransformers.scaffold("overcharge",
-                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/overcharge")), MaterialColor.COLOR_LIGHT_BLUE,
-                            DDBlockSpriteShifts.OVERCHARGED_SCAFFOLD, DDBlockSpriteShifts.OVERCHARGED_SCAFFOLD_INSIDE, DDBlockSpriteShifts.OVERCHARGED_CASING))
-                    .item(RemovaAndNonGravitylBlockItem::CCAScaffolding)
-                    .build()
-                    .register();
-    public static final BlockEntry<MetalScaffoldingBlock> NETHERITE_SCAFFOLD =
-            REGISTRATE.block("netherite_scaffolding", MetalScaffoldingBlock::new)
-                    .transform(BuilderTransformers.scaffold("netherite",
-                            () -> DataIngredient.tag(AllTags.forgeItemTag("ingots/netherite")), MaterialColor.COLOR_LIGHT_BLUE,
-                            DDBlockSpriteShifts.NETHERITE_SCAFFOLD, DDBlockSpriteShifts.NETHERITE_SCAFFOLD_INSIDE, DDBlockSpriteShifts.NETHERITE_CASING))
-                    .register();
 
     public static final BlockEntry<BlockcopycatBlock> COPYCAT_BlOCK =
             REGISTRATE.block("copycat_block", BlockcopycatBlock::new)
@@ -974,86 +315,12 @@ public class DDBlocks {
                     .transform(customItemModel("copycat_base", "slab"))
                     .register();
 
-    public static final BlockEntry<SpectralRubyLampBlock> SPECTRAL_RUBY_LAMP =
-            REGISTRATE.block("spectral_ruby_lamp", SpectralRubyLampBlock::new)
-                    .initialProperties(() -> Blocks.REDSTONE_LAMP)
-                    .properties(p -> p.color(MaterialColor.TERRACOTTA_PINK)
-                            .noOcclusion()
-                            .lightLevel(s -> s.getValue(SpectralRubyLampBlock.POWER)))
-                    .transform(pickaxeOnly())
-                    .simpleItem()
-                    .register();
-
-    public static final BlockEntry<RotatedPillarBlock> SPECTRAL_RUBY_BLOCK =
-            REGISTRATE.block("spectral_ruby_block", RotatedPillarBlock::new)
-            .initialProperties(() -> Blocks.AMETHYST_BLOCK)
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_MAGENTA)
-                    .requiresCorrectToolForDrops()
-                    .sound(SoundType.DEEPSLATE))
-            .transform(pickaxeOnly())
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> SPECTRAL_RUBY_TILES =
-            REGISTRATE.block("spectral_ruby_tiles", Block::new)
-            .initialProperties(() -> Blocks.DEEPSLATE)
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_MAGENTA))
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .transform(pickaxeOnly())
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> SMALL_SPECTRAL_RUBY_TILES =
-            REGISTRATE.block("small_spectral_ruby_tiles", Block::new)
-            .initialProperties(() -> Blocks.DEEPSLATE)
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_MAGENTA))
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .transform(pickaxeOnly())
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<GlassBlock> vertical_framed_split_glass = REGISTRATE.block("vertical_framed_split_glass", GlassBlock::new)
-            .transform(BuilderTransgender.block(() -> DDBlockSpriteShifts.vertical_framed_split_glass))
-            .initialProperties(() -> Blocks.GLASS)
-            .addLayer(() -> RenderType::cutoutMipped)
-            .properties(BlockBehaviour.Properties::noOcclusion)
-            .register();
-    public static final BlockEntry<ConnectedGlassPaneBlock> vertical_framed_split_glass_pane = REGISTRATE.block("vertical_framed_split_glass_pane", ConnectedGlassPaneBlock::new)
-            .transform(BuilderTransgender.block(() -> DDBlockSpriteShifts.vertical_framed_split_glass))
-            .initialProperties(() -> Blocks.GLASS)
-            .addLayer(() -> RenderType::cutoutMipped)
-            .properties(BlockBehaviour.Properties::noOcclusion)
-            .register();
-    public static final BlockEntry<GlassBlock> horizontal_framed_split_glass = REGISTRATE.block("horizontal_framed_split_glass", GlassBlock::new)
-            .transform(BuilderTransgender.block(() -> DDBlockSpriteShifts.horizontal_framed_split_glass))
-            .initialProperties(() -> Blocks.GLASS)
-            .addLayer(() -> RenderType::cutoutMipped)
-            .properties(BlockBehaviour.Properties::noOcclusion)
-            .register();
-    public static final BlockEntry<ConnectedGlassPaneBlock> horizontal_framed_split_glass_pane = REGISTRATE.block("horizontal_framed_split_glass_pane", ConnectedGlassPaneBlock::new)
-            .transform(BuilderTransgender.block(() -> DDBlockSpriteShifts.horizontal_framed_split_glass))
-            .initialProperties(() -> Blocks.GLASS)
-            .addLayer(() -> RenderType::cutoutMipped)
-            .properties(BlockBehaviour.Properties::noOcclusion)
-            .register();
-    public static final BlockEntry<GlassBlock> framed_split_glass = REGISTRATE.block("framed_split_glass", GlassBlock::new)
-            .transform(BuilderTransgender.block(() -> DDBlockSpriteShifts.framed_split_glass))
-            .initialProperties(() -> Blocks.GLASS)
-            .addLayer(() -> RenderType::cutoutMipped)
-            .properties(BlockBehaviour.Properties::noOcclusion)
-            .register();
-    public static final BlockEntry<ConnectedGlassPaneBlock> framed_split_glass_pane = REGISTRATE.block("framed_split_glass_pane", ConnectedGlassPaneBlock::new)
-            .transform(BuilderTransgender.block(() -> DDBlockSpriteShifts.framed_split_glass))
-            .initialProperties(() -> Blocks.GLASS)
-            .addLayer(() -> RenderType::cutoutMipped)
-            .properties(BlockBehaviour.Properties::noOcclusion)
-            .register();
-
     public static final BlockEntry<GlassBlock> ornate_iron_glass = REGISTRATE.block("ornate_iron_glass", GlassBlock::new)
             .transform(BuilderTransgender.blockv2(() -> DDBlockSpriteShifts.ornate_iron_glass, () -> DDBlockSpriteShifts.ornate_iron_glass_top))
             .initialProperties(() -> Blocks.GLASS)
             .addLayer(() -> RenderType::cutoutMipped)
             .register();
+
     public static final BlockEntry<ConnectedGlassPaneBlock> ornate_iron_glass_pane = REGISTRATE.block("ornate_iron_glass_pane", ConnectedGlassPaneBlock::new)
             .transform(BuilderTransgender.block(() -> DDBlockSpriteShifts.ornate_iron_glass))
             .initialProperties(() -> Blocks.GLASS)
@@ -1493,9 +760,6 @@ public class DDBlocks {
             .lang("Rubber Pressure Plate")
             .simpleItem()
             .register();
-
-    
-    
     
     
     public static final BlockEntry<Block> asphalt_block = REGISTRATE.block("asphalt_block", Block::new)
@@ -1547,209 +811,6 @@ public class DDBlocks {
                     .color(MaterialColor.TERRACOTTA_CYAN))
             .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE))
             .lang("Horizontal Hazard Block")
-            .register();
-
-    public static final BlockEntry<Block> andesite_asphalt_block = REGISTRATE.block("andesite_asphalt_block", Block::new)
-            .properties(p -> p.destroyTime(1.25f)
-                    .speedFactor(1.2F)
-                    .jumpFactor(1.2F)
-                    .friction(0.6F)
-                    .color(MaterialColor.STONE))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.STONE))
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> asurine_asphalt_block = REGISTRATE.block("asurine_asphalt_block", Block::new)
-            .properties(p -> p.destroyTime(1.25f)
-                    .speedFactor(1.2F)
-                    .jumpFactor(1.2F)
-                    .friction(0.6F)
-                    .color(MaterialColor.COLOR_BLUE))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE))
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> calcite_asphalt_block = REGISTRATE.block("calcite_asphalt_block", Block::new)
-            .properties(p -> p.destroyTime(1.25f)
-                    .speedFactor(1.2F)
-                    .jumpFactor(1.2F)
-                    .friction(0.6F)
-                    .color(MaterialColor.TERRACOTTA_WHITE))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.CALCITE))
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> crimsite_asphalt_block = REGISTRATE.block("crimsite_asphalt_block", Block::new)
-            .properties(p -> p.destroyTime(1.25f)
-                    .speedFactor(1.2F)
-                    .jumpFactor(1.2F)
-                    .friction(0.6F)
-                    .color(MaterialColor.COLOR_RED))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE))
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> deepslate_asphalt_block = REGISTRATE.block("deepslate_asphalt_block", Block::new)
-            .properties(p -> p.destroyTime(1.25f)
-                    .speedFactor(1.2F)
-                    .jumpFactor(1.2F)
-                    .friction(0.6F)
-                    .color(MaterialColor.DEEPSLATE))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE))
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> diorite_asphalt_block = REGISTRATE.block("diorite_asphalt_block", Block::new)
-            .properties(p -> p.destroyTime(1.25f)
-                    .speedFactor(1.2F)
-                    .jumpFactor(1.2F)
-                    .friction(0.6F)
-                    .color(MaterialColor.QUARTZ))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.STONE))
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> dripstone_asphalt_block = REGISTRATE.block("dripstone_asphalt_block", Block::new)
-            .properties(p -> p.destroyTime(1.25f)
-                    .speedFactor(1.2F)
-                    .jumpFactor(1.2F)
-                    .friction(0.6F)
-                    .color(MaterialColor.TERRACOTTA_BROWN))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.DRIPSTONE_BLOCK))
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> gabbro_asphalt_block = REGISTRATE.block("gabbro_asphalt_block", Block::new)
-            .properties(p -> p.destroyTime(1.25f)
-                    .speedFactor(1.2F)
-                    .jumpFactor(1.2F)
-                    .friction(0.6F)
-                    .color(MaterialColor.TERRACOTTA_LIGHT_GRAY))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.TUFF))
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> dolomite_asphalt_block = REGISTRATE.block("dolomite_asphalt_block", Block::new)
-            .properties(p -> p.destroyTime(1.25f)
-                    .speedFactor(1.2F)
-                    .jumpFactor(1.2F)
-                    .friction(0.6F)
-                    .color(MaterialColor.TERRACOTTA_WHITE))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.TUFF))
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> granite_asphalt_block = REGISTRATE.block("granite_asphalt_block", Block::new)
-            .properties(p -> p.destroyTime(1.25f)
-                    .speedFactor(1.2F)
-                    .jumpFactor(1.2F)
-                    .friction(0.6F)
-                    .color(MaterialColor.TERRACOTTA_CYAN))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.STONE))
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> limestone_asphalt_block = REGISTRATE.block("limestone_asphalt_block", Block::new)
-            .properties(p -> p.destroyTime(1.25f)
-                    .speedFactor(1.2F)
-                    .jumpFactor(1.2F)
-                    .friction(0.6F)
-                    .color(MaterialColor.SAND))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.STONE))
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> ochrum_asphalt_block = REGISTRATE.block("ochrum_asphalt_block", Block::new)
-            .properties(p -> p.destroyTime(1.25f)
-                    .speedFactor(1.2F)
-                    .jumpFactor(1.2F)
-                    .friction(0.6F)
-                    .color(MaterialColor.TERRACOTTA_YELLOW))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.CALCITE))
-            .simpleItem()
-            .register();
-
-        public static final BlockEntry<Block> potassic_asphalt_block = REGISTRATE.block("potassic_asphalt_block", Block::new)
-                .properties(p -> p.destroyTime(1.25f)
-                        .speedFactor(1.2F)
-                        .jumpFactor(1.2F)
-                        .friction(0.6F)
-                        .color(MaterialColor.TERRACOTTA_BLUE))
-                .properties(p -> p.sound(new ForgeSoundType(0.8f, 0.85f, () -> DDSoundEvents.ore_stone_break.get(),
-                        () -> DDSoundEvents.ore_stone_step.get(), () -> DDSoundEvents.ore_stone_place.get(),
-                        () -> DDSoundEvents.ore_stone_hit.get(), () -> DDSoundEvents.ore_stone_fall.get())))
-                .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-                .simpleItem()
-                .register();
-
-    public static final BlockEntry<Block> aethersite_asphalt_block = REGISTRATE.block("aethersite_asphalt_block", Block::new)
-            .properties(p -> p.destroyTime(1.25f)
-                    .speedFactor(1.2F)
-                    .jumpFactor(1.2F)
-                    .friction(0.6F)
-                    .color(MaterialColor.TERRACOTTA_BLUE))
-            .properties(p -> p.sound(new ForgeSoundType(0.8f, 1.5f, () -> DDSoundEvents.ore_stone_break.get(),
-                    () -> DDSoundEvents.ore_stone_step.get(), () -> DDSoundEvents.ore_stone_place.get(),
-                    () -> DDSoundEvents.ore_stone_hit.get(), () -> DDSoundEvents.ore_stone_fall.get())))
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> scorchia_asphalt_block = REGISTRATE.block("scorchia_asphalt_block", Block::new)
-            .properties(p -> p.destroyTime(1.25f)
-                    .speedFactor(1.2F)
-                    .jumpFactor(1.2F)
-                    .friction(0.6F)
-                    .color(MaterialColor.TERRACOTTA_GRAY))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.STONE))
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> scoria_asphalt_block = REGISTRATE.block("scoria_asphalt_block", Block::new)
-            .properties(p -> p.destroyTime(1.25f)
-                    .speedFactor(1.2F)
-                    .jumpFactor(1.2F)
-                    .friction(0.6F)
-                    .color(MaterialColor.COLOR_BROWN))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.STONE))
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> tuff_asphalt_block = REGISTRATE.block("tuff_asphalt_block", Block::new)
-            .properties(p -> p.destroyTime(1.25f)
-                    .speedFactor(1.2F)
-                    .jumpFactor(1.2F)
-                    .friction(0.6F)
-                    .color(MaterialColor.TERRACOTTA_GRAY))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.TUFF))
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> veridium_asphalt_block = REGISTRATE.block("veridium_asphalt_block", Block::new)
-            .properties(p -> p.destroyTime(1.25f)
-                    .speedFactor(1.2F)
-                    .jumpFactor(1.2F)
-                    .friction(0.6F)
-                    .color(MaterialColor.WARPED_NYLIUM))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.TUFF))
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> weathered_limestone_asphalt_block = REGISTRATE.block("weathered_limestone_asphalt_block", Block::new)
-            .properties(p -> p.destroyTime(1.25f)
-                    .speedFactor(1.2F)
-                    .jumpFactor(1.2F)
-                    .friction(0.6F)
-                    .color(MaterialColor.COLOR_LIGHT_GRAY))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.STONE))
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> andesite_mossy_bricks = REGISTRATE.block("andesite_mossy_bricks", Block::new)
-            .properties(p -> p.destroyTime(1.25f)
-                    .color(MaterialColor.STONE))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.STONE))
-            .simpleItem()
             .register();
 
     public static final BlockEntry<Block> asurine_mossy_bricks = REGISTRATE.block("asurine_mossy_bricks", Block::new)
@@ -1839,16 +900,6 @@ public class DDBlocks {
             .simpleItem()
             .register();
 
-    public static final BlockEntry<Block> aethersite_mossy_bricks = REGISTRATE.block("aethersite_mossy_bricks", Block::new)
-            .properties(p -> p.destroyTime(1.25f)
-                    .color(MaterialColor.TERRACOTTA_BLUE))
-            .properties(p -> p.sound(new ForgeSoundType(0.8f, 1.5f, () -> DDSoundEvents.ore_stone_break.get(),
-                    () -> DDSoundEvents.ore_stone_step.get(), () -> DDSoundEvents.ore_stone_place.get(),
-                    () -> DDSoundEvents.ore_stone_hit.get(), () -> DDSoundEvents.ore_stone_fall.get())))
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .simpleItem()
-            .register();
-
     public static final BlockEntry<Block> scorchia_mossy_bricks = REGISTRATE.block("scorchia_mossy_bricks", Block::new)
             .properties(p -> p.destroyTime(1.25f)
                     .color(MaterialColor.TERRACOTTA_GRAY))
@@ -1881,136 +932,6 @@ public class DDBlocks {
             .properties(p -> p.destroyTime(1.25f)
                     .color(MaterialColor.COLOR_LIGHT_GRAY))
             .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.STONE))
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> polished_bronze_block =
-            REGISTRATE.block("bronze_polished_block", Block::new)
-            .initialProperties(SharedProperties::netheriteMetal)
-            .properties(p -> p.color(MaterialColor.COLOR_ORANGE))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.NETHERITE_BLOCK))
-            .properties(p -> p.strength(6f,5f))
-            .simpleItem()
-            .register();
-    public static final BlockEntry<StairBlock> polished_bronze_stairs =
-            REGISTRATE.block("bronze_polished_stairs", p -> new StairBlock(DDBlocks.polished_bronze_block::getDefaultState, p))
-            .initialProperties(DDBlocks.polished_bronze_block)
-            .simpleItem()
-            .register();
-    public static final BlockEntry<SlabBlock> polished_bronze_slab =
-            REGISTRATE.block("bronze_polished_slab", SlabBlock::new)
-            .initialProperties(DDBlocks.polished_bronze_block)
-            .simpleItem()
-            .register();
-    public static final BlockEntry<Block> tiled_bronze_block =
-            REGISTRATE.block("bronze_tiled_block", Block::new)
-            .initialProperties(DDBlocks.polished_bronze_block)
-            .simpleItem()
-            .register();
-    public static final BlockEntry<StairBlock> tiled_bronze_stairs =
-            REGISTRATE.block("bronze_tiled_stairs", p -> new StairBlock(DDBlocks.tiled_bronze_block::getDefaultState, p))
-            .initialProperties(DDBlocks.polished_bronze_block)
-            .simpleItem()
-            .register();
-    public static final BlockEntry<SlabBlock> tiled_bronze_slab =
-            REGISTRATE.block("bronze_tiled_slab", SlabBlock::new)
-            .initialProperties(DDBlocks.polished_bronze_block)
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> polished_steel_block =
-            REGISTRATE.block("steel_polished_block", Block::new)
-            .initialProperties(SharedProperties::netheriteMetal)
-            .properties(p -> p.color(MaterialColor.COLOR_GRAY))
-            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.NETHERITE_BLOCK))
-            .properties(p -> p.strength(3f,8f))
-            .simpleItem()
-            .register();
-    public static final BlockEntry<StairBlock> polished_steel_stairs =
-            REGISTRATE.block("steel_polished_stairs", p -> new StairBlock(DDBlocks.polished_steel_block::getDefaultState, p))
-            .initialProperties(DDBlocks.polished_steel_block)
-            .simpleItem()
-            .register();
-    public static final BlockEntry<SlabBlock> polished_steel_slab =
-            REGISTRATE.block("steel_polished_slab", SlabBlock::new)
-            .initialProperties(DDBlocks.polished_steel_block)
-            .simpleItem()
-            .register();
-    public static final BlockEntry<Block> tiled_steel_block =
-            REGISTRATE.block("steel_tiled_block", Block::new)
-            .initialProperties(DDBlocks.polished_steel_block)
-            .simpleItem()
-            .register();
-    public static final BlockEntry<StairBlock> tiled_steel_stairs =
-            REGISTRATE.block("steel_tiled_stairs", p -> new StairBlock(DDBlocks.tiled_steel_block::getDefaultState, p))
-            .initialProperties(DDBlocks.polished_steel_block)
-            .simpleItem()
-            .register();
-    public static final BlockEntry<SlabBlock> tiled_steel_slab =
-            REGISTRATE.block("steel_tiled_slab", SlabBlock::new)
-            .initialProperties(DDBlocks.polished_steel_block)
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> polished_zinc_block =
-            REGISTRATE.block("zinc_polished_block", Block::new)
-            .initialProperties(() -> Blocks.IRON_BLOCK)
-            .simpleItem()
-            .register();
-    public static final BlockEntry<StairBlock> polished_zinc_stairs =
-            REGISTRATE.block("zinc_polished_stairs", p -> new StairBlock(DDBlocks.polished_zinc_block::getDefaultState, p))
-            .initialProperties(() -> Blocks.IRON_BLOCK)
-            .simpleItem()
-            .register();
-    public static final BlockEntry<SlabBlock> polished_zinc_slab =
-            REGISTRATE.block("zinc_polished_slab", SlabBlock::new)
-                    .initialProperties(() -> Blocks.IRON_BLOCK)
-            .simpleItem()
-            .register();
-    public static final BlockEntry<Block> tiled_zinc_block =
-            REGISTRATE.block("zinc_tiled_block", Block::new)
-                    .initialProperties(() -> Blocks.IRON_BLOCK)
-            .simpleItem()
-            .register();
-    public static final BlockEntry<StairBlock> tiled_zinc_stairs =
-            REGISTRATE.block("zinc_tiled_stairs", p -> new StairBlock(DDBlocks.tiled_zinc_block::getDefaultState, p))
-                    .initialProperties(() -> Blocks.IRON_BLOCK)
-            .simpleItem()
-            .register();
-    public static final BlockEntry<SlabBlock> tiled_zinc_slab =
-            REGISTRATE.block("zinc_tiled_slab", SlabBlock::new)
-                    .initialProperties(() -> Blocks.IRON_BLOCK)
-            .simpleItem()
-            .register();
-
-    public static final BlockEntry<Block> polished_andesite_alloy_block =
-            REGISTRATE.block("andesite_alloy_polished_block", Block::new)
-                    .initialProperties(() -> Blocks.ANDESITE)
-            .simpleItem()
-            .register();
-    public static final BlockEntry<StairBlock> polished_andesite_alloy_stairs =
-            REGISTRATE.block("andesite_alloy_polished_stairs", p -> new StairBlock(DDBlocks.polished_andesite_alloy_block::getDefaultState, p))
-                    .initialProperties(() -> Blocks.ANDESITE)
-            .simpleItem()
-            .register();
-    public static final BlockEntry<SlabBlock> polished_andesite_alloy_slab =
-            REGISTRATE.block("andesite_alloy_polished_slab", SlabBlock::new)
-                    .initialProperties(() -> Blocks.ANDESITE)
-            .simpleItem()
-            .register();
-    public static final BlockEntry<Block> tiled_andesite_alloy_block =
-            REGISTRATE.block("andesite_alloy_tiled_block", Block::new)
-                    .initialProperties(() -> Blocks.ANDESITE)
-            .simpleItem()
-            .register();
-    public static final BlockEntry<StairBlock> tiled_andesite_alloy_stairs =
-            REGISTRATE.block("andesite_alloy_tiled_stairs", p -> new StairBlock(DDBlocks.tiled_andesite_alloy_block::getDefaultState, p))
-                    .initialProperties(() -> Blocks.ANDESITE)
-            .simpleItem()
-            .register();
-    public static final BlockEntry<SlabBlock> tiled_andesite_alloy_slab =
-            REGISTRATE.block("andesite_alloy_tiled_slab", SlabBlock::new)
-                    .initialProperties(() -> Blocks.ANDESITE)
             .simpleItem()
             .register();
 
@@ -2061,43 +982,6 @@ public class DDBlocks {
                     .transform(pickaxeOnly())
                     .simpleItem()
                     .register();
-
-    public static final BlockEntry<TwoBladeFanBlock> two_blade_fan =
-            REGISTRATE.block("2_blade_fan", TwoBladeFanBlock::new)
-            .initialProperties(SharedProperties::softMetal)
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_YELLOW))
-            .properties(BlockBehaviour.Properties::noOcclusion)
-            .transform(axeOrPickaxe())
-            .transform(BlockStressDefaults.setNoImpact())
-            .blockstate(BlockStateGen.axisBlockProvider(true))
-            .item()
-            .transform(customItemModel())
-            .register();
-
-    public static final BlockEntry<FourBladeFanBlock> four_blade_fan =
-            REGISTRATE.block("4_blade_fan", FourBladeFanBlock::new)
-            .initialProperties(SharedProperties::softMetal)
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_YELLOW))
-            .properties(BlockBehaviour.Properties::noOcclusion)
-            .transform(axeOrPickaxe())
-            .transform(BlockStressDefaults.setNoImpact())
-            .blockstate(BlockStateGen.axisBlockProvider(true))
-            .item()
-            .transform(customItemModel())
-            .register();
-
-    public static final BlockEntry<EightBladeFanBlock> eight_blade_fan =
-            REGISTRATE.block("8_blade_fan", EightBladeFanBlock::new)
-            .initialProperties(SharedProperties::softMetal)
-            .properties(p -> p.color(MaterialColor.TERRACOTTA_YELLOW))
-            .properties(BlockBehaviour.Properties::noOcclusion)
-            .transform(axeOrPickaxe())
-            .transform(BlockStressDefaults.setNoImpact())
-            .blockstate(BlockStateGen.axisBlockProvider(true))
-            .item()
-            .transform(customItemModel())
-            .register();
-
     public static void register() {
     }
 }

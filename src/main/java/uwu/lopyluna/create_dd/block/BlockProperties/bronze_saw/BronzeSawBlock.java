@@ -34,7 +34,8 @@ public class BronzeSawBlock extends SawBlock {
 
     @Override
     public BlockEntityType<? extends BronzeSawBlockEntity> getBlockEntityType() {
-        return DDBlockEntityTypes.BRONZE_SAW.get();
+        return null;
+        //DDBlockEntityTypes.BRONZE_SAW.get();
     }
 
     @Override
@@ -74,12 +75,14 @@ public class BronzeSawBlock extends SawBlock {
 
         @Override
         public Predicate<ItemStack> getItemPredicate() {
-            return DDBlocks.BRONZE_SAW::isIn;
+            return null;
+                    //DDBlocks.BRONZE_SAW::isIn;
         }
 
         @Override
         public Predicate<BlockState> getStatePredicate() {
-            return DDBlocks.BRONZE_SAW::has;
+            return null;
+                    //DDBlocks.BRONZE_SAW::has;
         }
 
         @Override

@@ -22,25 +22,16 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import uwu.lopyluna.create_dd.block.BlockProperties.flywheel.engine.FurnaceEngineBlock;
-import uwu.lopyluna.create_dd.block.BlockProperties.industrial_fan.Processing.IndustrialTypeFanProcessing;
 import uwu.lopyluna.create_dd.block.BlockResources.DDBlockPartialModel;
 import uwu.lopyluna.create_dd.block.DDBlocks;
 import uwu.lopyluna.create_dd.block.DDBlockEntityTypes;
 import uwu.lopyluna.create_dd.block.BlockPalette.DDPaletteBlocks;
 import uwu.lopyluna.create_dd.configs.DDConfigs;
-import uwu.lopyluna.create_dd.fluid.ChromaticFluidInteraction;
 import uwu.lopyluna.create_dd.fluid.DDFluids;
 import uwu.lopyluna.create_dd.item.DDItems;
 import uwu.lopyluna.create_dd.creative.DDItemTab;
-import uwu.lopyluna.create_dd.block.BlockProperties.industrial_fan.rando.DDParticleTypes;
 import uwu.lopyluna.create_dd.recipe.DDRecipesTypes;
 import uwu.lopyluna.create_dd.sounds.DDSoundEvents;
-import uwu.lopyluna.create_dd.worldgen.DDBuiltinRegistration;
-import uwu.lopyluna.create_dd.worldgen.DDFeatures;
-import uwu.lopyluna.create_dd.worldgen.DDOreFeatureConfigEntries;
-import uwu.lopyluna.create_dd.worldgen.DDPlacementModifiers;
-import uwu.lopyluna.create_dd.worldgen.ponder_dim.PonderPOI;
-import uwu.lopyluna.create_dd.worldgen.ponder_dim.Pondering;
 
 
 @SuppressWarnings({"all"})
@@ -88,20 +79,10 @@ public class DDCreate
         DDItems.register();
         DDFluids.register();
         DDPaletteBlocks.register();
-        Pondering.register();
-        PonderPOI.register(eventBus);
 
-        DDParticleTypes.register(eventBus);
         DDRecipesTypes.register(eventBus);
 
-        IndustrialTypeFanProcessing.register();
-
         DDTags.init();
-
-        DDOreFeatureConfigEntries.init();
-        DDFeatures.register(eventBus);
-        DDPlacementModifiers.register(eventBus);
-        DDBuiltinRegistration.register(eventBus);
 
         DDConfigs.register(modLoadingContext);
 
@@ -116,7 +97,6 @@ public class DDCreate
 
     public static void init(final FMLCommonSetupEvent event) {
         DDFluids.registerFluidInteractions();
-        ChromaticFluidInteraction.registerFluidInteractions();
     }
 
     public static ResourceLocation asResource(String path) {

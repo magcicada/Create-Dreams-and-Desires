@@ -9,7 +9,6 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import org.apache.commons.lang3.tuple.Pair;
 import uwu.lopyluna.create_dd.configs.client.DDClient;
-import uwu.lopyluna.create_dd.configs.common.DDCommon;
 import uwu.lopyluna.create_dd.configs.server.DDServer;
 
 import java.util.EnumMap;
@@ -22,15 +21,10 @@ public class DDConfigs {
     private static final Map<ModConfig.Type, DDConfigBase> CONFIGS = new EnumMap<>(ModConfig.Type.class);
 
     private static DDClient client;
-    private static DDCommon common;
     private static DDServer server;
 
     public static DDClient client() {
         return client;
-    }
-
-    public static DDCommon common() {
-        return common;
     }
 
     public static DDServer server() {
@@ -56,7 +50,6 @@ public class DDConfigs {
 
     public static void register(ModLoadingContext context) {
         client = register(DDClient::new, ModConfig.Type.CLIENT);
-        common = register(DDCommon::new, ModConfig.Type.COMMON);
         server = register(DDServer::new, ModConfig.Type.SERVER);
 
         for (Map.Entry<ModConfig.Type, DDConfigBase> pair : CONFIGS.entrySet())

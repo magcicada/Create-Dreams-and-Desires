@@ -18,26 +18,6 @@ public class DDSoundEvents {
     public static RegistryObject<SoundEvent> ore_stone_hit = registerSoundEvent("ore_stone_hit");
     public static RegistryObject<SoundEvent> ore_stone_fall = registerSoundEvent("ore_stone_fall");
 
-    public static RegistryObject<SoundEvent> magic_casing_break = registerSoundEvent("magic_casing_break");
-    public static RegistryObject<SoundEvent> magic_casing_step = registerSoundEvent("magic_casing_step");
-    public static RegistryObject<SoundEvent> magic_casing_place = registerSoundEvent("magic_casing_place");
-    public static RegistryObject<SoundEvent> magic_casing_hit = registerSoundEvent("magic_casing_hit");
-    public static RegistryObject<SoundEvent> magic_casing_fall = registerSoundEvent("magic_casing_fall");
-
-    public static RegistryObject<SoundEvent> magical_metal_break = registerSoundEvent("magical_metal_break");
-    public static RegistryObject<SoundEvent> magical_metal_step = registerSoundEvent("magical_metal_step");
-    public static RegistryObject<SoundEvent> magical_metal_place = registerSoundEvent("magical_metal_place");
-    public static RegistryObject<SoundEvent> magical_metal_hit = registerSoundEvent("magical_metal_hit");
-    public static RegistryObject<SoundEvent> magical_metal_fall = registerSoundEvent("magical_metal_fall");
-
-    public static RegistryObject<SoundEvent> shimmer_fill = registerSoundEvent("shimmer_fill");
-    public static RegistryObject<SoundEvent> shimmer_empty = registerSoundEvent("shimmer_empty");
-
-    public static RegistryObject<SoundEvent> radiant_panel = registerSoundEvent("radiant_panel"); //4
-    public static RegistryObject<SoundEvent> shadow_panel = registerSoundEvent("shadow_panel"); // 6
-
-    public static RegistryObject<SoundEvent> bell_ring = registerSoundEvent("bell_ring");
-
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(DDCreate.MOD_ID, name)));
     }

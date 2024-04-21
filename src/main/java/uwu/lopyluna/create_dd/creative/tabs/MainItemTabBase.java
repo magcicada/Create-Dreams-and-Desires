@@ -11,6 +11,6 @@ public class MainItemTabBase extends DDMainItemTab {
 
     @Override
     public @NotNull ItemStack makeIcon() {
-        return DDItems.spectral_ruby.asStack();
+        return DDItems.inductive_mechanism.asStack();
     }
 }
