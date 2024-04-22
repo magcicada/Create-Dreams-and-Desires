@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "tag": "create_dd:stone_types/stone"
+  },
+  "result": "create_dd:small_stone_brick_wall"
+}
