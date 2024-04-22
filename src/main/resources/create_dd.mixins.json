@@ -7,7 +7,8 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "create_dd.refmap.json",
   "mixins": [
-    "MixinTransportedItemStack"
+    "",
+    "MixinAllOreFeatureConfigEntries"
   ],
   "injectors": {
     "defaultRequire": 1
