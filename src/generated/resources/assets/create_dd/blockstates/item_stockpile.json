@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "large=false": {
+      "model": "create_dd:block/item_stockpile"
+    },
+    "large=true": {
+      "model": "create_dd:block/item_stockpile"
+    }
+  }
+}

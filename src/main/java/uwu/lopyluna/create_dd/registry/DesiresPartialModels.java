@@ -48,9 +48,7 @@ public class DesiresPartialModels {
 
 		ENGINE_PISTON = block("furnace_engine/piston"),
 		ENGINE_LINKAGE = block("furnace_engine/linkage"),
-		ENGINE_CONNECTOR = block("furnace_engine/shaft_connector"),
-		BOILER_GAUGE = block("furnace_engine/gauge"),
-		BOILER_GAUGE_DIAL = block("furnace_engine/gauge_dial");
+		ENGINE_CONNECTOR = block("furnace_engine/shaft_connector");
 	;
 
 	public static final Map<DyeColor, PartialModel> BACKPACK_FLAP = new EnumMap<>(DyeColor.class);

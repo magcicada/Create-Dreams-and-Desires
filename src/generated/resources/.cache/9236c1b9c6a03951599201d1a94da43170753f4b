@@ -1,4 +1,4 @@
-// 1.19.2	2024-04-21T23:57:41.6631759	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2024-04-22T04:52:48.1411931	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 9452bed2fb7ba829ea35644054add91456d3f5d9 assets/create_dd/blockstates/amethyst_block_pillar.json
 64dc32722d3ad05720fa9a200df1de7179cfd890 assets/create_dd/blockstates/basalt_pillar.json
 5fd6e80fe77786dd8fd0c5cfd6d866b44365aa96 assets/create_dd/blockstates/blackstone_pillar.json
@@ -84,6 +84,7 @@ c0c2af86fd7510e68ef4bb9826f310e7d2b0bad7 assets/create_dd/blockstates/gabbro.jso
 2c9248cc52f3a5ad3e339b83fed5a0e7a67494ef assets/create_dd/blockstates/gabbro_pillar.json
 3dac694f737e5172fa99b84485cf61f295cb4d50 assets/create_dd/blockstates/gray_asphalt_block.json
 0b507d381e56003839c6a159c122357f7e0acd42 assets/create_dd/blockstates/green_asphalt_block.json
+11a8cc2940c27360a875f1293c5f05b71b894033 assets/create_dd/blockstates/item_stockpile.json
 3116aa8903f1bcc60ab4816613e3a15483314fc5 assets/create_dd/blockstates/layered_amethyst_block.json
 27d34d669e73891cdfee812e08f6f09ad8d7c9ff assets/create_dd/blockstates/layered_basalt.json
 1c75808764c4cc8907ad3db3db255d56357dce43 assets/create_dd/blockstates/layered_blackstone.json
@@ -181,8 +182,8 @@ d0e15d8b322e5abdc07df9c4c495bcb04691a95d assets/create_dd/blockstates/stone_pill
 56fd03bcd0c7666dbb4176e55b4fe968694d149b assets/create_dd/blockstates/weathered_limestone_pillar.json
 1d893c673282b6b3b9d70d79a4e01626919ba26e assets/create_dd/blockstates/white_asphalt_block.json
 8aa6a407c7038d105f8d76b99556e833fb0032bd assets/create_dd/blockstates/yellow_asphalt_block.json
-51a51d2fb8d9a76b75eacec1cc2bd08c708631ec assets/create_dd/lang/en_ud.json
-6bc77aa144ba34cc40535a57ef8694a1b39cc940 assets/create_dd/lang/en_us.json
+5a6598ab9c5214df65361a42e5f3ae3b51eef358 assets/create_dd/lang/en_ud.json
+c51883162c9f558565456e306a7f80593df4370e assets/create_dd/lang/en_us.json
 186464982087eb2dd6aa9a5bf09cdb29e6326c49 assets/create_dd/models/block/amethyst_block_pillar.json
 37f5da0e49555aed59846ec90f8286e737feb179 assets/create_dd/models/block/amethyst_block_pillar_horizontal.json
 c9845fd31f14aa8e1a83ffc67249b5486a8ff5cc assets/create_dd/models/block/basalt_pillar.json
@@ -648,6 +649,7 @@ a575ee87ca8535bd2382ca7c8ca47625fe248534 assets/create_dd/models/item/cyan_aspha
 f1b38f0f195bbb22a595754ee2d3bb5db4eb4d8b assets/create_dd/models/item/gabbro_pillar.json
 f3d373fa5105a8b4a5f50757bf2cc1312d2c664c assets/create_dd/models/item/gray_asphalt_block.json
 428b436db3b935f5ad84cfef4af0dec81a04d944 assets/create_dd/models/item/green_asphalt_block.json
+61f8379891d13196fa6db84bfdecd62c37f6491a assets/create_dd/models/item/item_stockpile.json
 d72c5966bad23a8c80d87cd27de1e80f9fa8515c assets/create_dd/models/item/layered_amethyst_block.json
 bb3f5ddca40c033b30f1ad54efd38dddba29c678 assets/create_dd/models/item/layered_basalt.json
 2f1a107eeb562e1317806703a2b85500c6be79ec assets/create_dd/models/item/layered_blackstone.json
@@ -1146,6 +1148,7 @@ c7755d4b0b71030fd3bea0346aa1d5f92d37fc7f data/create_dd/loot_tables/blocks/gabbr
 67fba4825ea4a23d0ba9a83fb068630a419852eb data/create_dd/loot_tables/blocks/gabbro_pillar.json
 03e764889e39c199788461504cdaa530f7ecb986 data/create_dd/loot_tables/blocks/gray_asphalt_block.json
 342787d79c403c0d07183d95d0f383d7a66bf4f9 data/create_dd/loot_tables/blocks/green_asphalt_block.json
+5d50471a1557001a54e4f9bf1e70bedc74897f5c data/create_dd/loot_tables/blocks/item_stockpile.json
 f4d5738c98cbe41fcb05115343c3b3fc0bed4cab data/create_dd/loot_tables/blocks/layered_amethyst_block.json
 478bb8c2ff796e8b38356c1b43f71390f205b074 data/create_dd/loot_tables/blocks/layered_basalt.json
 19018204b9bc18c98327f98ce94413b7d844974b data/create_dd/loot_tables/blocks/layered_blackstone.json
@@ -1571,7 +1574,7 @@ f9fc6ab1b039ea4776c49ddfcd7669cb6f40cfcf data/forge/tags/fluids/sap.json
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/azalea_root_replaceable.json
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/dripstone_replaceable_blocks.json
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/lush_ground_replaceable.json
-b0f2e660854c67be5d66100dbf7076126079bd8a data/minecraft/tags/blocks/mineable/pickaxe.json
+f9912e39018d8365294e8b0ef3bc0b306d3d0df6 data/minecraft/tags/blocks/mineable/pickaxe.json
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/moss_replaceable.json
 194456f6efd26b8c9d17e350cc45783d4eb2d1db data/minecraft/tags/blocks/slabs.json
 c6ecc90519658839c46a11c59a5356548f0c23e4 data/minecraft/tags/blocks/stairs.json

@@ -6,6 +6,7 @@ import com.simibubi.create.foundation.block.connected.CTSpriteShifter;
 import com.simibubi.create.foundation.block.connected.CTType;
 import com.simibubi.create.foundation.block.render.SpriteShiftEntry;
 import com.simibubi.create.foundation.block.render.SpriteShifter;
+import com.simibubi.create.foundation.utility.Couple;
 import net.minecraft.world.item.DyeColor;
 import uwu.lopyluna.create_dd.DesiresCreate;
 
@@ -39,6 +40,12 @@ public class DesiresSpriteShifts {
 		BRASS_RUBBER_BELT_CASING = get("block/belt/brass_rubber_belt_casing", "block/belt/brass_rubber_belt_casing"),
 		INDUSTRIAL_RUBBER_BELT_CASING = get("block/belt/industrial_rubber_belt_casing", "block/belt/industrial_rubber_belt_casing");
 
+	public static final Couple<CTSpriteShiftEntry>
+			SOCKPILE_SIDE = vault("side"),
+			SOCKPILE_TOP = vault("top"),
+			SOCKPILE_BOTTOM = vault("bottom");
+
+
 	static {
 		populateMaps();
 	}
@@ -50,6 +57,13 @@ public class DesiresSpriteShifts {
 			DYED_OFFSET_RUBBER_BELTS.put(color, get("block/rubber_belt_offset", "block/rubber_belt/" + id + "_scroll"));
 			DYED_DIAGONAL_RUBBER_BELTS.put(color, get("block/rubber_belt_diagonal", "block/rubber_belt/" + id + "_diagonal_scroll"));
 		}
+	}
+
+	private static Couple<CTSpriteShiftEntry> vault(String name) {
+		final String prefixed = "block/stockpile/stockpile_" + name;
+		return Couple.createWithContext(
+				medium -> CTSpriteShifter.getCT(AllCTTypes.RECTANGLE, DesiresCreate.asResource(prefixed + "_small"),
+						DesiresCreate.asResource(medium ? prefixed + "_medium" : prefixed + "_large")));
 	}
 
 	private static CTSpriteShiftEntry omni(String name) {

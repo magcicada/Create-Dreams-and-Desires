@@ -7,8 +7,10 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "create_dd.refmap.json",
   "mixins": [
-    "",
-    "MixinAllOreFeatureConfigEntries"
+    "MixinAllOreFeatureConfigEntries",
+    "MixinBlockMovementChecks",
+    "MixinContraption",
+    "MixinMountedStorage"
   ],
   "injectors": {
     "defaultRequire": 1

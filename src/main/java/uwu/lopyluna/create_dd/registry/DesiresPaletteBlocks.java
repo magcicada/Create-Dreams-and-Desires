@@ -1,6 +1,5 @@
 package uwu.lopyluna.create_dd.registry;
 
-import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.SharedProperties;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -49,7 +48,7 @@ public class DesiresPaletteBlocks {
 					.blockstate((c, p) -> p.simpleBlock(c.get(), p.models()
 								.cubeAll(c.getName(), p.modLoc("block/asphalt/" + color))))
 					.properties(p -> p.destroyTime(1.25f)
-							.speedFactor(1.35F)
+							.speedFactor(1.15F)
 							.jumpFactor(1.25F)
 							.friction(0.3F)
 							.color(MaterialColor.COLOR_BLACK)
