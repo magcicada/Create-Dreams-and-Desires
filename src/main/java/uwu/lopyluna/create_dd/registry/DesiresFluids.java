@@ -46,7 +46,7 @@ public class DesiresFluids {
 				.tickRate(25)
 				.slopeFindDistance(3)
 				.explosionResistance(100f))
-			.tag(DesiresTags.DesiresFluidTags.SAP.tag)
+			.tag(DesiresTags.AllFluidTags.SAP.tag)
 			.source(ForgeFlowingFluid.Source::new)
 			.bucket()
 			.tag(DesiresTags.forgeItemTag("buckets/sap"))

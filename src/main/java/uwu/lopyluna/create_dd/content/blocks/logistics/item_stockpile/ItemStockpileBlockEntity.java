@@ -1,6 +1,5 @@
 package uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile;
 
-import com.simibubi.create.AllBlockEntityTypes;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
@@ -23,6 +22,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import uwu.lopyluna.create_dd.registry.DesiresBlockEntityTypes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import javax.annotation.ParametersAreNullableByDefault;
@@ -254,7 +254,7 @@ public class ItemStockpileBlockEntity extends SmartBlockEntity implements IMulti
 			for (int xOffset = 0; xOffset < radius; xOffset++) {
 				for (int zOffset = 0; zOffset < radius; zOffset++) {
 					BlockPos vaultPos = worldPosition.offset(xOffset, yOffset, zOffset);
-					ItemStockpileBlockEntity vaultAt = 	ConnectivityHandler.partAt(AllBlockEntityTypes.ITEM_VAULT.get(), level, vaultPos);
+					ItemStockpileBlockEntity vaultAt = 	ConnectivityHandler.partAt(DesiresBlockEntityTypes.ITEM_STOCKPILE.get(), level, vaultPos);
 					invs[yOffset * radius * radius + xOffset * radius + zOffset] =
 						vaultAt != null ? vaultAt.inventory : new ItemStackHandler();
 				}

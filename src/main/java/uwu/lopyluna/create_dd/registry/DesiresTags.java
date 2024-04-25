@@ -72,7 +72,7 @@ public class DesiresTags {
 		}
 	}
 
-	public enum DesiresBlockTags {
+	public enum AllBlockTags {
 
 		FAN_PROCESSING_CATALYSTS_FREEZING(NameSpace.MOD, "fan_processing_catalysts/freezing"),
 		FAN_PROCESSING_CATALYSTS_SEETHING(NameSpace.MOD, "fan_processing_catalysts/seething"),
@@ -84,23 +84,23 @@ public class DesiresTags {
 		public final TagKey<Block> tag;
 		public final boolean alwaysDatagen;
 
-		DesiresBlockTags() {
+		AllBlockTags() {
 			this(NameSpace.MOD);
 		}
 
-		DesiresBlockTags(NameSpace namespace) {
+		AllBlockTags(NameSpace namespace) {
 			this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
 		}
 
-		DesiresBlockTags(NameSpace namespace, String path) {
+		AllBlockTags(NameSpace namespace, String path) {
 			this(namespace, path, namespace.optionalDefault, namespace.alwaysDatagenDefault);
 		}
 
-		DesiresBlockTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
+		AllBlockTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
 			this(namespace, null, optional, alwaysDatagen);
 		}
 
-		DesiresBlockTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
+		AllBlockTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
 			ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
 			if (optional) {
 				tag = optionalTag(ForgeRegistries.BLOCKS, id);
@@ -128,30 +128,30 @@ public class DesiresTags {
 		
 	}
 
-	public enum DesiresItemTags {
+	public enum AllItemTags {
 
 		;
 
 		public final TagKey<Item> tag;
 		public final boolean alwaysDatagen;
 
-		DesiresItemTags() {
+		AllItemTags() {
 			this(NameSpace.MOD);
 		}
 
-		DesiresItemTags(NameSpace namespace) {
+		AllItemTags(NameSpace namespace) {
 			this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
 		}
 
-		DesiresItemTags(NameSpace namespace, String path) {
+		AllItemTags(NameSpace namespace, String path) {
 			this(namespace, path, namespace.optionalDefault, namespace.alwaysDatagenDefault);
 		}
 
-		DesiresItemTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
+		AllItemTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
 			this(namespace, null, optional, alwaysDatagen);
 		}
 
-		DesiresItemTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
+		AllItemTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
 			ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
 			if (optional) {
 				tag = optionalTag(ForgeRegistries.ITEMS, id);
@@ -175,7 +175,7 @@ public class DesiresTags {
 		
 	}
 
-	public enum DesiresFluidTags {
+	public enum AllFluidTags {
 
 		FAN_PROCESSING_CATALYSTS_FREEZING(NameSpace.MOD, "fan_processing_catalysts/freezing"),
 		FAN_PROCESSING_CATALYSTS_SEETHING(NameSpace.MOD, "fan_processing_catalysts/seething"),
@@ -187,23 +187,23 @@ public class DesiresTags {
 		public final TagKey<Fluid> tag;
 		public final boolean alwaysDatagen;
 
-		DesiresFluidTags() {
+		AllFluidTags() {
 			this(NameSpace.MOD);
 		}
 
-		DesiresFluidTags(NameSpace namespace) {
+		AllFluidTags(NameSpace namespace) {
 			this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
 		}
 
-		DesiresFluidTags(NameSpace namespace, String path) {
+		AllFluidTags(NameSpace namespace, String path) {
 			this(namespace, path, namespace.optionalDefault, namespace.alwaysDatagenDefault);
 		}
 
-		DesiresFluidTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
+		AllFluidTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
 			this(namespace, null, optional, alwaysDatagen);
 		}
 
-		DesiresFluidTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
+		AllFluidTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
 			ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
 			if (optional) {
 				tag = optionalTag(ForgeRegistries.FLUIDS, id);
@@ -312,9 +312,9 @@ public class DesiresTags {
 	}
 
 	public static void init() {
-		DesiresBlockTags.init();
-		DesiresItemTags.init();
-		DesiresFluidTags.init();
+		AllBlockTags.init();
+		AllItemTags.init();
+		AllFluidTags.init();
 		DesiresEntityTags.init();
 		DesiresRecipeSerializerTags.init();
 	}
