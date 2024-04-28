@@ -4,22 +4,24 @@ import com.simibubi.create.foundation.block.connected.AllCTTypes;
 import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
 import com.simibubi.create.foundation.block.connected.CTSpriteShifter;
 import com.simibubi.create.foundation.block.connected.CTType;
-import com.simibubi.create.foundation.block.render.SpriteShiftEntry;
-import com.simibubi.create.foundation.block.render.SpriteShifter;
 import com.simibubi.create.foundation.utility.Couple;
-import net.minecraft.world.item.DyeColor;
 import uwu.lopyluna.create_dd.DesiresCreate;
 
-import java.util.EnumMap;
-import java.util.Map;
 
 @SuppressWarnings({"all"})
 public class DesiresSpriteShifts {
 
 	public static final Couple<CTSpriteShiftEntry>
-			SOCKPILE_SIDE = vault("side"),
-			SOCKPILE_TOP = vault("top"),
-			SOCKPILE_BOTTOM = vault("bottom");
+			SOCKPILE_SIDE = stockpile("side"),
+			SOCKPILE_TOP = stockpile("top"),
+			SOCKPILE_BOTTOM = stockpile("bottom");
+
+
+	public static final Couple<CTSpriteShiftEntry>
+			KEG_TOP = keg("top"),
+			KEG_FRONT = keg("front"),
+			KEG_SIDE = keg("side"),
+			KEG_BOTTOM = keg("bottom");
 
 	//public static final CTSpriteShiftEntry
 	//	HYDRAULIC_SCAFFOLD = horizontal("scaffold/hydraulic_scaffold");
@@ -58,8 +60,15 @@ public class DesiresSpriteShifts {
 	//	}
 	//}
 
-	private static Couple<CTSpriteShiftEntry> vault(String name) {
+	private static Couple<CTSpriteShiftEntry> stockpile(String name) {
 		final String prefixed = "block/stockpile/stockpile_" + name;
+		return Couple.createWithContext(
+				medium -> CTSpriteShifter.getCT(AllCTTypes.RECTANGLE, DesiresCreate.asResource(prefixed + "_small"),
+						DesiresCreate.asResource(medium ? prefixed + "_medium" : prefixed + "_large")));
+	}
+
+	private static Couple<CTSpriteShiftEntry> keg(String name) {
+		final String prefixed = "block/keg/keg_" + name;
 		return Couple.createWithContext(
 				medium -> CTSpriteShifter.getCT(AllCTTypes.RECTANGLE, DesiresCreate.asResource(prefixed + "_small"),
 						DesiresCreate.asResource(medium ? prefixed + "_medium" : prefixed + "_large")));
@@ -78,11 +87,12 @@ public class DesiresSpriteShifts {
 	}
 
 	private static CTSpriteShiftEntry getCT(CTType type, String blockTextureName, String connectedTextureName) {
-		return CTSpriteShifter.getCT(type, DesiresCreate.asResource("block/" + blockTextureName),
-			DesiresCreate.asResource("block/" + connectedTextureName + "_connected"));
+		return CTSpriteShifter.getCT(type, DesiresCreate.asResource("block/" + blockTextureName), DesiresCreate.asResource("block/" + connectedTextureName + "_connected"));
 	}
 
 	private static CTSpriteShiftEntry getCT(CTType type, String blockTextureName) {
 		return getCT(type, blockTextureName, blockTextureName);
 	}
+
+	public static void init(){}
 }

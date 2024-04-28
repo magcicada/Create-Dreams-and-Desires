@@ -9,12 +9,16 @@ import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import net.minecraft.core.Direction;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankBlock;
 import uwu.lopyluna.create_dd.content.blocks.curiosities.FanSailBlock;
+import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegBlock;
+import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegCTBehaviour;
+import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegItem;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileCTBehaviour;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileItem;
@@ -24,6 +28,7 @@ import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.*;
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 
+@SuppressWarnings({"unused"})
 public class DesiresBlocks {
 
 	static {
@@ -36,7 +41,7 @@ public class DesiresBlocks {
 			.initialProperties(SharedProperties::wooden)
 			.properties(p -> p.color(MaterialColor.PODZOL))
 			.transform(axeOrPickaxe())
-			.blockstate(BlockStateGen.axisBlockProvider(true))
+			.blockstate(BlockStateGen.directionalBlockProvider(true))
 			.transform(BlockStressDefaults.setCapacity(8.0))
 			.transform(BlockStressDefaults.setGeneratorSpeed(CogCrankBlock::getSpeedRange))
 			.tag(AllTags.AllBlockTags.BRITTLE.tag)
@@ -65,6 +70,20 @@ public class DesiresBlocks {
 			.build()
 			.register();
 
+	public static final BlockEntry<FluidKegBlock> FLUID_KEG = REGISTRATE.block("fluid_keg", FluidKegBlock::new)
+			.initialProperties(SharedProperties::copperMetal)
+			.properties(p -> p.noOcclusion().isRedstoneConductor((p1, p2, p3) -> true))
+			.transform(pickaxeOnly())
+			.blockstate((c, p) -> p.getVariantBuilder(c.get())
+					.forAllStates(s -> ConfiguredModel.builder()
+							.modelFile(AssetLookup.standardModel(c, p))
+							.rotationY(s.getValue(FluidKegBlock.HORIZONTAL_AXIS) == Direction.Axis.X ? 90 : 0)
+							.build()))
+			.onRegister(connectedTextures(FluidKegCTBehaviour::new))
+			.item(FluidKegItem::new)
+			.build()
+			.register();
+
 
 	public static final BlockEntry<FanSailBlock> SPLASHING_SAIL =
 			REGISTRATE.block("splashing_sail", FanSailBlock::sail)
@@ -77,6 +96,7 @@ public class DesiresBlocks {
 					.tag(AllTags.AllBlockTags.WINDMILL_SAILS.tag)
 					.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
 					.tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SPLASHING.tag)
+					.lang("Splashing Catalyst Sail")
 					.simpleItem()
 					.register();
 
@@ -92,6 +112,7 @@ public class DesiresBlocks {
 					.tag(AllTags.AllBlockTags.WINDMILL_SAILS.tag)
 					.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
 					.tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_HAUNTING.tag)
+					.lang("Haunting Catalyst Sail")
 					.simpleItem()
 					.register();
 
@@ -107,6 +128,7 @@ public class DesiresBlocks {
 					.tag(AllTags.AllBlockTags.WINDMILL_SAILS.tag)
 					.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
 					.tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SMOKING.tag)
+					.lang("Smoking Catalyst Sail")
 					.simpleItem()
 					.register();
 
@@ -122,6 +144,7 @@ public class DesiresBlocks {
 					.tag(AllTags.AllBlockTags.WINDMILL_SAILS.tag)
 					.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
 					.tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_BLASTING.tag)
+					.lang("Blasting Catalyst Sail")
 					.simpleItem()
 					.register();
 
@@ -137,6 +160,7 @@ public class DesiresBlocks {
 					.tag(AllTags.AllBlockTags.WINDMILL_SAILS.tag)
 					.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
 					.tag(DesiresTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SEETHING.tag)
+					.lang("Seething Catalyst Sail")
 					.simpleItem()
 					.register();
 
@@ -151,6 +175,7 @@ public class DesiresBlocks {
 					.tag(AllTags.AllBlockTags.WINDMILL_SAILS.tag)
 					.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
 					.tag(DesiresTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_FREEZING.tag)
+					.lang("Freezing Catalyst Sail")
 					.simpleItem()
 					.register();
 

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "create_dd:item/gilded_rose_hoe"
+  }
+}

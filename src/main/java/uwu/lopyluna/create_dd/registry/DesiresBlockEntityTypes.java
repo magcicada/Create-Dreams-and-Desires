@@ -5,6 +5,7 @@ import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankInstance;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankRenderer;
+import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileBlockEntity;
 
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
@@ -23,6 +24,12 @@ public class DesiresBlockEntityTypes {
 			.blockEntity("item_stockpile", ItemStockpileBlockEntity::new)
 			.validBlocks(DesiresBlocks.ITEM_STOCKPILE)
 			.register();
+
+	public static final BlockEntityEntry<FluidKegBlockEntity> FLUID_KEG = REGISTRATE
+			.blockEntity("fluid_keg", FluidKegBlockEntity::new)
+			.validBlocks(DesiresBlocks.FLUID_KEG)
+			.register();
+
 
 	public static void register() {}
 }

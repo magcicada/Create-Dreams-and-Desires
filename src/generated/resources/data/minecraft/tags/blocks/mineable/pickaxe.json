@@ -1,6 +1,8 @@
 {
   "values": [
+    "create_dd:cog_crank",
     "create_dd:item_stockpile",
+    "create_dd:fluid_keg",
     "create_dd:black_asphalt_block",
     "create_dd:white_asphalt_block",
     "create_dd:blue_asphalt_block",

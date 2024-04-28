@@ -80,8 +80,8 @@ public class ItemStockpileBlockEntity extends SmartBlockEntity implements IMulti
 		
 		BlockPos pos = controllerBE.getBlockPos();
 		for (int y = 0; y < controllerBE.length; y++) {
-			for (int z = 0; z < (controllerBE.radius); z++) {
-				for (int x = 0; x < (controllerBE.radius); x++) {
+			for (int z = 0; z < controllerBE.radius; z++) {
+				for (int x = 0; x < controllerBE.radius; x++) {
 					level.updateNeighbourForOutputSignal(pos.offset(x, y, z), getBlockState().getBlock());
 				}
 			}
@@ -287,8 +287,8 @@ public class ItemStockpileBlockEntity extends SmartBlockEntity implements IMulti
 
 	@Override
 	public int getMaxLength(Axis longAxis, int width) {
-		if (longAxis == Axis.Y) return getMaxWidth();
-		return getMaxLength(width);
+		if (longAxis == Axis.Y) return getMaxLength(width);
+		return getMaxWidth();
 	}
 
 	@Override

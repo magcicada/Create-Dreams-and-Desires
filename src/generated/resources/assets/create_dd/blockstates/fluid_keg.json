@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "axis=x,large=false": {
+      "model": "create_dd:block/fluid_keg",
+      "y": 90
+    },
+    "axis=x,large=true": {
+      "model": "create_dd:block/fluid_keg",
+      "y": 90
+    },
+    "axis=z,large=false": {
+      "model": "create_dd:block/fluid_keg"
+    },
+    "axis=z,large=true": {
+      "model": "create_dd:block/fluid_keg"
+    }
+  }
+}
