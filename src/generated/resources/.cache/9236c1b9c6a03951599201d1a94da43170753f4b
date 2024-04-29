@@ -1,4 +1,4 @@
-// 1.19.2	2024-04-27T19:56:14.049312	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2024-04-28T15:06:28.2436928	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 9452bed2fb7ba829ea35644054add91456d3f5d9 assets/create_dd/blockstates/amethyst_block_pillar.json
 64dc32722d3ad05720fa9a200df1de7179cfd890 assets/create_dd/blockstates/basalt_pillar.json
 5fd6e80fe77786dd8fd0c5cfd6d866b44365aa96 assets/create_dd/blockstates/blackstone_pillar.json
@@ -1600,6 +1600,7 @@ db5c9e781540f9bf2869a67fe7f862286b81fbe8 data/create_dd/recipes/small_weathered_
 f07b8b04d7244bf409d60bb50d8c113edc5f2397 data/create_dd/recipes/weathered_limestone_pillar_from_stone_types_weathered_limestone_stonecutting.json
 e3ce355838218989fdd06bf708468f6f3eccd7dc data/create_dd/tags/blocks/fan_processing_catalysts/freezing.json
 f116aadc2f23a69ddd71f3a1ed7677ca171eea6d data/create_dd/tags/blocks/fan_processing_catalysts/seething.json
+252647f9fab0a76f593c4afa23f38fd0f6fe4c27 data/create_dd/tags/items/additional_drops_tool.json
 2967d4a4e0271fb42d52aad1573dbc054222decd data/create_dd/tags/items/stone_types/amethyst_block.json
 c87c5dd84b066e17616c192328ddd9b755b20c01 data/create_dd/tags/items/stone_types/basalt.json
 bbdc3646eb2d532864e93be6ef65290508431334 data/create_dd/tags/items/stone_types/blackstone.json
@@ -1611,6 +1612,11 @@ c4be85f36ff08fcc53207c1dade6f81a0b076230 data/create_dd/tags/items/stone_types/s
 2d39033963ca93fbe036328bf0539697d431d10f data/create_dd/tags/items/stone_types/weathered_limestone.json
 f9fc6ab1b039ea4776c49ddfcd7669cb6f40cfcf data/forge/tags/fluids/sap.json
 595efaf27802507ac303f0657b0ecf406d25fbac data/forge/tags/items/buckets/sap.json
+e86159d62f38eb2e3c0f54d71afe6baebd68b909 data/forge/tags/items/tools/axe.json
+9af1419c0cd5795da94f8a75a6ed6527fcb24033 data/forge/tags/items/tools/hoe.json
+a6561415aabf323c8873f5d44eeac1816885a57d data/forge/tags/items/tools/pickaxe.json
+6c8e3bb5924a8d209bea83fedd4b785a982c680c data/forge/tags/items/tools/shovel.json
+9bd60946b87fd97083cd66b7e73ba51dec9b7592 data/forge/tags/items/tools/sword.json
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/azalea_root_replaceable.json
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/dripstone_replaceable_blocks.json
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/lush_ground_replaceable.json

@@ -23,6 +23,8 @@ import uwu.lopyluna.create_dd.DesiresCreate;
 
 import java.util.Collections;
 
+import static uwu.lopyluna.create_dd.registry.DesiresTags.NameSpace.FORGE;
+
 @SuppressWarnings({"all"})
 public class DesiresTags {
 	public static <T> TagKey<T> optionalTag(IForgeRegistry<T> registry,
@@ -130,6 +132,13 @@ public class DesiresTags {
 
 	public enum AllItemTags {
 
+		ADDITIONAL_DROPS_TOOL,
+		SWORD(FORGE, "tools/sword"),
+		PICKAXE(FORGE, "tools/pickaxe"),
+		AXE(FORGE, "tools/axe"),
+		SHOVEL(FORGE, "tools/shovel"),
+		HOE(FORGE, "tools/hoe")
+
 		;
 
 		public final TagKey<Item> tag;
@@ -180,7 +189,7 @@ public class DesiresTags {
 		FAN_PROCESSING_CATALYSTS_FREEZING(NameSpace.MOD, "fan_processing_catalysts/freezing"),
 		FAN_PROCESSING_CATALYSTS_SEETHING(NameSpace.MOD, "fan_processing_catalysts/seething"),
 
-		SAP(NameSpace.FORGE)
+		SAP(FORGE)
 
 		;
 
