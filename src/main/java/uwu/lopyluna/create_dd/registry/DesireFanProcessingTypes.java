@@ -119,13 +119,11 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
             Vector3f color2 = new Color(0xE7E4BB).asVectorF();
             level.addParticle(new DustParticleOptions(color1, 1), pos.x + (level.random.nextFloat() - .5f) * .5f,
                     pos.y + .5f, pos.z + (level.random.nextFloat() - .5f) * .5f, 0, 1 / 8f, 0);
+            level.addParticle(new DustParticleOptions(color2, 1), pos.x + (level.random.nextFloat() - .5f) * .5f,
+                    pos.y + .5f, pos.z + (level.random.nextFloat() - .5f) * .5f, 0, 1 / 8f, 0);
             level.addParticle(new DustParticleOptions(color1, 1), pos.x + (level.random.nextFloat() - .5f) * .5f,
                     pos.y + .5f, pos.z + (level.random.nextFloat() - .5f) * .5f, 0, 1 / 8f, 0);
             level.addParticle(ParticleTypes.CRIT, pos.x + (level.random.nextFloat() - .5f) * .5f, pos.y + .5f,
-                    pos.z + (level.random.nextFloat() - .5f) * .5f, 0, 1 / 8f, 0);
-            level.addParticle(ParticleTypes.WAX_ON, pos.x + (level.random.nextFloat() - .5f) * .5f, pos.y + .5f,
-                    pos.z + (level.random.nextFloat() - .5f) * .5f, 0, 1 / 8f, 0);
-            level.addParticle(ParticleTypes.WHITE_ASH, pos.x + (level.random.nextFloat() - .5f) * .5f, pos.y + .5f,
                     pos.z + (level.random.nextFloat() - .5f) * .5f, 0, 1 / 8f, 0);
         }
 
@@ -136,15 +134,13 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
             if (random.nextFloat() < 1 / 128f)
                 particleAccess.spawnExtraParticle(ParticleTypes.CRIT, .125f);
             if (random.nextFloat() < 1 / 32f)
-                particleAccess.spawnExtraParticle(ParticleTypes.WAX_ON, .125f);
-            if (random.nextFloat() < 1 / 32f)
                 particleAccess.spawnExtraParticle(ParticleTypes.WHITE_ASH, .125f);
         }
 
         @Override
         public void affectEntity(Entity entity, Level level) {
 
-            if (entity instanceof Zombie zombie) {
+            if (entity instanceof Zombie zombie && !(entity instanceof Husk)) {
                 int progress = zombie.getPersistentData()
                         .getInt("CreateSanding");
                 if (progress < 50) {
@@ -160,14 +156,14 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
                 level.playSound(null, entity.blockPosition(), SoundEvents.HUSK_CONVERTED_TO_ZOMBIE,
                         SoundSource.NEUTRAL, 1.25f, 0.65f);
 
-                Stray stray = EntityType.STRAY.create(level);
+                Husk husk = EntityType.HUSK.create(level);
                 CompoundTag serializeNBT = zombie.saveWithoutId(new CompoundTag());
                 serializeNBT.remove("UUID");
 
-                assert stray != null;
-                stray.deserializeNBT(serializeNBT);
-                stray.setPos(zombie.getPosition(0));
-                level.addFreshEntity(stray);
+                assert husk != null;
+                husk.deserializeNBT(serializeNBT);
+                husk.setPos(zombie.getPosition(0));
+                level.addFreshEntity(husk);
                 zombie.discard();
             }
         }
@@ -184,7 +180,10 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
             }
             BlockState blockState = level.getBlockState(pos);
             if (DesiresTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SEETHING.matches(blockState)) {
-                return !blockState.hasProperty(BlazeBurnerBlock.HEAT_LEVEL) || blockState.getValue(BlazeBurnerBlock.HEAT_LEVEL).isAtLeast(BlazeBurnerBlock.HeatLevel.SEETHING);
+                if (blockState.hasProperty(BlazeBurnerBlock.HEAT_LEVEL) && !blockState.getValue(BlazeBurnerBlock.HEAT_LEVEL).isAtLeast(BlazeBurnerBlock.HeatLevel.SEETHING)) {
+                    return false;
+                }
+                return true;
             }
             return false;
         }

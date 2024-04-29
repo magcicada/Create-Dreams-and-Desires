@@ -215,6 +215,21 @@ public class DesiresBlocks {
 					.simpleItem()
 					.register();
 
+	public static final BlockEntry<FanSailBlock> SANDING_SAIL =
+			REGISTRATE.block("sanding_sail", FanSailBlock::sail)
+					.initialProperties(SharedProperties::wooden)
+					.properties(p -> p.color(MaterialColor.DIRT))
+					.properties(p -> p.sound(SoundType.SCAFFOLDING)
+							.noOcclusion())
+					.transform(axeOnly())
+					.blockstate(BlockStateGen.directionalBlockProvider(false))
+					.tag(AllTags.AllBlockTags.WINDMILL_SAILS.tag)
+					.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
+					.tag(DesiresTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SANDING.tag)
+					.lang("Sanding Catalyst Sail")
+					.simpleItem()
+					.register();
+
 
 	// Load this class
 
