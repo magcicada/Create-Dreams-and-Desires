@@ -30,7 +30,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-@SuppressWarnings({"removal", "deprecated", "all"})
+@SuppressWarnings({"removal", "deprecated", "unchecked", "all"})
 public class FluidKegBlockEntity extends SmartBlockEntity implements IMultiBlockEntityContainer.Fluid, IHaveGoggleInformation {
 
     private static final int MAX_SIZE = 3;

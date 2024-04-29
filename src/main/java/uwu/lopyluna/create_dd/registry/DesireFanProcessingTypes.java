@@ -4,6 +4,8 @@ import com.mojang.math.Vector3f;
 import com.simibubi.create.content.kinetics.fan.processing.AllFanProcessingTypes;
 import com.simibubi.create.content.kinetics.fan.processing.FanProcessingType;
 import com.simibubi.create.content.kinetics.fan.processing.FanProcessingTypeRegistry;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
+import com.simibubi.create.content.trains.CubeParticleData;
 import com.simibubi.create.foundation.recipe.RecipeApplier;
 import com.simibubi.create.foundation.utility.Color;
 import com.simibubi.create.foundation.utility.VecHelper;
@@ -22,9 +24,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.SnowGolem;
-import net.minecraft.world.entity.monster.EnderMan;
-import net.minecraft.world.entity.monster.Skeleton;
-import net.minecraft.world.entity.monster.Stray;
+import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -33,15 +33,17 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.content.recipes.FreezingRecipe;
+import uwu.lopyluna.create_dd.content.recipes.SandingRecipe;
+import uwu.lopyluna.create_dd.content.recipes.SeethingRecipe;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 public class DesireFanProcessingTypes extends AllFanProcessingTypes {
-    public static final HauntingType SANDING = register("sanding", new HauntingType());
-    public static final HauntingType FREEZING = register("freezing", new HauntingType());
-    public static final HauntingType SEETHING = register("seething", new HauntingType());
+    public static final SandingType SANDING = register("sanding", new SandingType());
+    public static final FreezingType FREEZING = register("freezing", new FreezingType());
+    public static final SeethingType SEETHING = register("seething", new SeethingType());
 
     private static final Map<String, FanProcessingType> LEGACY_NAME_MAP;
     static {
@@ -74,6 +76,195 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
         return FanProcessingType.parse(str);
     }
 
+    public static class SandingType implements FanProcessingType {
+        private static final SandingRecipe.SandingWrapper SANDING_WRAPPER = new SandingRecipe.SandingWrapper();
+
+        @Override
+        public boolean isValidAt(Level level, BlockPos pos) {
+            FluidState fluidState = level.getFluidState(pos);
+            if (DesiresTags.AllFluidTags.FAN_PROCESSING_CATALYSTS_SANDING.matches(fluidState)) {
+                return true;
+            }
+            BlockState blockState = level.getBlockState(pos);
+            return DesiresTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SANDING.matches(blockState);
+        }
+
+        @Override
+        public int getPriority() {
+            return 1000;
+        }
+
+        @Override
+        public boolean canProcess(ItemStack stack, Level level) {
+            SANDING_WRAPPER.setItem(0, stack);
+            Optional<SandingRecipe> recipe = DesiresRecipeTypes.SANDING.find(SANDING_WRAPPER, level);
+            return recipe.isPresent();
+        }
+
+        @Override
+        @Nullable
+        public List<ItemStack> process(ItemStack stack, Level level) {
+            SANDING_WRAPPER.setItem(0, stack);
+            Optional<SandingRecipe> recipe = DesiresRecipeTypes.SANDING.find(SANDING_WRAPPER, level);
+            if (recipe.isPresent())
+                return RecipeApplier.applyRecipeOn(stack, recipe.get());
+            return null;
+        }
+
+        @Override
+        public void spawnProcessingParticles(Level level, Vec3 pos) {
+            if (level.random.nextInt(8) != 0)
+                return;
+            Vector3f color1 = new Color(0xEDEBCB).asVectorF();
+            Vector3f color2 = new Color(0xE7E4BB).asVectorF();
+            level.addParticle(new DustParticleOptions(color1, 1), pos.x + (level.random.nextFloat() - .5f) * .5f,
+                    pos.y + .5f, pos.z + (level.random.nextFloat() - .5f) * .5f, 0, 1 / 8f, 0);
+            level.addParticle(new DustParticleOptions(color1, 1), pos.x + (level.random.nextFloat() - .5f) * .5f,
+                    pos.y + .5f, pos.z + (level.random.nextFloat() - .5f) * .5f, 0, 1 / 8f, 0);
+            level.addParticle(ParticleTypes.CRIT, pos.x + (level.random.nextFloat() - .5f) * .5f, pos.y + .5f,
+                    pos.z + (level.random.nextFloat() - .5f) * .5f, 0, 1 / 8f, 0);
+            level.addParticle(ParticleTypes.WAX_ON, pos.x + (level.random.nextFloat() - .5f) * .5f, pos.y + .5f,
+                    pos.z + (level.random.nextFloat() - .5f) * .5f, 0, 1 / 8f, 0);
+            level.addParticle(ParticleTypes.WHITE_ASH, pos.x + (level.random.nextFloat() - .5f) * .5f, pos.y + .5f,
+                    pos.z + (level.random.nextFloat() - .5f) * .5f, 0, 1 / 8f, 0);
+        }
+
+        @Override
+        public void morphAirFlow(AirFlowParticleAccess particleAccess, RandomSource random) {
+            particleAccess.setColor(Color.mixColors(0xE7E4BB, 0xEDEBCB, random.nextFloat()));
+            particleAccess.setAlpha(1f);
+            if (random.nextFloat() < 1 / 128f)
+                particleAccess.spawnExtraParticle(ParticleTypes.CRIT, .125f);
+            if (random.nextFloat() < 1 / 32f)
+                particleAccess.spawnExtraParticle(ParticleTypes.WAX_ON, .125f);
+            if (random.nextFloat() < 1 / 32f)
+                particleAccess.spawnExtraParticle(ParticleTypes.WHITE_ASH, .125f);
+        }
+
+        @Override
+        public void affectEntity(Entity entity, Level level) {
+
+            if (entity instanceof Zombie zombie) {
+                int progress = zombie.getPersistentData()
+                        .getInt("CreateSanding");
+                if (progress < 50) {
+                    if (progress % 10 == 0) {
+                        level.playSound(null, entity.blockPosition(), SoundEvents.HUSK_AMBIENT, SoundSource.NEUTRAL,
+                                1f, 1.5f * progress / 50f);
+                    }
+                    zombie.getPersistentData()
+                            .putInt("CreateSanding", progress + 1);
+                    return;
+                }
+
+                level.playSound(null, entity.blockPosition(), SoundEvents.HUSK_CONVERTED_TO_ZOMBIE,
+                        SoundSource.NEUTRAL, 1.25f, 0.65f);
+
+                Stray stray = EntityType.STRAY.create(level);
+                CompoundTag serializeNBT = zombie.saveWithoutId(new CompoundTag());
+                serializeNBT.remove("UUID");
+
+                assert stray != null;
+                stray.deserializeNBT(serializeNBT);
+                stray.setPos(zombie.getPosition(0));
+                level.addFreshEntity(stray);
+                zombie.discard();
+            }
+        }
+    }
+
+    public static class SeethingType implements FanProcessingType {
+        private static final SeethingRecipe.SeethingWrapper SEETHING_WRAPPER = new SeethingRecipe.SeethingWrapper();
+
+        @Override
+        public boolean isValidAt(Level level, BlockPos pos) {
+            FluidState fluidState = level.getFluidState(pos);
+            if (DesiresTags.AllFluidTags.FAN_PROCESSING_CATALYSTS_SEETHING.matches(fluidState)) {
+                return true;
+            }
+            BlockState blockState = level.getBlockState(pos);
+            if (DesiresTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SEETHING.matches(blockState)) {
+                return !blockState.hasProperty(BlazeBurnerBlock.HEAT_LEVEL) || blockState.getValue(BlazeBurnerBlock.HEAT_LEVEL).isAtLeast(BlazeBurnerBlock.HeatLevel.SEETHING);
+            }
+            return false;
+        }
+
+        @Override
+        public int getPriority() {
+            return 1200;
+        }
+
+        @Override
+        public boolean canProcess(ItemStack stack, Level level) {
+            SEETHING_WRAPPER.setItem(0, stack);
+            Optional<SeethingRecipe> recipe = DesiresRecipeTypes.SEETHING.find(SEETHING_WRAPPER, level);
+            return recipe.isPresent();
+        }
+
+        @Override
+        @Nullable
+        public List<ItemStack> process(ItemStack stack, Level level) {
+            SEETHING_WRAPPER.setItem(0, stack);
+            Optional<SeethingRecipe> recipe = DesiresRecipeTypes.SEETHING.find(SEETHING_WRAPPER, level);
+            if (recipe.isPresent())
+                return RecipeApplier.applyRecipeOn(stack, recipe.get());
+            return null;
+        }
+
+        @Override
+        public void spawnProcessingParticles(Level level, Vec3 pos) {
+            if (level.random.nextInt(8) != 0)
+                return;
+            Vector3f color = new Color(0x1e0f3d).asVectorF();
+            level.addParticle(new DustParticleOptions(color, 1), pos.x + (level.random.nextFloat() - .5f) * .5f,
+                    pos.y + .5f, pos.z + (level.random.nextFloat() - .5f) * .5f, 0, 1 / 8f, 0);
+            level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, pos.x, pos.y + .45f, pos.z, 0, 0, 0);
+            level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, pos.x + (level.random.nextFloat() - .5f) * .5f, pos.y + .5f,
+                    pos.z + (level.random.nextFloat() - .5f) * .5f, 0, 1 / 8f, 0);
+        }
+
+        @Override
+        public void morphAirFlow(AirFlowParticleAccess particleAccess, RandomSource random) {
+            particleAccess.setColor(Color.mixColors(0x64C9FD, 0x3f74e8, random.nextFloat()));
+            particleAccess.setAlpha(1f);
+            if (random.nextFloat() < 1 / 32f)
+                particleAccess.spawnExtraParticle(ParticleTypes.SOUL_FIRE_FLAME,  .125f);
+            Vector3f colorBright = new Color(0x64C9FD).asVectorF();
+            Vector3f colorDark = new Color(0x3f74e8).asVectorF();
+            if (random.nextFloat() < 1 / 32f)
+                particleAccess.spawnExtraParticle((new DustParticleOptions(colorBright, 1)), .125f);
+            if (random.nextFloat() < 1 / 32f)
+                particleAccess.spawnExtraParticle((new DustParticleOptions(colorDark, 1)), .125f);
+            if (random.nextFloat() < 1 / 48f)
+                particleAccess.spawnExtraParticle(ParticleTypes.SMOKE, .125f);
+            if (random.nextFloat() < 1 / 32f)
+                particleAccess.spawnExtraParticle((new CubeParticleData(192, 122, 85, 0.075f, 10, true)), .125f);
+            if (random.nextFloat() < 1 / 32f)
+                particleAccess.spawnExtraParticle((new CubeParticleData(191, 82, 91, 0.1f, 10, true)), .125f);
+        }
+
+        @Override
+        public void affectEntity(Entity entity, Level level) {
+            if (level.isClientSide)
+                return;
+
+            if (entity instanceof Blaze blaze) {
+                blaze.heal(4);
+            }
+
+            if (!entity.fireImmune()) {
+                entity.setSecondsOnFire(10);
+                entity.hurt(DamageSource.LAVA, 10);
+            }
+
+            if (entity instanceof LivingEntity livingEntity) {
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 2, false, false));
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 20, 1, false, false));
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 30, 0, false, false));
+            }
+        }
+    }
+
     public static class FreezingType implements FanProcessingType {
         private static final FreezingRecipe.FreezingWrapper FREEZING_WRAPPER = new FreezingRecipe.FreezingWrapper();
 
@@ -84,15 +275,12 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
                 return true;
             }
             BlockState blockState = level.getBlockState(pos);
-            if (DesiresTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_FREEZING.matches(blockState)) {
-                return true;
-            }
-            return false;
+            return DesiresTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_FREEZING.matches(blockState);
         }
 
         @Override
         public int getPriority() {
-            return 600;
+            return 1100;
         }
 
         @Override
