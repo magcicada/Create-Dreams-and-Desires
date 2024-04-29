@@ -1,6 +1,7 @@
 package uwu.lopyluna.create_dd.registry;
 
 import com.simibubi.create.content.equipment.toolbox.ToolboxDyeingRecipe;
+import com.simibubi.create.content.kinetics.fan.processing.HauntingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder.ProcessingRecipeFactory;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
@@ -16,12 +17,18 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.content.recipes.FreezingRecipe;
+import uwu.lopyluna.create_dd.content.recipes.SandingRecipe;
+import uwu.lopyluna.create_dd.content.recipes.SeethingRecipe;
 
 import java.util.Optional;
 import java.util.function.Supplier;
 
 public enum DesiresRecipeTypes implements IRecipeTypeInfo {
 
+	SANDING(SandingRecipe::new),
+	FREEZING(FreezingRecipe::new),
+	SEETHING(SeethingRecipe::new),
 
 	BACKPACK_DYEING(() -> new SimpleRecipeSerializer<>(ToolboxDyeingRecipe::new), () -> RecipeType.CRAFTING, false);
 

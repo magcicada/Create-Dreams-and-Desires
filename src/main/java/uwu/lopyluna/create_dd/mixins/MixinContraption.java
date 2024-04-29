@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileBlockEntity;
 
-@Mixin(Contraption.class)
+@Mixin(value = Contraption.class, remap = false)
 public abstract class MixinContraption {
 
     @Shadow

@@ -27,14 +27,13 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraftforge.common.util.ForgeSoundType;
-import net.minecraftforge.items.CapabilityItemHandler;
 import org.jetbrains.annotations.NotNull;
 import uwu.lopyluna.create_dd.registry.DesiresBlockEntityTypes;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 
 import javax.annotation.Nullable;
 
-@SuppressWarnings({"deprecation"})
+@SuppressWarnings({"deprecation", "removal", "all"})
 public class FluidKegBlock extends Block implements IWrenchable, IBE<FluidKegBlockEntity> {
 
     public static final Property<Axis> HORIZONTAL_AXIS = BlockStateProperties.HORIZONTAL_AXIS;
@@ -160,7 +159,7 @@ public class FluidKegBlock extends Block implements IWrenchable, IBE<FluidKegBlo
     @Override
     public int getAnalogOutputSignal(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos) {
         return getBlockEntityOptional(pLevel, pPos)
-                .map(vte -> vte.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY))
+                .map(vte -> vte.getCapability(net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY))
                 .map(lo -> lo.map(ItemHelper::calcRedstoneFromInventory)
                         .orElse(0))
                 .orElse(0);

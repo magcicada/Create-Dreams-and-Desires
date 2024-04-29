@@ -2,6 +2,9 @@ package uwu.lopyluna.create_dd.registry;
 
 
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.IndustrialFanBlock.IndustrialFanBlockEntity;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.IndustrialFanBlock.IndustrialFanInstance;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.IndustrialFanBlock.IndustrialFanRemderer;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankInstance;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankRenderer;
@@ -12,6 +15,12 @@ import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 
 public class DesiresBlockEntityTypes {
 
+	public static final BlockEntityEntry<IndustrialFanBlockEntity> INDUSTRIAL_FAN = REGISTRATE
+			.blockEntity("industrial_fan", IndustrialFanBlockEntity::new)
+			.instance(() -> IndustrialFanInstance::new, false)
+			.validBlocks(DesiresBlocks.INDUSTRIAL_FAN)
+			.renderer(() -> IndustrialFanRemderer::new)
+			.register();
 
 	public static final BlockEntityEntry<CogCrankBlockEntity> COG_CRANK = REGISTRATE
 			.blockEntity("cog_crank", CogCrankBlockEntity::new)

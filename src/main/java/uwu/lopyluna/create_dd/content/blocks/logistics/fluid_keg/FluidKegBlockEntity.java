@@ -22,15 +22,15 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Objects;
 
-@SuppressWarnings({"removal", "deprecated"})
+@SuppressWarnings({"removal", "deprecated", "all"})
 public class FluidKegBlockEntity extends SmartBlockEntity implements IMultiBlockEntityContainer.Fluid, IHaveGoggleInformation {
 
     private static final int MAX_SIZE = 3;
@@ -234,7 +234,7 @@ public class FluidKegBlockEntity extends SmartBlockEntity implements IMultiBlock
         }
 
         boolean changeOfController =
-                controllerBefore == null ? controller != null : !controllerBefore.equals(controller);
+                !Objects.equals(controllerBefore, controller);
         if (hasLevel() && (changeOfController || prevSize != width || prevHeight != height)) {
             if (hasLevel()) level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 16);
             if (isController()) tankInventory.setCapacity(getCapacityMultiplier() * getTotalTankSize());
@@ -270,7 +270,7 @@ public class FluidKegBlockEntity extends SmartBlockEntity implements IMultiBlock
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+        if (cap == net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
             initCapability();
             return fluidCapability.cast();
         }
@@ -298,7 +298,7 @@ public class FluidKegBlockEntity extends SmartBlockEntity implements IMultiBlock
         if (controllerBE == null)
             return false;
         return containedFluidTooltip(tooltip, isPlayerSneaking,
-                controllerBE.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY));
+                controllerBE.getCapability(net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY));
     }
 
     @Override

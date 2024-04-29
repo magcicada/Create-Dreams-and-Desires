@@ -31,6 +31,7 @@ public class DesiresPartialModels {
 		BRASS_RUBBER_BELT_COVER_Z = block("rubber_belt_cover/brass_belt_cover_z"),
 		INDUSTRIAL_RUBBER_BELT_COVER_Z = block("rubber_belt_cover/brass_belt_cover_z"),
 
+		INDUSTRIAL_FAN_POWER = block("industrial_fan/cog"),
 		INDUSTRIAL_FAN_INNER = block("industrial_fan/propeller"),
 		COG_CRANK_HANDLE = block("cog_crank/handle"),
 		HYDRAULIC_PRESS_HEAD = block("hydraulic_press/head"),

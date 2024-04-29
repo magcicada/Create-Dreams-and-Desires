@@ -17,7 +17,7 @@ import uwu.lopyluna.create_dd.registry.DesiresTags;
 
 import static net.minecraft.world.level.block.Block.dropResources;
 
-@Mixin(Block.class)
+@Mixin(value = Block.class, remap = false)
 public class MixinBlock {
 
 

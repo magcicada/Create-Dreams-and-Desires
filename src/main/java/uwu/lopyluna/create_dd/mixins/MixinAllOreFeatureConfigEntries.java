@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import uwu.lopyluna.create_dd.DesiresCreate;
 
-@Mixin(AllOreFeatureConfigEntries.class)
+@Mixin(value = AllOreFeatureConfigEntries.class, remap = false)
 public class MixinAllOreFeatureConfigEntries {
 
     @Final

@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileBlockEntity;
 
-@Mixin(MountedStorage.class)
+@Mixin(value = MountedStorage.class, remap = false)
 public class MixinMountedStorage {
 
     @Shadow boolean noFuel;

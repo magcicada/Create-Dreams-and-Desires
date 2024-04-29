@@ -33,8 +33,9 @@ public class DesiresSpriteShifts {
 	//	ORNATE_IRON_GLASS = getCT(AllCTTypes.OMNIDIRECTIONAL, "palettes/ornate_iron_glass", "palettes/ornate_iron_glass"),
 	//	ORNATE_IRON_GLASS_SIDE = getCT(AllCTTypes.OMNIDIRECTIONAL, "palettes/ornate_iron_glass_side", "palettes/ornate_iron_glass_side");
 //
-	//public static final CTSpriteShiftEntry
-	//	HYDRAULIC_CASING = omni("hydraulic_casing");
+	public static final CTSpriteShiftEntry
+			INDUSTRIAL_CASING = omni("industrial_casing"),
+			HYDRAULIC_CASING = omni("hydraulic_casing");
 
 	//public static final Map<DyeColor, SpriteShiftEntry> DYED_RUBBER_BELTS = new EnumMap<>(DyeColor.class),
 	//		DYED_OFFSET_RUBBER_BELTS = new EnumMap<>(DyeColor.class), DYED_DIAGONAL_RUBBER_BELTS = new EnumMap<>(DyeColor.class);

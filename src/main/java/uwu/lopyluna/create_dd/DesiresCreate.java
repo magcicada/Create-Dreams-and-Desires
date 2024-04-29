@@ -79,6 +79,7 @@ public class DesiresCreate
         DesiresEntityTypes.register();
         DesiresBlockEntityTypes.register();
         DesiresSpriteShifts.init();
+        DesireFanProcessingTypes.register();
         DesiresRecipeTypes.register(modEventBus);
         DesiresEntityDataSerializers.register(modEventBus);
         DesiresPackets.registerPackets();

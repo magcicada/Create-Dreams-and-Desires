@@ -2,18 +2,22 @@ package uwu.lopyluna.create_dd.registry;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
+import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.foundation.block.ItemUseOverrides;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.BlockStateGen;
+import com.simibubi.create.foundation.data.BuilderTransformers;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.IndustrialFanBlock.IndustrialFanBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankBlock;
 import uwu.lopyluna.create_dd.content.blocks.curiosities.FanSailBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegBlock;
@@ -28,14 +32,45 @@ import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.*;
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 
-@SuppressWarnings({"unused"})
+@SuppressWarnings({"unused", "removal"})
 public class DesiresBlocks {
 
 	static {
 		REGISTRATE.creativeModeTab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB);
 	}
-	//Horizontal Tank -> Fluid Keg
-	//Vertical Vault -> Item Stockpile
+
+
+
+	public static final BlockEntry<CasingBlock> HYDRAULIC_CASING = REGISTRATE.block("hydraulic_casing", CasingBlock::new)
+			.transform(BuilderTransformers.casing(() -> DesiresSpriteShifts.HYDRAULIC_CASING))
+			.properties(p -> p.color(MaterialColor.COLOR_ORANGE))
+			.properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.COPPER))
+			.transform(pickaxeOnly())
+			.lang("Hydraulic Casing")
+			.register();
+
+	public static final BlockEntry<CasingBlock> INDUSTRIAL_CASING = REGISTRATE.block("industrial_casing", CasingBlock::new)
+			.transform(BuilderTransformers.casing(() -> DesiresSpriteShifts.INDUSTRIAL_CASING))
+			.properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN))
+			.properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.NETHERITE_BLOCK))
+			.transform(pickaxeOnly())
+			.lang("Industrial Casing")
+			.register();
+
+	public static final BlockEntry<IndustrialFanBlock> INDUSTRIAL_FAN = REGISTRATE.block("industrial_fan", IndustrialFanBlock::new)
+			.initialProperties(SharedProperties::stone)
+			.properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN))
+			.properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.NETHERITE_BLOCK))
+			.blockstate(BlockStateGen.directionalBlockProvider(true))
+			.addLayer(() -> RenderType::cutoutMipped)
+			.transform(pickaxeOnly())
+			.transform(BlockStressDefaults.setImpact(4.0))
+			.transform(BlockStressDefaults.setCapacity(16))
+			.item()
+			.transform(customItemModel())
+			.lang("Industrial Fan")
+			.register();
+
 
 	public static final BlockEntry<CogCrankBlock> COG_CRANK = REGISTRATE.block("cog_crank", CogCrankBlock::new)
 			.initialProperties(SharedProperties::wooden)
@@ -160,6 +195,7 @@ public class DesiresBlocks {
 					.tag(AllTags.AllBlockTags.WINDMILL_SAILS.tag)
 					.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
 					.tag(DesiresTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SEETHING.tag)
+					.tag(DesiresTags.AllBlockTags.INDUSTRIAL_FAN_HEATER.tag)
 					.lang("Seething Catalyst Sail")
 					.simpleItem()
 					.register();
