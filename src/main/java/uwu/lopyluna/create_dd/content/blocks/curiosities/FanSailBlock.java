@@ -112,6 +112,7 @@ public class FanSailBlock extends WrenchableDirectionalBlock {
                     || DesiresBlocks.BLASTING_SAIL.isIn(i)
                     || DesiresBlocks.SEETHING_SAIL.isIn(i)
                     || DesiresBlocks.FREEZING_SAIL.isIn(i)
+                    || DesiresBlocks.SANDING_SAIL.isIn(i)
                     || AllBlocks.SAIL.isIn(i)
                     || AllBlocks.SAIL_FRAME.isIn(i);
         }

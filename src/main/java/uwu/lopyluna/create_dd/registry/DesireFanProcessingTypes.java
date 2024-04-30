@@ -1,6 +1,8 @@
 package uwu.lopyluna.create_dd.registry;
 
 import com.mojang.math.Vector3f;
+import com.simibubi.create.AllRecipeTypes;
+import com.simibubi.create.content.equipment.sandPaper.SandPaperPolishingRecipe;
 import com.simibubi.create.content.kinetics.fan.processing.AllFanProcessingTypes;
 import com.simibubi.create.content.kinetics.fan.processing.FanProcessingType;
 import com.simibubi.create.content.kinetics.fan.processing.FanProcessingTypeRegistry;
@@ -96,6 +98,7 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
 
         @Override
         public boolean canProcess(ItemStack stack, Level level) {
+
             SANDING_WRAPPER.setItem(0, stack);
             Optional<SandingRecipe> recipe = DesiresRecipeTypes.SANDING.find(SANDING_WRAPPER, level);
             return recipe.isPresent();
