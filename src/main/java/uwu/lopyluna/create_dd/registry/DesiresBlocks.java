@@ -40,6 +40,13 @@ public class DesiresBlocks {
 	}
 
 
+	public static final BlockEntry<CasingBlock> OVERBURDEN_CASING = REGISTRATE.block("overburden_casing", CasingBlock::new)
+			.transform(BuilderTransformers.casing(() -> DesiresSpriteShifts.OVERBURDEN_CASING))
+			.properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_BLUE))
+			.properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.NETHERITE_BLOCK))
+			.transform(pickaxeOnly())
+			.lang("Overburden Casing")
+			.register();
 
 	public static final BlockEntry<CasingBlock> HYDRAULIC_CASING = REGISTRATE.block("hydraulic_casing", CasingBlock::new)
 			.transform(BuilderTransformers.casing(() -> DesiresSpriteShifts.HYDRAULIC_CASING))

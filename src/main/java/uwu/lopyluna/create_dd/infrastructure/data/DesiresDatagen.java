@@ -8,6 +8,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.infrastructure.data.recipe.DesireProcessingRecipeGen;
 import uwu.lopyluna.create_dd.infrastructure.ponder.DesirePonderTags;
 import uwu.lopyluna.create_dd.infrastructure.ponder.DesiresPonderIndex;
 import uwu.lopyluna.create_dd.registry.DesiresSoundEvents;
@@ -22,9 +23,9 @@ public class DesiresDatagen {
 		DataGenerator generator = event.getGenerator();
 		ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
-		if (event.includeClient()) {
+//		if (event.includeClient()) {
 //			generator.addProvider(true, DesiresSoundEvents.provider(generator));
-		}
+//		}
 
 		if (event.includeServer()) {
 //			generator.addProvider(true, new DesiresRecipeSerializerTagsProvider(generator, existingFileHelper));
@@ -34,7 +35,7 @@ public class DesiresDatagen {
 //			generator.addProvider(true, new StandardRecipeGen(generator));
 //			generator.addProvider(true, new MechanicalCraftingRecipeGen(generator));
 //			generator.addProvider(true, new SequencedAssemblyRecipeGen(generator));
-//			ProcessingRecipeGen.registerAll(generator);
+			DesireProcessingRecipeGen.registerAll(generator);
 
 //			AllOreFeatureConfigEntries.gatherData(event);
 		}

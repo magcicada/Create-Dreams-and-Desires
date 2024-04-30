@@ -105,7 +105,7 @@ public class DesireTiers {
         @NotNull
         @Override
         public Ingredient getRepairIngredient() {
-            return Ingredient.of(DesiresItems.OVERBURDEN_BLEND.get());
+            return Ingredient.of(DesiresItems.BURY_BLEND.get());
         }
     };
 }

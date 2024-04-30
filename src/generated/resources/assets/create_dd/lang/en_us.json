@@ -108,6 +108,7 @@
   "block.create_dd.magenta_asphalt_block": "Magenta Asphalt Block",
   "block.create_dd.netherrack_pillar": "Netherrack Pillar",
   "block.create_dd.orange_asphalt_block": "Orange Asphalt Block",
+  "block.create_dd.overburden_casing": "Overburden Casing",
   "block.create_dd.packed_mud_pillar": "Packed Mud Pillar",
   "block.create_dd.pink_asphalt_block": "Pink Asphalt Block",
   "block.create_dd.polished_cut_amethyst_block": "Polished Cut Amethyst Block",
@@ -195,11 +196,13 @@
   "block.create_dd.white_asphalt_block": "White Asphalt Block",
   "block.create_dd.yellow_asphalt_block": "Yellow Asphalt Block",
   "fluid.create_dd.sap": "Sap",
+  "item.create_dd.coal_piece": "Coal Piece",
+  "item.create_dd.diamond_shard": "Diamond Shard",
   "item.create_dd.gilded_rose_axe": "Gilded Rose Axe",
   "item.create_dd.gilded_rose_hoe": "Gilded Rose Hoe",
   "item.create_dd.gilded_rose_pickaxe": "Gilded Rose Pickaxe",
   "item.create_dd.gilded_rose_shovel": "Gilded Rose Shovel",
   "item.create_dd.gilded_rose_sword": "Gilded Rose Sword",
-  "item.create_dd.overburden_blend": "Overburden Blend",
+  "item.create_dd.lapis_alloy": "Bury Blend",
   "item.create_dd.sap_bucket": "Sap Bucket"
 }

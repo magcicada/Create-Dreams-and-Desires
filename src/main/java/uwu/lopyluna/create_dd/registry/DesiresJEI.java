@@ -43,7 +43,7 @@ import java.util.function.Supplier;
 import static com.simibubi.create.compat.jei.CreateJEI.consumeTypedRecipes;
 
 @JeiPlugin
-@SuppressWarnings({"unused", "inline", "all"})
+@SuppressWarnings({"unused", "inline", "unchecked", "all"})
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class DesiresJEI implements IModPlugin {

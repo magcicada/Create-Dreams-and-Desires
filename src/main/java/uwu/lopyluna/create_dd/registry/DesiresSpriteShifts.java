@@ -34,6 +34,7 @@ public class DesiresSpriteShifts {
 	//	ORNATE_IRON_GLASS_SIDE = getCT(AllCTTypes.OMNIDIRECTIONAL, "palettes/ornate_iron_glass_side", "palettes/ornate_iron_glass_side");
 //
 	public static final CTSpriteShiftEntry
+			OVERBURDEN_CASING = omni("overburden_casing"),
 			INDUSTRIAL_CASING = omni("industrial_casing"),
 			HYDRAULIC_CASING = omni("hydraulic_casing");
 

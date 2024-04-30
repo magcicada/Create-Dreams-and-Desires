@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "create:crushed_raw_iron"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "create:crushed_raw_iron"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "create_dd:lapis_alloy"
+  }
+}

@@ -12,9 +12,23 @@ public class ItemTransformer {
             .register();
     }
 
+    public static ItemEntry<Item> itemEntry(String name, String lang) {return REGISTRATE.item(name, Item::new)
+            .lang(lang)
+            .register();
+    }
+
     @SafeVarargs
-    public static ItemEntry<Item> itemEntryTagged(String name, TagKey<Item>... tags) {return REGISTRATE.item(name, Item::new)
+    public static ItemEntry<Item> itemEntryTagged(String name, TagKey<Item>... tags) {
+        return REGISTRATE.item(name, Item::new)
             .tag(tags)
             .register();
+    }
+
+    @SafeVarargs
+    public static ItemEntry<Item> itemEntryTagged(String name, String lang, TagKey<Item>... tags) {
+        return REGISTRATE.item(name, Item::new)
+                .tag(tags)
+                .lang(lang)
+                .register();
     }
 }

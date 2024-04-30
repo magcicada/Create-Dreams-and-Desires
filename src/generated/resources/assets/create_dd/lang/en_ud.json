@@ -108,6 +108,7 @@
   "block.create_dd.magenta_asphalt_block": "ʞɔoןᗺ ʇןɐɥdsⱯ ɐʇuǝbɐW",
   "block.create_dd.netherrack_pillar": "ɹɐןןıԀ ʞɔɐɹɹǝɥʇǝN",
   "block.create_dd.orange_asphalt_block": "ʞɔoןᗺ ʇןɐɥdsⱯ ǝbuɐɹO",
+  "block.create_dd.overburden_casing": "buısɐƆ uǝpɹnqɹǝʌO",
   "block.create_dd.packed_mud_pillar": "ɹɐןןıԀ pnW pǝʞɔɐԀ",
   "block.create_dd.pink_asphalt_block": "ʞɔoןᗺ ʇןɐɥdsⱯ ʞuıԀ",
   "block.create_dd.polished_cut_amethyst_block": "ʞɔoןᗺ ʇsʎɥʇǝɯⱯ ʇnƆ pǝɥsıןoԀ",
@@ -195,11 +196,13 @@
   "block.create_dd.white_asphalt_block": "ʞɔoןᗺ ʇןɐɥdsⱯ ǝʇıɥM",
   "block.create_dd.yellow_asphalt_block": "ʞɔoןᗺ ʇןɐɥdsⱯ ʍoןןǝʎ",
   "fluid.create_dd.sap": "dɐS",
+  "item.create_dd.coal_piece": "ǝɔǝıԀ ןɐoƆ",
+  "item.create_dd.diamond_shard": "pɹɐɥS puoɯɐıᗡ",
   "item.create_dd.gilded_rose_axe": "ǝxⱯ ǝsoᴚ pǝpןı⅁",
   "item.create_dd.gilded_rose_hoe": "ǝoH ǝsoᴚ pǝpןı⅁",
   "item.create_dd.gilded_rose_pickaxe": "ǝxɐʞɔıԀ ǝsoᴚ pǝpןı⅁",
   "item.create_dd.gilded_rose_shovel": "ןǝʌoɥS ǝsoᴚ pǝpןı⅁",
   "item.create_dd.gilded_rose_sword": "pɹoʍS ǝsoᴚ pǝpןı⅁",
-  "item.create_dd.overburden_blend": "puǝןᗺ uǝpɹnqɹǝʌO",
+  "item.create_dd.lapis_alloy": "puǝןᗺ ʎɹnᗺ",
   "item.create_dd.sap_bucket": "ʇǝʞɔnᗺ dɐS"
 }
