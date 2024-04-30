@@ -48,7 +48,7 @@ public class DesiresPaletteBlocks {
 					.blockstate((c, p) -> p.simpleBlock(c.get(), p.models()
 								.cubeAll(c.getName(), p.modLoc("block/asphalt/" + color))))
 					.properties(p -> p.destroyTime(1.25f)
-							.speedFactor(1.15F)
+							.speedFactor(1.05F)
 							.jumpFactor(1.25F)
 							.friction(0.3F)
 							.color(MaterialColor.COLOR_BLACK)

@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "create_dd:crafting/lapis_alloy"
+        "recipe": "create_dd:crafting/bury_blend"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "create_dd:crafting/lapis_alloy"
+      "create_dd:crafting/bury_blend"
     ]
   }
 }

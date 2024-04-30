@@ -45,27 +45,27 @@ public class DesireTiers {
     {
         @Override
         public int getUses() {
-            return 1024;
+            return 512;
         }
 
         @Override
         public float getSpeed() {
-            return 2F;
+            return 8.0F;
         }
 
         @Override
         public float getAttackDamageBonus() {
-            return 4F;
+            return 2.0F;
         }
 
         @Override
         public int getLevel() {
-            return 3;
+            return 2;
         }
 
         @Override
         public int getEnchantmentValue() {
-            return 20;
+            return 15;
         }
 
         @NotNull
@@ -84,12 +84,12 @@ public class DesireTiers {
 
         @Override
         public float getSpeed() {
-            return 8F;
+            return 8.0F;
         }
 
         @Override
         public float getAttackDamageBonus() {
-            return 4F;
+            return 2.0F;
         }
 
         @Override
@@ -99,7 +99,7 @@ public class DesireTiers {
 
         @Override
         public int getEnchantmentValue() {
-            return 20;
+            return 25;
         }
 
         @NotNull

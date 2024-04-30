@@ -137,9 +137,12 @@ public class DesiresTags {
 		ADDITIONAL_DROPS_TOOL,
 		SWORD(FORGE, "tools/sword"),
 		PICKAXE(FORGE, "tools/pickaxe"),
+		DRILL(FORGE, "tools/drill"),
 		AXE(FORGE, "tools/axe"),
+		SAW(FORGE, "tools/saw"),
 		SHOVEL(FORGE, "tools/shovel"),
-		HOE(FORGE, "tools/hoe")
+		HOE(FORGE, "tools/hoe"),
+		SCYTHE(FORGE, "tools/scythe")
 
 		;
 
