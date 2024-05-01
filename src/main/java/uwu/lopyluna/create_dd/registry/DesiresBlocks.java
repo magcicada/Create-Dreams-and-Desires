@@ -2,10 +2,8 @@ package uwu.lopyluna.create_dd.registry;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
-import com.simibubi.create.content.kinetics.steamEngine.PoweredShaftBlock;
 import com.simibubi.create.foundation.block.ItemUseOverrides;
 import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
@@ -13,7 +11,6 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
@@ -248,20 +245,23 @@ public class DesiresBlocks {
 	public static final BlockEntry<FurnaceEngineBlock> FURNACE_ENGINE =
 			REGISTRATE.block("furnace_engine", FurnaceEngineBlock::new)
 					.initialProperties(SharedProperties::softMetal)
+					.properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN)
+							.sound(SoundType.NETHERITE_BLOCK))
 					.properties(BlockBehaviour.Properties::noOcclusion)
 					.transform(pickaxeOnly())
 					.tag(AllTags.AllBlockTags.BRITTLE.tag)
 					.blockstate((c, p) -> {
 						p.horizontalFaceBlock(c.get(), AssetLookup.partialBaseModel(c, p));
 					})
-					.transform(BlockStressDefaults.setCapacity(1024.0))
+					.transform(BlockStressDefaults.setCapacity(512.0))
+					.transform(BlockStressDefaults.setGeneratorSpeed(FurnaceEngineBlock::getSpeedRange))
 					.item()
 					.transform(ModelGen.customItemModel())
 					.register();
 
 	public static final BlockEntry<PoweredFlywheelBlock> POWERED_FLYWHEEL =
 			REGISTRATE.block("powered_flywheel", PoweredFlywheelBlock::new)
-					.initialProperties(SharedProperties::stone)
+					.initialProperties(SharedProperties::softMetal)
 					.properties(p -> p.color(MaterialColor.METAL))
 					.transform(pickaxeOnly())
 					.blockstate(BlockStateGen.axisBlockProvider(false))

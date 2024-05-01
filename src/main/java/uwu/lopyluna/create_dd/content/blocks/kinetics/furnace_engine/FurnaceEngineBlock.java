@@ -3,12 +3,20 @@ package uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
-import com.simibubi.create.content.kinetics.simpleRelays.ShaftBlock;
-import com.simibubi.create.content.kinetics.steamEngine.PoweredShaftBlock;
+import com.simibubi.create.content.kinetics.flywheel.FlywheelBlock;
 import com.simibubi.create.foundation.block.IBE;
+import com.simibubi.create.foundation.placement.IPlacementHelper;
+import com.simibubi.create.foundation.placement.PlacementHelpers;
+import com.simibubi.create.foundation.placement.PlacementOffset;
+import com.simibubi.create.foundation.utility.BlockHelper;
+import com.simibubi.create.foundation.utility.Couple;
 import com.simibubi.create.foundation.utility.Iterate;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -28,6 +36,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -35,8 +44,13 @@ import net.minecraftforge.fml.common.Mod;
 import uwu.lopyluna.create_dd.registry.DesiresBlockEntityTypes;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 
+import java.util.function.Predicate;
+
 @Mod.EventBusSubscriber
 public class FurnaceEngineBlock extends FaceAttachedHorizontalDirectionalBlock implements SimpleWaterloggedBlock, IWrenchable, IBE<FurnaceEngineBlockEntity> {
+
+    private static final int placementHelperId = PlacementHelpers.register(new FurnaceEngineBlock.PlacementHelper());
+
     public FurnaceEngineBlock(Properties pProperties) {
         super(pProperties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACE, AttachFace.FLOOR).setValue(FACING, Direction.NORTH).setValue(BlockStateProperties.WATERLOGGED, false));
@@ -71,6 +85,19 @@ public class FurnaceEngineBlock extends FaceAttachedHorizontalDirectionalBlock i
     public FluidState getFluidState(BlockState state) {
         return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
     }
+
+    @Override
+    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
+                                 BlockHitResult ray) {
+        ItemStack heldItem = player.getItemInHand(hand);
+
+        IPlacementHelper placementHelper = PlacementHelpers.get(placementHelperId);
+        if (placementHelper.matchesItem(heldItem))
+            return placementHelper.getOffset(player, world, state, pos, ray)
+                    .placeInWorld(world, (BlockItem) heldItem.getItem(), player, hand, ray);
+        return InteractionResult.PASS;
+    }
+
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
@@ -128,5 +155,43 @@ public class FurnaceEngineBlock extends FaceAttachedHorizontalDirectionalBlock i
         BlockState shaftState = pLevel.getBlockState(shaftPos);
         if (isFlywheelValid(pState, shaftState))
             pLevel.setBlock(shaftPos, PoweredFlywheelBlock.getEquivalent(shaftState,shaftState.getValue(RotatedPillarKineticBlock.AXIS)), 3);
+    }
+
+    @MethodsReturnNonnullByDefault
+    private static class PlacementHelper implements IPlacementHelper {
+        @Override
+        public Predicate<ItemStack> getItemPredicate() {
+            return AllBlocks.FLYWHEEL::isIn;
+        }
+
+        @Override
+        public Predicate<BlockState> getStatePredicate() {
+            return s -> s.getBlock() instanceof FurnaceEngineBlock;
+        }
+
+        @Override
+        public PlacementOffset getOffset(Player player, Level world, BlockState state, BlockPos pos,
+                                         BlockHitResult ray) {
+            BlockPos shaftPos = FurnaceEngineBlock.getFlywheelPos(state, pos);
+            BlockState shaft = AllBlocks.FLYWHEEL.getDefaultState();
+            for (Direction direction : Direction.orderedByNearest(player)) {
+                shaft = shaft.setValue(FlywheelBlock.AXIS, direction.getAxis());
+                if (isFlywheelValid(state, shaft))
+                    break;
+            }
+
+            BlockState newState = world.getBlockState(shaftPos);
+            if (!newState.getMaterial().isReplaceable())
+                return PlacementOffset.fail();
+
+            Direction.Axis axis = shaft.getValue(FlywheelBlock.AXIS);
+            return PlacementOffset.success(shaftPos,
+                    s -> BlockHelper.copyProperties(s, DesiresBlocks.POWERED_FLYWHEEL.getDefaultState())
+                            .setValue(PoweredFlywheelBlock.AXIS, axis));
+        }
+    }
+
+    public static Couple<Integer> getSpeedRange() {
+        return Couple.create(0, 32);
     }
 }
