@@ -10,6 +10,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.content.items.equipment.BackTankPickaxeItem;
+import uwu.lopyluna.create_dd.content.items.equipment.deforester_saw.DeforesterSawItem;
 import uwu.lopyluna.create_dd.content.items.equipment.gilded_rose_tools.*;
 
 import static com.tterrag.registrate.providers.RegistrateRecipeProvider.has;
@@ -23,23 +25,18 @@ public class DesiresItems {
 		REGISTRATE.creativeModeTab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB);
 	}
 
-//	public static final ItemEntry<Item>
-//			BURY_BLEND = itemEntry("lapis_alloy", "Bury Blend");
-
 	public static final ItemEntry<Item> BURY_BLEND = REGISTRATE.item("lapis_alloy", Item::new)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/generated")).texture("layer0",
 					new ResourceLocation(DesiresCreate.MOD_ID,"item/bury_blend")))
 			.tag(forgeItemTag("ingots/bury_blend"), forgeItemTag("ingots"), forgeItemTag("bury_blends"))
-			.recipe((c, p) -> {
-				ShapelessRecipeBuilder.shapeless(c.get(), 2)
-						.requires(Items.LAPIS_LAZULI)
-						.requires(AllItems.CRUSHED_IRON.get())
-						.requires(AllItems.CRUSHED_IRON.get())
-						.requires(Items.LAPIS_LAZULI)
-						.unlockedBy("has_" + getItemName(Items.LAPIS_LAZULI), has(Items.LAPIS_LAZULI))
-						.save(p, DesiresCreate.asResource("crafting/bury_blend"));
-			})
+			.recipe((c, p) -> ShapelessRecipeBuilder.shapeless(c.get(), 2)
+					.requires(Items.LAPIS_LAZULI)
+					.requires(AllItems.CRUSHED_IRON.get())
+					.requires(AllItems.CRUSHED_IRON.get())
+					.requires(Items.LAPIS_LAZULI)
+					.unlockedBy("has_" + getItemName(Items.LAPIS_LAZULI), has(Items.LAPIS_LAZULI))
+					.save(p, DesiresCreate.asResource("crafting/bury_blend")))
 			.lang("Bury Blend")
 			.register();
 
@@ -134,6 +131,24 @@ public class DesiresItems {
 			.properties(p -> p.rarity(Rarity.UNCOMMON))
 			.tag(DesiresTags.AllItemTags.ADDITIONAL_DROPS_TOOL.tag)
 			.tag(DesiresTags.AllItemTags.HOE.tag)
+			.register();
+
+
+	public static final ItemEntry<BackTankPickaxeItem> EXCAVATION_DRILL = REGISTRATE.item("excavation_drill",
+					p -> new BackTankPickaxeItem(DesireTiers.GILDED_ROSE, 1, -2.8F, p))
+			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
+					new ResourceLocation("item/handheld")).texture("layer0",
+					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + GILDED_ROSE_PICKAXE.getId().getPath())))
+			.properties(p -> p.rarity(Rarity.UNCOMMON))
+			.tag(DesiresTags.AllItemTags.PICKAXE.tag)
+			.register();
+
+	public static final ItemEntry<DeforesterSawItem> DEFORESTER_SAW = REGISTRATE.item("deforester_saw", DeforesterSawItem::new)
+			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
+					new ResourceLocation("item/handheld")).texture("layer0",
+					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + GILDED_ROSE_PICKAXE.getId().getPath())))
+			.properties(p -> p.rarity(Rarity.UNCOMMON))
+			.tag(DesiresTags.AllItemTags.AXE.tag)
 			.register();
 
 
