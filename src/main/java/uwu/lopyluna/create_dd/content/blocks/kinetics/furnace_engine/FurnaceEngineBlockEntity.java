@@ -1,23 +1,34 @@
 package uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine;
 
+import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.contraptions.bearing.WindmillBearingBlockEntity;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import com.simibubi.create.content.kinetics.steamEngine.SteamEngineBlock;
+import com.simibubi.create.content.kinetics.steamEngine.SteamJetParticleData;
 import com.simibubi.create.foundation.advancement.AllAdvancements;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollOptionBehaviour;
+import com.simibubi.create.foundation.utility.AngleHelper;
 import com.simibubi.create.foundation.utility.Lang;
+import com.simibubi.create.foundation.utility.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.DistExecutor;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 
 import javax.annotation.Nullable;
@@ -54,67 +65,114 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
         PoweredFlywheelBlockEntity flywheel = this.getFlywheel();
         AbstractFurnaceBlockEntity furnace = this.getFurnace();
 
-        if (furnace == null || flywheel == null) {
-            if (level.isClientSide())
-                return;
-            if (flywheel == null)
-                return;
-            if (!flywheel.getBlockPos()
-                    .subtract(worldPosition)
-                    .equals(flywheel.enginePos))
-                return;
-            if (flywheel.engineEfficiency == 0)
-                return;
-            Direction facing = FurnaceEngineBlock.getFacing(getBlockState());
-            if (level.isLoaded(worldPosition.relative(facing.getOpposite())))
-                flywheel.update(worldPosition, 0, 0);
-            return;
+        if (furnace != null && flywheel != null) {
+            boolean verticalTarget = false;
+            BlockState flywheelState = flywheel.getBlockState();
+            Direction.Axis targetAxis = Direction.Axis.X;
+            Block var7 = flywheelState.getBlock();
+            if (var7 instanceof IRotate) {
+                IRotate ir = (IRotate)var7;
+                targetAxis = ir.getRotationAxis(flywheelState);
+            }
+
+            verticalTarget = targetAxis == Direction.Axis.Y;
+            BlockState blockState = this.getBlockState();
+            if (DesiresBlocks.FURNACE_ENGINE.has(blockState)) {
+                Direction facing = SteamEngineBlock.getFacing(blockState);
+                if (facing.getAxis() == Direction.Axis.Y) {
+                    facing = (Direction)blockState.getValue(SteamEngineBlock.FACING);
+                }
+
+                float efficiency = furnace.isLit() ? 1.0F : 0.0F;
+                if (efficiency > 0.0F) {
+                    this.award(AllAdvancements.STEAM_ENGINE);
+                }
+
+                int conveyedSpeedLevel = efficiency == 0.0F ? 1 : (verticalTarget ? 1 : (int)GeneratingKineticBlockEntity.convertToDirection(1.0F, facing));
+                if (targetAxis == Direction.Axis.Z) {
+                    conveyedSpeedLevel *= -1;
+                }
+
+                if (this.movementDirection.get() == WindmillBearingBlockEntity.RotationDirection.COUNTER_CLOCKWISE) {
+                    conveyedSpeedLevel *= -1;
+                }
+
+                float flywheelSpeed = flywheel.getTheoreticalSpeed();
+                if (flywheel.hasSource() && flywheelSpeed != 0.0F && conveyedSpeedLevel != 0 && flywheelSpeed > 0.0F != conveyedSpeedLevel > 0) {
+                    this.movementDirection.setValue(1 - this.movementDirection.get().ordinal());
+                    conveyedSpeedLevel *= -1;
+                }
+
+                flywheel.update(this.worldPosition, conveyedSpeedLevel, efficiency);
+                if (this.level.isClientSide) {
+                    DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> {
+                        return this::spawnParticles;
+                    });
+                }
+            }
+        } else if (!this.level.isClientSide()) {
+            if (flywheel != null) {
+                if (flywheel.getBlockPos().subtract(this.worldPosition).equals(flywheel.enginePos)) {
+                    if (flywheel.engineEfficiency != 0.0F) {
+                        Direction facing = SteamEngineBlock.getFacing(this.getBlockState());
+                        if (this.level.isLoaded(this.worldPosition.relative(facing.getOpposite()))) {
+                            flywheel.update(this.worldPosition, 0, 0.0F);
+                        }
+
+                    }
+                }
+            }
         }
 
-        boolean verticalTarget = false;
-        BlockState shaftState = flywheel.getBlockState();
-        Direction.Axis targetAxis = Direction.Axis.X;
-        if (shaftState.getBlock()instanceof IRotate ir)
-            targetAxis = ir.getRotationAxis(shaftState);
-        verticalTarget = targetAxis == Direction.Axis.Y;
+    }
 
-        BlockState blockState = getBlockState();
-        if (!DesiresBlocks.FURNACE_ENGINE.has(blockState))
-            return;
-        Direction facing = FurnaceEngineBlock.getFacing(blockState);
-        if (facing.getAxis() == Direction.Axis.Y)
-            facing = blockState.getValue(FurnaceEngineBlock.FACING);
+    @OnlyIn(Dist.CLIENT)
+    private void spawnParticles() {
+        Float targetAngle = this.getTargetAngle();
+        PoweredFlywheelBlockEntity ste = this.target.get();
+        if (ste != null) {
+            if (ste.isPoweredBy(this.worldPosition)) {
+                if (targetAngle != null) {
+                    float angle = AngleHelper.deg((double)targetAngle);
+                    angle += angle < 0.0F ? -105.0F : 285.0F;
+                    angle %= 360.0F;
+                    PoweredFlywheelBlockEntity flywheel = this.getFlywheel();
+                    if (flywheel != null && flywheel.getSpeed() != 0.0F) {
+                        if (!(angle >= 0.0F) || this.prevAngle > 180.0F && angle < 180.0F) {
+                            if (angle < 0.0F && (!(this.prevAngle < -180.0F) || !(angle > -180.0F))) {
+                                this.prevAngle = angle;
+                            } else {
+                                AbstractFurnaceBlockEntity sourceBE = this.source.get();
+                                if (sourceBE != null) {
+                                    float volume = 3.0F / 2;
+                                    float pitch = 0.78F - this.level.random.nextFloat() * 0.25F;
+                                    this.level.playLocalSound(this.worldPosition.getX(), this.worldPosition.getY(), this.worldPosition.getZ(), SoundEvents.CANDLE_EXTINGUISH, SoundSource.BLOCKS, volume, pitch, false);
+                                    AllSoundEvents.STEAM.playAt(this.level, this.worldPosition, volume / 16.0F, 0.5F, false);
+                                }
 
-        float efficiency = furnace.isLit() ? 1 : 0;
-        if (efficiency > 0)
-
-            award(AllAdvancements.STEAM_ENGINE);
-
-        int conveyedSpeedLevel =
-                efficiency == 0 ? 1 : verticalTarget ? 1 : (int) GeneratingKineticBlockEntity.convertToDirection(1, facing);
-        if (targetAxis == Direction.Axis.Z)
-            conveyedSpeedLevel *= -1;
-        if (movementDirection.get() == WindmillBearingBlockEntity.RotationDirection.COUNTER_CLOCKWISE)
-            conveyedSpeedLevel *= -1;
-
-        float flywheelSpeed = flywheel.getTheoreticalSpeed();
-        if (flywheel.hasSource() && flywheelSpeed != 0 && conveyedSpeedLevel != 0
-                && (flywheelSpeed > 0) != (conveyedSpeedLevel > 0)) {
-            movementDirection.setValue(1 - movementDirection.get()
-                    .ordinal());
-            conveyedSpeedLevel *= -1;
+                                Direction facing = FurnaceEngineBlock.getFacing(this.getBlockState());
+                                Vec3 offset = VecHelper.rotate((new Vec3(0.0, 0.0, 1.0)).add(VecHelper.offsetRandomly(Vec3.ZERO, this.level.random, 1.0F).multiply(1.0, 1.0, 0.0).normalize().scale(0.5)), (double)AngleHelper.verticalAngle(facing), Direction.Axis.X);
+                                offset = VecHelper.rotate(offset, AngleHelper.horizontalAngle(facing), Direction.Axis.Y);
+                                Vec3 v = offset.scale(0.5).add(Vec3.atCenterOf(this.worldPosition));
+                                Vec3 m = offset.subtract(Vec3.atLowerCornerOf(facing.getNormal()).scale(0.75));
+                                this.level.addParticle(new SteamJetParticleData(1.0F), v.x, v.y, v.z, m.x, m.y, m.z);
+                                this.prevAngle = angle;
+                            }
+                        } else {
+                            this.prevAngle = angle;
+                        }
+                    }
+                }
+            }
         }
-
-        flywheel.update(worldPosition, conveyedSpeedLevel, efficiency);
-
     }
 
     private void onDirectionChanged() {}
 
     public PoweredFlywheelBlockEntity getFlywheel() {
-        PoweredFlywheelBlockEntity shaft = this.target.get();
-        if (shaft == null || shaft.isRemoved() || !shaft.canBePoweredBy(this.worldPosition)) {
-            if (shaft != null) {
+        PoweredFlywheelBlockEntity flywheel = this.target.get();
+        if (flywheel == null || flywheel.isRemoved() || !flywheel.canBePoweredBy(this.worldPosition)) {
+            if (flywheel != null) {
                 this.target = new WeakReference(null);
             }
 
@@ -123,13 +181,13 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
             if (anyShaftAt instanceof PoweredFlywheelBlockEntity) {
                 PoweredFlywheelBlockEntity ps = (PoweredFlywheelBlockEntity)anyShaftAt;
                 if (ps.canBePoweredBy(this.worldPosition)) {
-                    shaft = ps;
+                    flywheel = ps;
                     this.target = new WeakReference(ps);
                 }
             }
         }
 
-        return shaft;
+        return flywheel;
     }
     public AbstractFurnaceBlockEntity getFurnace() {
         AbstractFurnaceBlockEntity furnace = this.source.get();
