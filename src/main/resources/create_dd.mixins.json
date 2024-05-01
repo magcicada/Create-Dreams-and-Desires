@@ -11,7 +11,8 @@
     "MixinBlock",
     "MixinBlockMovementChecks",
     "MixinContraption",
-    "MixinMountedStorage"
+    "MixinMountedStorage",
+    "MixinRotatedPillarKineticBlock"
   ],
   "injectors": {
     "defaultRequire": 1

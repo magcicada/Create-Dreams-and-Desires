@@ -1,6 +1,8 @@
 package uwu.lopyluna.create_dd.registry;
 
 
+import com.simibubi.create.content.kinetics.flywheel.FlywheelBlockEntity;
+import com.simibubi.create.content.kinetics.flywheel.FlywheelInstance;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.IndustrialFanBlock.IndustrialFanBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.IndustrialFanBlock.IndustrialFanInstance;
@@ -8,6 +10,7 @@ import uwu.lopyluna.create_dd.content.blocks.kinetics.IndustrialFanBlock.Industr
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankInstance;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankRenderer;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.*;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileBlockEntity;
 
@@ -37,6 +40,20 @@ public class DesiresBlockEntityTypes {
 	public static final BlockEntityEntry<FluidKegBlockEntity> FLUID_KEG = REGISTRATE
 			.blockEntity("fluid_keg", FluidKegBlockEntity::new)
 			.validBlocks(DesiresBlocks.FLUID_KEG)
+			.register();
+
+	public static final BlockEntityEntry<FurnaceEngineBlockEntity> FURNACE_ENGINE = REGISTRATE
+			.blockEntity("furnace_engine", FurnaceEngineBlockEntity::new)
+			.instance(()->FurnaceEngineInstance::new)
+			.validBlocks(DesiresBlocks.FURNACE_ENGINE)
+			.renderer(()-> FurnaceEngineRenderer::new)
+			.register();
+
+	public static final BlockEntityEntry<PoweredFlywheelBlockEntity> POWERED_FLYWHEEL = REGISTRATE
+			.blockEntity("powered_flywheel", PoweredFlywheelBlockEntity::new)
+			.instance(() -> PoweredFlywheelInstance::new, false)
+			.validBlocks(DesiresBlocks.POWERED_FLYWHEEL)
+			.renderer(() -> PoweredFlywheelRenderer::new)
 			.register();
 
 

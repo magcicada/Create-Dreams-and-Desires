@@ -2,24 +2,27 @@ package uwu.lopyluna.create_dd.registry;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
+import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
+import com.simibubi.create.content.kinetics.steamEngine.PoweredShaftBlock;
 import com.simibubi.create.foundation.block.ItemUseOverrides;
-import com.simibubi.create.foundation.data.AssetLookup;
-import com.simibubi.create.foundation.data.BlockStateGen;
-import com.simibubi.create.foundation.data.BuilderTransformers;
-import com.simibubi.create.foundation.data.SharedProperties;
+import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.IndustrialFanBlock.IndustrialFanBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankBlock;
 import uwu.lopyluna.create_dd.content.blocks.curiosities.FanSailBlock;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngineBlock;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.PoweredFlywheelBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegCTBehaviour;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegItem;
@@ -236,6 +239,30 @@ public class DesiresBlocks {
 					.lang("Sanding Catalyst Sail")
 					.simpleItem()
 					.register();
+
+	public static final BlockEntry<FurnaceEngineBlock> FURNACE_ENGINE =
+			REGISTRATE.block("furnace_engine", FurnaceEngineBlock::new)
+					.initialProperties(SharedProperties::softMetal)
+					.properties(BlockBehaviour.Properties::noOcclusion)
+					.transform(pickaxeOnly())
+					.tag(AllTags.AllBlockTags.BRITTLE.tag)
+					.blockstate((c, p) -> {
+						p.horizontalFaceBlock(c.get(), AssetLookup.partialBaseModel(c, p));
+					})
+					.transform(BlockStressDefaults.setCapacity(1024.0))
+					.item()
+					.transform(ModelGen.customItemModel())
+					.register();
+
+	public static final BlockEntry<PoweredFlywheelBlock> POWERED_FLYWHEEL =
+			REGISTRATE.block("powered_flywheel", PoweredFlywheelBlock::new)
+					.initialProperties(SharedProperties::stone)
+					.properties(p -> p.color(MaterialColor.METAL))
+					.transform(pickaxeOnly())
+					.blockstate(BlockStateGen.axisBlockProvider(false))
+					.loot((lt, block) -> lt.dropOther(block, AllBlocks.FLYWHEEL.get()))
+					.register();
+
 
 
 	// Load this class
