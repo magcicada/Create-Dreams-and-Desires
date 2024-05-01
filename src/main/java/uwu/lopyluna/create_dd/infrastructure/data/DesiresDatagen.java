@@ -32,7 +32,6 @@ public class DesiresDatagen {
 
 //			generator.addProvider(true, new AllAdvancements(generator));
 
-//			generator.addProvider(true, new StandardRecipeGen(generator));
 //			generator.addProvider(true, new MechanicalCraftingRecipeGen(generator));
 //			generator.addProvider(true, new SequencedAssemblyRecipeGen(generator));
 			DesireProcessingRecipeGen.registerAll(generator);

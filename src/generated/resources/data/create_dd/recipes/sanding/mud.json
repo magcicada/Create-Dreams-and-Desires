@@ -1,0 +1,13 @@
+{
+  "type": "create_dd:sanding",
+  "ingredients": [
+    {
+      "item": "minecraft:mud"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:packed_mud"
+    }
+  ]
+}

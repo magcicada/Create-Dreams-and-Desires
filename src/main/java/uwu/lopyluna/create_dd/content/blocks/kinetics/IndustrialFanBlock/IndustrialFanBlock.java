@@ -19,6 +19,22 @@ public class IndustrialFanBlock extends EncasedFanBlock implements ICogWheel {
         super(properties);
     }
 
+
+    @Override
+    public boolean showCapacityWithAnnotation() {
+        return true;
+    }
+
+    @Override
+    public BlockState updateAfterWrenched(BlockState newState, UseOnContext context) {
+        BlockEntity be = context.getLevel().getBlockEntity(context.getClickedPos());
+        if (be instanceof IndustrialFanBlockEntity) {
+            ((IndustrialFanBlockEntity) be).reActivateSource = true;
+        }
+        blockUpdate(newState, context.getLevel(), context.getClickedPos());
+        return newState;
+    }
+
     @Override
     public InteractionResult onWrenched(BlockState state, UseOnContext context) {
         BlockEntity be = context.getLevel().getBlockEntity(context.getClickedPos());

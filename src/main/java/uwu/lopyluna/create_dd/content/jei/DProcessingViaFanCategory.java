@@ -2,10 +2,7 @@ package uwu.lopyluna.create_dd.content.jei;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
-import com.simibubi.create.compat.jei.category.ProcessingViaFanCategory;
 import com.simibubi.create.compat.jei.category.animations.AnimatedKinetics;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
@@ -56,6 +53,11 @@ public abstract class DProcessingViaFanCategory<T extends Recipe<?>> extends Cre
         matrixStack.mulPose(Vector3f.XP.rotationDegrees(-12.5f));
         matrixStack.mulPose(Vector3f.YP.rotationDegrees(22.5f));
 
+        AnimatedKinetics.defaultBlockElement(DesiresPartialModels.INDUSTRIAL_FAN_POWER)
+                .rotateBlock(180, 0, AnimatedKinetics.getCurrentAngle() * 4)
+                .scale(SCALE)
+                .render(matrixStack);
+
         AnimatedKinetics.defaultBlockElement(DesiresPartialModels.INDUSTRIAL_FAN_INNER)
                 .rotateBlock(180, 0, AnimatedKinetics.getCurrentAngle() * 16)
                 .scale(SCALE)
@@ -67,7 +69,7 @@ public abstract class DProcessingViaFanCategory<T extends Recipe<?>> extends Cre
                 .scale(SCALE)
                 .render(matrixStack);
 
-        renderAttachedBlock(matrixStack);
+        renderAttachedBlock(iRecipeSlotsView, matrixStack, mouseX, mouseY);
         matrixStack.popPose();
     }
 
@@ -85,9 +87,9 @@ public abstract class DProcessingViaFanCategory<T extends Recipe<?>> extends Cre
         matrixStack.translate(56, 33, 0);
     }
 
-    protected abstract void renderAttachedBlock(PoseStack matrixStack);
+    protected abstract void renderAttachedBlock(IRecipeSlotsView iRecipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY);
 
-    public static abstract class MultiOutput<T extends ProcessingRecipe<?>> extends ProcessingViaFanCategory<T> {
+    public static abstract class MultiOutput<T extends ProcessingRecipe<?>> extends DProcessingViaFanCategory<T> {
 
         public MultiOutput(Info<T> info) {
             super(info);

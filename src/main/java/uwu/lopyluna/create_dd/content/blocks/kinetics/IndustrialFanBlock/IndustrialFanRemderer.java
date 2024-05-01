@@ -16,6 +16,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import uwu.lopyluna.create_dd.registry.DesiresPartialModels;
 
+import java.util.Objects;
+
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
 
 public class IndustrialFanRemderer extends KineticBlockEntityRenderer<IndustrialFanBlockEntity> {
@@ -33,7 +35,7 @@ public class IndustrialFanRemderer extends KineticBlockEntityRenderer<Industrial
                 .getValue(FACING);
         VertexConsumer vb = buffer.getBuffer(RenderType.cutoutMipped());
 
-        int lightBehind = LevelRenderer.getLightColor(be.getLevel(), be.getBlockPos().relative(direction.getOpposite()));
+        int lightOverall = LevelRenderer.getLightColor(Objects.requireNonNull(be.getLevel()), be.getBlockPos());
         int lightInFront = LevelRenderer.getLightColor(be.getLevel(), be.getBlockPos().relative(direction));
 
         SuperByteBuffer shaftHalf =
@@ -50,7 +52,7 @@ public class IndustrialFanRemderer extends KineticBlockEntityRenderer<Industrial
         float angle = (time * speed * 3 / 10f) % 360;
         angle = angle / 180f * (float) Math.PI;
 
-        standardKineticRotationTransform(shaftHalf, be, lightBehind).renderInto(ms, vb);
+        standardKineticRotationTransform(shaftHalf, be, lightOverall).renderInto(ms, vb);
         kineticRotationTransform(fanInner, be, direction.getAxis(), angle, lightInFront).renderInto(ms, vb);
     }
 

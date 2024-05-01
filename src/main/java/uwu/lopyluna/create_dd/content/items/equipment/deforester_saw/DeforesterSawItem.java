@@ -11,7 +11,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -34,6 +33,7 @@ import static uwu.lopyluna.create_dd.registry.DesireTiers.Deforester;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
+@SuppressWarnings({"all"})
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class DeforesterSawItem extends BackTankAxeItem {
     private static boolean deforesting = false; // required as to not run into "recursions" over forge events on tree cutting
@@ -72,11 +72,11 @@ public class DeforesterSawItem extends BackTankAxeItem {
         world.addFreshEntity(entity);
     }
 
-    //@Override
-    //@OnlyIn(Dist.CLIENT)
-    //public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-    //    consumer.accept(SimpleCustomRenderer.create(this, new DeforesterSawRenderer()));
-    //}
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(SimpleCustomRenderer.create(this, new DeforesterSawRenderer()));
+    }
 
 
     @Override

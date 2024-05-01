@@ -1,6 +1,7 @@
 package uwu.lopyluna.create_dd.registry;
 
 import com.simibubi.create.AllItems;
+import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.item.CombustibleItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.core.Registry;
@@ -144,9 +145,7 @@ public class DesiresItems {
 			.register();
 
 	public static final ItemEntry<DeforesterSawItem> DEFORESTER_SAW = REGISTRATE.item("deforester_saw", DeforesterSawItem::new)
-			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
-					new ResourceLocation("item/handheld")).texture("layer0",
-					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + GILDED_ROSE_PICKAXE.getId().getPath())))
+			.model(AssetLookup.itemModelWithPartials())
 			.properties(p -> p.rarity(Rarity.UNCOMMON))
 			.tag(DesiresTags.AllItemTags.AXE.tag)
 			.register();

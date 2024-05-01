@@ -4,10 +4,10 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 import uwu.lopyluna.create_dd.registry.DesiresTags;
 
 public class DesiresRegistrateTags {
@@ -29,6 +29,11 @@ public class DesiresRegistrateTags {
 				.add(Blocks.POWDER_SNOW);
 
 		prov.tag(DesiresTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SEETHING.tag)
+				.add(AllBlocks.BLAZE_BURNER.get());
+
+		prov.tag(DesiresTags.AllBlockTags.INDUSTRIAL_FAN_HEATER.tag)
+				.add(Blocks.LAVA)
+				.add(DesiresBlocks.SEETHING_SAIL.get())
 				.add(AllBlocks.BLAZE_BURNER.get());
 
 		prov.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)

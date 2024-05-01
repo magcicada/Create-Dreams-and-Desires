@@ -1,0 +1,17 @@
+{
+  "type": "create_dd:freezing",
+  "ingredients": [
+    {
+      "item": "create:blaze_cake"
+    }
+  ],
+  "results": [
+    {
+      "item": "create:powdered_obsidian"
+    },
+    {
+      "chance": 90.0,
+      "item": "create:cinder_flour"
+    }
+  ]
+}

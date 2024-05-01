@@ -27,6 +27,8 @@ public abstract class DesireProcessingRecipeGen extends CreateRecipeProvider {
 
     public static void registerAll(DataGenerator gen) {
         GENERATORS.add(new WashingRecipeGen(gen));
+        GENERATORS.add(new SandingRecipeGen(gen));
+        GENERATORS.add(new FreezingRecipeGen(gen));
         GENERATORS.add(new SeethingRecipeGen(gen));
         GENERATORS.add(new ItemApplicationRecipeGen(gen));
 

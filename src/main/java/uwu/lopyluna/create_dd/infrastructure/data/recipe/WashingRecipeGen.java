@@ -44,25 +44,6 @@ public class WashingRecipeGen extends DesireProcessingRecipeGen {
 		return create(() -> block, b -> b.output(result));
 	}
 
-	public GeneratedRecipe crushedOre(ItemEntry<Item> crushed, Supplier<ItemLike> nugget, Supplier<ItemLike> secondary,
-		float secondaryChance) {
-		return create(crushed::get, b -> b.output(nugget.get(), 9)
-			.output(secondaryChance, secondary.get(), 1));
-	}
-
-	public GeneratedRecipe moddedCrushedOre(ItemEntry<? extends Item> crushed, CompatMetals metal) {
-		String metalName = metal.getName();
-		for (Mods mod : metal.getMods()) {
-			ResourceLocation nugget = mod.nuggetOf(metalName);
-			create(mod.getId() + "/" + crushed.getId()
-				.getPath(),
-				b -> b.withItemIngredients(Ingredient.of(crushed::get))
-					.output(1, nugget, 9)
-					.whenModLoaded(mod.getId()));
-		}
-		return null;
-	}
-
 	public WashingRecipeGen(DataGenerator dataGenerator) {
 		super(dataGenerator);
 	}

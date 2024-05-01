@@ -15,6 +15,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 import uwu.lopyluna.create_dd.registry.DesiresTags;
 
@@ -86,7 +87,10 @@ public class IndustrialFanBlockEntity extends EncasedFanBlockEntity {
     }
 
     public boolean blockBelowIsHot() {
-        assert level != null;
+        FluidState fluidState = level.getFluidState(worldPosition.below());
+        if (DesiresTags.AllFluidTags.INDUSTRIAL_FAN_HEATER.matches(fluidState)) {
+            return true;
+        }
         BlockState blockState = level.getBlockState(worldPosition.below());
         if (DesiresTags.AllBlockTags.INDUSTRIAL_FAN_HEATER.matches(blockState)) {
             if (blockState.hasProperty(BlazeBurnerBlock.HEAT_LEVEL) && !blockState.getValue(BlazeBurnerBlock.HEAT_LEVEL).isAtLeast(BlazeBurnerBlock.HeatLevel.FADING)) {
@@ -95,24 +99,6 @@ public class IndustrialFanBlockEntity extends EncasedFanBlockEntity {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-
-        if (updateGenerator) {
-            updateGenerator = false;
-            updateGenerator();
-        }
-
-        if (isGenerator || getSpeed() == 0)
-            return;
-
-        if (reActivateSource) {
-            updateGeneratedRotation();
-            reActivateSource = false;
-        }
     }
 
 //GeneratingKineticBlockEntity stuff
@@ -137,6 +123,24 @@ public class IndustrialFanBlockEntity extends EncasedFanBlockEntity {
         KineticBlockEntity sourceBE = (KineticBlockEntity) blockEntity;
         if (reActivateSource && Math.abs(sourceBE.getSpeed()) >= Math.abs(getGeneratedSpeed()))
             reActivateSource = false;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        if (reActivateSource) {
+            updateGeneratedRotation();
+            reActivateSource = false;
+        }
+
+        if (updateGenerator) {
+            updateGenerator = false;
+            updateGenerator();
+        }
+
+        if (isGenerator || getSpeed() == 0)
+            return;
     }
 
     @Override
