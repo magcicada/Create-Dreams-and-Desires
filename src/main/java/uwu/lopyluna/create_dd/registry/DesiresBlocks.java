@@ -19,6 +19,7 @@ import uwu.lopyluna.create_dd.content.blocks.kinetics.IndustrialFanBlock.Industr
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankBlock;
 import uwu.lopyluna.create_dd.content.blocks.curiosities.FanSailBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngineBlock;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngineGenerator;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.PoweredFlywheelBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegCTBehaviour;
@@ -250,10 +251,8 @@ public class DesiresBlocks {
 					.properties(BlockBehaviour.Properties::noOcclusion)
 					.transform(pickaxeOnly())
 					.tag(AllTags.AllBlockTags.BRITTLE.tag)
-					.blockstate((c, p) -> {
-						p.horizontalFaceBlock(c.get(), AssetLookup.partialBaseModel(c, p));
-					})
-					.transform(BlockStressDefaults.setCapacity(512.0))
+					.blockstate(new FurnaceEngineGenerator()::generate)
+					.transform(BlockStressDefaults.setCapacity(128.0))
 					.transform(BlockStressDefaults.setGeneratorSpeed(FurnaceEngineBlock::getSpeedRange))
 					.item()
 					.transform(ModelGen.customItemModel())

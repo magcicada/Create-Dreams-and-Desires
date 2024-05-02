@@ -1,6 +1,7 @@
 package uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine;
 
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
 import com.simibubi.create.content.kinetics.flywheel.FlywheelBlock;
@@ -37,15 +38,24 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.jetbrains.annotations.NotNull;
 import uwu.lopyluna.create_dd.registry.DesiresBlockEntityTypes;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
+@SuppressWarnings({"deprecation"})
+@ParametersAreNonnullByDefault
 @Mod.EventBusSubscriber
 public class FurnaceEngineBlock extends FaceAttachedHorizontalDirectionalBlock implements SimpleWaterloggedBlock, IWrenchable, IBE<FurnaceEngineBlockEntity> {
 
@@ -82,13 +92,13 @@ public class FurnaceEngineBlock extends FaceAttachedHorizontalDirectionalBlock i
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         super.createBlockStateDefinition(pBuilder.add(FACE, FACING, BlockStateProperties.WATERLOGGED));
     }
-    public FluidState getFluidState(BlockState state) {
+    public @NotNull FluidState getFluidState(BlockState state) {
         return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
-                                 BlockHitResult ray) {
+    public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
+                                          BlockHitResult ray) {
         ItemStack heldItem = player.getItemInHand(hand);
 
         IPlacementHelper placementHelper = PlacementHelpers.get(placementHelperId);
@@ -105,6 +115,7 @@ public class FurnaceEngineBlock extends FaceAttachedHorizontalDirectionalBlock i
         BlockState state = super.getStateForPlacement(context);
         return state == null ? null : state.setValue(BlockStateProperties.WATERLOGGED, ifluidstate.getType() == Fluids.WATER);
     }
+
     @SubscribeEvent
     public static void usingFurnaceEngineOnFurnacePreventsGUI(PlayerInteractEvent.RightClickBlock event) {
         BlockItem blockItem;
@@ -147,6 +158,36 @@ public class FurnaceEngineBlock extends FaceAttachedHorizontalDirectionalBlock i
     @Override
     public BlockEntityType<? extends FurnaceEngineBlockEntity> getBlockEntityType() {
         return DesiresBlockEntityTypes.FURNACE_ENGINE.get();
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+        VoxelShape up_z = Stream.of(Block.box(1.5, 4, 2, 14.5, 14, 14), Block.box(0, 3, 3.5, 1.5, 13, 12.5), Block.box(-1, -3, -1, 17, 4, 17), Block.box(14.5, 3, 3.5, 16, 13, 12.5), Block.box(3.5, 4, 0, 12.5, 11, 2), Block.box(3.5, 4, 14, 12.5, 11, 16)
+        ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
+        VoxelShape up_x = Stream.of(Block.box(2, 4, 1.5, 14, 14, 14.5), Block.box(3.5, 3, 14.5, 12.5, 13, 16), Block.box(-1, -3, -1, 17, 4, 17), Block.box(3.5, 3, 0, 12.5, 13, 1.5), Block.box(0, 4, 3.5, 2, 11, 12.5), Block.box(14, 4, 3.5, 16, 11, 12.5)
+        ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
+
+        VoxelShape down_z = Stream.of(Block.box(1.5, 2, 2, 14.5, 12, 14), Block.box(14.5, 3, 3.5, 16, 13, 12.5), Block.box(-1, 12, -1, 17, 19, 17), Block.box(0, 3, 3.5, 1.5, 13, 12.5), Block.box(3.5, 5, 0, 12.5, 12, 2), Block.box(3.5, 5, 14, 12.5, 12, 16)
+        ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
+        VoxelShape down_x = Stream.of(Block.box(2, 2, 1.5, 14, 12, 14.5), Block.box(3.5, 3, 0, 12.5, 13, 1.5), Block.box(-1, 12, -1, 17, 19, 17), Block.box(3.5, 3, 14.5, 12.5, 13, 16), Block.box(0, 5, 3.5, 2, 12, 12.5), Block.box(14, 5, 3.5, 16, 12, 12.5)
+        ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
+
+        VoxelShape wall_north = Stream.of(Block.box(1.5, 2, 2, 14.5, 14, 12), Block.box(0, 3.5, 3, 1.5, 12.5, 13), Block.box(-1, -1, 12, 17, 17, 19), Block.box(14.5, 3.5, 3, 16, 12.5, 13), Block.box(3.5, 0, 5, 12.5, 2, 12), Block.box(3.5, 14, 5, 12.5, 16, 12)
+        ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
+        VoxelShape wall_south = Stream.of(Block.box(1.5, 2, 4, 14.5, 14, 14), Block.box(14.5, 3.5, 3, 16, 12.5, 13), Block.box(-1, -1, -3, 17, 17, 4), Block.box(0, 3.5, 3, 1.5, 12.5, 13), Block.box(3.5, 0, 4, 12.5, 2, 11), Block.box(3.5, 14, 4, 12.5, 16, 11)
+        ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
+        VoxelShape wall_east = Stream.of(Block.box(4, 2, 1.5, 14, 14, 14.5), Block.box(3, 3.5, 0, 13, 12.5, 1.5), Block.box(-3, -1, -1, 4, 17, 17), Block.box(3, 3.5, 14.5, 13, 12.5, 16), Block.box(4, 0, 3.5, 11, 2, 12.5), Block.box(4, 14, 3.5, 11, 16, 12.5)
+        ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
+        VoxelShape wall_west = Stream.of(Block.box(2, 2, 1.5, 12, 14, 14.5), Block.box(3, 3.5, 14.5, 13, 12.5, 16), Block.box(12, -1, -1, 19, 17, 17), Block.box(3, 3.5, 0, 13, 12.5, 1.5), Block.box(5, 0, 3.5, 12, 2, 12.5), Block.box(5, 14, 3.5, 12, 16, 12.5)
+        ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();;
+
+        AttachFace face = pState.getValue(FACE);
+        Direction direction = pState.getValue(FACING);
+        return face == AttachFace.CEILING ? direction.getAxis() == Direction.Axis.X ? down_x : down_z :
+               face == AttachFace.FLOOR ? direction.getAxis() == Direction.Axis.X ? up_x : up_z :
+               direction == Direction.NORTH ? wall_north :
+               direction == Direction.SOUTH ? wall_south :
+               direction == Direction.EAST ? wall_east : wall_west;
     }
 
     @Override

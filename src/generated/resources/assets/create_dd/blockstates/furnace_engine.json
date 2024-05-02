@@ -69,40 +69,40 @@
       "y": 270
     },
     "face=wall,facing=east,waterlogged=false": {
-      "model": "create_dd:block/furnace_engine/block",
+      "model": "create_dd:block/furnace_engine/block_horizontal",
       "x": 90,
       "y": 90
     },
     "face=wall,facing=east,waterlogged=true": {
-      "model": "create_dd:block/furnace_engine/block",
+      "model": "create_dd:block/furnace_engine/block_horizontal",
       "x": 90,
       "y": 90
     },
     "face=wall,facing=north,waterlogged=false": {
-      "model": "create_dd:block/furnace_engine/block",
+      "model": "create_dd:block/furnace_engine/block_horizontal",
       "x": 90
     },
     "face=wall,facing=north,waterlogged=true": {
-      "model": "create_dd:block/furnace_engine/block",
+      "model": "create_dd:block/furnace_engine/block_horizontal",
       "x": 90
     },
     "face=wall,facing=south,waterlogged=false": {
-      "model": "create_dd:block/furnace_engine/block",
+      "model": "create_dd:block/furnace_engine/block_horizontal",
       "x": 90,
       "y": 180
     },
     "face=wall,facing=south,waterlogged=true": {
-      "model": "create_dd:block/furnace_engine/block",
+      "model": "create_dd:block/furnace_engine/block_horizontal",
       "x": 90,
       "y": 180
     },
     "face=wall,facing=west,waterlogged=false": {
-      "model": "create_dd:block/furnace_engine/block",
+      "model": "create_dd:block/furnace_engine/block_horizontal",
       "x": 90,
       "y": 270
     },
     "face=wall,facing=west,waterlogged=true": {
-      "model": "create_dd:block/furnace_engine/block",
+      "model": "create_dd:block/furnace_engine/block_horizontal",
       "x": 90,
       "y": 270
     }

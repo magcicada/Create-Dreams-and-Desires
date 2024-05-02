@@ -120,7 +120,7 @@ public class PoweredFlywheelBlockEntity extends GeneratingKineticBlockEntity {
 
 	@Override
 	public float getGeneratedSpeed() {
-		return getCombinedCapacity() > 0 ? movementDirection * 16 * getSpeedModifier() : 0;
+		return getCombinedCapacity() > 0 ? movementDirection * 8 * getSpeedModifier() : 0;
 	}
 
 	private float getCombinedCapacity() {
