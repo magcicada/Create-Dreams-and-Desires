@@ -27,15 +27,13 @@ public class SmokeJetParticleData implements ParticleOptions, ICustomParticleDat
 
     public static final ParticleOptions.Deserializer<SmokeJetParticleData> DESERIALIZER =
             new ParticleOptions.Deserializer<SmokeJetParticleData>() {
-                public SmokeJetParticleData fromCommand(ParticleType<SmokeJetParticleData> particleTypeIn,
-                                                        StringReader reader) throws CommandSyntaxException {
+                public SmokeJetParticleData fromCommand(ParticleType<SmokeJetParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
                     reader.expect(' ');
                     float speed = reader.readFloat();
                     return new SmokeJetParticleData(speed);
                 }
 
-                public SmokeJetParticleData fromNetwork(ParticleType<SmokeJetParticleData> particleTypeIn,
-                                                        FriendlyByteBuf buffer) {
+                public SmokeJetParticleData fromNetwork(ParticleType<SmokeJetParticleData> particleTypeIn, FriendlyByteBuf buffer) {
                     return new SmokeJetParticleData(buffer.readFloat());
                 }
             };
@@ -44,6 +42,10 @@ public class SmokeJetParticleData implements ParticleOptions, ICustomParticleDat
 
     public SmokeJetParticleData(float speed) {
         this.speed = speed;
+    }
+
+    public SmokeJetParticleData() {
+        this(0);
     }
 
     @Override
