@@ -1,13 +1,11 @@
 package uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine;
 
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.contraptions.bearing.WindmillBearingBlockEntity;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import com.simibubi.create.content.kinetics.steamEngine.SteamEngineBlock;
-import com.simibubi.create.content.kinetics.steamEngine.SteamJetParticleData;
 import com.simibubi.create.foundation.advancement.AllAdvancements;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -19,7 +17,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -145,9 +142,9 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
                                 AbstractFurnaceBlockEntity sourceBE = this.source.get();
                                 if (sourceBE != null) {
                                     float volume = 3.0F / 2;
-                                    float pitch = 0.78F - this.level.random.nextFloat() * 0.25F;
+                                    float pitch = 0.28F + this.level.random.nextFloat() * 0.1F;
                                     this.level.playLocalSound(this.worldPosition.getX(), this.worldPosition.getY(), this.worldPosition.getZ(), SoundEvents.CANDLE_EXTINGUISH, SoundSource.BLOCKS, volume, pitch, false);
-                                    AllSoundEvents.STEAM.playAt(this.level, this.worldPosition, volume / 16.0F, 0.5F, false);
+                                    AllSoundEvents.STEAM.playAt(this.level, this.worldPosition, volume / 16.0F, 0.25F, false);
                                 }
 
                                 Direction facing = FurnaceEngineBlock.getFacing(this.getBlockState());
@@ -155,7 +152,7 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
                                 offset = VecHelper.rotate(offset, AngleHelper.horizontalAngle(facing), Direction.Axis.Y);
                                 Vec3 v = offset.scale(0.5).add(Vec3.atCenterOf(this.worldPosition));
                                 Vec3 m = offset.subtract(Vec3.atLowerCornerOf(facing.getNormal()).scale(0.75));
-                                this.level.addParticle(new SteamJetParticleData(1.0F), v.x, v.y, v.z, m.x, m.y, m.z);
+                                this.level.addParticle(new SmokeJetParticleData(0.5F), v.x, v.y, v.z, m.x, m.y, m.z);
                                 this.prevAngle = angle;
                             }
                         } else {

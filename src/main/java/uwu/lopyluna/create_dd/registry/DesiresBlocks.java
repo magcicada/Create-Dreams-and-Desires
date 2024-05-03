@@ -21,6 +21,7 @@ import uwu.lopyluna.create_dd.content.blocks.kinetics.IndustrialFanBlock.Industr
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankBlock;
 import uwu.lopyluna.create_dd.content.blocks.curiosities.FanSailBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngineBlock;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngineGenerator;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.PoweredFlywheelBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegCTBehaviour;
@@ -44,32 +45,37 @@ public class DesiresBlocks {
 
 	public static final BlockEntry<CasingBlock> OVERBURDEN_CASING = REGISTRATE.block("overburden_casing", CasingBlock::new)
 			.transform(BuilderTransformers.casing(() -> DesiresSpriteShifts.OVERBURDEN_CASING))
-			.properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_BLUE))
-			.properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.NETHERITE_BLOCK))
+			.properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_BLUE)
+					.requiresCorrectToolForDrops()
+					.sound(SoundType.NETHERITE_BLOCK))
 			.transform(pickaxeOnly())
 			.lang("Overburden Casing")
 			.register();
 
 	public static final BlockEntry<CasingBlock> HYDRAULIC_CASING = REGISTRATE.block("hydraulic_casing", CasingBlock::new)
 			.transform(BuilderTransformers.casing(() -> DesiresSpriteShifts.HYDRAULIC_CASING))
-			.properties(p -> p.color(MaterialColor.COLOR_ORANGE))
-			.properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.COPPER))
+			.properties(p -> p.color(MaterialColor.COLOR_ORANGE)
+					.requiresCorrectToolForDrops()
+					.sound(SoundType.COPPER))
 			.transform(pickaxeOnly())
 			.lang("Hydraulic Casing")
 			.register();
 
 	public static final BlockEntry<CasingBlock> INDUSTRIAL_CASING = REGISTRATE.block("industrial_casing", CasingBlock::new)
 			.transform(BuilderTransformers.casing(() -> DesiresSpriteShifts.INDUSTRIAL_CASING))
-			.properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN))
-			.properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.NETHERITE_BLOCK))
+			.properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN)
+					.requiresCorrectToolForDrops()
+					.sound(SoundType.NETHERITE_BLOCK))
 			.transform(pickaxeOnly())
 			.lang("Industrial Casing")
 			.register();
 
 	public static final BlockEntry<IndustrialFanBlock> INDUSTRIAL_FAN = REGISTRATE.block("industrial_fan", IndustrialFanBlock::new)
 			.initialProperties(SharedProperties::stone)
-			.properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN))
-			.properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.NETHERITE_BLOCK))
+			.properties(p -> p.noOcclusion()
+					.color(MaterialColor.TERRACOTTA_CYAN)
+					.requiresCorrectToolForDrops()
+					.sound(SoundType.NETHERITE_BLOCK))
 			.blockstate(BlockStateGen.directionalBlockProvider(true))
 			.addLayer(() -> RenderType::cutoutMipped)
 			.transform(pickaxeOnly())
@@ -253,25 +259,27 @@ public class DesiresBlocks {
 	public static final BlockEntry<FurnaceEngineBlock> FURNACE_ENGINE =
 			REGISTRATE.block("furnace_engine", FurnaceEngineBlock::new)
 					.initialProperties(SharedProperties::softMetal)
+					.properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN)
+							.sound(SoundType.NETHERITE_BLOCK))
 					.properties(BlockBehaviour.Properties::noOcclusion)
 					.transform(pickaxeOnly())
 					.tag(AllTags.AllBlockTags.BRITTLE.tag)
-					.blockstate((c, p) -> {
-						p.horizontalFaceBlock(c.get(), AssetLookup.partialBaseModel(c, p));
-					})
-					.transform(BlockStressDefaults.setCapacity(1024.0))
+					.blockstate(new FurnaceEngineGenerator()::generate)
+					.transform(BlockStressDefaults.setCapacity(128.0))
+					.transform(BlockStressDefaults.setGeneratorSpeed(FurnaceEngineBlock::getSpeedRange))
 					.item()
-					.transform(customItemModel())
+					.transform(ModelGen.customItemModel())
 					.register();
 
 	public static final BlockEntry<PoweredFlywheelBlock> POWERED_FLYWHEEL =
 			REGISTRATE.block("powered_flywheel", PoweredFlywheelBlock::new)
-					.initialProperties(SharedProperties::stone)
+					.initialProperties(SharedProperties::softMetal)
 					.properties(p -> p.color(MaterialColor.METAL))
 					.transform(pickaxeOnly())
 					.blockstate(BlockStateGen.axisBlockProvider(false))
 					.loot((lt, block) -> lt.dropOther(block, AllBlocks.FLYWHEEL.get()))
 					.register();
+
 
 
 	// Load this class
