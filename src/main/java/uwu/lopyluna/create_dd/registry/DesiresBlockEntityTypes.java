@@ -4,6 +4,9 @@ package uwu.lopyluna.create_dd.registry;
 import com.simibubi.create.content.kinetics.flywheel.FlywheelBlockEntity;
 import com.simibubi.create.content.kinetics.flywheel.FlywheelInstance;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.HydraulicPress.HydraulicPressBlockEntity;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.HydraulicPress.HydraulicPressInstance;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.HydraulicPress.HydraulicPressRenderer;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.IndustrialFanBlock.IndustrialFanBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.IndustrialFanBlock.IndustrialFanInstance;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.IndustrialFanBlock.IndustrialFanRemderer;
@@ -23,6 +26,13 @@ public class DesiresBlockEntityTypes {
 			.instance(() -> IndustrialFanInstance::new, false)
 			.validBlocks(DesiresBlocks.INDUSTRIAL_FAN)
 			.renderer(() -> IndustrialFanRemderer::new)
+			.register();
+
+	public static final BlockEntityEntry<HydraulicPressBlockEntity> HYDRAULIC_PRESS = REGISTRATE
+			.blockEntity("hydraulic_press", HydraulicPressBlockEntity::new)
+			.instance(() -> HydraulicPressInstance::new)
+			.validBlocks(DesiresBlocks.HYDRAULIC_PRESS)
+			.renderer(() -> HydraulicPressRenderer::new)
 			.register();
 
 	public static final BlockEntityEntry<CogCrankBlockEntity> COG_CRANK = REGISTRATE

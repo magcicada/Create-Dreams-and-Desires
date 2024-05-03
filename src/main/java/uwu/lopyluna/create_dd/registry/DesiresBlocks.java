@@ -4,6 +4,7 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
+import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
 import com.simibubi.create.foundation.block.ItemUseOverrides;
 import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.HydraulicPress.HydraulicPressBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.IndustrialFanBlock.IndustrialFanBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankBlock;
 import uwu.lopyluna.create_dd.content.blocks.curiosities.FanSailBlock;
@@ -82,6 +84,17 @@ public class DesiresBlocks {
 			.item()
 			.transform(customItemModel())
 			.lang("Industrial Fan")
+			.register();
+
+	public static final BlockEntry<HydraulicPressBlock> HYDRAULIC_PRESS = REGISTRATE.block("hydraulic_press", HydraulicPressBlock::new)
+			.initialProperties(SharedProperties::copperMetal)
+			.properties(BlockBehaviour.Properties::noOcclusion)
+			.properties(p -> p.noOcclusion().color(MaterialColor.TERRACOTTA_ORANGE))
+			.transform(pickaxeOnly())
+			.blockstate(BlockStateGen.horizontalBlockProvider(true))
+			.transform(BlockStressDefaults.setImpact(8.0))
+			.item(AssemblyOperatorBlockItem::new)
+			.transform(customItemModel())
 			.register();
 
 
