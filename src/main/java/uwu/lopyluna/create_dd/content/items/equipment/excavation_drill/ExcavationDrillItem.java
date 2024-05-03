@@ -1,12 +1,19 @@
 package uwu.lopyluna.create_dd.content.items.equipment.excavation_drill;
 
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
+import com.simibubi.create.foundation.item.CustomArmPoseItem;
+import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import com.simibubi.create.foundation.utility.VecHelper;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -14,10 +21,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import uwu.lopyluna.create_dd.content.items.equipment.BackTankPickaxeItem;
 import uwu.lopyluna.create_dd.infrastructure.utility.BoreMining;
 import uwu.lopyluna.create_dd.registry.DesiresItems;
@@ -27,6 +38,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import static uwu.lopyluna.create_dd.infrastructure.utility.VeinMining.findVein;
 import static uwu.lopyluna.create_dd.registry.DesireTiers.Drill;
@@ -35,11 +47,19 @@ import static uwu.lopyluna.create_dd.registry.DesireTiers.Drill;
 @MethodsReturnNonnullByDefault
 @SuppressWarnings({"all"})
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class ExcavationDrillItem extends BackTankPickaxeItem {
+public class ExcavationDrillItem extends BackTankPickaxeItem implements CustomArmPoseItem {
     private static final Set<BlockPos> hashedBlocks = new HashSet<>();
     private static boolean veinExcavating = false;
     public ExcavationDrillItem(Properties pProperties) {
         super(Drill, 1, -2.8F, pProperties);
+    }
+
+    public float getDestroySpeed(ItemStack pStack, BlockState pState) {
+        LocalPlayer player = Minecraft.getInstance().player;
+        assert player != null;
+
+        return pState.is(pState.getBlock()) && player.isCrouching() ? pState.is(DesiresTags.forgeBlockTag("ores")) ? this.speed * 0.4F : this.speed * 0.6F :
+                pState.is(pState.getBlock()) && !player.isCrouching() ? this.speed * 1.25F : 0.5F;
     }
 
     public static void destroyVein(Level pLevel, BlockState state, BlockPos pos,
@@ -108,7 +128,25 @@ public class ExcavationDrillItem extends BackTankPickaxeItem {
         }
     }
 
+    @Override
+    public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
+        return true;
+    }
 
+    @Override
+    @Nullable
+    public HumanoidModel.ArmPose getArmPose(ItemStack stack, AbstractClientPlayer player, InteractionHand hand) {
+        if (!player.swinging) {
+            return HumanoidModel.ArmPose.CROSSBOW_HOLD;
+        }
+        return null;
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(SimpleCustomRenderer.create(this, new ExcavationDrillRenderer()));
+    }
 
     @Override
     public boolean isBarVisible(@NotNull ItemStack stack) {

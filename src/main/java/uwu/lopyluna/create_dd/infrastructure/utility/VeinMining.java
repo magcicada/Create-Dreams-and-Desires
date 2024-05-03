@@ -98,20 +98,6 @@ public class VeinMining {
         return true;
     }
 
-    private enum SearchDirection {
-        UP(0, 1),
-        DOWN(-1, 0),
-        BOTH(-1, 1);
-
-        int minY;
-        int maxY;
-
-        private SearchDirection(int minY, int maxY) {
-            this.minY = minY;
-            this.maxY = maxY;
-        }
-    }
-
     public static boolean isOre(BlockState state) {
         return state.is(DesiresTags.forgeBlockTag("ores"));
     }

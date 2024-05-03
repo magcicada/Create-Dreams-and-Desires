@@ -9,6 +9,7 @@ import uwu.lopyluna.create_dd.DesiresCreate;
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 
+@SuppressWarnings({"unused"})
 public class DesiresPaletteBlocks {
 
 	static {

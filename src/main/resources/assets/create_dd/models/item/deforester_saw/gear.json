@@ -1,6 +1,6 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "create_dd:item/deforester/item",
+	"parent": "create_dd:item/deforester_saw/item",
 	"textures": {
 		"5": "create_dd:item/handheld_saw/base",
 		"particle": "create_dd:item/handheld_saw/base"

@@ -11,8 +11,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import uwu.lopyluna.create_dd.DesiresCreate;
-import uwu.lopyluna.create_dd.content.items.equipment.BackTankPickaxeItem;
 import uwu.lopyluna.create_dd.content.items.equipment.deforester_saw.DeforesterSawItem;
+import uwu.lopyluna.create_dd.content.items.equipment.excavation_drill.ExcavationDrillItem;
 import uwu.lopyluna.create_dd.content.items.equipment.gilded_rose_tools.*;
 
 import static com.tterrag.registrate.providers.RegistrateRecipeProvider.has;
@@ -135,11 +135,8 @@ public class DesiresItems {
 			.register();
 
 
-	public static final ItemEntry<BackTankPickaxeItem> EXCAVATION_DRILL = REGISTRATE.item("excavation_drill",
-					p -> new BackTankPickaxeItem(DesireTiers.GILDED_ROSE, 1, -2.8F, p))
-			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
-					new ResourceLocation("item/handheld")).texture("layer0",
-					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + GILDED_ROSE_PICKAXE.getId().getPath())))
+	public static final ItemEntry<ExcavationDrillItem> EXCAVATION_DRILL = REGISTRATE.item("excavation_drill", ExcavationDrillItem::new)
+			.model(AssetLookup.itemModelWithPartials())
 			.properties(p -> p.rarity(Rarity.UNCOMMON))
 			.tag(DesiresTags.AllItemTags.PICKAXE.tag)
 			.register();
