@@ -2,10 +2,9 @@ package uwu.lopyluna.create_dd.registry;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
-import com.simibubi.create.content.kinetics.steamEngine.PoweredShaftBlock;
+import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
 import com.simibubi.create.foundation.block.ItemUseOverrides;
 import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
@@ -13,11 +12,11 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.HydraulicPress.HydraulicPressBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.IndustrialFanBlock.IndustrialFanBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankBlock;
 import uwu.lopyluna.create_dd.content.blocks.curiosities.FanSailBlock;
@@ -45,37 +44,32 @@ public class DesiresBlocks {
 
 	public static final BlockEntry<CasingBlock> OVERBURDEN_CASING = REGISTRATE.block("overburden_casing", CasingBlock::new)
 			.transform(BuilderTransformers.casing(() -> DesiresSpriteShifts.OVERBURDEN_CASING))
-			.properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_BLUE)
-					.requiresCorrectToolForDrops()
-					.sound(SoundType.NETHERITE_BLOCK))
+			.properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_BLUE))
+			.properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.NETHERITE_BLOCK))
 			.transform(pickaxeOnly())
 			.lang("Overburden Casing")
 			.register();
 
 	public static final BlockEntry<CasingBlock> HYDRAULIC_CASING = REGISTRATE.block("hydraulic_casing", CasingBlock::new)
 			.transform(BuilderTransformers.casing(() -> DesiresSpriteShifts.HYDRAULIC_CASING))
-			.properties(p -> p.color(MaterialColor.COLOR_ORANGE)
-					.requiresCorrectToolForDrops()
-					.sound(SoundType.COPPER))
+			.properties(p -> p.color(MaterialColor.COLOR_ORANGE))
+			.properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.COPPER))
 			.transform(pickaxeOnly())
 			.lang("Hydraulic Casing")
 			.register();
 
 	public static final BlockEntry<CasingBlock> INDUSTRIAL_CASING = REGISTRATE.block("industrial_casing", CasingBlock::new)
 			.transform(BuilderTransformers.casing(() -> DesiresSpriteShifts.INDUSTRIAL_CASING))
-			.properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN)
-					.requiresCorrectToolForDrops()
-					.sound(SoundType.NETHERITE_BLOCK))
+			.properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN))
+			.properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.NETHERITE_BLOCK))
 			.transform(pickaxeOnly())
 			.lang("Industrial Casing")
 			.register();
 
 	public static final BlockEntry<IndustrialFanBlock> INDUSTRIAL_FAN = REGISTRATE.block("industrial_fan", IndustrialFanBlock::new)
 			.initialProperties(SharedProperties::stone)
-			.properties(p -> p.noOcclusion()
-					.color(MaterialColor.TERRACOTTA_CYAN)
-					.requiresCorrectToolForDrops()
-					.sound(SoundType.NETHERITE_BLOCK))
+			.properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN))
+			.properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.NETHERITE_BLOCK))
 			.blockstate(BlockStateGen.directionalBlockProvider(true))
 			.addLayer(() -> RenderType::cutoutMipped)
 			.transform(pickaxeOnly())
@@ -84,6 +78,17 @@ public class DesiresBlocks {
 			.item()
 			.transform(customItemModel())
 			.lang("Industrial Fan")
+			.register();
+
+	public static final BlockEntry<HydraulicPressBlock> HYDRAULIC_PRESS = REGISTRATE.block("hydraulic_press", HydraulicPressBlock::new)
+			.initialProperties(SharedProperties::copperMetal)
+			.properties(BlockBehaviour.Properties::noOcclusion)
+			.properties(p -> p.noOcclusion().color(MaterialColor.TERRACOTTA_ORANGE))
+			.transform(pickaxeOnly())
+			.blockstate(BlockStateGen.horizontalBlockProvider(true))
+			.transform(BlockStressDefaults.setImpact(8.0))
+			.item(AssemblyOperatorBlockItem::new)
+			.transform(customItemModel())
 			.register();
 
 
@@ -256,7 +261,7 @@ public class DesiresBlocks {
 					})
 					.transform(BlockStressDefaults.setCapacity(1024.0))
 					.item()
-					.transform(ModelGen.customItemModel())
+					.transform(customItemModel())
 					.register();
 
 	public static final BlockEntry<PoweredFlywheelBlock> POWERED_FLYWHEEL =
@@ -267,7 +272,6 @@ public class DesiresBlocks {
 					.blockstate(BlockStateGen.axisBlockProvider(false))
 					.loot((lt, block) -> lt.dropOther(block, AllBlocks.FLYWHEEL.get()))
 					.register();
-
 
 
 	// Load this class

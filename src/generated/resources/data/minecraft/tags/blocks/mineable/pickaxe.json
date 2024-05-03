@@ -4,6 +4,7 @@
     "create_dd:hydraulic_casing",
     "create_dd:industrial_casing",
     "create_dd:industrial_fan",
+    "create_dd:hydraulic_press",
     "create_dd:cog_crank",
     "create_dd:item_stockpile",
     "create_dd:fluid_keg",
