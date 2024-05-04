@@ -1,4 +1,4 @@
-// 1.19.2	2024-05-03T23:16:37.5884632	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2024-05-04T00:42:22.9787491	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 9452bed2fb7ba829ea35644054add91456d3f5d9 assets/create_dd/blockstates/amethyst_block_pillar.json
 64dc32722d3ad05720fa9a200df1de7179cfd890 assets/create_dd/blockstates/basalt_pillar.json
 5fd6e80fe77786dd8fd0c5cfd6d866b44365aa96 assets/create_dd/blockstates/blackstone_pillar.json
@@ -814,6 +814,7 @@ a82334edc63e8e4eef4e6fed4ad582e89b244b7c data/create_dd/advancements/recipes/bui
 767782d48701e60b5422eba95864acf7415b7936 data/create_dd/advancements/recipes/create_dd.base/crafting/bury_blend.json
 8075e1e297bfb860d7c5e877d803b20093a565d0 data/create_dd/advancements/recipes/create_dd.base/crafting/coal_piece_from_coal.json
 09a5e0c67801506ce96c03375fb0a3d5715be19d data/create_dd/advancements/recipes/create_dd.base/crafting/diamond_shard_from_diamond.json
+f8c5bb58c07cb1a367b10ce8a1dc63357ec753dc data/create_dd/advancements/recipes/create_dd.base/music_disc_waltz_of_the_flowers_from_rose_quartz_stonecutting.json
 65653977617e3348192f1e027ef038007e141169 data/create_dd/advancements/recipes/create_dd.palettes/amethyst_block_pillar_from_stone_types_amethyst_block_stonecutting.json
 17e2d2e94ca051f869731c51abdce581540a41d0 data/create_dd/advancements/recipes/create_dd.palettes/basalt_pillar_from_stone_types_basalt_stonecutting.json
 671d537ab130c5147c06c7a29222fffe7492bf64 data/create_dd/advancements/recipes/create_dd.palettes/blackstone_pillar_from_stone_types_blackstone_stonecutting.json
@@ -1493,6 +1494,7 @@ dd94b30c6e461043db83723f189b7421688e0a6d data/create_dd/recipes/layered_gabbro_f
 9a3fee67d9a3824f1b8df3c7363b91bd6525e442 data/create_dd/recipes/layered_packed_mud_from_stone_types_packed_mud_stonecutting.json
 095b3241f34097235081be9781c3524799e10bbc data/create_dd/recipes/layered_stone_from_stone_types_stone_stonecutting.json
 d29d6da9ed83a089191cf63d5de2fe78461d14cc data/create_dd/recipes/layered_weathered_limestone_from_stone_types_weathered_limestone_stonecutting.json
+7ff4dd26fc35bf57d701ebfbbcd786cb5a462ef7 data/create_dd/recipes/music_disc_waltz_of_the_flowers_from_rose_quartz_stonecutting.json
 50bb8fc3944163db033c233687d37959bb5b37c9 data/create_dd/recipes/netherrack_from_stone_types_netherrack_stonecutting.json
 157dcde7f55b7585bb45c878ffd88ab25b1bebf4 data/create_dd/recipes/netherrack_pillar_from_stone_types_netherrack_stonecutting.json
 62e392ddf523f4f367eb252ecdcb945538314d9b data/create_dd/recipes/packed_mud_from_stone_types_packed_mud_stonecutting.json
@@ -1682,6 +1684,8 @@ ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/moss_replace
 194456f6efd26b8c9d17e350cc45783d4eb2d1db data/minecraft/tags/blocks/slabs.json
 c6ecc90519658839c46a11c59a5356548f0c23e4 data/minecraft/tags/blocks/stairs.json
 fdb73d978a03bde4723cf9e386a8b1eccbf4170a data/minecraft/tags/blocks/walls.json
+dcde55d653767e29d066e1f0456f604678c3decf data/minecraft/tags/items/creeper_drop_music_discs.json
+dcde55d653767e29d066e1f0456f604678c3decf data/minecraft/tags/items/music_discs.json
 194456f6efd26b8c9d17e350cc45783d4eb2d1db data/minecraft/tags/items/slabs.json
 c6ecc90519658839c46a11c59a5356548f0c23e4 data/minecraft/tags/items/stairs.json
 fdb73d978a03bde4723cf9e386a8b1eccbf4170a data/minecraft/tags/items/walls.json

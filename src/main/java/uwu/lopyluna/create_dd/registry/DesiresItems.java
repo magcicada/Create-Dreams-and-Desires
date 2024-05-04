@@ -3,6 +3,7 @@ package uwu.lopyluna.create_dd.registry;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.item.CombustibleItem;
+import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -10,6 +11,7 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.content.items.equipment.NameableRecordItem;
 import uwu.lopyluna.create_dd.content.items.equipment.deforester_saw.DeforesterSawItem;
@@ -19,6 +21,7 @@ import uwu.lopyluna.create_dd.content.items.equipment.gilded_rose_tools.*;
 import static com.tterrag.registrate.providers.RegistrateRecipeProvider.has;
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 import static uwu.lopyluna.create_dd.registry.DesiresTags.forgeItemTag;
+import static uwu.lopyluna.create_dd.registry.DesiresTags.optionalTag;
 
 @SuppressWarnings({"unused", "deprecation"})
 public class DesiresItems {
@@ -152,6 +155,9 @@ public class DesiresItems {
 					p -> new NameableRecordItem(10, DesiresSoundEvents.MUSIC_DISC_WALTZ_OF_THE_FLOWERS, p, 16600, "Tchaikovsky - Waltz of the Flowers"))
 			.properties(p -> p.rarity(Rarity.RARE)
 					.stacksTo(1))
+			.recipe((c, p) -> p.stonecutting(DataIngredient.items(AllItems.ROSE_QUARTZ), c, 1))
+			.tag(optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("minecraft", "music_discs")))
+			.tag(optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("minecraft", "creeper_drop_music_discs")))
 			.lang("Music Disc")
 			.register();
 
