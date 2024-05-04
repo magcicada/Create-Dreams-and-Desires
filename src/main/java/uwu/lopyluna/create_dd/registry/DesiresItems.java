@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.content.items.equipment.NameableRecordItem;
 import uwu.lopyluna.create_dd.content.items.equipment.deforester_saw.DeforesterSawItem;
 import uwu.lopyluna.create_dd.content.items.equipment.excavation_drill.ExcavationDrillItem;
 import uwu.lopyluna.create_dd.content.items.equipment.gilded_rose_tools.*;
@@ -145,6 +146,13 @@ public class DesiresItems {
 			.model(AssetLookup.itemModelWithPartials())
 			.properties(p -> p.rarity(Rarity.UNCOMMON))
 			.tag(DesiresTags.AllItemTags.AXE.tag)
+			.register();
+
+	public static final ItemEntry<NameableRecordItem> MUSIC_DISC_WALTZ_OF_THE_FLOWERS = REGISTRATE.item("music_disc_waltz_of_the_flowers",
+					p -> new NameableRecordItem(10, DesiresSoundEvents.MUSIC_DISC_WALTZ_OF_THE_FLOWERS, p, 16600, "Tchaikovsky - Waltz of the Flowers"))
+			.properties(p -> p.rarity(Rarity.RARE)
+					.stacksTo(1))
+			.lang("Music Disc")
 			.register();
 
 

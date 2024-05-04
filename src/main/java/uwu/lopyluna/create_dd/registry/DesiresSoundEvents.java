@@ -17,6 +17,7 @@ public class DesiresSoundEvents {
 	public static RegistryObject<SoundEvent> CREATVEDITE_PLACE = registerSoundEvent("creatvedite_place");
 	public static RegistryObject<SoundEvent> CREATVEDITE_HIT = registerSoundEvent("creatvedite_hit");
 	public static RegistryObject<SoundEvent> CREATVEDITE_FALL = registerSoundEvent("creatvedite_fall");
+	public static RegistryObject<SoundEvent> MUSIC_DISC_WALTZ_OF_THE_FLOWERS = registerSoundEvent("music_disc.waltz_of_the_flowers");
 
 	private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
 		return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(DesiresCreate.MOD_ID, name)));

@@ -28,5 +28,8 @@
     {"name": "create_dd:creatvedite/step2","volume": 0.9},
     {"name": "create_dd:creatvedite/step3","volume": 0.9},
     {"name": "create_dd:creatvedite/step4","volume": 0.9}
+  ]},
+  "music_disc.waltz_of_the_flowers": {"sounds": [
+    {"name": "create_dd:disc/waltz_of_the_flowers_by_tchaikovsk","volume": 0.9}
   ]}
 }
