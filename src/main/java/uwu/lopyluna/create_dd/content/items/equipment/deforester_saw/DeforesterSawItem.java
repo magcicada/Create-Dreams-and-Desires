@@ -5,6 +5,7 @@ import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import com.simibubi.create.foundation.utility.VecHelper;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
@@ -44,8 +45,10 @@ public class DeforesterSawItem extends BackTankAxeItem {
     // Moved away from Item#onBlockDestroyed as it does not get called in Creative
     public static void destroyTree(Level pLevel, BlockState state, BlockPos pos,
                                    Player player) {
+        Minecraft mc = Minecraft.getInstance();
+        boolean playerHeldShift = mc.options.keyShift.isDown();
 
-        if (deforesting || !(state.is(BlockTags.LOGS) || AllTags.AllBlockTags.SLIMY_LOGS.matches(state)) || !player.isCrouching())
+        if (deforesting || !(state.is(BlockTags.LOGS) || AllTags.AllBlockTags.SLIMY_LOGS.matches(state)) || !playerHeldShift)
             return;
         Vec3 vec = player.getLookAngle();
 

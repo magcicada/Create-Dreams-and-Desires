@@ -69,7 +69,7 @@ public class DesiresCreate
 
         REGISTRATE.registerEventListeners(modEventBus);
 
-        DesiresSoundEvents.prepare();
+        DesiresSoundEvents.register(modEventBus);
         DesiresTags.init();
         DesiresCreativeModeTabs.init();
         DesiresBlocks.register();

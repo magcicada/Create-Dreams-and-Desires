@@ -3,22 +3,21 @@ package uwu.lopyluna.create_dd.content.items.equipment.excavation_drill;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.foundation.item.CustomArmPoseItem;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
+import com.simibubi.create.foundation.utility.BlockHelper;
 import com.simibubi.create.foundation.utility.VecHelper;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -55,17 +54,19 @@ public class ExcavationDrillItem extends BackTankPickaxeItem implements CustomAr
     }
 
     public float getDestroySpeed(ItemStack pStack, BlockState pState) {
-        LocalPlayer player = Minecraft.getInstance().player;
-        assert player != null;
+        Minecraft mc = Minecraft.getInstance();
+        boolean playerHeldShift = mc.options.keyShift.isDown();
 
-        return pState.is(pState.getBlock()) && player.isCrouching() ? pState.is(DesiresTags.forgeBlockTag("ores")) ? this.speed * 0.4F : this.speed * 0.6F :
-                pState.is(pState.getBlock()) && !player.isCrouching() ? this.speed * 1.25F : 0.5F;
+        return pState.is(pState.getBlock()) && playerHeldShift ? pState.is(DesiresTags.forgeBlockTag("ores")) ? this.speed * 0.4F : this.speed * 0.6F :
+                pState.is(pState.getBlock()) && !playerHeldShift ? this.speed * 1.25F : 0.5F;
     }
 
     public static void destroyVein(Level pLevel, BlockState state, BlockPos pos,
                                    Player player) {
+        Minecraft mc = Minecraft.getInstance();
+        boolean playerHeldShift = mc.options.keyShift.isDown();
 
-        if (veinExcavating || !(state.is(DesiresTags.forgeBlockTag("ores"))) || !player.isCrouching())
+        if (veinExcavating || !(state.is(DesiresTags.forgeBlockTag("ores"))) || !playerHeldShift)
             return;
         Vec3 vec = player.getLookAngle();
 
@@ -92,6 +93,8 @@ public class ExcavationDrillItem extends BackTankPickaxeItem implements CustomAr
 
     @SubscribeEvent
     public static void onBlockDestroyed(BlockEvent.BreakEvent event) {
+        Minecraft mc = Minecraft.getInstance();
+        boolean playerHeldShift = mc.options.keyShift.isDown();
         Player player = event.getPlayer();
         Level level = (Level) event.getLevel();
         ItemStack heldItemMainhand = event.getPlayer().getItemInHand(InteractionHand.MAIN_HAND);
@@ -103,7 +106,7 @@ public class ExcavationDrillItem extends BackTankPickaxeItem implements CustomAr
             destroyVein((Level) event.getLevel(), event.getState(), event.getPos(), event.getPlayer());
         }
 
-        if (DesiresItems.EXCAVATION_DRILL.isIn(heldItemMainhand) && player instanceof ServerPlayer serverPlayer && player.isCrouching() && !validOres) {
+        if (DesiresItems.EXCAVATION_DRILL.isIn(heldItemMainhand) && player instanceof ServerPlayer serverPlayer && playerHeldShift && !validOres) {
             BlockPos initalBlockPos = event.getPos();
 
             if (hashedBlocks.contains(initalBlockPos)) {
@@ -116,13 +119,23 @@ public class ExcavationDrillItem extends BackTankPickaxeItem implements CustomAr
                         !DesiresItems.EXCAVATION_DRILL.get().isCorrectToolForDrops(heldItemMainhand, event.getLevel().getBlockState(pos))) {
                     continue;
                 }
-                SoundType soundType = level.getBlockState(pos).getSoundType();
-                if (!level.isClientSide()) {
-                    level.playSound(player, pos, soundType.getBreakSound(), SoundSource.BLOCKS, soundType.getVolume() - 0.5F, soundType.getPitch() + 0.25F);
-                }
 
                 hashedBlocks.add(pos);
-                serverPlayer.gameMode.destroyBlock(pos);
+                Vec3 vec = VecHelper.offsetRandomly(VecHelper.getCenterOf(pos), level.random, .125f);
+                BlockHelper.destroyBlockAs(level, pos, player, heldItemMainhand, 1f, (stack) -> {
+                    if (stack.isEmpty())
+                        return;
+                    if (!level.getGameRules()
+                            .getBoolean(GameRules.RULE_DOBLOCKDROPS))
+                        return;
+                    if (level.restoringBlockSnapshots)
+                        return;
+
+                    ItemEntity itementity = new ItemEntity(level, vec.x, vec.y, vec.z, stack);
+                    itementity.setDefaultPickUpDelay();
+                    itementity.setDeltaMovement(Vec3.ZERO);
+                    level.addFreshEntity(itementity);
+                });
                 hashedBlocks.remove(pos);
             }
         }

@@ -26,9 +26,9 @@ public class ExcavationDrillRenderer extends CustomRenderedItemModelRenderer {
     @Override
     protected void render(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemTransforms.TransformType transformType,
                           PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-        LocalPlayer player = Minecraft.getInstance().player;
-        assert player != null;
-        boolean playerHeldShift = player.input.shiftKeyDown;
+        Minecraft mc = Minecraft.getInstance();
+        boolean playerHeldAttack = mc.options.keyAttack.isDown();
+        boolean playerHeldShift = mc.options.keyShift.isDown();
         TransformStack stacker = TransformStack.cast(ms);
         float worldTime = AnimationTickHolder.getRenderTime();
         renderer.render(ITEM.get(), light);
@@ -42,7 +42,10 @@ public class ExcavationDrillRenderer extends CustomRenderedItemModelRenderer {
         ms.popPose();
 
         ms.pushPose();
-        float angleFast = (worldTime * 0.5f % 360) * (playerHeldShift ? -40 : -16);
+        float angleFast = (worldTime * 0.5f % 360) * (
+                playerHeldShift ?
+                playerHeldAttack ? -64 : -32 :
+                playerHeldAttack ? -32 : -16);
         stacker.translate(HEAD_ROTATION_OFFSET)
                 .rotateZ(angleFast)
                 .translateBack(HEAD_ROTATION_OFFSET);

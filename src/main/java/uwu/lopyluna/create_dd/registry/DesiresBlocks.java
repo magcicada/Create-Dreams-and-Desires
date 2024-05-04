@@ -12,10 +12,12 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.common.util.ForgeSoundType;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.HydraulicPress.HydraulicPressBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.IndustrialFanBlock.IndustrialFanBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankBlock;
@@ -35,13 +37,28 @@ import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.*;
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 
-@SuppressWarnings({"unused", "removal"})
+@SuppressWarnings({"unused", "removal", "all"})
 public class DesiresBlocks {
 
 	static {
 		REGISTRATE.creativeModeTab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB);
 	}
 
+	public static final BlockEntry<CasingBlock> CREATIVE_CASING = REGISTRATE.block("creative_casing", CasingBlock::new)
+			.transform(BuilderTransformers.casing(() -> DesiresSpriteShifts.CREATIVE_CASING))
+			.properties(p -> p.color(MaterialColor.COLOR_BLACK)
+					.requiresCorrectToolForDrops())
+			.properties(p -> p.sound(new ForgeSoundType(0.8f, .8f, () -> DesiresSoundEvents.CREATVEDITE_BREAK.get(),
+					() -> DesiresSoundEvents.CREATVEDITE_STEP.get(), () -> DesiresSoundEvents.CREATVEDITE_PLACE.get(),
+					() -> DesiresSoundEvents.CREATVEDITE_HIT.get(), () -> DesiresSoundEvents.CREATVEDITE_FALL.get())))
+			.transform(pickaxeOnly())
+			.properties(p -> p.lightLevel($ -> 5))
+			.lang("Creative Casing")
+			.simpleItem()
+			.item()
+			.properties(p -> p.rarity(Rarity.EPIC))
+			.build()
+			.register();
 
 	public static final BlockEntry<CasingBlock> OVERBURDEN_CASING = REGISTRATE.block("overburden_casing", CasingBlock::new)
 			.transform(BuilderTransformers.casing(() -> DesiresSpriteShifts.OVERBURDEN_CASING))

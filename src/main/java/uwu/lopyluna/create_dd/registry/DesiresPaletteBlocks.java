@@ -26,7 +26,6 @@ public class DesiresPaletteBlocks {
 
 	public static final int COLORED_BLOCKS = generateColorBlocks();
 
-	//WALLPAPERS
 	public static int generateColorBlocks(){
 		String[] colors = {"black", "white", "blue", "light_blue", "red", "green", "lime", "pink", "magenta", "yellow", "gray", "light_gray", "brown", "cyan", "purple", "orange"};
 		for (String color : colors) {
@@ -49,9 +48,9 @@ public class DesiresPaletteBlocks {
 					.blockstate((c, p) -> p.simpleBlock(c.get(), p.models()
 								.cubeAll(c.getName(), p.modLoc("block/asphalt/" + color))))
 					.properties(p -> p.destroyTime(1.25f)
-							.speedFactor(1.05F)
+							.speedFactor(0.001F)
 							.jumpFactor(1.25F)
-							.friction(0.3F)
+							.friction(0.35F)
 							.color(MaterialColor.COLOR_BLACK)
 							.sound(SoundType.POLISHED_DEEPSLATE))
 					.transform(pickaxeOnly())

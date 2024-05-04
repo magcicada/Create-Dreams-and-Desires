@@ -41,16 +41,15 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
-import uwu.lopyluna.create_dd.DesiresCreate;
 
 import java.util.List;
 import java.util.Optional;
 
+@SuppressWarnings({"removal", "all"})
 public class HydraulicPressBlockEntity extends BasinOperatingBlockEntity implements PressingBehaviour.PressingBehaviourSpecifics {
     private static final Object compressingRecipesKey = new Object();
 
@@ -136,7 +135,7 @@ public class HydraulicPressBlockEntity extends BasinOperatingBlockEntity impleme
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && side.getAxis() == getBlockState().getValue(HydraulicPressBlock.HORIZONTAL_FACING).getClockWise().getAxis() && side.getAxis() != Direction.Axis.Y)
+        if (cap == net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && side.getAxis() == getBlockState().getValue(HydraulicPressBlock.HORIZONTAL_FACING).getClockWise().getAxis() && side.getAxis() != Direction.Axis.Y)
             return tank.getCapability()
                     .cast();
         return super.getCapability(cap, side);
