@@ -39,6 +39,24 @@ public class DesiresSpriteShifts {
 			INDUSTRIAL_CASING = omni("industrial_casing"),
 			HYDRAULIC_CASING = omni("hydraulic_casing");
 
+	public static final CTSpriteShiftEntry
+			 BLACK_BLUEPRINT_BLOCK = omniBlueprint("black"),
+			 WHITE_BLUEPRINT_BLOCK = omniBlueprint("white"),
+			 BLUE_BLUEPRINT_BLOCK = omni("blueprint_block"),
+			 LIGHT_BLUE_BLUEPRINT_BLOCK = omniBlueprint("light"),
+			 RED_BLUEPRINT_BLOCK = omniBlueprint("red"),
+			 GREEN_BLUEPRINT_BLOCK = omniBlueprint("green"),
+			 LIME_BLUEPRINT_BLOCK = omniBlueprint("lime"),
+			 PINK_BLUEPRINT_BLOCK = omniBlueprint("pink"),
+			 MAGENTA_BLUEPRINT_BLOCK = omniBlueprint("magenta"),
+			 YELLOW_BLUEPRINT_BLOCK = omniBlueprint("yellow"),
+			 GRAY_BLUEPRINT_BLOCK = omniBlueprint("gray"),
+			 LIGHT_GRAY_BLUEPRINT_BLOCK = omniBlueprint("light_gray"),
+			 BROWN_BLUEPRINT_BLOCK = omniBlueprint("brown"),
+			 CYAN_BLUEPRINT_BLOCK = omniBlueprint("cyan"),
+			 PURPLE_BLUEPRINT_BLOCK = omniBlueprint("purple"),
+			 ORANGE_BLUEPRINT_BLOCK = omniBlueprint("orange");
+
 	//public static final Map<DyeColor, SpriteShiftEntry> DYED_RUBBER_BELTS = new EnumMap<>(DyeColor.class),
 	//		DYED_OFFSET_RUBBER_BELTS = new EnumMap<>(DyeColor.class), DYED_DIAGONAL_RUBBER_BELTS = new EnumMap<>(DyeColor.class);
 
@@ -75,6 +93,10 @@ public class DesiresSpriteShifts {
 		return Couple.createWithContext(
 				medium -> CTSpriteShifter.getCT(AllCTTypes.RECTANGLE, DesiresCreate.asResource(prefixed + "_small"),
 						DesiresCreate.asResource(medium ? prefixed + "_medium" : prefixed + "_large")));
+	}
+
+	private static CTSpriteShiftEntry omniBlueprint(String name) {
+		return getCT(AllCTTypes.OMNIDIRECTIONAL, name + "_blueprint_block");
 	}
 
 	private static CTSpriteShiftEntry omni(String name) {

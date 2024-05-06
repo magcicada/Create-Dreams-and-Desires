@@ -1,19 +1,19 @@
 package uwu.lopyluna.create_dd.registry;
 
-
-import com.simibubi.create.content.kinetics.flywheel.FlywheelBlockEntity;
-import com.simibubi.create.content.kinetics.flywheel.FlywheelInstance;
+import com.simibubi.create.content.kinetics.transmission.SplitShaftInstance;
+import com.simibubi.create.content.kinetics.transmission.SplitShaftRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
-import uwu.lopyluna.create_dd.content.blocks.kinetics.HydraulicPress.HydraulicPressBlockEntity;
-import uwu.lopyluna.create_dd.content.blocks.kinetics.HydraulicPress.HydraulicPressInstance;
-import uwu.lopyluna.create_dd.content.blocks.kinetics.HydraulicPress.HydraulicPressRenderer;
-import uwu.lopyluna.create_dd.content.blocks.kinetics.IndustrialFanBlock.IndustrialFanBlockEntity;
-import uwu.lopyluna.create_dd.content.blocks.kinetics.IndustrialFanBlock.IndustrialFanInstance;
-import uwu.lopyluna.create_dd.content.blocks.kinetics.IndustrialFanBlock.IndustrialFanRemderer;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.hydraulic_press.HydraulicPressBlockEntity;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.hydraulic_press.HydraulicPressInstance;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.hydraulic_press.HydraulicPressRenderer;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.industrial_fan_block.IndustrialFanBlockEntity;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.industrial_fan_block.IndustrialFanInstance;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.industrial_fan_block.IndustrialFanRemderer;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankInstance;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankRenderer;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.*;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.transmission.InverseBoxBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileBlockEntity;
 
@@ -66,6 +66,12 @@ public class DesiresBlockEntityTypes {
 			.renderer(() -> PoweredFlywheelRenderer::new)
 			.register();
 
+	//public static final BlockEntityEntry<InverseBoxBlockEntity> INVERSE_BOX = REGISTRATE
+	//		.blockEntity("inverse_box", InverseBoxBlockEntity::new)
+	//		.instance(() -> SplitShaftInstance::new, false)
+	//		.validBlocks(DesiresBlocks.INVERSE_BOX)
+	//		.renderer(() -> SplitShaftRenderer::new)
+	//		.register();
 
 	public static void register() {}
 }

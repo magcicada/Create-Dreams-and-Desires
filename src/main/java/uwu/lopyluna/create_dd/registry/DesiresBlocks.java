@@ -18,13 +18,14 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.util.ForgeSoundType;
-import uwu.lopyluna.create_dd.content.blocks.kinetics.HydraulicPress.HydraulicPressBlock;
-import uwu.lopyluna.create_dd.content.blocks.kinetics.IndustrialFanBlock.IndustrialFanBlock;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.hydraulic_press.HydraulicPressBlock;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.industrial_fan_block.IndustrialFanBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankBlock;
 import uwu.lopyluna.create_dd.content.blocks.curiosities.FanSailBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngineBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngineGenerator;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.PoweredFlywheelBlock;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.transmission.InverseBoxBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegCTBehaviour;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegItem;
@@ -114,6 +115,16 @@ public class DesiresBlocks {
 			.transform(customItemModel())
 			.register();
 
+	//public static final BlockEntry<InverseBoxBlock> INVERSE_BOX = REGISTRATE.block("inverse_box", InverseBoxBlock::new)
+	//		.initialProperties(SharedProperties::stone)
+	//		.properties(p -> p.noOcclusion().color(MaterialColor.PODZOL))
+	//		.addLayer(() -> RenderType::cutoutMipped)
+	//		.transform(BlockStressDefaults.setNoImpact())
+	//		.transform(axeOrPickaxe())
+	//		.blockstate(BlockStateGen.axisBlockProvider(false))
+	//		.item()
+	//		.transform(customItemModel())
+	//		.register();
 
 	public static final BlockEntry<CogCrankBlock> COG_CRANK = REGISTRATE.block("cog_crank", CogCrankBlock::new)
 			.initialProperties(SharedProperties::wooden)

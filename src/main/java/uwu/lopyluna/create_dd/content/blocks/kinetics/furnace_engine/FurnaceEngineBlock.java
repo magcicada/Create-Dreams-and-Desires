@@ -1,7 +1,6 @@
 package uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine;
 
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
 import com.simibubi.create.content.kinetics.flywheel.FlywheelBlock;
