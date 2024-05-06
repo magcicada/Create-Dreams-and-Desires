@@ -29,6 +29,18 @@
     {"name": "create_dd:creatvedite/step3","volume": 0.9},
     {"name": "create_dd:creatvedite/step4","volume": 0.9}
   ]},
+  "rubber_break": {"subtitle": "subtitles.block.generic.break","sounds": [
+    {"name": "create_dd:rubber/break1","volume": 0.9},
+    {"name": "create_dd:rubber/break2","volume": 0.9},
+    {"name": "create_dd:rubber/break3","volume": 0.9},
+    {"name": "create_dd:rubber/break4","volume": 0.9}
+  ]},
+  "rubber_place": {"subtitle": "subtitles.block.generic.place","sounds": [
+    {"name": "create_dd:rubber/place1","volume": 0.9},
+    {"name": "create_dd:rubber/place2","volume": 0.9},
+    {"name": "create_dd:rubber/place3","volume": 0.9},
+    {"name": "create_dd:rubber/place4","volume": 0.9}
+  ]},
   "music_disc.waltz_of_the_flowers": {"sounds": [
     {"name": "create_dd:disc/waltz_of_the_flowers_by_tchaikovsk","volume": 0.9}
   ]}

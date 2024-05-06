@@ -12,7 +12,9 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
@@ -25,7 +27,6 @@ import uwu.lopyluna.create_dd.content.blocks.curiosities.FanSailBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngineBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngineGenerator;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.PoweredFlywheelBlock;
-import uwu.lopyluna.create_dd.content.blocks.kinetics.transmission.InverseBoxBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegCTBehaviour;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegItem;
@@ -37,6 +38,8 @@ import static com.simibubi.create.foundation.data.CreateRegistrate.connectedText
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.*;
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
+import static uwu.lopyluna.create_dd.registry.DesiresPaletteBlocks.rawRubberDecorTag;
+import static uwu.lopyluna.create_dd.registry.DesiresPaletteBlocks.rubberDecorTag;
 
 @SuppressWarnings({"unused", "removal", "all"})
 public class DesiresBlocks {
@@ -44,6 +47,32 @@ public class DesiresBlocks {
 	static {
 		REGISTRATE.creativeModeTab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB);
 	}
+
+	public static final BlockEntry<Block> RUBBER_BLOCK = REGISTRATE.block("rubber_block", Block::new)
+			.properties(p -> p.color(MaterialColor.TERRACOTTA_GRAY))
+			.properties(p -> p.sound(new ForgeSoundType(0.9f, .6f, () -> DesiresSoundEvents.RUBBER_BREAK.get(),
+					() -> SoundEvents.STEM_STEP, () -> DesiresSoundEvents.RUBBER_PLACE.get(),
+					() -> SoundEvents.STEM_HIT, () -> SoundEvents.STEM_FALL)))
+			.properties(p -> p.strength(0.5f,1.5f))
+			.lang("Block of Rubber")
+			.item()
+			.tag(rubberDecorTag)
+			.build()
+			.simpleItem()
+			.register();
+
+	public static final BlockEntry<Block> RAW_RUBBER_BLOCK = REGISTRATE.block("raw_rubber_block", Block::new)
+			.properties(p -> p.color(MaterialColor.TERRACOTTA_WHITE))
+			.properties(p -> p.sound(new ForgeSoundType(0.9f, .75f, () -> DesiresSoundEvents.RUBBER_BREAK.get(),
+					() -> SoundEvents.STEM_STEP, () -> DesiresSoundEvents.RUBBER_PLACE.get(),
+					() -> SoundEvents.STEM_HIT, () -> SoundEvents.STEM_FALL)))
+			.properties(p -> p.strength(0.5f,1.5f))
+			.lang("Block of Raw Rubber")
+			.item()
+			.tag(rawRubberDecorTag)
+			.build()
+			.simpleItem()
+			.register();
 
 	public static final BlockEntry<CasingBlock> CREATIVE_CASING = REGISTRATE.block("creative_casing", CasingBlock::new)
 			.transform(BuilderTransformers.casing(() -> DesiresSpriteShifts.CREATIVE_CASING))

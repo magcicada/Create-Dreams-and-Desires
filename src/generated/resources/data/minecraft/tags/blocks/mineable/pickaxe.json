@@ -1,16 +1,5 @@
 {
   "values": [
-    "create_dd:creative_casing",
-    "create_dd:overburden_casing",
-    "create_dd:hydraulic_casing",
-    "create_dd:industrial_casing",
-    "create_dd:industrial_fan",
-    "create_dd:hydraulic_press",
-    "create_dd:cog_crank",
-    "create_dd:item_stockpile",
-    "create_dd:fluid_keg",
-    "create_dd:furnace_engine",
-    "create_dd:powered_flywheel",
     "create_dd:black_asphalt_block",
     "create_dd:white_asphalt_block",
     "create_dd:blue_asphalt_block",
@@ -191,6 +180,17 @@
     "create_dd:small_dolomite_brick_slab",
     "create_dd:small_dolomite_brick_wall",
     "create_dd:layered_dolomite",
-    "create_dd:dolomite_pillar"
+    "create_dd:dolomite_pillar",
+    "create_dd:creative_casing",
+    "create_dd:overburden_casing",
+    "create_dd:hydraulic_casing",
+    "create_dd:industrial_casing",
+    "create_dd:industrial_fan",
+    "create_dd:hydraulic_press",
+    "create_dd:cog_crank",
+    "create_dd:item_stockpile",
+    "create_dd:fluid_keg",
+    "create_dd:furnace_engine",
+    "create_dd:powered_flywheel"
   ]
 }
