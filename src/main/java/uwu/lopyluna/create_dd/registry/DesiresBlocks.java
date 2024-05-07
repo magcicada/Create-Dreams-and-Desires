@@ -55,10 +55,10 @@ public class DesiresBlocks {
 					() -> SoundEvents.STEM_HIT, () -> SoundEvents.STEM_FALL)))
 			.properties(p -> p.strength(0.5f,1.5f))
 			.lang("Block of Rubber")
+			.simpleItem()
 			.item()
 			.tag(rubberDecorTag)
 			.build()
-			.simpleItem()
 			.register();
 
 	public static final BlockEntry<Block> RAW_RUBBER_BLOCK = REGISTRATE.block("raw_rubber_block", Block::new)
@@ -68,10 +68,10 @@ public class DesiresBlocks {
 					() -> SoundEvents.STEM_HIT, () -> SoundEvents.STEM_FALL)))
 			.properties(p -> p.strength(0.5f,1.5f))
 			.lang("Block of Raw Rubber")
+			.simpleItem()
 			.item()
 			.tag(rawRubberDecorTag)
 			.build()
-			.simpleItem()
 			.register();
 
 	public static final BlockEntry<CasingBlock> CREATIVE_CASING = REGISTRATE.block("creative_casing", CasingBlock::new)

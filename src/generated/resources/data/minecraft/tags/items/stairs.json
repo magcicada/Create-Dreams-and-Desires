@@ -1,5 +1,7 @@
 {
   "values": [
+    "create_dd:padded_rubber_stairs",
+    "create_dd:raw_padded_rubber_stairs",
     "create_dd:black_padded_rubber_stairs",
     "create_dd:white_padded_rubber_stairs",
     "create_dd:blue_padded_rubber_stairs",

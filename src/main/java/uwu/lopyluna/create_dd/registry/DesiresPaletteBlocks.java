@@ -1,6 +1,7 @@
 package uwu.lopyluna.create_dd.registry;
 
 import com.simibubi.create.foundation.data.SharedProperties;
+import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -9,7 +10,9 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -22,22 +25,28 @@ import static uwu.lopyluna.create_dd.registry.DesiresTags.optionalTag;
 import static uwu.lopyluna.create_dd.registry.helper.BlockTransformer.blueprintBlocks;
 import static uwu.lopyluna.create_dd.registry.helper.BlockTransformer.rubber_decor;
 
-@SuppressWarnings({"unused"})
+@SuppressWarnings({"unused", "deprecation"})
 public class DesiresPaletteBlocks {
 
 	static {
 		REGISTRATE.creativeModeTab(() -> DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB);
 	}
+
+	public static SoundType rubberSoundType = new ForgeSoundType(0.9f, .6f, () -> DesiresSoundEvents.RUBBER_BREAK.get(), () -> SoundEvents.STEM_STEP, () -> DesiresSoundEvents.RUBBER_PLACE.get(), () -> SoundEvents.STEM_HIT, () -> SoundEvents.STEM_FALL);
 	public static TagKey<Item> rubberDecorTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", "rubber_decor"));
 	public static TagKey<Item> rawRubberDecorTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", "raw_rubber_decor"));
 
+	public static TagKey<Block> stairsBlockTag = optionalTag(ForgeRegistries.BLOCKS, new ResourceLocation("minecraft", "stairs"));
+	public static TagKey<Item> stairsItemTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("minecraft", "stairs"));
+	public static TagKey<Block> slabsBlockTag = optionalTag(ForgeRegistries.BLOCKS, new ResourceLocation("minecraft", "slabs"));
+	public static TagKey<Item> slabsItemTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("minecraft", "slabs"));
+
 	public static final BlockEntry<Block> PADDED_RUBBER = REGISTRATE.block("padded_rubber", Block::new)
 			.properties(p -> p.color(MaterialColor.TERRACOTTA_GRAY))
-			.properties(p -> p.sound(new ForgeSoundType(0.9f, .6f, () -> DesiresSoundEvents.RUBBER_BREAK.get(),
-					() -> SoundEvents.STEM_STEP, () -> DesiresSoundEvents.RUBBER_PLACE.get(),
-					() -> SoundEvents.STEM_HIT, () -> SoundEvents.STEM_FALL)))
+			.properties(p -> p.sound(rubberSoundType))
 			.properties(p -> p.strength(0.5f,1.5f))
-			.recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 1)
+			.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rubberDecorTag), c, 1))
+			.recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 4)
 					.pattern("CC")
 					.pattern("CC")
 					.define('C', DesiresBlocks.RUBBER_BLOCK.get())
@@ -48,13 +57,54 @@ public class DesiresPaletteBlocks {
 			.build()
 			.register();
 
+	public static final BlockEntry<Block> PADDED_TILED_RUBBER =
+			REGISTRATE.block("padded_tiled_rubber", Block::new)
+					.properties(p -> p.color(MaterialColor.TERRACOTTA_GRAY)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
+					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rubberDecorTag), c, 1))
+					.item()
+					.tag(rubberDecorTag)
+					.build()
+					.register();
+
+	public static final BlockEntry<Block> PADDED_MOSAIC_RUBBER =
+			REGISTRATE.block("padded_mosaic_rubber", Block::new)
+					.properties(p -> p.color(MaterialColor.TERRACOTTA_GRAY)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
+					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rubberDecorTag), c, 1))
+					.item()
+					.tag(rubberDecorTag)
+					.build()
+					.register();
+
+	public static final BlockEntry<SlabBlock> PADDED_RUBBER_SLAB =
+			REGISTRATE.block("padded_rubber_slab", SlabBlock::new)
+					.properties(p -> p.color(MaterialColor.TERRACOTTA_GRAY)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
+					.tag(slabsBlockTag)
+					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rubberDecorTag), c, 2))
+					.blockstate((c, p) -> p.slabBlock(c.get(), DesiresCreate.asResource("block/padded_rubber"),
+							DesiresCreate.asResource("block/padded_rubber_slab"),
+							DesiresCreate.asResource("block/padded_rubber"),
+							DesiresCreate.asResource("block/padded_rubber")))
+					.item()
+					.tag(slabsItemTag)
+					.build()
+					.register();
+
+	public static final BlockEntry<StairBlock> PADDED_RUBBER_STAIRS =
+			REGISTRATE.block("padded_rubber_stairs", p -> new StairBlock(DesiresPaletteBlocks.PADDED_RUBBER.getDefaultState(), p))
+					.properties(p -> p.color(MaterialColor.TERRACOTTA_GRAY)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
+					.tag(stairsBlockTag)
+					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rubberDecorTag), c, 1))
+					.blockstate((c, p) -> p.stairsBlock(c.get(), DesiresCreate.asResource("block/padded_tiled_rubber")))
+					.item()
+					.tag(rubberDecorTag, stairsItemTag)
+					.build()
+					.register();
+
 	public static final BlockEntry<Block> RAW_PADDED_RUBBER = REGISTRATE.block("raw_padded_rubber", Block::new)
 			.properties(p -> p.color(MaterialColor.TERRACOTTA_WHITE))
-			.properties(p -> p.sound(new ForgeSoundType(0.9f, .75f, () -> DesiresSoundEvents.RUBBER_BREAK.get(),
-					() -> SoundEvents.STEM_STEP, () -> DesiresSoundEvents.RUBBER_PLACE.get(),
-					() -> SoundEvents.STEM_HIT, () -> SoundEvents.STEM_FALL)))
+			.properties(p -> p.sound(rubberSoundType))
 			.properties(p -> p.strength(0.5f,1.5f))
-			.recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 1)
+			.recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 4)
 					.pattern("CC")
 					.pattern("CC")
 					.define('C', DesiresBlocks.RAW_RUBBER_BLOCK.get())
@@ -64,6 +114,49 @@ public class DesiresPaletteBlocks {
 			.tag(rawRubberDecorTag)
 			.build()
 			.register();
+
+	public static final BlockEntry<Block> RAW_PADDED_TILED_RUBBER =
+			REGISTRATE.block("raw_padded_tiled_rubber", Block::new)
+					.properties(p -> p.color(MaterialColor.TERRACOTTA_WHITE)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
+					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rawRubberDecorTag), c, 1))
+					.item()
+					.tag(rawRubberDecorTag)
+					.build()
+					.register();
+	
+	public static final BlockEntry<Block> RAW_PADDED_MOSAIC_RUBBER =
+			REGISTRATE.block("raw_padded_mosaic_rubber", Block::new)
+					.properties(p -> p.color(MaterialColor.TERRACOTTA_WHITE)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
+					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rawRubberDecorTag), c, 1))
+					.item()
+					.tag(rawRubberDecorTag)
+					.build()
+					.register();
+	
+	public static final BlockEntry<SlabBlock> RAW_PADDED_RUBBER_SLAB =
+			REGISTRATE.block("raw_padded_rubber_slab", SlabBlock::new)
+					.properties(p -> p.color(MaterialColor.TERRACOTTA_WHITE)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
+					.tag(slabsBlockTag)
+					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rawRubberDecorTag), c, 2))
+					.blockstate((c, p) -> p.slabBlock(c.get(), DesiresCreate.asResource("block/" + "raw_padded_rubber"),
+							DesiresCreate.asResource("block/" + "raw_padded_rubber_slab"),
+							DesiresCreate.asResource("block/" + "raw_padded_rubber"),
+							DesiresCreate.asResource("block/" + "raw_padded_rubber")))
+					.item()
+					.tag(slabsItemTag)
+					.build()
+					.register();
+	
+	public static final BlockEntry<StairBlock> RAW_PADDED_RUBBER_STAIRS =
+			REGISTRATE.block("raw_padded_rubber_stairs", p -> new StairBlock(DesiresPaletteBlocks.PADDED_RUBBER.getDefaultState(), p))
+					.properties(p -> p.color(MaterialColor.TERRACOTTA_WHITE)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
+					.tag(stairsBlockTag)
+					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rawRubberDecorTag), c, 1))
+					.blockstate((c, p) -> p.stairsBlock(c.get(), DesiresCreate.asResource("block/" + "raw_padded_tiled_rubber")))
+					.item()
+					.tag(rawRubberDecorTag, stairsItemTag)
+					.build()
+					.register();
 
 	public static final BlockEntry<Block>
 			BLACK_RUBBER_BLOCKS = rubber_decor("black", MaterialColor.COLOR_BLACK, Items.BLACK_DYE),
