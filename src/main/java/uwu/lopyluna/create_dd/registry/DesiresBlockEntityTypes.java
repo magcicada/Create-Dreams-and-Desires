@@ -66,12 +66,12 @@ public class DesiresBlockEntityTypes {
 			.renderer(() -> PoweredFlywheelRenderer::new)
 			.register();
 
-	//public static final BlockEntityEntry<InverseBoxBlockEntity> INVERSE_BOX = REGISTRATE
-	//		.blockEntity("inverse_box", InverseBoxBlockEntity::new)
-	//		.instance(() -> SplitShaftInstance::new, false)
-	//		.validBlocks(DesiresBlocks.INVERSE_BOX)
-	//		.renderer(() -> SplitShaftRenderer::new)
-	//		.register();
+	public static final BlockEntityEntry<InverseBoxBlockEntity> INVERSE_BOX = REGISTRATE
+			.blockEntity("inverse_box", InverseBoxBlockEntity::new)
+			.instance(() -> SplitShaftInstance::new, false)
+			.validBlocks(DesiresBlocks.INVERSE_BOX)
+			.renderer(() -> SplitShaftRenderer::new)
+			.register();
 
 	public static void register() {}
 }

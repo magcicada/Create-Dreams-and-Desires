@@ -4,7 +4,7 @@ import com.simibubi.create.AllItems;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class BaseCreativeModeTab extends CreateCreativeModeTab {
+public class BaseCreativeModeTab extends DesireCreativeModeTab {
 	public BaseCreativeModeTab() {
 		super("base");
 	}

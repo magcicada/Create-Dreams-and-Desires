@@ -26,8 +26,7 @@ public class InverseBoxBlock extends AbstractEncasedShaftBlock implements IBE<Sp
 
     @Override
     public BlockEntityType<? extends SplitShaftBlockEntity> getBlockEntityType() {
-        return null;
-        //return DesiresBlockEntityTypes.INVERSE_BOX.get();
+        return DesiresBlockEntityTypes.INVERSE_BOX.get();
     }
 
     @SuppressWarnings({"deprecation"})

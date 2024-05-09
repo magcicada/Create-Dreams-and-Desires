@@ -20,6 +20,8 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.util.ForgeSoundType;
+import uwu.lopyluna.create_dd.content.blocks.curiosities.BoreBlock;
+import uwu.lopyluna.create_dd.content.blocks.curiosities.BoreBlockMovementBehaviour;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.hydraulic_press.HydraulicPressBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.industrial_fan_block.IndustrialFanBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankBlock;
@@ -27,6 +29,7 @@ import uwu.lopyluna.create_dd.content.blocks.curiosities.FanSailBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngineBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngineGenerator;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.PoweredFlywheelBlock;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.transmission.InverseBoxBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegCTBehaviour;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegItem;
@@ -34,6 +37,7 @@ import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockp
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileCTBehaviour;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileItem;
 
+import static com.simibubi.create.AllMovementBehaviours.movementBehaviour;
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.*;
@@ -44,9 +48,18 @@ import static uwu.lopyluna.create_dd.registry.DesiresPaletteBlocks.rubberDecorTa
 @SuppressWarnings({"unused", "removal", "all"})
 public class DesiresBlocks {
 
-	static {
-		REGISTRATE.creativeModeTab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB);
-	}
+	public static final BlockEntry<Block> RAW_RUBBER_BLOCK = REGISTRATE.block("raw_rubber_block", Block::new)
+			.properties(p -> p.color(MaterialColor.TERRACOTTA_WHITE))
+			.properties(p -> p.sound(new ForgeSoundType(0.9f, .75f, () -> DesiresSoundEvents.RUBBER_BREAK.get(),
+					() -> SoundEvents.STEM_STEP, () -> DesiresSoundEvents.RUBBER_PLACE.get(),
+					() -> SoundEvents.STEM_HIT, () -> SoundEvents.STEM_FALL)))
+			.properties(p -> p.strength(0.5f,1.5f))
+			.lang("Block of Raw Rubber")
+			.item()
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.tag(rawRubberDecorTag)
+			.build()
+			.register();
 
 	public static final BlockEntry<Block> RUBBER_BLOCK = REGISTRATE.block("rubber_block", Block::new)
 			.properties(p -> p.color(MaterialColor.TERRACOTTA_GRAY))
@@ -55,22 +68,9 @@ public class DesiresBlocks {
 					() -> SoundEvents.STEM_HIT, () -> SoundEvents.STEM_FALL)))
 			.properties(p -> p.strength(0.5f,1.5f))
 			.lang("Block of Rubber")
-			.simpleItem()
 			.item()
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.tag(rubberDecorTag)
-			.build()
-			.register();
-
-	public static final BlockEntry<Block> RAW_RUBBER_BLOCK = REGISTRATE.block("raw_rubber_block", Block::new)
-			.properties(p -> p.color(MaterialColor.TERRACOTTA_WHITE))
-			.properties(p -> p.sound(new ForgeSoundType(0.9f, .75f, () -> DesiresSoundEvents.RUBBER_BREAK.get(),
-					() -> SoundEvents.STEM_STEP, () -> DesiresSoundEvents.RUBBER_PLACE.get(),
-					() -> SoundEvents.STEM_HIT, () -> SoundEvents.STEM_FALL)))
-			.properties(p -> p.strength(0.5f,1.5f))
-			.lang("Block of Raw Rubber")
-			.simpleItem()
-			.item()
-			.tag(rawRubberDecorTag)
 			.build()
 			.register();
 
@@ -84,8 +84,8 @@ public class DesiresBlocks {
 			.transform(pickaxeOnly())
 			.properties(p -> p.lightLevel($ -> 5))
 			.lang("Creative Casing")
-			.simpleItem()
 			.item()
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.properties(p -> p.rarity(Rarity.EPIC))
 			.build()
 			.register();
@@ -97,6 +97,9 @@ public class DesiresBlocks {
 					.sound(SoundType.NETHERITE_BLOCK))
 			.transform(pickaxeOnly())
 			.lang("Overburden Casing")
+			.item()
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.build()
 			.register();
 
 	public static final BlockEntry<CasingBlock> HYDRAULIC_CASING = REGISTRATE.block("hydraulic_casing", CasingBlock::new)
@@ -106,6 +109,9 @@ public class DesiresBlocks {
 					.sound(SoundType.COPPER))
 			.transform(pickaxeOnly())
 			.lang("Hydraulic Casing")
+			.item()
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.build()
 			.register();
 
 	public static final BlockEntry<CasingBlock> INDUSTRIAL_CASING = REGISTRATE.block("industrial_casing", CasingBlock::new)
@@ -115,6 +121,9 @@ public class DesiresBlocks {
 					.sound(SoundType.NETHERITE_BLOCK))
 			.transform(pickaxeOnly())
 			.lang("Industrial Casing")
+			.item()
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.build()
 			.register();
 
 	public static final BlockEntry<IndustrialFanBlock> INDUSTRIAL_FAN = REGISTRATE.block("industrial_fan", IndustrialFanBlock::new)
@@ -128,9 +137,10 @@ public class DesiresBlocks {
 			.transform(pickaxeOnly())
 			.transform(BlockStressDefaults.setImpact(4.0))
 			.transform(BlockStressDefaults.setCapacity(16))
-			.item()
-			.transform(customItemModel())
 			.lang("Industrial Fan")
+			.item()
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.transform(customItemModel())
 			.register();
 
 	public static final BlockEntry<HydraulicPressBlock> HYDRAULIC_PRESS = REGISTRATE.block("hydraulic_press", HydraulicPressBlock::new)
@@ -141,19 +151,34 @@ public class DesiresBlocks {
 			.blockstate(BlockStateGen.horizontalBlockProvider(true))
 			.transform(BlockStressDefaults.setImpact(8.0))
 			.item(AssemblyOperatorBlockItem::new)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.transform(customItemModel())
 			.register();
 
-	//public static final BlockEntry<InverseBoxBlock> INVERSE_BOX = REGISTRATE.block("inverse_box", InverseBoxBlock::new)
-	//		.initialProperties(SharedProperties::stone)
-	//		.properties(p -> p.noOcclusion().color(MaterialColor.PODZOL))
-	//		.addLayer(() -> RenderType::cutoutMipped)
-	//		.transform(BlockStressDefaults.setNoImpact())
-	//		.transform(axeOrPickaxe())
-	//		.blockstate(BlockStateGen.axisBlockProvider(false))
-	//		.item()
-	//		.transform(customItemModel())
-	//		.register();
+	public static final BlockEntry<BoreBlock> BORE_BLOCK = REGISTRATE.block("bore_block", BoreBlock::new)
+			.initialProperties(SharedProperties::stone)
+			.properties(p -> p.color(MaterialColor.STONE))
+			.properties(p -> p.sound(new ForgeSoundType(0.9f, 1.25f, () -> SoundEvents.NETHERITE_BLOCK_BREAK.get(),
+					() -> SoundEvents.NETHERITE_BLOCK_STEP, () -> SoundEvents.NETHERITE_BLOCK_PLACE.get(),
+					() -> SoundEvents.NETHERITE_BLOCK_HIT, () -> SoundEvents.NETHERITE_BLOCK_FALL)))
+			.onRegister(movementBehaviour(new BoreBlockMovementBehaviour()))
+			.transform(pickaxeOnly())
+			.item()
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.build()
+			.register();
+
+	public static final BlockEntry<InverseBoxBlock> INVERSE_BOX = REGISTRATE.block("inverse_box", InverseBoxBlock::new)
+			.initialProperties(SharedProperties::stone)
+			.properties(p -> p.noOcclusion().color(MaterialColor.PODZOL))
+			.addLayer(() -> RenderType::cutoutMipped)
+			.transform(BlockStressDefaults.setNoImpact())
+			.transform(axeOrPickaxe())
+			.blockstate(BlockStateGen.axisBlockProvider(true))
+			.item()
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.transform(customItemModel())
+			.register();
 
 	public static final BlockEntry<CogCrankBlock> COG_CRANK = REGISTRATE.block("cog_crank", CogCrankBlock::new)
 			.initialProperties(SharedProperties::wooden)
@@ -170,6 +195,7 @@ public class DesiresBlocks {
 					.save(prov))
 			.onRegister(ItemUseOverrides::addBlock)
 			.item()
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.transform(customItemModel())
 			.register();
 
@@ -185,6 +211,7 @@ public class DesiresBlocks {
 							.build()))
 			.onRegister(connectedTextures(ItemStockpileCTBehaviour::new))
 			.item(ItemStockpileItem::new)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.build()
 			.register();
 
@@ -199,6 +226,7 @@ public class DesiresBlocks {
 							.build()))
 			.onRegister(connectedTextures(FluidKegCTBehaviour::new))
 			.item(FluidKegItem::new)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.build()
 			.register();
 
@@ -215,7 +243,9 @@ public class DesiresBlocks {
 					.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
 					.tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SPLASHING.tag)
 					.lang("Splashing Catalyst Sail")
-					.simpleItem()
+					.item()
+					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+					.build()
 					.register();
 
 	public static final BlockEntry<FanSailBlock> HAUNTING_SAIL =
@@ -231,7 +261,9 @@ public class DesiresBlocks {
 					.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
 					.tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_HAUNTING.tag)
 					.lang("Haunting Catalyst Sail")
-					.simpleItem()
+					.item()
+					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+					.build()
 					.register();
 
 	public static final BlockEntry<FanSailBlock> SMOKING_SAIL =
@@ -247,7 +279,9 @@ public class DesiresBlocks {
 					.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
 					.tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SMOKING.tag)
 					.lang("Smoking Catalyst Sail")
-					.simpleItem()
+					.item()
+					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+					.build()
 					.register();
 
 	public static final BlockEntry<FanSailBlock> BLASTING_SAIL =
@@ -263,7 +297,9 @@ public class DesiresBlocks {
 					.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
 					.tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_BLASTING.tag)
 					.lang("Blasting Catalyst Sail")
-					.simpleItem()
+					.item()
+					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+					.build()
 					.register();
 
 	public static final BlockEntry<FanSailBlock> SEETHING_SAIL =
@@ -280,7 +316,9 @@ public class DesiresBlocks {
 					.tag(DesiresTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SEETHING.tag)
 					.tag(DesiresTags.AllBlockTags.INDUSTRIAL_FAN_HEATER.tag)
 					.lang("Seething Catalyst Sail")
-					.simpleItem()
+					.item()
+					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+					.build()
 					.register();
 
 	public static final BlockEntry<FanSailBlock> FREEZING_SAIL =
@@ -295,7 +333,9 @@ public class DesiresBlocks {
 					.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
 					.tag(DesiresTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_FREEZING.tag)
 					.lang("Freezing Catalyst Sail")
-					.simpleItem()
+					.item()
+					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+					.build()
 					.register();
 
 	public static final BlockEntry<FanSailBlock> SANDING_SAIL =
@@ -310,7 +350,9 @@ public class DesiresBlocks {
 					.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
 					.tag(DesiresTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SANDING.tag)
 					.lang("Sanding Catalyst Sail")
-					.simpleItem()
+					.item()
+					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+					.build()
 					.register();
 
 	public static final BlockEntry<FurnaceEngineBlock> FURNACE_ENGINE =
@@ -325,6 +367,7 @@ public class DesiresBlocks {
 					.transform(BlockStressDefaults.setCapacity(128.0))
 					.transform(BlockStressDefaults.setGeneratorSpeed(FurnaceEngineBlock::getSpeedRange))
 					.item()
+					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 					.transform(ModelGen.customItemModel())
 					.register();
 

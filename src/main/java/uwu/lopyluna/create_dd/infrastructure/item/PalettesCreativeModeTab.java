@@ -5,7 +5,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class PalettesCreativeModeTab extends CreateCreativeModeTab {
+public class PalettesCreativeModeTab extends DesireCreativeModeTab {
 	public PalettesCreativeModeTab() {
 		super("palettes");
 	}

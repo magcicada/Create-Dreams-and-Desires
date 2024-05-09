@@ -8,8 +8,11 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.DesiresCreate;
@@ -30,10 +33,58 @@ public class DesiresItems {
 		REGISTRATE.creativeModeTab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB);
 	}
 
-	public static final ItemEntry<Item> BURY_BLEND = REGISTRATE.item("lapis_alloy", Item::new)
+	public static final ItemEntry<Item> RAW_RUBBER = REGISTRATE.item("raw_rubber", Item::new)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/generated")).texture("layer0",
-					new ResourceLocation(DesiresCreate.MOD_ID,"item/bury_blend")))
+					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
+			.tag(forgeItemTag("raw_rubbers"))
+			.recipe((c, p) -> {
+				Item output = DesiresBlocks.RAW_RUBBER_BLOCK.get().asItem();
+				ShapedRecipeBuilder.shaped(output, 1)
+						.pattern("CCC")
+						.pattern("CCC")
+						.pattern("CCC")
+						.define('C', c.get())
+						.unlockedBy("has_" + getItemName(output), has(output))
+						.save(p, DesiresCreate.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
+				ShapelessRecipeBuilder.shapeless(c.get(), 9)
+						.requires(output)
+						.unlockedBy("has_" + c.getName(), has(c.get()))
+						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
+			})
+			.lang("Raw Rubber")
+			.register();
+
+	public static final ItemEntry<Item> RUBBER = REGISTRATE.item("rubber", Item::new)
+			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
+					new ResourceLocation("item/generated")).texture("layer0",
+					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
+			.tag(forgeItemTag("rubbers"), forgeItemTag("crude_rubbers"))
+			.recipe((c, p) -> {
+				Item output = DesiresBlocks.RUBBER_BLOCK.get().asItem();
+				ShapedRecipeBuilder.shaped(output, 1)
+						.pattern("CCC")
+						.pattern("CCC")
+						.pattern("CCC")
+						.define('C', c.get())
+						.unlockedBy("has_" + getItemName(output), has(output))
+						.save(p, DesiresCreate.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
+				ShapelessRecipeBuilder.shapeless(c.get(), 9)
+						.requires(output)
+						.unlockedBy("has_" + c.getName(), has(c.get()))
+						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
+
+				SimpleCookingRecipeBuilder.cooking(Ingredient.of(RAW_RUBBER.get()), c.get(), 2, 600, RecipeSerializer.SMOKING_RECIPE)
+						.unlockedBy("has_" + getItemName(RAW_RUBBER.get()), has(RAW_RUBBER.get()))
+						.save(p, DesiresCreate.asResource("smoking/" + c.getId().getPath()));
+			})
+			.lang("Rubber")
+			.register();
+
+	public static final ItemEntry<Item> BURY_BLEND = REGISTRATE.item("bury_blend", Item::new)
+			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
+					new ResourceLocation("item/generated")).texture("layer0",
+					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
 			.tag(forgeItemTag("ingots/bury_blend"), forgeItemTag("ingots"), forgeItemTag("bury_blends"))
 			.recipe((c, p) -> ShapelessRecipeBuilder.shapeless(c.get(), 2)
 					.requires(Items.LAPIS_LAZULI)

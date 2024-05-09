@@ -14,8 +14,8 @@ import uwu.lopyluna.create_dd.DesiresCreate;
 
 import java.util.Collection;
 
-public abstract class CreateCreativeModeTab extends CreativeModeTab {
-	public CreateCreativeModeTab(String id) {
+public abstract class DesireCreativeModeTab extends CreativeModeTab {
+	public DesireCreativeModeTab(String id) {
 		super(DesiresCreate.MOD_ID + "." + id);
 	}
 

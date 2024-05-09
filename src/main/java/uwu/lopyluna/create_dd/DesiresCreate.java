@@ -23,6 +23,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngineBlock;
 import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
 import uwu.lopyluna.create_dd.infrastructure.data.DesiresDatagen;
 import uwu.lopyluna.create_dd.registry.*;
@@ -46,7 +47,7 @@ public class DesiresCreate
     public static KineticStats create(Item item) {
         if (item instanceof BlockItem blockItem) {
             Block block = blockItem.getBlock();
-            if (block instanceof IRotate) {
+            if (block instanceof IRotate || block instanceof FurnaceEngineBlock) {
                 return new KineticStats(block);
             }
         }
@@ -71,6 +72,7 @@ public class DesiresCreate
 
         DesiresSoundEvents.register(modEventBus);
         DesiresTags.init();
+        DesiresClassicItems.register();
         DesiresCreativeModeTabs.init();
         DesiresBlocks.register();
         DesiresItems.register();

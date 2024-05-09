@@ -17,6 +17,7 @@
   "block.create_dd.blue_padded_rubber_stairs": "Blue Padded Rubber Stairs",
   "block.create_dd.blue_padded_tiled_rubber": "Blue Padded Tiled Rubber",
   "block.create_dd.blueprint_block": "Blueprint Block",
+  "block.create_dd.bore_block": "Bore Block",
   "block.create_dd.brown_asphalt_block": "Brown Asphalt Block",
   "block.create_dd.brown_blueprint_block": "Brown Blueprint Block",
   "block.create_dd.brown_padded_mosaic_rubber": "Brown Padded Mosaic Rubber",
@@ -131,6 +132,7 @@
   "block.create_dd.hydraulic_press": "Hydraulic Press",
   "block.create_dd.industrial_casing": "Industrial Casing",
   "block.create_dd.industrial_fan": "Industrial Fan",
+  "block.create_dd.inverse_box": "Inverse Box",
   "block.create_dd.item_stockpile": "Item Stockpile",
   "block.create_dd.layered_amethyst_block": "Layered Amethyst Block",
   "block.create_dd.layered_basalt": "Layered Basalt",
@@ -308,6 +310,7 @@
   "block.create_dd.yellow_padded_rubber_stairs": "Yellow Padded Rubber Stairs",
   "block.create_dd.yellow_padded_tiled_rubber": "Yellow Padded Tiled Rubber",
   "fluid.create_dd.sap": "Sap",
+  "item.create_dd.bury_blend": "Bury Blend",
   "item.create_dd.coal_piece": "Coal Piece",
   "item.create_dd.deforester_saw": "Deforester Saw",
   "item.create_dd.diamond_shard": "Diamond Shard",
@@ -317,7 +320,12 @@
   "item.create_dd.gilded_rose_pickaxe": "Gilded Rose Pickaxe",
   "item.create_dd.gilded_rose_shovel": "Gilded Rose Shovel",
   "item.create_dd.gilded_rose_sword": "Gilded Rose Sword",
-  "item.create_dd.lapis_alloy": "Bury Blend",
+  "item.create_dd.lapis_alloy": "NA | INVALID ITEM",
   "item.create_dd.music_disc_waltz_of_the_flowers": "Music Disc",
-  "item.create_dd.sap_bucket": "Sap Bucket"
+  "item.create_dd.raw_rubber": "Raw Rubber",
+  "item.create_dd.reversed_gearshift": "NA | INVALID ITEM",
+  "item.create_dd.rubber": "Rubber",
+  "item.create_dd.sap_bucket": "Sap Bucket",
+  "itemGroup.create_dd.base": "Create: Dreams n' Desires",
+  "itemGroup.create_dd.palettes": "Dreams n' Desires Building Blocks"
 }

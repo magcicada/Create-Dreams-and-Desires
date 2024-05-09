@@ -2,6 +2,7 @@ package uwu.lopyluna.create_dd.infrastructure.data;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.simibubi.create.Create;
 import com.simibubi.create.foundation.utility.FilesHelper;
 import com.tterrag.registrate.providers.ProviderType;
 import net.minecraft.data.DataGenerator;
@@ -11,7 +12,7 @@ import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.infrastructure.data.recipe.DesireProcessingRecipeGen;
 import uwu.lopyluna.create_dd.infrastructure.ponder.DesirePonderTags;
 import uwu.lopyluna.create_dd.infrastructure.ponder.DesiresPonderIndex;
-import uwu.lopyluna.create_dd.registry.DesiresSoundEvents;
+import uwu.lopyluna.create_dd.registry.DesiresLangPartial;
 
 import java.util.Map.Entry;
 import java.util.function.BiConsumer;
@@ -50,6 +51,7 @@ public class DesiresDatagen {
 //			provideDefaultLang("tooltips", langConsumer);
 //			AllAdvancements.provideLang(langConsumer);
 //			DesiresSoundEvents.provideLang(langConsumer);
+			providePartialLang(langConsumer);
 			providePonderLang(langConsumer);
 		});
 	}
@@ -66,6 +68,9 @@ public class DesiresDatagen {
 			String value = entry.getValue().getAsString();
 			consumer.accept(key, value);
 		}
+	}
+	private static void providePartialLang(BiConsumer<String, String> consumer) {
+		DesiresLangPartial.provideLang(consumer);
 	}
 
 	private static void providePonderLang(BiConsumer<String, String> consumer) {

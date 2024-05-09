@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "cookingtime": 600,
+  "experience": 2.0,
+  "ingredient": {
+    "item": "create_dd:raw_rubber"
+  },
+  "result": "create_dd:rubber"
+}

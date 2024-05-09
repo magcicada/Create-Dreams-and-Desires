@@ -17,6 +17,7 @@
   "block.create_dd.blue_padded_rubber_stairs": "sɹıɐʇS ɹǝqqnᴚ pǝppɐԀ ǝnןᗺ",
   "block.create_dd.blue_padded_tiled_rubber": "ɹǝqqnᴚ pǝןı⟘ pǝppɐԀ ǝnןᗺ",
   "block.create_dd.blueprint_block": "ʞɔoןᗺ ʇuıɹdǝnןᗺ",
+  "block.create_dd.bore_block": "ʞɔoןᗺ ǝɹoᗺ",
   "block.create_dd.brown_asphalt_block": "ʞɔoןᗺ ʇןɐɥdsⱯ uʍoɹᗺ",
   "block.create_dd.brown_blueprint_block": "ʞɔoןᗺ ʇuıɹdǝnןᗺ uʍoɹᗺ",
   "block.create_dd.brown_padded_mosaic_rubber": "ɹǝqqnᴚ ɔıɐsoW pǝppɐԀ uʍoɹᗺ",
@@ -131,6 +132,7 @@
   "block.create_dd.hydraulic_press": "ssǝɹԀ ɔıןnɐɹpʎH",
   "block.create_dd.industrial_casing": "buısɐƆ ןɐıɹʇsnpuI",
   "block.create_dd.industrial_fan": "uɐℲ ןɐıɹʇsnpuI",
+  "block.create_dd.inverse_box": "xoᗺ ǝsɹǝʌuI",
   "block.create_dd.item_stockpile": "ǝןıdʞɔoʇS ɯǝʇI",
   "block.create_dd.layered_amethyst_block": "ʞɔoןᗺ ʇsʎɥʇǝɯⱯ pǝɹǝʎɐꞀ",
   "block.create_dd.layered_basalt": "ʇןɐsɐᗺ pǝɹǝʎɐꞀ",
@@ -308,6 +310,7 @@
   "block.create_dd.yellow_padded_rubber_stairs": "sɹıɐʇS ɹǝqqnᴚ pǝppɐԀ ʍoןןǝʎ",
   "block.create_dd.yellow_padded_tiled_rubber": "ɹǝqqnᴚ pǝןı⟘ pǝppɐԀ ʍoןןǝʎ",
   "fluid.create_dd.sap": "dɐS",
+  "item.create_dd.bury_blend": "puǝןᗺ ʎɹnᗺ",
   "item.create_dd.coal_piece": "ǝɔǝıԀ ןɐoƆ",
   "item.create_dd.deforester_saw": "ʍɐS ɹǝʇsǝɹoɟǝᗡ",
   "item.create_dd.diamond_shard": "pɹɐɥS puoɯɐıᗡ",
@@ -317,7 +320,12 @@
   "item.create_dd.gilded_rose_pickaxe": "ǝxɐʞɔıԀ ǝsoᴚ pǝpןı⅁",
   "item.create_dd.gilded_rose_shovel": "ןǝʌoɥS ǝsoᴚ pǝpןı⅁",
   "item.create_dd.gilded_rose_sword": "pɹoʍS ǝsoᴚ pǝpןı⅁",
-  "item.create_dd.lapis_alloy": "puǝןᗺ ʎɹnᗺ",
+  "item.create_dd.lapis_alloy": "WƎ⟘I ᗡIꞀⱯΛNI | ⱯN",
   "item.create_dd.music_disc_waltz_of_the_flowers": "ɔsıᗡ ɔısnW",
-  "item.create_dd.sap_bucket": "ʇǝʞɔnᗺ dɐS"
+  "item.create_dd.raw_rubber": "ɹǝqqnᴚ ʍɐᴚ",
+  "item.create_dd.reversed_gearshift": "WƎ⟘I ᗡIꞀⱯΛNI | ⱯN",
+  "item.create_dd.rubber": "ɹǝqqnᴚ",
+  "item.create_dd.sap_bucket": "ʇǝʞɔnᗺ dɐS",
+  "itemGroup.create_dd.base": "sǝɹısǝᗡ ,u sɯɐǝɹᗡ :ǝʇɐǝɹƆ",
+  "itemGroup.create_dd.palettes": "sʞɔoןᗺ buıpןınᗺ sǝɹısǝᗡ ,u sɯɐǝɹᗡ"
 }
