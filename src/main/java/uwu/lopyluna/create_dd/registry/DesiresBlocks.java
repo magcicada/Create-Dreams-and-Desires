@@ -2,11 +2,16 @@ package uwu.lopyluna.create_dd.registry;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
+import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
+import com.simibubi.create.content.kinetics.motor.CreativeMotorBlock;
+import com.simibubi.create.content.kinetics.motor.CreativeMotorGenerator;
 import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
 import com.simibubi.create.foundation.block.ItemUseOverrides;
 import com.simibubi.create.foundation.data.*;
+import com.simibubi.create.foundation.utility.Couple;
+import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
@@ -29,6 +34,7 @@ import uwu.lopyluna.create_dd.content.blocks.curiosities.FanSailBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngineBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngineGenerator;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.PoweredFlywheelBlock;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.kinetic_motor.KineticMotorBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.transmission.InverseBoxBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegCTBehaviour;
@@ -379,6 +385,20 @@ public class DesiresBlocks {
 					.blockstate(BlockStateGen.axisBlockProvider(false))
 					.loot((lt, block) -> lt.dropOther(block, AllBlocks.FLYWHEEL.get()))
 					.register();
+
+	public static final BlockEntry<KineticMotorBlock> KINETIC_MOTOR = REGISTRATE
+			.block("kinetic_motor", KineticMotorBlock::new)
+			.initialProperties(SharedProperties::stone)
+			.properties(p -> p.color(MaterialColor.COLOR_GRAY))
+			.tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+			.transform(pickaxeOnly())
+			.blockstate(new CreativeMotorGenerator()::generate)
+			.transform(BlockStressDefaults.setCapacity(48))
+			.transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 32)))
+			.item()
+			.properties(p -> p.rarity(Rarity.EPIC))
+			.transform(customItemModel())
+			.register();
 
 
 

@@ -11,6 +11,7 @@
     "MixinBlock",
     "MixinBlockMovementChecks",
     "MixinContraption",
+    "MixinKineticNetwork",
     "MixinMountedStorage",
     "MixinRotatedPillarKineticBlock"
   ],
