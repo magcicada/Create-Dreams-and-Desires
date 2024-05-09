@@ -205,6 +205,45 @@ public class DesiresBlocks {
 			.transform(customItemModel())
 			.register();
 
+	public static final BlockEntry<FurnaceEngineBlock> FURNACE_ENGINE =
+			REGISTRATE.block("furnace_engine", FurnaceEngineBlock::new)
+					.initialProperties(SharedProperties::softMetal)
+					.properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN)
+							.sound(SoundType.NETHERITE_BLOCK))
+					.properties(BlockBehaviour.Properties::noOcclusion)
+					.transform(pickaxeOnly())
+					.tag(AllTags.AllBlockTags.BRITTLE.tag)
+					.blockstate(new FurnaceEngineGenerator()::generate)
+					.transform(BlockStressDefaults.setCapacity(256.0))
+					.transform(BlockStressDefaults.setGeneratorSpeed(FurnaceEngineBlock::getSpeedRange))
+					.item()
+					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+					.transform(ModelGen.customItemModel())
+					.register();
+
+	public static final BlockEntry<PoweredFlywheelBlock> POWERED_FLYWHEEL =
+			REGISTRATE.block("powered_flywheel", PoweredFlywheelBlock::new)
+					.initialProperties(SharedProperties::softMetal)
+					.properties(p -> p.color(MaterialColor.METAL))
+					.transform(pickaxeOnly())
+					.blockstate(BlockStateGen.axisBlockProvider(false))
+					.loot((lt, block) -> lt.dropOther(block, AllBlocks.FLYWHEEL.get()))
+					.register();
+
+	public static final BlockEntry<KineticMotorBlock> KINETIC_MOTOR = REGISTRATE
+			.block("kinetic_motor", KineticMotorBlock::new)
+			.initialProperties(SharedProperties::stone)
+			.properties(p -> p.color(MaterialColor.COLOR_GRAY))
+			.tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+			.transform(axeOrPickaxe())
+			.blockstate(new CreativeMotorGenerator()::generate)
+			.transform(BlockStressDefaults.setCapacity(48))
+			.transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 32)))
+			.item()
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.transform(customItemModel())
+			.register();
+
 	public static final BlockEntry<ItemStockpileBlock> ITEM_STOCKPILE = REGISTRATE.block("item_stockpile", ItemStockpileBlock::new)
 			.initialProperties(SharedProperties::softMetal)
 			.properties(p -> p.color(MaterialColor.TERRACOTTA_BLUE)
@@ -360,46 +399,6 @@ public class DesiresBlocks {
 					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 					.build()
 					.register();
-
-	public static final BlockEntry<FurnaceEngineBlock> FURNACE_ENGINE =
-			REGISTRATE.block("furnace_engine", FurnaceEngineBlock::new)
-					.initialProperties(SharedProperties::softMetal)
-					.properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN)
-							.sound(SoundType.NETHERITE_BLOCK))
-					.properties(BlockBehaviour.Properties::noOcclusion)
-					.transform(pickaxeOnly())
-					.tag(AllTags.AllBlockTags.BRITTLE.tag)
-					.blockstate(new FurnaceEngineGenerator()::generate)
-					.transform(BlockStressDefaults.setCapacity(256.0))
-					.transform(BlockStressDefaults.setGeneratorSpeed(FurnaceEngineBlock::getSpeedRange))
-					.item()
-					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
-					.transform(ModelGen.customItemModel())
-					.register();
-
-	public static final BlockEntry<PoweredFlywheelBlock> POWERED_FLYWHEEL =
-			REGISTRATE.block("powered_flywheel", PoweredFlywheelBlock::new)
-					.initialProperties(SharedProperties::softMetal)
-					.properties(p -> p.color(MaterialColor.METAL))
-					.transform(pickaxeOnly())
-					.blockstate(BlockStateGen.axisBlockProvider(false))
-					.loot((lt, block) -> lt.dropOther(block, AllBlocks.FLYWHEEL.get()))
-					.register();
-
-	public static final BlockEntry<KineticMotorBlock> KINETIC_MOTOR = REGISTRATE
-			.block("kinetic_motor", KineticMotorBlock::new)
-			.initialProperties(SharedProperties::stone)
-			.properties(p -> p.color(MaterialColor.COLOR_GRAY))
-			.tag(AllTags.AllBlockTags.SAFE_NBT.tag)
-			.transform(pickaxeOnly())
-			.blockstate(new CreativeMotorGenerator()::generate)
-			.transform(BlockStressDefaults.setCapacity(48))
-			.transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 32)))
-			.item()
-			.properties(p -> p.rarity(Rarity.EPIC))
-			.transform(customItemModel())
-			.register();
-
 
 
 	// Load this class
