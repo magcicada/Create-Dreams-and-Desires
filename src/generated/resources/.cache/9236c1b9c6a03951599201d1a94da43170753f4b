@@ -1,4 +1,4 @@
-// 1.19.2	2024-05-08T20:05:52.7772751	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2024-05-09T02:39:43.370667	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 9452bed2fb7ba829ea35644054add91456d3f5d9 assets/create_dd/blockstates/amethyst_block_pillar.json
 64dc32722d3ad05720fa9a200df1de7179cfd890 assets/create_dd/blockstates/basalt_pillar.json
 5fd6e80fe77786dd8fd0c5cfd6d866b44365aa96 assets/create_dd/blockstates/blackstone_pillar.json
@@ -309,8 +309,8 @@ af62e1b2187e70334a3e36986b368feac281d63d assets/create_dd/blockstates/yellow_pad
 3f358d81d3da01f3d0fa242bf9928888a0702508 assets/create_dd/blockstates/yellow_padded_rubber_slab.json
 2736c91b94b9dd34ed0a702b4b538e6d63bc5c73 assets/create_dd/blockstates/yellow_padded_rubber_stairs.json
 7ac56fd4064658532ee94e7c8def9f604e9528aa assets/create_dd/blockstates/yellow_padded_tiled_rubber.json
-cbe3bd9b407c0bff866d009670ad59f9814468b7 assets/create_dd/lang/en_ud.json
-98e980d7a06af2220c24059296f507c24ea6bf25 assets/create_dd/lang/en_us.json
+f1776afb4250a0c22843bcacf62260a8b3626388 assets/create_dd/lang/en_ud.json
+d6ab3cfb3445efe4b6c33f3251eb1dcf682c1532 assets/create_dd/lang/en_us.json
 186464982087eb2dd6aa9a5bf09cdb29e6326c49 assets/create_dd/models/block/amethyst_block_pillar.json
 37f5da0e49555aed59846ec90f8286e737feb179 assets/create_dd/models/block/amethyst_block_pillar_horizontal.json
 c9845fd31f14aa8e1a83ffc67249b5486a8ff5cc assets/create_dd/models/block/basalt_pillar.json
@@ -1041,6 +1041,7 @@ a9aeba0305094440505b9d94164883b5e94df53b assets/create_dd/models/item/magenta_bl
 acf5c4fad89a8e1e1f80fdf367915e38ccf55e1f assets/create_dd/models/item/magenta_padded_rubber_slab.json
 e3635e9be79d4b1af5fa71610b4bb8d6ba2909e4 assets/create_dd/models/item/magenta_padded_rubber_stairs.json
 4c474ecc2a13bcd975f4aac73f6b8ed7105dddae assets/create_dd/models/item/magenta_padded_tiled_rubber.json
+763a67899307a8e1789c4cd8ecdc39325677bb54 assets/create_dd/models/item/magnet.json
 2d5cf29aeabb150d78c1ced77e7e8f969bf83359 assets/create_dd/models/item/music_disc_waltz_of_the_flowers.json
 0d36341a0a5dc1bafac37b4eaa9030e52a625f21 assets/create_dd/models/item/netherrack_pillar.json
 46ac75a3d7d3675ef5e2510394105f822b7dc6c7 assets/create_dd/models/item/orange_asphalt_block.json
@@ -1201,6 +1202,8 @@ a82334edc63e8e4eef4e6fed4ad582e89b244b7c data/create_dd/advancements/recipes/bui
 767782d48701e60b5422eba95864acf7415b7936 data/create_dd/advancements/recipes/create_dd.base/crafting/bury_blend.json
 8075e1e297bfb860d7c5e877d803b20093a565d0 data/create_dd/advancements/recipes/create_dd.base/crafting/coal_piece_from_coal.json
 09a5e0c67801506ce96c03375fb0a3d5715be19d data/create_dd/advancements/recipes/create_dd.base/crafting/diamond_shard_from_diamond.json
+0edd861306479128199d6774a9102fc76cedddf3 data/create_dd/advancements/recipes/create_dd.base/crafting/equipment/flipped_magnet.json
+1fab61cd0980ccad68c2d7981d7faf7f5ce5ab95 data/create_dd/advancements/recipes/create_dd.base/crafting/equipment/magnet.json
 3f7941e16d06f0ffe7cbf8822b6e475d4ed7c16e data/create_dd/advancements/recipes/create_dd.base/crafting/raw_rubber_block_from_raw_rubber.json
 766f3bc2a095fdd767b8b83314d35e120ea889e5 data/create_dd/advancements/recipes/create_dd.base/crafting/raw_rubber_from_raw_rubber_block.json
 9ddc929f1775733e2dd9395d87ba498e1ddfef10 data/create_dd/advancements/recipes/create_dd.base/crafting/rubber_block_from_rubber.json
@@ -1945,6 +1948,8 @@ ce61c45a3a0ca85e8e564c351e9c4a29ddce1fb1 data/create_dd/recipes/crafting/coal_fr
 1ece023879053ba1f98e4c80a7506b5e83f65a65 data/create_dd/recipes/crafting/cyan_padded_rubber_from_cyan_padded_rubber.json
 75f7959d6e0be1412b935ec26c4d861edb5cb0d6 data/create_dd/recipes/crafting/diamond_from_diamond_shard.json
 c1443f32f168201ddb43f0bfecd39e9a9fd591c7 data/create_dd/recipes/crafting/diamond_shard_from_diamond.json
+950a34c3fdec36e5ccb208d3f093e826d673cdfa data/create_dd/recipes/crafting/equipment/flipped_magnet.json
+599a899e7214fc12f9ad7d456dd4f94ea953baae data/create_dd/recipes/crafting/equipment/magnet.json
 18de0b42285f131c2d8edc081e23a23a3b388c06 data/create_dd/recipes/crafting/gray_padded_rubber_from_gray_padded_rubber.json
 d85d257093daa7752d5c0ce29d011d387d5e1a68 data/create_dd/recipes/crafting/green_padded_rubber_from_green_padded_rubber.json
 3ba5ce15ea37179ccd51fb7dfff55bd8c604b759 data/create_dd/recipes/crafting/light_blue_padded_rubber_from_light_blue_padded_rubber.json

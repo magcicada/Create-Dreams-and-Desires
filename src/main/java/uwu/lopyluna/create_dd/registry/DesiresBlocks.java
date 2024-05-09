@@ -364,7 +364,7 @@ public class DesiresBlocks {
 					.transform(pickaxeOnly())
 					.tag(AllTags.AllBlockTags.BRITTLE.tag)
 					.blockstate(new FurnaceEngineGenerator()::generate)
-					.transform(BlockStressDefaults.setCapacity(128.0))
+					.transform(BlockStressDefaults.setCapacity(256.0))
 					.transform(BlockStressDefaults.setGeneratorSpeed(FurnaceEngineBlock::getSpeedRange))
 					.item()
 					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)

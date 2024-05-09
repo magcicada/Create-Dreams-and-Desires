@@ -135,6 +135,7 @@ public class DesiresTags {
 	public enum AllItemTags {
 
 		ADDITIONAL_DROPS_TOOL,
+		MAGNET_IGNORE,
 		SWORD(FORGE, "tools/sword"),
 		PICKAXE(FORGE, "tools/pickaxe"),
 		DRILL(FORGE, "tools/drill"),

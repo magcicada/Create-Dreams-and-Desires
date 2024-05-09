@@ -20,6 +20,7 @@ import uwu.lopyluna.create_dd.content.items.equipment.NameableRecordItem;
 import uwu.lopyluna.create_dd.content.items.equipment.deforester_saw.DeforesterSawItem;
 import uwu.lopyluna.create_dd.content.items.equipment.excavation_drill.ExcavationDrillItem;
 import uwu.lopyluna.create_dd.content.items.equipment.gilded_rose_tools.*;
+import uwu.lopyluna.create_dd.content.items.equipment.magnet.MagnetItem;
 
 import static com.tterrag.registrate.providers.RegistrateRecipeProvider.has;
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
@@ -137,6 +138,35 @@ public class DesiresItems {
 						.unlockedBy("has_" + c.getName(), has(c.get()))
 						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
 			})
+			.register();
+
+	public static final ItemEntry<MagnetItem> MAGNET = REGISTRATE.item("magnet", MagnetItem::new)
+			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
+					new ResourceLocation("item/generated")).texture("layer0",
+					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
+			.recipe((c, p) -> {
+				ShapedRecipeBuilder.shaped(c.get(), 1)
+						.pattern("I I")
+						.pattern("B Q")
+						.pattern("BNQ")
+						.define('Q', AllItems.POLISHED_ROSE_QUARTZ.get())
+						.define('B', BURY_BLEND.get())
+						.define('I', Items.IRON_INGOT)
+						.define('N', Items.NETHERITE_INGOT)
+						.unlockedBy("has_" + c.getName(), has(c.get()))
+						.save(p, DesiresCreate.asResource("crafting/equipment/flipped_" + c.getName()));
+				ShapedRecipeBuilder.shaped(c.get(), 1)
+						.pattern("I I")
+						.pattern("Q B")
+						.pattern("QNB")
+						.define('Q', AllItems.POLISHED_ROSE_QUARTZ.get())
+						.define('B', BURY_BLEND.get())
+						.define('I', Items.IRON_INGOT)
+						.define('N', Items.NETHERITE_INGOT)
+						.unlockedBy("has_" + c.getName(), has(c.get()))
+						.save(p, DesiresCreate.asResource("crafting/equipment/" + c.getName()));
+			})
+			.lang("Magnet")
 			.register();
 
 	public static final ItemEntry<GRSwordItem> GILDED_ROSE_SWORD = REGISTRATE.item("gilded_rose_sword",
