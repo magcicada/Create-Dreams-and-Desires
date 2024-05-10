@@ -1,4 +1,4 @@
-// 1.19.2	2024-05-09T02:39:43.370667	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2024-05-10T01:19:05.3742805	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 9452bed2fb7ba829ea35644054add91456d3f5d9 assets/create_dd/blockstates/amethyst_block_pillar.json
 64dc32722d3ad05720fa9a200df1de7179cfd890 assets/create_dd/blockstates/basalt_pillar.json
 5fd6e80fe77786dd8fd0c5cfd6d866b44365aa96 assets/create_dd/blockstates/blackstone_pillar.json
@@ -113,6 +113,7 @@ b808ec2219254ea9c4ed76dca01193606c41c0ff assets/create_dd/blockstates/fluid_keg.
 90f76de3b5f7448cf9e80233392a42216d233117 assets/create_dd/blockstates/furnace_engine.json
 c0c2af86fd7510e68ef4bb9826f310e7d2b0bad7 assets/create_dd/blockstates/gabbro.json
 2c9248cc52f3a5ad3e339b83fed5a0e7a67494ef assets/create_dd/blockstates/gabbro_pillar.json
+6bf94c13d89dbb297a47713ed2770b9f3689a986 assets/create_dd/blockstates/giant_gear.json
 3dac694f737e5172fa99b84485cf61f295cb4d50 assets/create_dd/blockstates/gray_asphalt_block.json
 38ebc6f478f73664a5fb7deaea4855baa7d1bfda assets/create_dd/blockstates/gray_blueprint_block.json
 a536f1623bf02dbab49e87651135eeaa0c98037d assets/create_dd/blockstates/gray_padded_mosaic_rubber.json
@@ -134,6 +135,7 @@ b40ca72b98ec870f2b0e2f003061d63a610c6765 assets/create_dd/blockstates/industrial
 71108aedbb696f04bc91ce48a982a3d24c64869a assets/create_dd/blockstates/industrial_fan.json
 f0038a2804485c81ab0355f39316d0d0cc92b1b7 assets/create_dd/blockstates/inverse_box.json
 11a8cc2940c27360a875f1293c5f05b71b894033 assets/create_dd/blockstates/item_stockpile.json
+34232bdafcaa4455230ef1ba66aee53dda3d1d78 assets/create_dd/blockstates/kinetic_motor.json
 3116aa8903f1bcc60ab4816613e3a15483314fc5 assets/create_dd/blockstates/layered_amethyst_block.json
 27d34d669e73891cdfee812e08f6f09ad8d7c9ff assets/create_dd/blockstates/layered_basalt.json
 1c75808764c4cc8907ad3db3db255d56357dce43 assets/create_dd/blockstates/layered_blackstone.json
@@ -309,8 +311,8 @@ af62e1b2187e70334a3e36986b368feac281d63d assets/create_dd/blockstates/yellow_pad
 3f358d81d3da01f3d0fa242bf9928888a0702508 assets/create_dd/blockstates/yellow_padded_rubber_slab.json
 2736c91b94b9dd34ed0a702b4b538e6d63bc5c73 assets/create_dd/blockstates/yellow_padded_rubber_stairs.json
 7ac56fd4064658532ee94e7c8def9f604e9528aa assets/create_dd/blockstates/yellow_padded_tiled_rubber.json
-f1776afb4250a0c22843bcacf62260a8b3626388 assets/create_dd/lang/en_ud.json
-d6ab3cfb3445efe4b6c33f3251eb1dcf682c1532 assets/create_dd/lang/en_us.json
+18dac1b13e3b80e629edbc169cf84f34331d1b83 assets/create_dd/lang/en_ud.json
+73676b469eab3e99bef3252e349044c0babc0b9b assets/create_dd/lang/en_us.json
 186464982087eb2dd6aa9a5bf09cdb29e6326c49 assets/create_dd/models/block/amethyst_block_pillar.json
 37f5da0e49555aed59846ec90f8286e737feb179 assets/create_dd/models/block/amethyst_block_pillar_horizontal.json
 c9845fd31f14aa8e1a83ffc67249b5486a8ff5cc assets/create_dd/models/block/basalt_pillar.json
@@ -977,6 +979,7 @@ e44cf9051e387285b08db6b04c903b2252891cda assets/create_dd/models/item/freezing_s
 d45fb895dd210b9dfbed29211f532c26db7be85d assets/create_dd/models/item/furnace_engine.json
 6fed2f17716dc797f43efec04ef361a065d3417f assets/create_dd/models/item/gabbro.json
 f1b38f0f195bbb22a595754ee2d3bb5db4eb4d8b assets/create_dd/models/item/gabbro_pillar.json
+a37ff2ea610126f96782889d1e49828727b95bc3 assets/create_dd/models/item/giant_gear.json
 bbe74f4ef22c0b3dbdfadd18526ee75ca2850d60 assets/create_dd/models/item/gilded_rose_axe.json
 485c19a5f9048fccf5246d435ca34d95b0b9eab4 assets/create_dd/models/item/gilded_rose_hoe.json
 fc61f6cce9ad022034dd6ddbb1ca2e77e0fc01df assets/create_dd/models/item/gilded_rose_pickaxe.json
@@ -1003,6 +1006,7 @@ f568c2ccfb49e9bfd28a0400898540937cb4217b assets/create_dd/models/item/hydraulic_
 bc11f629b02a37ef233219907f537bc28eeae4c4 assets/create_dd/models/item/industrial_fan.json
 cfa5b5d57dffc03a603933d70e2664698ca45fb0 assets/create_dd/models/item/inverse_box.json
 61f8379891d13196fa6db84bfdecd62c37f6491a assets/create_dd/models/item/item_stockpile.json
+8651aa61c57b543d09992b7484fdd9ca4d8e85fe assets/create_dd/models/item/kinetic_motor.json
 f4a56df58d2199908ac84374db239389ade97108 assets/create_dd/models/item/lapis_alloy.json
 d72c5966bad23a8c80d87cd27de1e80f9fa8515c assets/create_dd/models/item/layered_amethyst_block.json
 bb3f5ddca40c033b30f1ad54efd38dddba29c678 assets/create_dd/models/item/layered_basalt.json
@@ -1190,6 +1194,7 @@ d042e346c34a92dce730da83e59d97ef291a5a6b data/create/tags/blocks/fan_processing_
 9700f882078a8e4070ab92b8c6b1923e9b4a01c4 data/create/tags/blocks/fan_processing_catalysts/smoking.json
 8723823afc54638c7c5203951813e2749ce68591 data/create/tags/blocks/fan_processing_catalysts/splashing.json
 019a81e6dc009215d821f4e09b03d69b14c46cd8 data/create/tags/blocks/fan_transparent.json
+c73ec4cdf2cbfc34299f2e60ce77ce282ec4fdfe data/create/tags/blocks/safe_nbt.json
 4c644c5405bf84e53e820f8dfb50bc683bf29818 data/create/tags/blocks/windmill_sails.json
 0395d2a14e0fcdb5ad3f5c9da75ecc5e2641497c data/create/tags/items/casing.json
 1d0b98508bea5a445348e980a140917b17e867e3 data/create_dd/advancements/recipes/building_blocks/amethyst_block_from_stone_types_amethyst_block_stonecutting.json
@@ -1725,6 +1730,7 @@ a25975cd07868bba9bf41960d88de5ba0c13b945 data/create_dd/loot_tables/blocks/freez
 c04df07517e3a95a5e9de257209393f96ce13857 data/create_dd/loot_tables/blocks/furnace_engine.json
 c7755d4b0b71030fd3bea0346aa1d5f92d37fc7f data/create_dd/loot_tables/blocks/gabbro.json
 67fba4825ea4a23d0ba9a83fb068630a419852eb data/create_dd/loot_tables/blocks/gabbro_pillar.json
+afc010bfca4b48e3d70917d78a3f67ba1379ead5 data/create_dd/loot_tables/blocks/giant_gear.json
 03e764889e39c199788461504cdaa530f7ecb986 data/create_dd/loot_tables/blocks/gray_asphalt_block.json
 3af77d1a8cac6bbd02b85b6a18edd10d798a3809 data/create_dd/loot_tables/blocks/gray_blueprint_block.json
 7c9b450da2bda0d3528d3ea861a7a51dbe5bb437 data/create_dd/loot_tables/blocks/gray_padded_mosaic_rubber.json
@@ -1746,6 +1752,7 @@ faeb29559b9ce0a34001669efe6957b8f3735fc3 data/create_dd/loot_tables/blocks/hydra
 293c651f07a133dde2bdd78f2b374c919a98c089 data/create_dd/loot_tables/blocks/industrial_fan.json
 df6ac5504414ce8deecd0e8cff8f3cb5557680d4 data/create_dd/loot_tables/blocks/inverse_box.json
 5d50471a1557001a54e4f9bf1e70bedc74897f5c data/create_dd/loot_tables/blocks/item_stockpile.json
+0e977c58312368c2cf3c6aebe3cffcdf16d58813 data/create_dd/loot_tables/blocks/kinetic_motor.json
 f4d5738c98cbe41fcb05115343c3b3fc0bed4cab data/create_dd/loot_tables/blocks/layered_amethyst_block.json
 478bb8c2ff796e8b38356c1b43f71390f205b074 data/create_dd/loot_tables/blocks/layered_basalt.json
 19018204b9bc18c98327f98ce94413b7d844974b data/create_dd/loot_tables/blocks/layered_blackstone.json
@@ -2392,8 +2399,8 @@ ac6313eb3c75d8e3c2d8e9b356740da183fd563b data/forge/tags/items/tools/pickaxe.jso
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/azalea_root_replaceable.json
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/dripstone_replaceable_blocks.json
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/lush_ground_replaceable.json
-d834d69ae6bd475ef0bb18bfdad2000c7b1e0b18 data/minecraft/tags/blocks/mineable/axe.json
-93021319b53a2bdf8d6a0d1f4a70b2106f29acf4 data/minecraft/tags/blocks/mineable/pickaxe.json
+2bb355ac246701ef210f35cd2e6e9148aa3e78e6 data/minecraft/tags/blocks/mineable/axe.json
+b8c132e9f1bfc2d1fd0d62b7e383f83f821b100e data/minecraft/tags/blocks/mineable/pickaxe.json
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/moss_replaceable.json
 2a7a1edb20dd28f4e45ac19e631d5813e24d6eff data/minecraft/tags/blocks/slabs.json
 f36a6393cb0327f020065a27637b9e43ddf88921 data/minecraft/tags/blocks/stairs.json

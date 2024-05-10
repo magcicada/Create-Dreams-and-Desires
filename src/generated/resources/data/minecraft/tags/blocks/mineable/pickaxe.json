@@ -190,10 +190,11 @@
     "create_dd:bore_block",
     "create_dd:inverse_box",
     "create_dd:cog_crank",
-    "create_dd:item_stockpile",
-    "create_dd:fluid_keg",
     "create_dd:furnace_engine",
     "create_dd:powered_flywheel",
-    "create_dd:kinetic_motor"
+    "create_dd:giant_gear",
+    "create_dd:kinetic_motor",
+    "create_dd:item_stockpile",
+    "create_dd:fluid_keg"
   ]
 }

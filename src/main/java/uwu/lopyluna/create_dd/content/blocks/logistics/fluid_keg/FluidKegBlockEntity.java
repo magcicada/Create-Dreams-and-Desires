@@ -13,7 +13,6 @@ import net.minecraft.core.Direction.Axis;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -50,9 +49,12 @@ public class FluidKegBlockEntity extends SmartBlockEntity implements IMultiBlock
         super(type, pos, state);
         tankInventory = createInventory();
         fluidCapability = LazyOptional.of(() -> tankInventory);
+        updateConnectivity = false;
 
         width = 1;
         height = 1;
+
+        refreshCapability();
     }
 
     protected SmartFluidTank createInventory() {
@@ -109,7 +111,7 @@ public class FluidKegBlockEntity extends SmartBlockEntity implements IMultiBlock
 
     protected void updateConnectivity() {
         updateConnectivity = false;
-        if (level.isClientSide())
+        if (level.isClientSide)
             return;
         if (!isController())
             return;
@@ -167,7 +169,7 @@ public class FluidKegBlockEntity extends SmartBlockEntity implements IMultiBlock
     }
 
     public void removeController(boolean keepFluids) {
-        if (level.isClientSide())
+        if (level.isClientSide)
             return;
         updateConnectivity = true;
         if (!keepFluids)
@@ -183,7 +185,7 @@ public class FluidKegBlockEntity extends SmartBlockEntity implements IMultiBlock
             getLevel().setBlock(worldPosition, state, 22);
         }
 
-        fluidCapability.invalidate();
+        refreshCapability();
         setChanged();
         sendData();
     }
@@ -195,7 +197,7 @@ public class FluidKegBlockEntity extends SmartBlockEntity implements IMultiBlock
         if (controller.equals(this.controller))
             return;
         this.controller = controller;
-        fluidCapability.invalidate();
+        refreshCapability();
         setChanged();
         sendData();
     }
@@ -233,13 +235,17 @@ public class FluidKegBlockEntity extends SmartBlockEntity implements IMultiBlock
                 tankInventory.drain(-tankInventory.getSpace(), IFluidHandler.FluidAction.EXECUTE);
         }
 
+        if (!clientPacket)
+            return;
+        
         boolean changeOfController =
                 !Objects.equals(controllerBefore, controller);
         if (hasLevel() && (changeOfController || prevSize != width || prevHeight != height)) {
-            if (hasLevel()) level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 16);
-            if (isController()) tankInventory.setCapacity(getCapacityMultiplier() * getTotalTankSize());
+            if (hasLevel()) 
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 16);
+            if (isController()) 
+                tankInventory.setCapacity(getCapacityMultiplier() * getTotalTankSize());
             invalidateRenderBoundingBox();
-            level.setBlocksDirty(getBlockPos(), Blocks.AIR.defaultBlockState(), getBlockState());
         }
 
         if (luminosity != prevLum && hasLevel())
@@ -270,25 +276,21 @@ public class FluidKegBlockEntity extends SmartBlockEntity implements IMultiBlock
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (cap == net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-            initCapability();
+        if (!fluidCapability.isPresent())
+            refreshCapability();
+        if (cap == net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
             return fluidCapability.cast();
-        }
         return super.getCapability(cap, side);
     }
 
-    private void initCapability() {
-        if (!isController()) {
-            FluidKegBlockEntity controllerBE = getControllerBE();
-            if (controllerBE == null)
-                return;
-
-            controllerBE.initCapability();
-            fluidCapability = controllerBE.fluidCapability;
-            return;
-        }
-
-
+    private void refreshCapability() {
+        LazyOptional<IFluidHandler> oldCap = fluidCapability;
+        fluidCapability = LazyOptional.of(() -> handlerForCapability());
+        oldCap.invalidate();
+    }
+    private IFluidHandler handlerForCapability() {
+        return isController() ? tankInventory
+                : getControllerBE() != null ? getControllerBE().handlerForCapability() : new FluidTank(0);
     }
 
     @Override
@@ -310,8 +312,8 @@ public class FluidKegBlockEntity extends SmartBlockEntity implements IMultiBlock
         if (FluidKegBlock.isTank(state)) { // safety
             level.setBlock(getBlockPos(), state.setValue(FluidKegBlock.LARGE, width > 2), 6);
         }
+        
         onFluidStackChanged(tankInventory.getFluid());
-        fluidCapability.invalidate();
         setChanged();
     }
 
@@ -335,6 +337,11 @@ public class FluidKegBlockEntity extends SmartBlockEntity implements IMultiBlock
     @Override
     public int getTankSize(int tank) {
         return getCapacityMultiplier();
+    }
+
+    @Override
+    public void setTankSize(int tank, int blocks) {
+        applyFluidTankSize(blocks);
     }
 
     public static int getCapacityMultiplier() {

@@ -2,16 +2,13 @@ package uwu.lopyluna.create_dd.registry;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
-import com.simibubi.create.content.kinetics.motor.CreativeMotorBlock;
 import com.simibubi.create.content.kinetics.motor.CreativeMotorGenerator;
 import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
 import com.simibubi.create.foundation.block.ItemUseOverrides;
 import com.simibubi.create.foundation.data.*;
 import com.simibubi.create.foundation.utility.Couple;
-import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
@@ -27,6 +24,8 @@ import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.util.ForgeSoundType;
 import uwu.lopyluna.create_dd.content.blocks.curiosities.BoreBlock;
 import uwu.lopyluna.create_dd.content.blocks.curiosities.BoreBlockMovementBehaviour;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlock;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlockItem;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.hydraulic_press.HydraulicPressBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.industrial_fan_block.IndustrialFanBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankBlock;
@@ -205,6 +204,56 @@ public class DesiresBlocks {
 			.transform(customItemModel())
 			.register();
 
+	public static final BlockEntry<FurnaceEngineBlock> FURNACE_ENGINE =
+			REGISTRATE.block("furnace_engine", FurnaceEngineBlock::new)
+					.initialProperties(SharedProperties::softMetal)
+					.properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN)
+							.sound(SoundType.NETHERITE_BLOCK))
+					.properties(BlockBehaviour.Properties::noOcclusion)
+					.transform(pickaxeOnly())
+					.tag(AllTags.AllBlockTags.BRITTLE.tag)
+					.blockstate(new FurnaceEngineGenerator()::generate)
+					.transform(BlockStressDefaults.setCapacity(256.0))
+					.transform(BlockStressDefaults.setGeneratorSpeed(FurnaceEngineBlock::getSpeedRange))
+					.item()
+					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+					.transform(ModelGen.customItemModel())
+					.register();
+
+	public static final BlockEntry<PoweredFlywheelBlock> POWERED_FLYWHEEL =
+			REGISTRATE.block("powered_flywheel", PoweredFlywheelBlock::new)
+					.initialProperties(SharedProperties::softMetal)
+					.properties(p -> p.color(MaterialColor.METAL))
+					.transform(pickaxeOnly())
+					.blockstate(BlockStateGen.axisBlockProvider(false))
+					.loot((lt, block) -> lt.dropOther(block, AllBlocks.FLYWHEEL.get()))
+					.register();
+
+	public static final BlockEntry<GiantGearBlock> GIANT_GEAR = REGISTRATE.block("giant_gear", GiantGearBlock::new)
+			.initialProperties(SharedProperties::netheriteMetal)
+			.properties(p -> p.noOcclusion().sound(SoundType.METAL).color(MaterialColor.COLOR_YELLOW))
+			.transform(pickaxeOnly())
+			.transform(BlockStressDefaults.setImpact(8.0))
+			.blockstate(BlockStateGen.axisBlockProvider(true))
+			.item(GiantGearBlockItem::new)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.transform(customItemModel())
+			.register();
+
+	public static final BlockEntry<KineticMotorBlock> KINETIC_MOTOR = REGISTRATE
+			.block("kinetic_motor", KineticMotorBlock::new)
+			.initialProperties(SharedProperties::stone)
+			.properties(p -> p.color(MaterialColor.COLOR_GRAY))
+			.tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+			.transform(axeOrPickaxe())
+			.blockstate(new CreativeMotorGenerator()::generate)
+			.transform(BlockStressDefaults.setCapacity(48))
+			.transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 32)))
+			.item()
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.transform(customItemModel())
+			.register();
+
 	public static final BlockEntry<ItemStockpileBlock> ITEM_STOCKPILE = REGISTRATE.block("item_stockpile", ItemStockpileBlock::new)
 			.initialProperties(SharedProperties::softMetal)
 			.properties(p -> p.color(MaterialColor.TERRACOTTA_BLUE)
@@ -360,46 +409,6 @@ public class DesiresBlocks {
 					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 					.build()
 					.register();
-
-	public static final BlockEntry<FurnaceEngineBlock> FURNACE_ENGINE =
-			REGISTRATE.block("furnace_engine", FurnaceEngineBlock::new)
-					.initialProperties(SharedProperties::softMetal)
-					.properties(p -> p.color(MaterialColor.TERRACOTTA_CYAN)
-							.sound(SoundType.NETHERITE_BLOCK))
-					.properties(BlockBehaviour.Properties::noOcclusion)
-					.transform(pickaxeOnly())
-					.tag(AllTags.AllBlockTags.BRITTLE.tag)
-					.blockstate(new FurnaceEngineGenerator()::generate)
-					.transform(BlockStressDefaults.setCapacity(256.0))
-					.transform(BlockStressDefaults.setGeneratorSpeed(FurnaceEngineBlock::getSpeedRange))
-					.item()
-					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
-					.transform(ModelGen.customItemModel())
-					.register();
-
-	public static final BlockEntry<PoweredFlywheelBlock> POWERED_FLYWHEEL =
-			REGISTRATE.block("powered_flywheel", PoweredFlywheelBlock::new)
-					.initialProperties(SharedProperties::softMetal)
-					.properties(p -> p.color(MaterialColor.METAL))
-					.transform(pickaxeOnly())
-					.blockstate(BlockStateGen.axisBlockProvider(false))
-					.loot((lt, block) -> lt.dropOther(block, AllBlocks.FLYWHEEL.get()))
-					.register();
-
-	public static final BlockEntry<KineticMotorBlock> KINETIC_MOTOR = REGISTRATE
-			.block("kinetic_motor", KineticMotorBlock::new)
-			.initialProperties(SharedProperties::stone)
-			.properties(p -> p.color(MaterialColor.COLOR_GRAY))
-			.tag(AllTags.AllBlockTags.SAFE_NBT.tag)
-			.transform(pickaxeOnly())
-			.blockstate(new CreativeMotorGenerator()::generate)
-			.transform(BlockStressDefaults.setCapacity(48))
-			.transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 32)))
-			.item()
-			.properties(p -> p.rarity(Rarity.EPIC))
-			.transform(customItemModel())
-			.register();
-
 
 
 	// Load this class

@@ -1,0 +1,17 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "create_dd:block/giant_gear/block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "create_dd:block/giant_gear/block"
+    },
+    "axis=z": {
+      "model": "create_dd:block/giant_gear/block",
+      "x": 90,
+      "y": 180
+    }
+  }
+}
