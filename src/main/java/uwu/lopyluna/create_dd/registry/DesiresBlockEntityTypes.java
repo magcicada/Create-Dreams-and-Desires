@@ -2,13 +2,19 @@ package uwu.lopyluna.create_dd.registry;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.Create;
+import com.simibubi.create.content.kinetics.base.CutoutRotatingInstance;
 import com.simibubi.create.content.kinetics.base.HalfShaftInstance;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import com.simibubi.create.content.kinetics.motor.CreativeMotorBlockEntity;
 import com.simibubi.create.content.kinetics.motor.CreativeMotorRenderer;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftInstance;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftRenderer;
+import com.simibubi.create.content.kinetics.waterwheel.LargeWaterWheelBlockEntity;
+import com.simibubi.create.content.kinetics.waterwheel.WaterWheelInstance;
+import com.simibubi.create.content.kinetics.waterwheel.WaterWheelRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.hydraulic_press.HydraulicPressBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.hydraulic_press.HydraulicPressInstance;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.hydraulic_press.HydraulicPressRenderer;
@@ -86,6 +92,14 @@ public class DesiresBlockEntityTypes {
 			.instance(() -> HalfShaftInstance::new, false)
 			.validBlocks(DesiresBlocks.KINETIC_MOTOR)
 			.renderer(() -> KineticMotorRenderer::new).register();
+
+
+	public static final BlockEntityEntry<GiantGearBlockEntity> GIANT_GEAR = REGISTRATE
+			.blockEntity("giant_gear", GiantGearBlockEntity::new)
+			.instance(() -> CutoutRotatingInstance::new, false)
+			.validBlocks(DesiresBlocks.GIANT_GEAR)
+			.renderer(() -> KineticBlockEntityRenderer::new)
+			.register();
 
 	public static void register() {}
 }

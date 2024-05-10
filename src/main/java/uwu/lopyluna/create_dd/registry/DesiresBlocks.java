@@ -24,6 +24,8 @@ import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.util.ForgeSoundType;
 import uwu.lopyluna.create_dd.content.blocks.curiosities.BoreBlock;
 import uwu.lopyluna.create_dd.content.blocks.curiosities.BoreBlockMovementBehaviour;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlock;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlockItem;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.hydraulic_press.HydraulicPressBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.industrial_fan_block.IndustrialFanBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankBlock;
@@ -226,6 +228,17 @@ public class DesiresBlocks {
 					.blockstate(BlockStateGen.axisBlockProvider(false))
 					.loot((lt, block) -> lt.dropOther(block, AllBlocks.FLYWHEEL.get()))
 					.register();
+
+	public static final BlockEntry<GiantGearBlock> GIANT_GEAR = REGISTRATE.block("giant_gear", GiantGearBlock::new)
+			.initialProperties(SharedProperties::netheriteMetal)
+			.properties(p -> p.noOcclusion().sound(SoundType.METAL).color(MaterialColor.COLOR_YELLOW))
+			.transform(pickaxeOnly())
+			.transform(BlockStressDefaults.setImpact(8.0))
+			.blockstate(BlockStateGen.axisBlockProvider(true))
+			.item(GiantGearBlockItem::new)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.transform(customItemModel())
+			.register();
 
 	public static final BlockEntry<KineticMotorBlock> KINETIC_MOTOR = REGISTRATE
 			.block("kinetic_motor", KineticMotorBlock::new)
