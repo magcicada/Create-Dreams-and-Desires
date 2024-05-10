@@ -80,7 +80,7 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
                     facing = (Direction)blockState.getValue(SteamEngineBlock.FACING);
                 }
 
-                float efficiency = furnace.isLit() ? 1.0F : 0.0F;
+                float efficiency = furnace.cookingProgress > 0 && furnace.cookingTotalTime > 0 ? 1.0f : 0.0f;
                 if (efficiency > 0.0F) {
                     this.award(AllAdvancements.STEAM_ENGINE);
                 }
