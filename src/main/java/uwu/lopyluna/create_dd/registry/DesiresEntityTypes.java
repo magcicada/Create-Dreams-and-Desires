@@ -2,7 +2,7 @@ package uwu.lopyluna.create_dd.registry;
 
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
 import com.simibubi.create.foundation.data.CreateEntityBuilder;
-import com.simibubi.create.foundation.utility.Lang;
+import uwu.lopyluna.create_dd.registry.helper.Lang;
 import com.tterrag.registrate.util.nullness.NonNullConsumer;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;

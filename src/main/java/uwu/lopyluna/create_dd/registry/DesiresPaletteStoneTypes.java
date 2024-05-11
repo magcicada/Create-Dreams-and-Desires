@@ -1,7 +1,7 @@
 package uwu.lopyluna.create_dd.registry;
 
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.utility.Lang;
+import uwu.lopyluna.create_dd.registry.helper.Lang;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;

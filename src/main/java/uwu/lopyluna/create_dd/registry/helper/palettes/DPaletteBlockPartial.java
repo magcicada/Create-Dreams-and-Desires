@@ -1,7 +1,7 @@
 package uwu.lopyluna.create_dd.registry.helper.palettes;
 
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.utility.Lang;
+import uwu.lopyluna.create_dd.registry.helper.Lang;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.providers.DataGenContext;

@@ -15,7 +15,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
 import com.simibubi.create.foundation.utility.AngleHelper;
-import com.simibubi.create.foundation.utility.Lang;
+import uwu.lopyluna.create_dd.registry.helper.Lang;
 import com.simibubi.create.foundation.utility.VecHelper;
 import java.util.List;
 

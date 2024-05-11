@@ -1,4 +1,4 @@
-package uwu.lopyluna.create_dd.content.blocks.curiosities;
+package uwu.lopyluna.create_dd.content.blocks.others;
 
 import net.minecraft.world.level.block.Block;
 

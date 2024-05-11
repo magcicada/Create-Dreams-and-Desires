@@ -8,7 +8,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.ValueSettingsBoard;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueSettingsFormatter;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
 import com.simibubi.create.foundation.utility.Components;
-import com.simibubi.create.foundation.utility.Lang;
+import uwu.lopyluna.create_dd.registry.helper.Lang;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -26,7 +26,7 @@ public class KineticMotorScrollValueBehaviour extends ScrollValueBehaviour {
     public ValueSettingsBoard createBoard(Player player, BlockHitResult hitResult) {
         ImmutableList<Component> rows = ImmutableList.of(Components.literal("⟳").withStyle(ChatFormatting.BOLD), Components.literal("⟲").withStyle(ChatFormatting.BOLD));
         ValueSettingsFormatter formatter = new ValueSettingsFormatter(this::formatSettings);
-        return new ValueSettingsBoard(this.label, 32, 16, rows, formatter);
+        return new ValueSettingsBoard(this.label, 32, 8, rows, formatter);
     }
 
     public void setValueSettings(Player player, ValueSettingsBehaviour.ValueSettings valueSetting, boolean ctrlHeld) {

@@ -1,4 +1,4 @@
-// 1.19.2	2024-05-10T01:19:05.3742805	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2024-05-10T17:21:10.7353193	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 9452bed2fb7ba829ea35644054add91456d3f5d9 assets/create_dd/blockstates/amethyst_block_pillar.json
 64dc32722d3ad05720fa9a200df1de7179cfd890 assets/create_dd/blockstates/basalt_pillar.json
 5fd6e80fe77786dd8fd0c5cfd6d866b44365aa96 assets/create_dd/blockstates/blackstone_pillar.json
@@ -113,7 +113,8 @@ b808ec2219254ea9c4ed76dca01193606c41c0ff assets/create_dd/blockstates/fluid_keg.
 90f76de3b5f7448cf9e80233392a42216d233117 assets/create_dd/blockstates/furnace_engine.json
 c0c2af86fd7510e68ef4bb9826f310e7d2b0bad7 assets/create_dd/blockstates/gabbro.json
 2c9248cc52f3a5ad3e339b83fed5a0e7a67494ef assets/create_dd/blockstates/gabbro_pillar.json
-6bf94c13d89dbb297a47713ed2770b9f3689a986 assets/create_dd/blockstates/giant_gear.json
+c6e6a83139c19cd667949fd59afa5858d5c3137c assets/create_dd/blockstates/giant_gear.json
+3dff9e1ec59415779195d2abfa9f07bc17b428a1 assets/create_dd/blockstates/giant_gear_structure.json
 3dac694f737e5172fa99b84485cf61f295cb4d50 assets/create_dd/blockstates/gray_asphalt_block.json
 38ebc6f478f73664a5fb7deaea4855baa7d1bfda assets/create_dd/blockstates/gray_blueprint_block.json
 a536f1623bf02dbab49e87651135eeaa0c98037d assets/create_dd/blockstates/gray_padded_mosaic_rubber.json
@@ -311,8 +312,8 @@ af62e1b2187e70334a3e36986b368feac281d63d assets/create_dd/blockstates/yellow_pad
 3f358d81d3da01f3d0fa242bf9928888a0702508 assets/create_dd/blockstates/yellow_padded_rubber_slab.json
 2736c91b94b9dd34ed0a702b4b538e6d63bc5c73 assets/create_dd/blockstates/yellow_padded_rubber_stairs.json
 7ac56fd4064658532ee94e7c8def9f604e9528aa assets/create_dd/blockstates/yellow_padded_tiled_rubber.json
-18dac1b13e3b80e629edbc169cf84f34331d1b83 assets/create_dd/lang/en_ud.json
-73676b469eab3e99bef3252e349044c0babc0b9b assets/create_dd/lang/en_us.json
+54c872e4d9f53496dd8edbcaff027c57723f280c assets/create_dd/lang/en_ud.json
+a7447511e22358f3aeeaf7f99a17425c4a02a756 assets/create_dd/lang/en_us.json
 186464982087eb2dd6aa9a5bf09cdb29e6326c49 assets/create_dd/models/block/amethyst_block_pillar.json
 37f5da0e49555aed59846ec90f8286e737feb179 assets/create_dd/models/block/amethyst_block_pillar_horizontal.json
 c9845fd31f14aa8e1a83ffc67249b5486a8ff5cc assets/create_dd/models/block/basalt_pillar.json
@@ -1731,6 +1732,7 @@ c04df07517e3a95a5e9de257209393f96ce13857 data/create_dd/loot_tables/blocks/furna
 c7755d4b0b71030fd3bea0346aa1d5f92d37fc7f data/create_dd/loot_tables/blocks/gabbro.json
 67fba4825ea4a23d0ba9a83fb068630a419852eb data/create_dd/loot_tables/blocks/gabbro_pillar.json
 afc010bfca4b48e3d70917d78a3f67ba1379ead5 data/create_dd/loot_tables/blocks/giant_gear.json
+2b2a4bde1a1c86393b28fa3ff9b81ef1ddeed22d data/create_dd/loot_tables/blocks/giant_gear_structure.json
 03e764889e39c199788461504cdaa530f7ecb986 data/create_dd/loot_tables/blocks/gray_asphalt_block.json
 3af77d1a8cac6bbd02b85b6a18edd10d798a3809 data/create_dd/loot_tables/blocks/gray_blueprint_block.json
 7c9b450da2bda0d3528d3ea861a7a51dbe5bb437 data/create_dd/loot_tables/blocks/gray_padded_mosaic_rubber.json
@@ -2400,7 +2402,7 @@ ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/azalea_root_
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/dripstone_replaceable_blocks.json
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/lush_ground_replaceable.json
 2bb355ac246701ef210f35cd2e6e9148aa3e78e6 data/minecraft/tags/blocks/mineable/axe.json
-b8c132e9f1bfc2d1fd0d62b7e383f83f821b100e data/minecraft/tags/blocks/mineable/pickaxe.json
+1238dce15fe8ed9a1350362bddc4b62017f6a1f5 data/minecraft/tags/blocks/mineable/pickaxe.json
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/moss_replaceable.json
 2a7a1edb20dd28f4e45ac19e631d5813e24d6eff data/minecraft/tags/blocks/slabs.json
 f36a6393cb0327f020065a27637b9e43ddf88921 data/minecraft/tags/blocks/stairs.json

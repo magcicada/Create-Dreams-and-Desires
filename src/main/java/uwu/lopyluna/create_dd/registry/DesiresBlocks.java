@@ -22,14 +22,15 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.util.ForgeSoundType;
-import uwu.lopyluna.create_dd.content.blocks.curiosities.BoreBlock;
-import uwu.lopyluna.create_dd.content.blocks.curiosities.BoreBlockMovementBehaviour;
+import uwu.lopyluna.create_dd.content.blocks.others.BoreBlock;
+import uwu.lopyluna.create_dd.content.blocks.others.BoreBlockMovementBehaviour;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlockItem;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearStructuralBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.hydraulic_press.HydraulicPressBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.industrial_fan_block.IndustrialFanBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankBlock;
-import uwu.lopyluna.create_dd.content.blocks.curiosities.FanSailBlock;
+import uwu.lopyluna.create_dd.content.blocks.others.FanSailBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngineBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngineGenerator;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.PoweredFlywheelBlock;
@@ -238,6 +239,16 @@ public class DesiresBlocks {
 			.item(GiantGearBlockItem::new)
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.transform(customItemModel())
+			.register();
+
+
+	public static final BlockEntry<GiantGearStructuralBlock> GIANT_GEAR_STRUCTURAL = REGISTRATE.block("giant_gear_structure", GiantGearStructuralBlock::new)
+			.initialProperties(SharedProperties::netheriteMetal)
+			.blockstate((c, p) -> p.getVariantBuilder(c.get())
+					.forAllStatesExcept(BlockStateGen.mapToAir(p), GiantGearStructuralBlock.FACING))
+			.properties(p -> p.noOcclusion().sound(SoundType.METAL).color(MaterialColor.COLOR_YELLOW))
+			.transform(pickaxeOnly())
+			.lang("Giant Gear")
 			.register();
 
 	public static final BlockEntry<KineticMotorBlock> KINETIC_MOTOR = REGISTRATE

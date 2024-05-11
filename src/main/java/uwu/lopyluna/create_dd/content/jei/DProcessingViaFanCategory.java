@@ -7,7 +7,7 @@ import com.simibubi.create.compat.jei.category.animations.AnimatedKinetics;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
-import com.simibubi.create.foundation.utility.Lang;
+import uwu.lopyluna.create_dd.registry.helper.Lang;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -17,9 +17,11 @@ import net.minecraft.world.item.crafting.Recipe;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 import uwu.lopyluna.create_dd.registry.DesiresPartialModels;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.function.Supplier;
 
+@ParametersAreNonnullByDefault
 public abstract class DProcessingViaFanCategory<T extends Recipe<?>> extends CreateRecipeCategory<T> {
 
     protected static final int SCALE = 24;

@@ -1,14 +1,27 @@
 {
   "variants": {
-    "axis=x": {
+    "axis=x,extension=false": {
       "model": "create_dd:block/giant_gear/block",
       "x": 90,
       "y": 90
     },
-    "axis=y": {
+    "axis=x,extension=true": {
+      "model": "create_dd:block/giant_gear/block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,extension=false": {
       "model": "create_dd:block/giant_gear/block"
     },
-    "axis=z": {
+    "axis=y,extension=true": {
+      "model": "create_dd:block/giant_gear/block"
+    },
+    "axis=z,extension=false": {
+      "model": "create_dd:block/giant_gear/block",
+      "x": 90,
+      "y": 180
+    },
+    "axis=z,extension=true": {
       "model": "create_dd:block/giant_gear/block",
       "x": 90,
       "y": 180

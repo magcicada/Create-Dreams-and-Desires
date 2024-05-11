@@ -1,7 +1,7 @@
 package uwu.lopyluna.create_dd.registry;
 
 import com.simibubi.create.foundation.particle.ICustomParticleData;
-import com.simibubi.create.foundation.utility.Lang;
+import uwu.lopyluna.create_dd.registry.helper.Lang;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraftforge.api.distmarker.Dist;
