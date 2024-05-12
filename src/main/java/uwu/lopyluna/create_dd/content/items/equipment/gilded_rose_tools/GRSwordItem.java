@@ -2,6 +2,7 @@ package uwu.lopyluna.create_dd.content.items.equipment.gilded_rose_tools;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import uwu.lopyluna.create_dd.registry.DesiresTags;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.Consumer;
 
 @ParametersAreNonnullByDefault
 @SuppressWarnings({"deprecation"})
@@ -40,7 +42,7 @@ public class GRSwordItem extends SwordItem {
     @Override
     public float getDestroySpeed(ItemStack pStack, BlockState pState) {
         if (DesiresTags.AllItemTags.ADDITIONAL_DROPS_TOOL.matches(pStack)) {
-            return isOnCooldown ? 0.1F : 1.0F;
+            return isOnCooldown ? 0.5F : 2.0F;
         } else return super.getDestroySpeed(pStack, pState);
     }
 
@@ -81,6 +83,7 @@ public class GRSwordItem extends SwordItem {
         if (!pPlayer.getCooldowns().isOnCooldown(pPlayer.getMainHandItem().getItem())) {
             pPlayer.getCooldowns().addCooldown(this, getUseDuration(pStack));
         }
+        pStack.hurtAndBreak(2, pPlayer, (p_43276_) -> p_43276_.broadcastBreakEvent(EquipmentSlot.MAINHAND));
     }
 
     @Override
@@ -90,9 +93,7 @@ public class GRSwordItem extends SwordItem {
                 return true;
             if (enchantment == Enchantments.BLOCK_EFFICIENCY)
                 return true;
-            if (enchantment == Enchantments.MOB_LOOTING)
-                return true;
-            return enchantment == Enchantments.BLOCK_FORTUNE;
+            return enchantment == Enchantments.MOB_LOOTING;
         } else return super.canApplyAtEnchantingTable(stack, enchantment);
     }
 
@@ -104,45 +105,33 @@ public class GRSwordItem extends SwordItem {
     }
 
     @Override
-    public boolean isBarVisible(ItemStack pStack) {
+    public <T extends LivingEntity> int damageItem(ItemStack pStack, int amount, T entity, Consumer<T> onBroken) {
         if (DesiresTags.AllItemTags.ADDITIONAL_DROPS_TOOL.matches(pStack)) {
-            return false;
-        } else return super.isBarVisible(pStack);
-    }
-
-    @Override
-    public boolean isDamageable(ItemStack stack) {
-        if (DesiresTags.AllItemTags.ADDITIONAL_DROPS_TOOL.matches(stack)) {
-            return false;
-        } else return super.isDamageable(stack);
-    }
-
-    @Override
-    public boolean isRepairable(ItemStack stack) {
-        if (DesiresTags.AllItemTags.ADDITIONAL_DROPS_TOOL.matches(stack)) {
-            return false;
-        } else return super.isRepairable(stack);
+            int lootingLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MOB_LOOTING, pStack);
+            return super.damageItem(pStack, amount, entity, onBroken) + (lootingLevel + lootingLevel) * 5;
+        } else
+            return super.damageItem(pStack, amount, entity, onBroken);
     }
 
     public float efficiencyDuration(ItemStack pStack) {
         int efficiencyLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY, pStack);
-        return efficiencyLevel == 0 ? 1 :
-                efficiencyLevel == 1 ? 1.25F :
-                        efficiencyLevel == 2 ? 1.5F :
-                                efficiencyLevel == 3 ? 1.75F :
-                                        efficiencyLevel == 4 ? 2 :
-                                                efficiencyLevel == 5 ? 2.25F : 1;
+        return efficiencyLevel == 0 ? 2 :
+               efficiencyLevel == 1 ? 2.25F :
+               efficiencyLevel == 2 ? 2.5F :
+               efficiencyLevel == 3 ? 2.75F :
+               efficiencyLevel == 4 ? 3 :
+               efficiencyLevel == 5 ? 3.25F :
+                                      1;
     }
 
     @Override
     public int getUseDuration(ItemStack pStack) {
         if (DesiresTags.AllItemTags.ADDITIONAL_DROPS_TOOL.matches(pStack)) {
-            int fortuneLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, pStack);
             int lootingLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MOB_LOOTING, pStack);
             if (offHandPower) {
-                return (int)(((fortuneLevel + lootingLevel + 1) * 20) / efficiencyDuration(pStack)) + 15;
+                return (int)(((lootingLevel + lootingLevel) * 5) / efficiencyDuration(pStack)) + 1;
             } else {
-                return (int)(((fortuneLevel + lootingLevel + 1) * 20) / efficiencyDuration(pStack)) + 30;
+                return (int)(((lootingLevel + lootingLevel) * 10) / efficiencyDuration(pStack)) + 1;
             }
         } else return super.getUseDuration(pStack);
     }

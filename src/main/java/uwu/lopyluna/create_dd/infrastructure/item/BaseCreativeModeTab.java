@@ -1,8 +1,8 @@
 package uwu.lopyluna.create_dd.infrastructure.item;
 
-import com.simibubi.create.AllItems;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 
 public class BaseCreativeModeTab extends DesireCreativeModeTab {
 	public BaseCreativeModeTab() {
@@ -12,6 +12,6 @@ public class BaseCreativeModeTab extends DesireCreativeModeTab {
 	@Override
 	@NotNull
 	public ItemStack makeIcon() {
-		return AllItems.PRECISION_MECHANISM.asStack();
+		return DesiresBlocks.COG_CRANK.asStack();
 	}
 }

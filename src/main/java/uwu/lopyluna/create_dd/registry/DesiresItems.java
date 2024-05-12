@@ -1,6 +1,8 @@
 package uwu.lopyluna.create_dd.registry;
 
 import com.simibubi.create.AllItems;
+import com.simibubi.create.AllTags;
+import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.item.CombustibleItem;
 import com.tterrag.registrate.util.DataIngredient;
@@ -27,12 +29,18 @@ import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 import static uwu.lopyluna.create_dd.registry.DesiresTags.forgeItemTag;
 import static uwu.lopyluna.create_dd.registry.DesiresTags.optionalTag;
 
-@SuppressWarnings({"unused", "deprecation"})
+@SuppressWarnings({"unused", "deprecation", "all"})
 public class DesiresItems {
 
 	static {
 		REGISTRATE.creativeModeTab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB);
 	}
+
+	public static final ItemEntry<SequencedAssemblyItem>
+			INCOMPLETE_KINETIC_MECHANISM = sequencedItem("incomplete_kinetic_mechanism");
+
+	public static final ItemEntry<Item>
+			KINETIC_MECHANISM = item("kinetic_mechanism");
 
 	public static final ItemEntry<Item> RAW_RUBBER = REGISTRATE.item("raw_rubber", Item::new)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
@@ -97,6 +105,25 @@ public class DesiresItems {
 			.lang("Bury Blend")
 			.register();
 
+	public static final ItemEntry<Item> LAPIS_LAZULI_SHARD = REGISTRATE.item("lapis_lazuli_shard", Item::new)
+			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
+					new ResourceLocation("item/generated")).texture("layer0",
+					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
+			.tag(forgeItemTag("nuggets/lapis"), forgeItemTag("nuggets"))
+			.recipe((c, p) -> {
+				Item output = Items.LAPIS_LAZULI;
+				ShapedRecipeBuilder.shaped(output, 1)
+						.pattern("CC")
+						.pattern("CC")
+						.define('C', c.get())
+						.unlockedBy("has_" + getItemName(output), has(output))
+						.save(p, DesiresCreate.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
+				ShapelessRecipeBuilder.shapeless(c.get(), 4)
+						.requires(output)
+						.unlockedBy("has_" + c.getName(), has(c.get()))
+						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
+			})
+			.register();
 
 	public static final ItemEntry<Item> DIAMOND_SHARD = REGISTRATE.item("diamond_shard", Item::new)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
@@ -219,17 +246,38 @@ public class DesiresItems {
 			.tag(DesiresTags.AllItemTags.HOE.tag)
 			.register();
 
+	public static final ItemEntry<DeforesterSawItem> DEFORESTER_SAW = REGISTRATE.item("deforester_saw", DeforesterSawItem::new)
+			.model(AssetLookup.itemModelWithPartials())
+			.properties(p -> p.rarity(Rarity.UNCOMMON))
+			.recipe((c, p) -> {
+				ShapedRecipeBuilder.shaped(c.get(), 1)
+						.pattern(" II")
+						.pattern("AKI")
+						.pattern(" S ")
+						.define('K', KINETIC_MECHANISM.get())
+						.define('A', AllItems.ANDESITE_ALLOY.get())
+						.define('I', AllTags.forgeItemTag("plates/iron"))
+						.define('S', Items.STICK)
+						.unlockedBy("has_" + getItemName(KINETIC_MECHANISM.get().asItem()), has(KINETIC_MECHANISM.get()))
+						.save(p, DesiresCreate.asResource("crafting/equipment/flipped_" + c.getName()));
+				ShapedRecipeBuilder.shaped(c.get(), 1)
+						.pattern("II ")
+						.pattern("IKA")
+						.pattern(" S ")
+						.define('K', KINETIC_MECHANISM.get())
+						.define('A', AllItems.ANDESITE_ALLOY.get())
+						.define('I', AllTags.forgeItemTag("plates/iron"))
+						.define('S', Items.STICK)
+						.unlockedBy("has_" + getItemName(KINETIC_MECHANISM.get().asItem()), has(KINETIC_MECHANISM.get()))
+						.save(p, DesiresCreate.asResource("crafting/equipment/" + c.getName()));
+			})
+			.tag(DesiresTags.AllItemTags.AXE.tag)
+			.register();
 
 	public static final ItemEntry<ExcavationDrillItem> EXCAVATION_DRILL = REGISTRATE.item("excavation_drill", ExcavationDrillItem::new)
 			.model(AssetLookup.itemModelWithPartials())
 			.properties(p -> p.rarity(Rarity.UNCOMMON))
 			.tag(DesiresTags.AllItemTags.PICKAXE.tag)
-			.register();
-
-	public static final ItemEntry<DeforesterSawItem> DEFORESTER_SAW = REGISTRATE.item("deforester_saw", DeforesterSawItem::new)
-			.model(AssetLookup.itemModelWithPartials())
-			.properties(p -> p.rarity(Rarity.UNCOMMON))
-			.tag(DesiresTags.AllItemTags.AXE.tag)
 			.register();
 
 	public static final ItemEntry<NameableRecordItem> MUSIC_DISC_WALTZ_OF_THE_FLOWERS = REGISTRATE.item("music_disc_waltz_of_the_flowers",
@@ -241,6 +289,17 @@ public class DesiresItems {
 			.tag(optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("minecraft", "creeper_drop_music_discs")))
 			.lang("Music Disc")
 			.register();
+
+
+	private static ItemEntry<Item> item(String name) {
+		return REGISTRATE.item(name, Item::new)
+				.register();
+	}
+
+	private static ItemEntry<SequencedAssemblyItem> sequencedItem(String name) {
+		return REGISTRATE.item(name, SequencedAssemblyItem::new)
+				.register();
+	}
 
 
 	protected static String getItemName(ItemLike pItemLike) {

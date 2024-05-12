@@ -14,6 +14,7 @@ import com.simibubi.create.AllItems;
 import com.simibubi.create.foundation.data.recipe.CompatMetals;
 import com.simibubi.create.foundation.data.recipe.Mods;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -22,11 +23,13 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.registry.DesiresItems;
 import uwu.lopyluna.create_dd.registry.DesiresRecipeTypes;
 
 import java.util.function.Supplier;
 
-@SuppressWarnings({"unused"})
+@SuppressWarnings({"unused", "deprecation", "all"})
 public class SeethingRecipeGen extends DesireProcessingRecipeGen {
 
 	GeneratedRecipe
@@ -35,6 +38,10 @@ public class SeethingRecipeGen extends DesireProcessingRecipeGen {
 		MAGMA_BLOCK = convert(Blocks.NETHERRACK, Blocks.MAGMA_BLOCK),
 		MAGMA_CREAM = convert(Items.SLIME_BALL, Items.MAGMA_CREAM),
 		CRYING_OBSIDIAN = convert(Blocks.OBSIDIAN, Blocks.CRYING_OBSIDIAN),
+
+		LAPIS_LAZULI_SHARD = convertChanceRecipe(() -> Items.CALCITE, DesiresItems.LAPIS_LAZULI_SHARD::get, .75f),
+		DIAMOND_SHARD = convertChanceRecipe(() -> Items.COAL_BLOCK, DesiresItems.DIAMOND_SHARD::get, .25f),
+		DIAMOND_SHARD_V2 = convertChanceRecipe(() -> Items.DEEPSLATE_COAL_ORE, DesiresItems.DIAMOND_SHARD::get, .75f),
 
 		NETHERITE_SCRAP = secondaryRecipe(() -> Items.ANCIENT_DEBRIS, () -> Items.NETHERITE_SCRAP, () -> Items.NETHERITE_SCRAP, .35f),
 
@@ -73,8 +80,11 @@ public class SeethingRecipeGen extends DesireProcessingRecipeGen {
 
 	public GeneratedRecipe secondaryRecipe(Supplier<ItemLike> item, Supplier<ItemLike> first, Supplier<ItemLike> secondary,
 									  float secondaryChance) {
-		return create(item, b -> b.output(first.get(), 1)
+		return create(DesiresCreate.asResource(getItemName(first.get()) + "_from_" + getItemName(item.get())), b -> b.withItemIngredients(Ingredient.of(item.get())).output(first.get(), 1)
 				.output(secondaryChance, secondary.get(), 1));
+	}
+	public GeneratedRecipe convertChanceRecipe(Supplier<ItemLike> item, Supplier<ItemLike> result, float chance) {
+		return create(DesiresCreate.asResource(getItemName(result.get()) + "_from_" + getItemName(item.get())), b -> b.withItemIngredients(Ingredient.of(item.get())).output(chance, result.get(), 1));
 	}
 
 	public GeneratedRecipe crushedOre(ItemEntry<Item> crushed, Supplier<ItemLike> ingot, Supplier<ItemLike> secondary,
@@ -95,6 +105,10 @@ public class SeethingRecipeGen extends DesireProcessingRecipeGen {
 					.whenModLoaded(mod.getId()));
 		}
 		return null;
+	}
+
+	protected static String getItemName(ItemLike pItemLike) {
+		return Registry.ITEM.getKey(pItemLike.asItem()).getPath();
 	}
 
 	public SeethingRecipeGen(DataGenerator dataGenerator) {

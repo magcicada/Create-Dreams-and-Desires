@@ -25,7 +25,7 @@ public class ItemApplicationRecipeGen extends DesireProcessingRecipeGen {
 
     GeneratedRecipe HYDRAULIC = create("hydraulic_casing", b -> b
             .require(AllBlocks.COPPER_CASING.get())
-            .require(Items.COPPER_INGOT)
+            .require(AllItems.COPPER_SHEET.get())
             .output(DesiresBlocks.HYDRAULIC_CASING.get()));
 
     @Override

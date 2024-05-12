@@ -143,7 +143,11 @@ public class DesiresTags {
 		SAW(FORGE, "tools/saw"),
 		SHOVEL(FORGE, "tools/shovel"),
 		HOE(FORGE, "tools/hoe"),
-		SCYTHE(FORGE, "tools/scythe")
+		SCYTHE(FORGE, "tools/scythe"),
+
+
+		IRON_PLATE(FORGE, "plates/iron")
+
 
 		;
 

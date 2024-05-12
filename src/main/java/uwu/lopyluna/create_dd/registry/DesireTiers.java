@@ -11,7 +11,7 @@ public class DesireTiers {
     {
         @Override
         public int getUses() {
-            return 500;
+            return 1500;
         }
 
         @Override
@@ -21,12 +21,12 @@ public class DesireTiers {
 
         @Override
         public float getAttackDamageBonus() {
-            return 2.0F;
+            return 3.0F;
         }
 
         @Override
         public int getLevel() {
-            return 2;
+            return 3;
         }
 
         @Override

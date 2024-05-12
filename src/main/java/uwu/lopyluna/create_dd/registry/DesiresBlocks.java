@@ -1,6 +1,7 @@
 package uwu.lopyluna.create_dd.registry;
 
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
@@ -9,19 +10,26 @@ import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
 import com.simibubi.create.foundation.block.ItemUseOverrides;
 import com.simibubi.create.foundation.data.*;
 import com.simibubi.create.foundation.utility.Couple;
+import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Registry;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.util.ForgeSoundType;
+import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.content.blocks.others.BoreBlock;
 import uwu.lopyluna.create_dd.content.blocks.others.BoreBlockMovementBehaviour;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlock;
@@ -43,10 +51,13 @@ import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockp
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileCTBehaviour;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileItem;
 
+import java.util.function.Consumer;
+
 import static com.simibubi.create.AllMovementBehaviours.movementBehaviour;
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.*;
+import static com.tterrag.registrate.providers.RegistrateRecipeProvider.has;
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 import static uwu.lopyluna.create_dd.registry.DesiresPaletteBlocks.rawRubberDecorTag;
 import static uwu.lopyluna.create_dd.registry.DesiresPaletteBlocks.rubberDecorTag;
@@ -169,6 +180,17 @@ public class DesiresBlocks {
 					() -> SoundEvents.NETHERITE_BLOCK_HIT, () -> SoundEvents.NETHERITE_BLOCK_FALL)))
 			.onRegister(movementBehaviour(new BoreBlockMovementBehaviour()))
 			.transform(pickaxeOnly())
+			.recipe((c, p) -> {
+				ShapedRecipeBuilder.shaped(c.get(), 4)
+						.pattern("AIA")
+						.pattern("ICI")
+						.pattern("AIA")
+						.define('A', AllItems.ANDESITE_ALLOY.get())
+						.define('C', AllBlocks.ANDESITE_ALLOY_BLOCK.get())
+						.define('I', Items.IRON_INGOT)
+						.unlockedBy("has_" + c.getName(), has(c.get()))
+						.save(p, DesiresCreate.asResource("crafting/" + c.getName()));
+			})
 			.item()
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.build()
@@ -181,6 +203,30 @@ public class DesiresBlocks {
 			.transform(BlockStressDefaults.setNoImpact())
 			.transform(axeOrPickaxe())
 			.blockstate(BlockStateGen.axisBlockProvider(true))
+			.recipe((c, p) -> ShapelessRecipeBuilder.shapeless(c.get(), 1)
+					.requires(AllBlocks.ANDESITE_CASING.get())
+					.requires(AllBlocks.COGWHEEL.get())
+					.unlockedBy("has_" + getItemName(AllBlocks.COGWHEEL.get()), has(AllBlocks.COGWHEEL.get()))
+					.save(p, DesiresCreate.asResource("crafting/kinetics/inverse_box")))
+			.item()
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.transform(customItemModel())
+			.register();
+
+	public static final BlockEntry<KineticMotorBlock> KINETIC_MOTOR = REGISTRATE
+			.block("kinetic_motor", KineticMotorBlock::new)
+			.initialProperties(SharedProperties::stone)
+			.properties(p -> p.color(MaterialColor.COLOR_GRAY))
+			.tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+			.transform(axeOrPickaxe())
+			.recipe((c, p) -> ShapelessRecipeBuilder.shapeless(c.get(), 1)
+					.requires(AllBlocks.ANDESITE_CASING.get())
+					.requires(DesiresItems.KINETIC_MECHANISM.get())
+					.unlockedBy("has_" + getItemName(DesiresItems.KINETIC_MECHANISM.get()), has(DesiresItems.KINETIC_MECHANISM.get()))
+					.save(p, DesiresCreate.asResource("crafting/kinetics/kinetic_motor")))
+			.blockstate(new CreativeMotorGenerator()::generate)
+			.transform(BlockStressDefaults.setCapacity(48))
+			.transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 32)))
 			.item()
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.transform(customItemModel())
@@ -237,7 +283,7 @@ public class DesiresBlocks {
 			.transform(BlockStressDefaults.setImpact(8.0))
 			.blockstate(BlockStateGen.axisBlockProvider(true))
 			.item(GiantGearBlockItem::new)
-			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.tab(() -> null)
 			.transform(customItemModel())
 			.register();
 
@@ -251,19 +297,6 @@ public class DesiresBlocks {
 			.lang("Giant Gear")
 			.register();
 
-	public static final BlockEntry<KineticMotorBlock> KINETIC_MOTOR = REGISTRATE
-			.block("kinetic_motor", KineticMotorBlock::new)
-			.initialProperties(SharedProperties::stone)
-			.properties(p -> p.color(MaterialColor.COLOR_GRAY))
-			.tag(AllTags.AllBlockTags.SAFE_NBT.tag)
-			.transform(axeOrPickaxe())
-			.blockstate(new CreativeMotorGenerator()::generate)
-			.transform(BlockStressDefaults.setCapacity(48))
-			.transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 32)))
-			.item()
-			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
-			.transform(customItemModel())
-			.register();
 
 	public static final BlockEntry<ItemStockpileBlock> ITEM_STOCKPILE = REGISTRATE.block("item_stockpile", ItemStockpileBlock::new)
 			.initialProperties(SharedProperties::softMetal)
@@ -308,6 +341,7 @@ public class DesiresBlocks {
 					.tag(AllTags.AllBlockTags.WINDMILL_SAILS.tag)
 					.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
 					.tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SPLASHING.tag)
+					.recipe((c, p) -> fanSailCrafting(c.get(), Items.WATER_BUCKET, p, c))
 					.lang("Splashing Catalyst Sail")
 					.item()
 					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
@@ -326,6 +360,7 @@ public class DesiresBlocks {
 					.tag(AllTags.AllBlockTags.WINDMILL_SAILS.tag)
 					.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
 					.tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_HAUNTING.tag)
+					.recipe((c, p) -> fanSailCrafting(c.get(), Items.SOUL_CAMPFIRE, p, c))
 					.lang("Haunting Catalyst Sail")
 					.item()
 					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
@@ -344,6 +379,7 @@ public class DesiresBlocks {
 					.tag(AllTags.AllBlockTags.WINDMILL_SAILS.tag)
 					.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
 					.tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SMOKING.tag)
+					.recipe((c, p) -> fanSailCrafting(c.get(), Items.CAMPFIRE, p, c))
 					.lang("Smoking Catalyst Sail")
 					.item()
 					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
@@ -362,6 +398,7 @@ public class DesiresBlocks {
 					.tag(AllTags.AllBlockTags.WINDMILL_SAILS.tag)
 					.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
 					.tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_BLASTING.tag)
+					.recipe((c, p) -> fanSailCrafting(c.get(), Items.LAVA_BUCKET, p, c))
 					.lang("Blasting Catalyst Sail")
 					.item()
 					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
@@ -398,6 +435,7 @@ public class DesiresBlocks {
 					.tag(AllTags.AllBlockTags.WINDMILL_SAILS.tag)
 					.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
 					.tag(DesiresTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_FREEZING.tag)
+					.recipe((c, p) -> fanSailCrafting(c.get(), Items.POWDER_SNOW_BUCKET, p, c))
 					.lang("Freezing Catalyst Sail")
 					.item()
 					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
@@ -415,12 +453,28 @@ public class DesiresBlocks {
 					.tag(AllTags.AllBlockTags.WINDMILL_SAILS.tag)
 					.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
 					.tag(DesiresTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SANDING.tag)
+					.recipe((c, p) -> fanSailCrafting(c.get(), Items.SAND, p, c))
 					.lang("Sanding Catalyst Sail")
 					.item()
 					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 					.build()
 					.register();
 
+	public static void fanSailCrafting(ItemLike itemLike, ItemLike cataylst, Consumer<FinishedRecipe> pFinishedRecipeConsumer, DataGenContext c) {
+		ShapedRecipeBuilder.shaped(itemLike, 4)
+				.pattern("SCS")
+				.pattern("CRC")
+				.pattern("SCS")
+				.define('S', AllBlocks.SAIL_FRAME.get())
+				.define('R', DesiresBlocks.RUBBER_BLOCK.get())
+				.define('C', cataylst)
+				.unlockedBy("has_" + getItemName(cataylst), has(cataylst))
+				.save(pFinishedRecipeConsumer, DesiresCreate.asResource("crafting/fan_catalyst/" + c.getName()));
+	}
+
+	protected static String getItemName(ItemLike pItemLike) {
+		return Registry.ITEM.getKey(pItemLike.asItem()).getPath();
+	}
 
 	// Load this class
 

@@ -1,9 +1,9 @@
 package uwu.lopyluna.create_dd.infrastructure.item;
 
-import com.simibubi.create.AllBlocks;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import uwu.lopyluna.create_dd.registry.DesiresPaletteBlocks;
 
 public class PalettesCreativeModeTab extends DesireCreativeModeTab {
 	public PalettesCreativeModeTab() {
@@ -17,6 +17,6 @@ public class PalettesCreativeModeTab extends DesireCreativeModeTab {
 	@Override
 	@NotNull
 	public ItemStack makeIcon() {
-		return AllBlocks.EXPERIENCE_BLOCK.asStack();
+		return DesiresPaletteBlocks.LIGHT_BLUE_BLUEPRINT_BLOCK.asStack();
 	}
 }
