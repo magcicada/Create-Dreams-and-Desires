@@ -156,7 +156,7 @@ public class DesiresBlocks {
 			.transform(BlockStressDefaults.setCapacity(16))
 			.lang("Industrial Fan")
 			.item()
-			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.tab(() -> DesiresCreativeModeTabs.BETA_CREATIVE_TAB)
 			.transform(customItemModel())
 			.register();
 
@@ -168,7 +168,7 @@ public class DesiresBlocks {
 			.blockstate(BlockStateGen.horizontalBlockProvider(true))
 			.transform(BlockStressDefaults.setImpact(8.0))
 			.item(AssemblyOperatorBlockItem::new)
-			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.tab(() -> DesiresCreativeModeTabs.BETA_CREATIVE_TAB)
 			.transform(customItemModel())
 			.register();
 
@@ -283,10 +283,9 @@ public class DesiresBlocks {
 			.transform(BlockStressDefaults.setImpact(8.0))
 			.blockstate(BlockStateGen.axisBlockProvider(true))
 			.item(GiantGearBlockItem::new)
-			.tab(() -> null)
+			.tab(() -> DesiresCreativeModeTabs.BETA_CREATIVE_TAB)
 			.transform(customItemModel())
 			.register();
-
 
 	public static final BlockEntry<GiantGearStructuralBlock> GIANT_GEAR_STRUCTURAL = REGISTRATE.block("giant_gear_structure", GiantGearStructuralBlock::new)
 			.initialProperties(SharedProperties::netheriteMetal)
@@ -325,7 +324,7 @@ public class DesiresBlocks {
 							.build()))
 			.onRegister(connectedTextures(FluidKegCTBehaviour::new))
 			.item(FluidKegItem::new)
-			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.tab(() -> DesiresCreativeModeTabs.BETA_CREATIVE_TAB)
 			.build()
 			.register();
 

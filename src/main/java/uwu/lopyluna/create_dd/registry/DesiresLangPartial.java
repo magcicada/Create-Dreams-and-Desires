@@ -13,6 +13,7 @@ public class DesiresLangPartial {
         consume(consumer, "create_dd.recipe.fan_seething", "Bulk Seething");
         consume(consumer, "itemGroup.create_dd.base", "Create: Dreams n' Desires");
         consume(consumer, "itemGroup.create_dd.palettes", "Dreams n' Desires Building Blocks");
+        consume(consumer, "itemGroup.create_dd.beta", "Dreams n' Desires Beta Items");
 
     }
 
