@@ -290,6 +290,41 @@ public class DesiresItems {
 			.lang("Music Disc")
 			.register();
 
+	public static final ItemEntry<SpawnEggItem> INERT_BLAZELING_SPAWN_EGG = REGISTRATE.item("inert_blazeling_spawn_egg",
+					p -> new SpawnEggItem(DesiresEntityTypes.INERT_BLAZELING.get(), 5451574, 13661252, p))
+			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
+					new ResourceLocation("item/template_spawn_egg")))
+			.register();
+
+	public static final ItemEntry<SpawnEggItem> SEETHING_ABLAZE_SPAWN_EGG = REGISTRATE.item("seething_ablaze_spawn_egg",
+					p -> new SpawnEggItem(DesiresEntityTypes.SEETHING_ABLAZE.get(), 44543, 56063, p))
+			.tag(AllTags.AllItemTags.BLAZE_BURNER_FUEL_SPECIAL.tag)
+			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
+					new ResourceLocation("item/template_spawn_egg")))
+			.register();
+
+	public static final ItemEntry<CombustibleItem> SEETHING_ABLAZE_ROD = REGISTRATE.item("seething_ablaze_rod", CombustibleItem::new)
+			.tag(AllTags.AllItemTags.BLAZE_BURNER_FUEL_SPECIAL.tag)
+			.onRegister(i -> i.setBurnTime(9600))
+			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
+					new ResourceLocation("item/handheld")).texture("layer0",
+					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
+			.recipe((c, p) -> {
+				Item output = DesiresItems.SEETHING_ABLAZE_POWDER.get().asItem();
+				ShapelessRecipeBuilder.shapeless(output, 2)
+						.requires(c.get())
+						.unlockedBy("has_" + c.getName(), has(c.get()))
+						.save(p, DesiresCreate.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
+			})
+			.register();
+
+	public static final ItemEntry<CombustibleItem> SEETHING_ABLAZE_POWDER = REGISTRATE.item("seething_ablaze_powder", CombustibleItem::new)
+			.onRegister(i -> i.setBurnTime(4800))
+			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
+					new ResourceLocation("item/generated")).texture("layer0",
+					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
+			.register();
+
 
 	private static ItemEntry<Item> item(String name) {
 		return REGISTRATE.item(name, Item::new)

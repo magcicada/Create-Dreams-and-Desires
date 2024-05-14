@@ -318,6 +318,8 @@
   "create_dd.recipe.fan_sanding.fan": "puɐS puıɥǝq uɐℲ",
   "create_dd.recipe.fan_seething": "buıɥʇǝǝS ʞןnᗺ",
   "create_dd.recipe.fan_seething.fan": "ɹǝuɹnᗺ ǝzɐןᗺ pǝʇɐǝH ɹǝdnS puıɥǝq uɐℲ",
+  "entity.create_dd.inert_blazeling": "buıןǝzɐןᗺ ʇɹǝuI",
+  "entity.create_dd.seething_ablaze": "ǝzɐןqⱯ buıɥʇǝǝS",
   "fluid.create_dd.sap": "dɐS",
   "item.create_dd.bury_blend": "puǝןᗺ ʎɹnᗺ",
   "item.create_dd.coal_piece": "ǝɔǝıԀ ןɐoƆ",
@@ -330,6 +332,7 @@
   "item.create_dd.gilded_rose_shovel": "ןǝʌoɥS ǝsoᴚ pǝpןı⅁",
   "item.create_dd.gilded_rose_sword": "pɹoʍS ǝsoᴚ pǝpןı⅁",
   "item.create_dd.incomplete_kinetic_mechanism": "ɯsıuɐɥɔǝW ɔıʇǝuıʞ ǝʇǝןdɯoɔuI",
+  "item.create_dd.inert_blazeling_spawn_egg": "bbƎ uʍɐdS buıןǝzɐןᗺ ʇɹǝuI",
   "item.create_dd.kinetic_mechanism": "ɯsıuɐɥɔǝW ɔıʇǝuıʞ",
   "item.create_dd.lapis_alloy": "WƎ⟘I ᗡIꞀⱯΛNI | ⱯN",
   "item.create_dd.lapis_lazuli_shard": "pɹɐɥS ıןnzɐꞀ sıdɐꞀ",
@@ -339,6 +342,9 @@
   "item.create_dd.reversed_gearshift": "WƎ⟘I ᗡIꞀⱯΛNI | ⱯN",
   "item.create_dd.rubber": "ɹǝqqnᴚ",
   "item.create_dd.sap_bucket": "ʇǝʞɔnᗺ dɐS",
+  "item.create_dd.seething_ablaze_powder": "ɹǝpʍoԀ ǝzɐןqⱯ buıɥʇǝǝS",
+  "item.create_dd.seething_ablaze_rod": "poᴚ ǝzɐןqⱯ buıɥʇǝǝS",
+  "item.create_dd.seething_ablaze_spawn_egg": "bbƎ uʍɐdS ǝzɐןqⱯ buıɥʇǝǝS",
   "itemGroup.create_dd.base": "sǝɹısǝᗡ ,u sɯɐǝɹᗡ :ǝʇɐǝɹƆ",
   "itemGroup.create_dd.palettes": "sʞɔoןᗺ buıpןınᗺ sǝɹısǝᗡ ,u sɯɐǝɹᗡ"
 }

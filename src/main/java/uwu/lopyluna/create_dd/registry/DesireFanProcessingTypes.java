@@ -1,8 +1,6 @@
 package uwu.lopyluna.create_dd.registry;
 
 import com.mojang.math.Vector3f;
-import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.content.equipment.sandPaper.SandPaperPolishingRecipe;
 import com.simibubi.create.content.kinetics.fan.processing.AllFanProcessingTypes;
 import com.simibubi.create.content.kinetics.fan.processing.FanProcessingType;
 import com.simibubi.create.content.kinetics.fan.processing.FanProcessingTypeRegistry;
@@ -34,6 +32,8 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.content.entities.inert_blazeling.InertBlaze;
+import uwu.lopyluna.create_dd.content.entities.seething_ablaze.SeethingBlaze;
 import uwu.lopyluna.create_dd.content.recipes.FreezingRecipe;
 import uwu.lopyluna.create_dd.content.recipes.SandingRecipe;
 import uwu.lopyluna.create_dd.content.recipes.SeethingRecipe;
@@ -142,6 +142,33 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
 
         @Override
         public void affectEntity(Entity entity, Level level) {
+
+            if (entity instanceof Blaze blaze && !(entity instanceof SeethingBlaze)) {
+                int progress = blaze.getPersistentData()
+                        .getInt("CreateSanding");
+                if (progress < 50) {
+                    if (progress % 10 == 0) {
+                        level.playSound(null, entity.blockPosition(), SoundEvents.BLAZE_AMBIENT, SoundSource.NEUTRAL,
+                                0.5f, 1.5f * progress / 50f);
+                    }
+                    blaze.getPersistentData()
+                            .putInt("CreateSanding", progress + 1);
+                    return;
+                }
+
+                level.playSound(null, entity.blockPosition(), SoundEvents.BLAZE_BURN,
+                        SoundSource.NEUTRAL, 1.25f, 0.65f);
+
+                InertBlaze inertBlaze = DesiresEntityTypes.INERT_BLAZELING.create(level);
+                CompoundTag serializeNBT = blaze.saveWithoutId(new CompoundTag());
+                serializeNBT.remove("UUID");
+
+                assert inertBlaze != null;
+                inertBlaze.deserializeNBT(serializeNBT);
+                inertBlaze.setPos(blaze.getPosition(0));
+                level.addFreshEntity(inertBlaze);
+                blaze.discard();
+            }
 
             if (entity instanceof Zombie zombie && !(entity instanceof Husk)) {
                 int progress = zombie.getPersistentData()
@@ -263,6 +290,34 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
                 livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 2, false, false));
                 livingEntity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 20, 1, false, false));
                 livingEntity.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 30, 0, false, false));
+            }
+
+
+            if (entity instanceof Blaze blaze && !(entity instanceof SeethingBlaze)) {
+                int progress = blaze.getPersistentData()
+                        .getInt("CreateSanding");
+                if (progress < 100) {
+                    if (progress % 10 == 0) {
+                        level.playSound(null, entity.blockPosition(), SoundEvents.BLAZE_AMBIENT, SoundSource.NEUTRAL,
+                                1.5f, 0.5f * progress / 100f);
+                    }
+                    blaze.getPersistentData()
+                            .putInt("CreateSanding", progress + 1);
+                    return;
+                }
+
+                level.playSound(null, entity.blockPosition(), SoundEvents.BLAZE_BURN,
+                        SoundSource.NEUTRAL, 1.25f, 0.65f);
+
+                SeethingBlaze seethingBlaze = DesiresEntityTypes.SEETHING_ABLAZE.create(level);
+                CompoundTag serializeNBT = blaze.saveWithoutId(new CompoundTag());
+                serializeNBT.remove("UUID");
+
+                assert seethingBlaze != null;
+                seethingBlaze.deserializeNBT(serializeNBT);
+                seethingBlaze.setPos(blaze.getPosition(0));
+                level.addFreshEntity(seethingBlaze);
+                blaze.discard();
             }
         }
     }

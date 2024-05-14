@@ -318,6 +318,8 @@
   "create_dd.recipe.fan_sanding.fan": "Fan behind Sand",
   "create_dd.recipe.fan_seething": "Bulk Seething",
   "create_dd.recipe.fan_seething.fan": "Fan behind Super Heated Blaze Burner",
+  "entity.create_dd.inert_blazeling": "Inert Blazeling",
+  "entity.create_dd.seething_ablaze": "Seething Ablaze",
   "fluid.create_dd.sap": "Sap",
   "item.create_dd.bury_blend": "Bury Blend",
   "item.create_dd.coal_piece": "Coal Piece",
@@ -330,6 +332,7 @@
   "item.create_dd.gilded_rose_shovel": "Gilded Rose Shovel",
   "item.create_dd.gilded_rose_sword": "Gilded Rose Sword",
   "item.create_dd.incomplete_kinetic_mechanism": "Incomplete Kinetic Mechanism",
+  "item.create_dd.inert_blazeling_spawn_egg": "Inert Blazeling Spawn Egg",
   "item.create_dd.kinetic_mechanism": "Kinetic Mechanism",
   "item.create_dd.lapis_alloy": "NA | INVALID ITEM",
   "item.create_dd.lapis_lazuli_shard": "Lapis Lazuli Shard",
@@ -339,6 +342,9 @@
   "item.create_dd.reversed_gearshift": "NA | INVALID ITEM",
   "item.create_dd.rubber": "Rubber",
   "item.create_dd.sap_bucket": "Sap Bucket",
+  "item.create_dd.seething_ablaze_powder": "Seething Ablaze Powder",
+  "item.create_dd.seething_ablaze_rod": "Seething Ablaze Rod",
+  "item.create_dd.seething_ablaze_spawn_egg": "Seething Ablaze Spawn Egg",
   "itemGroup.create_dd.base": "Create: Dreams n' Desires",
   "itemGroup.create_dd.palettes": "Dreams n' Desires Building Blocks"
 }
