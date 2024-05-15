@@ -1,4 +1,4 @@
-package uwu.lopyluna.create_dd.content.blocks.others;
+package uwu.lopyluna.create_dd.content.blocks.contraptions.bore_block;
 
 import net.minecraft.world.level.block.Block;
 

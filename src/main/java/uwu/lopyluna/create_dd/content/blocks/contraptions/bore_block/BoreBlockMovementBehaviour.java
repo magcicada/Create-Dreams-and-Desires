@@ -1,4 +1,4 @@
-package uwu.lopyluna.create_dd.content.blocks.others;
+package uwu.lopyluna.create_dd.content.blocks.contraptions.bore_block;
 
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
 import com.simibubi.create.content.contraptions.mounted.MountedContraption;
