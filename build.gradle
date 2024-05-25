@@ -22,7 +22,7 @@ apply plugin: 'org.spongepowered.mixin'
 jarJar.enable()
 
 group = 'uwu.lopyluna.create_dd'
-archivesBaseName = "Create-Dreams-n-Desires-${artifact_minecraft_version}"
+archivesBaseName = "Create-DnDesire-${artifact_minecraft_version}"
 version = mod_version
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)

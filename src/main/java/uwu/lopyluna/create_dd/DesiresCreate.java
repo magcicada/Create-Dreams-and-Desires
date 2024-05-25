@@ -74,13 +74,13 @@ public class DesiresCreate
         DesiresTags.init();
         DesiresClassicItems.register();
         DesiresCreativeModeTabs.init();
+        DesiresSpriteShifts.register();
         DesiresBlocks.register();
         DesiresItems.register();
         DesiresFluids.register();
         DesiresPaletteBlocks.register();
         DesiresEntityTypes.register();
         DesiresBlockEntityTypes.register();
-        DesiresSpriteShifts.init();
         DesireFanProcessingTypes.register();
         DesiresRecipeTypes.register(modEventBus);
         DesiresParticleTypes.register(modEventBus);

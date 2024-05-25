@@ -119,5 +119,5 @@ public class DesiresSpriteShifts {
 		return getCT(type, blockTextureName, blockTextureName);
 	}
 
-	public static void init(){}
+	public static void register(){}
 }
