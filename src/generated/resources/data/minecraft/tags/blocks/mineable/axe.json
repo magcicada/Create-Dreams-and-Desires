@@ -4,6 +4,7 @@
     "create_dd:overburden_casing",
     "create_dd:hydraulic_casing",
     "create_dd:industrial_casing",
+    "create_dd:gaugeometer",
     "create_dd:inverse_box",
     "create_dd:kinetic_motor",
     "create_dd:cog_crank",

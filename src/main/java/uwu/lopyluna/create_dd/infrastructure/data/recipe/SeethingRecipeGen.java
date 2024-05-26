@@ -38,6 +38,7 @@ public class SeethingRecipeGen extends DesireProcessingRecipeGen {
 		MAGMA_BLOCK = convert(Blocks.NETHERRACK, Blocks.MAGMA_BLOCK),
 		MAGMA_CREAM = convert(Items.SLIME_BALL, Items.MAGMA_CREAM),
 		CRYING_OBSIDIAN = convert(Blocks.OBSIDIAN, Blocks.CRYING_OBSIDIAN),
+		COBBLED_DEEPSLATE = convert(Blocks.COBBLESTONE, Blocks.COBBLED_DEEPSLATE),
 
 		LAPIS_LAZULI_SHARD = convertChanceRecipe(() -> Items.CALCITE, DesiresItems.LAPIS_LAZULI_SHARD::get, .75f),
 		DIAMOND_SHARD = convertChanceRecipe(() -> Items.COAL_BLOCK, DesiresItems.DIAMOND_SHARD::get, .25f),

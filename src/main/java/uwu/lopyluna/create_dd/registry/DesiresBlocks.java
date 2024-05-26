@@ -5,8 +5,11 @@ import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
+import com.simibubi.create.content.kinetics.gauge.GaugeGenerator;
 import com.simibubi.create.content.kinetics.motor.CreativeMotorGenerator;
 import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
+import com.simibubi.create.content.redstone.displayLink.source.KineticSpeedDisplaySource;
+import com.simibubi.create.content.redstone.displayLink.source.KineticStressDisplaySource;
 import com.simibubi.create.foundation.block.ItemUseOverrides;
 import com.simibubi.create.foundation.data.*;
 import com.simibubi.create.foundation.utility.Couple;
@@ -32,6 +35,7 @@ import net.minecraftforge.common.util.ForgeSoundType;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.content.blocks.contraptions.bore_block.BoreBlock;
 import uwu.lopyluna.create_dd.content.blocks.contraptions.bore_block.BoreBlockMovementBehaviour;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.gaugeometer.GaugeMeterBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlockItem;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearStructuralBlock;
@@ -54,6 +58,7 @@ import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockp
 import java.util.function.Consumer;
 
 import static com.simibubi.create.AllMovementBehaviours.movementBehaviour;
+import static com.simibubi.create.content.redstone.displayLink.AllDisplayBehaviours.assignDataBehaviour;
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.*;
@@ -160,15 +165,33 @@ public class DesiresBlocks {
 			.transform(customItemModel())
 			.register();
 
+	public static final BlockEntry<GaugeMeterBlock> GAUGEOMETER = REGISTRATE.block("gaugeometer", GaugeMeterBlock::new)
+			.initialProperties(SharedProperties::wooden)
+			.properties(p -> p.color(MaterialColor.PODZOL))
+			.transform(axeOrPickaxe())
+			.transform(BlockStressDefaults.setNoImpact())
+			.blockstate(new GaugeGenerator()::generate)
+			.onRegister(assignDataBehaviour(new KineticSpeedDisplaySource(), "kinetic_speed"))
+			.onRegister(assignDataBehaviour(new KineticStressDisplaySource(), "kinetic_stress"))
+			.recipe((c, p) -> ShapelessRecipeBuilder.shapeless(c.get(), 2)
+					.requires(AllBlocks.STRESSOMETER.get())
+					.requires(AllBlocks.SPEEDOMETER.get())
+					.unlockedBy("has_" + getItemName(Items.COMPASS), has(Items.COMPASS))
+					.save(p, DesiresCreate.asResource("crafting/gaugeometer")))
+			.item()
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.transform(ModelGen.customItemModel("gauge", "_", "item"))
+			.register();
+
 	public static final BlockEntry<HydraulicPressBlock> HYDRAULIC_PRESS = REGISTRATE.block("hydraulic_press", HydraulicPressBlock::new)
 			.initialProperties(SharedProperties::copperMetal)
 			.properties(BlockBehaviour.Properties::noOcclusion)
 			.properties(p -> p.noOcclusion().color(MaterialColor.TERRACOTTA_ORANGE))
 			.transform(pickaxeOnly())
 			.blockstate(BlockStateGen.horizontalBlockProvider(true))
-			.transform(BlockStressDefaults.setImpact(8.0))
+			.transform(BlockStressDefaults.setImpact(64.0))
 			.item(AssemblyOperatorBlockItem::new)
-			.tab(() -> DesiresCreativeModeTabs.BETA_CREATIVE_TAB)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.transform(customItemModel())
 			.register();
 

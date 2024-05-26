@@ -1,6 +1,5 @@
 package uwu.lopyluna.create_dd.registry;
 
-import com.simibubi.create.content.equipment.toolbox.ToolboxDyeingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder.ProcessingRecipeFactory;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
@@ -27,36 +26,19 @@ public enum DesiresRecipeTypes implements IRecipeTypeInfo {
 
 	SANDING(SandingRecipe::new),
 	FREEZING(FreezingRecipe::new),
-	SEETHING(SeethingRecipe::new),
-
-	BACKPACK_DYEING(() -> new SimpleRecipeSerializer<>(ToolboxDyeingRecipe::new), () -> RecipeType.CRAFTING, false);
+	SEETHING(SeethingRecipe::new);
 
 
 
 	private final ResourceLocation id;
 	private final RegistryObject<RecipeSerializer<?>> serializerObject;
-	@Nullable
-	private final RegistryObject<RecipeType<?>> typeObject;
 	private final Supplier<RecipeType<?>> type;
-
-	DesiresRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier, Supplier<RecipeType<?>> typeSupplier, boolean registerType) {
-		String name = Lang.asId(name());
-		id = DesiresCreate.asResource(name);
-		serializerObject = Registers.SERIALIZER_REGISTER.register(name, serializerSupplier);
-		if (registerType) {
-			typeObject = Registers.TYPE_REGISTER.register(name, typeSupplier);
-			type = typeObject;
-		} else {
-			typeObject = null;
-			type = typeSupplier;
-		}
-	}
 
 	DesiresRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier) {
 		String name = Lang.asId(name());
 		id = DesiresCreate.asResource(name);
 		serializerObject = Registers.SERIALIZER_REGISTER.register(name, serializerSupplier);
-		typeObject = Registers.TYPE_REGISTER.register(name, () -> RecipeType.simple(id));
+		@Nullable RegistryObject<RecipeType<?>> typeObject = Registers.TYPE_REGISTER.register(name, () -> RecipeType.simple(id));
 		type = typeObject;
 	}
 

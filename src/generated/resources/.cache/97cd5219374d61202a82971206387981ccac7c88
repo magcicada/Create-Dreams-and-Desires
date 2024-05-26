@@ -1,4 +1,4 @@
-// 1.19.2	2024-05-11T16:20:33.3166101	Create: Dreams n' Desires Processing Recipes
+// 1.19.2	2024-05-26T09:25:08.9416182	Create: Dreams n' Desires Processing Recipes
 b8d00ac2807aff46d5d01626bad8d2858960a4e6 data/create_dd/recipes/freezing/blaze_cake.json
 360b8d3644c9aa6e4e8314814b7dbbf81a674866 data/create_dd/recipes/freezing/crying_obsidian.json
 0320e91da26b5e9b946db92fe7c45c0389a1bafb data/create_dd/recipes/freezing/ice.json
@@ -7,8 +7,12 @@ b8d00ac2807aff46d5d01626bad8d2858960a4e6 data/create_dd/recipes/freezing/blaze_c
 aa85ba2f1e1ecba8117f3362041c72c45371c4ae data/create_dd/recipes/freezing/snow.json
 f1ee602926e17dcd03164a757e057cddd1ac7a2b data/create_dd/recipes/freezing/snowball.json
 7373fba2170dfc961fc57dc66f839b4903c94ed1 data/create_dd/recipes/freezing/water_bucket.json
+e1e8f1993db6abe53964d4463b6de850a5af81fc data/create_dd/recipes/item_application/cogwheel.json
+beb84e458753cf8f910104f2f0871f8a35f33d0c data/create_dd/recipes/item_application/downgrade_cogwheel.json
+6f50d4c85f0d663c81f7e7eef7b58ef9123a52f4 data/create_dd/recipes/item_application/downgrade_large_cogwheel.json
 3271eea40c1a3371bf6d391acfaacf71ac6d2ce2 data/create_dd/recipes/item_application/hydraulic_casing.json
 cbb90b1f030f45b6f631e487573fdf63af6abef9 data/create_dd/recipes/item_application/industrial_casing.json
+8589bfa8db920f936ba18f12cf317e5c55839481 data/create_dd/recipes/item_application/large_cogwheel.json
 7a70512493af66e0b5cee21c88ccc733686e5839 data/create_dd/recipes/item_application/overburden_casing.json
 dd2f8820e673813ab71a16adab136a625cbf47fe data/create_dd/recipes/mixing/bury_blend.json
 920a0d761ab71b88287f8b11fd6286aeaf1d7377 data/create_dd/recipes/mixing/calcite.json

@@ -186,6 +186,7 @@
     "create_dd:hydraulic_casing",
     "create_dd:industrial_casing",
     "create_dd:industrial_fan",
+    "create_dd:gaugeometer",
     "create_dd:hydraulic_press",
     "create_dd:bore_block",
     "create_dd:inverse_box",

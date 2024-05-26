@@ -5,7 +5,7 @@ import com.simibubi.create.foundation.config.ConfigBase;
 public class DLogistics extends ConfigBase {
 
 //	public final ConfigInt mechanicalArmRange = i(5, 1, "mechanicalArmRange", Comments.mechanicalArmRange);
-	public final ConfigInt calculationLinkRange = i(512, 1, "calculationLinkRange", Comments.calculationLinkRange);
+//	public final ConfigInt calculationLinkRange = i(512, 1, "calculationLinkRange", Comments.calculationLinkRange);
 	public final ConfigInt verticalVaultCapacity = i(20, 1, "verticalVaultCapacity", Comments.verticalVaultCapacity);
 
 	@Override

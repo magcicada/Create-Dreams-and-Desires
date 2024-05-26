@@ -3,10 +3,12 @@ package uwu.lopyluna.create_dd.registry;
 import com.jozufozu.flywheel.core.PartialModel;
 import uwu.lopyluna.create_dd.DesiresCreate;
 
+@SuppressWarnings({"all"})
 public class DesiresPartialModels {
 
 	public static final PartialModel
 
+		EMPTY = block("empty"),
 		INDUSTRIAL_FAN_POWER = block("industrial_fan/cog"),
 		INDUSTRIAL_FAN_INNER = block("industrial_fan/propeller"),
 		COG_CRANK_HANDLE = block("cog_crank/handle"),

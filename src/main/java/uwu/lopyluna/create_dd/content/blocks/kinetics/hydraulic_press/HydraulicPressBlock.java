@@ -34,7 +34,10 @@ public class HydraulicPressBlock extends HorizontalKineticBlock implements IBE<H
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
-        return !AllBlocks.BASIN.has(worldIn.getBlockState(pos.below()));
+        BlockState belowState = worldIn.getBlockState(pos.below());
+        return !AllBlocks.BASIN.has(belowState) ||
+                !AllBlocks.DEPOT.has(belowState) ||
+                !AllBlocks.BELT.has(belowState);
     }
 
     @Override
@@ -58,6 +61,11 @@ public class HydraulicPressBlock extends HorizontalKineticBlock implements IBE<H
     }
 
     @Override
+    public SpeedLevel getMinimumRequiredSpeedLevel() {
+        return SpeedLevel.MEDIUM;
+    }
+
+    @Override
     public Class<HydraulicPressBlockEntity> getBlockEntityClass() {
         return HydraulicPressBlockEntity.class;
     }
@@ -71,4 +79,5 @@ public class HydraulicPressBlock extends HorizontalKineticBlock implements IBE<H
     public boolean isPathfindable(BlockState state, BlockGetter reader, BlockPos pos, PathComputationType type) {
         return false;
     }
+
 }

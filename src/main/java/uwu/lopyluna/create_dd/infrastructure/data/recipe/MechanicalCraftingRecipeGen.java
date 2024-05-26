@@ -1,6 +1,7 @@
 package uwu.lopyluna.create_dd.infrastructure.data.recipe;
 
 import com.google.common.base.Supplier;
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
@@ -11,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 import uwu.lopyluna.create_dd.registry.DesiresItems;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -21,6 +23,17 @@ import java.util.function.UnaryOperator;
 public class MechanicalCraftingRecipeGen extends CreateRecipeProvider {
 
     GeneratedRecipe
+
+            HYDRAULIC_PRESS = create(DesiresBlocks.HYDRAULIC_PRESS::get).returns(1)
+            .recipe(b -> b
+                    .key('P', AllBlocks.FLUID_PIPE.get())
+                    .key('M', AllBlocks.MECHANICAL_PRESS.get())
+                    .key('H', DesiresBlocks.HYDRAULIC_CASING.get())
+                    .key('C', Items.COPPER_BLOCK)
+                    .patternLine(" P ")
+                    .patternLine(" H ")
+                    .patternLine("CMC")
+            ),
 
             EXCAVATION_DRILL = create(DesiresItems.EXCAVATION_DRILL::get).returns(1)
             .recipe(b -> b
