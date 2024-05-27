@@ -15,6 +15,7 @@ import com.simibubi.create.foundation.data.*;
 import com.simibubi.create.foundation.utility.Couple;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
+import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
@@ -31,11 +32,12 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.util.ForgeSoundType;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.content.blocks.contraptions.bore_block.BoreBlock;
 import uwu.lopyluna.create_dd.content.blocks.contraptions.bore_block.BoreBlockMovementBehaviour;
-import uwu.lopyluna.create_dd.content.blocks.kinetics.gaugeometer.GaugeMeterBlock;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.multimeter.MultiMeterBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlockItem;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearStructuralBlock;
@@ -48,9 +50,9 @@ import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngi
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.PoweredFlywheelBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.kinetic_motor.KineticMotorBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.transmission.InverseBoxBlock;
-import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegBlock;
-import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegCTBehaviour;
-import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegItem;
+import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirBlock;
+import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirCTBehaviour;
+import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirItem;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileCTBehaviour;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileItem;
@@ -161,11 +163,11 @@ public class DesiresBlocks {
 			.transform(BlockStressDefaults.setCapacity(16))
 			.lang("Industrial Fan")
 			.item()
-			.tab(() -> DesiresCreativeModeTabs.BETA_CREATIVE_TAB)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.transform(customItemModel())
 			.register();
 
-	public static final BlockEntry<GaugeMeterBlock> GAUGEOMETER = REGISTRATE.block("gaugeometer", GaugeMeterBlock::new)
+	public static final BlockEntry<MultiMeterBlock> MULTIMETER = REGISTRATE.block("multimeter", MultiMeterBlock::new)
 			.initialProperties(SharedProperties::wooden)
 			.properties(p -> p.color(MaterialColor.PODZOL))
 			.transform(axeOrPickaxe())
@@ -177,7 +179,7 @@ public class DesiresBlocks {
 					.requires(AllBlocks.STRESSOMETER.get())
 					.requires(AllBlocks.SPEEDOMETER.get())
 					.unlockedBy("has_" + getItemName(Items.COMPASS), has(Items.COMPASS))
-					.save(p, DesiresCreate.asResource("crafting/gaugeometer")))
+					.save(p, DesiresCreate.asResource("crafting/multimeter")))
 			.item()
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.transform(ModelGen.customItemModel("gauge", "_", "item"))
@@ -332,22 +334,44 @@ public class DesiresBlocks {
 							.build()))
 			.onRegister(connectedTextures(ItemStockpileCTBehaviour::new))
 			.item(ItemStockpileItem::new)
+			.recipe((c, p) -> {
+				p.stonecutting(DataIngredient.items(AllBlocks.ITEM_VAULT), c, 1);
+				p.stonecutting(DataIngredient.items(c), AllBlocks.ITEM_VAULT, 1);
+
+				ShapedRecipeBuilder.shaped(c.get(), 1)
+						.define('B', AllTags.forgeItemTag("plates/iron"))
+						.define('C', Tags.Items.BARRELS_WOODEN)
+						.pattern("BCB")
+						.unlockedBy("has_" + getItemName(Items.BARREL.asItem()), has(Tags.Items.BARRELS_WOODEN))
+						.save(p, DesiresCreate.asResource("crafting/kinetics/" + c.getName()));
+			})
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.build()
 			.register();
 
-	public static final BlockEntry<FluidKegBlock> FLUID_KEG = REGISTRATE.block("fluid_keg", FluidKegBlock::new)
+	public static final BlockEntry<FluidReservoirBlock> FLUID_RESERVOIR = REGISTRATE.block("fluid_reservoir", FluidReservoirBlock::new)
 			.initialProperties(SharedProperties::copperMetal)
 			.properties(p -> p.noOcclusion().isRedstoneConductor((p1, p2, p3) -> true))
 			.transform(pickaxeOnly())
 			.blockstate((c, p) -> p.getVariantBuilder(c.get())
 					.forAllStates(s -> ConfiguredModel.builder()
 							.modelFile(AssetLookup.standardModel(c, p))
-							.rotationY(s.getValue(FluidKegBlock.HORIZONTAL_AXIS) == Direction.Axis.X ? 90 : 0)
+							.rotationY(s.getValue(FluidReservoirBlock.HORIZONTAL_AXIS) == Direction.Axis.X ? 90 : 0)
 							.build()))
-			.onRegister(connectedTextures(FluidKegCTBehaviour::new))
-			.item(FluidKegItem::new)
-			.tab(() -> DesiresCreativeModeTabs.BETA_CREATIVE_TAB)
+			.onRegister(connectedTextures(FluidReservoirCTBehaviour::new))
+			.item(FluidReservoirItem::new)
+			.recipe((c, p) -> {
+				p.stonecutting(DataIngredient.items(AllBlocks.FLUID_TANK), c, 1);
+				p.stonecutting(DataIngredient.items(c), AllBlocks.FLUID_TANK, 1);
+
+				ShapedRecipeBuilder.shaped(c.get(), 1)
+						.define('B', AllTags.forgeItemTag("plates/copper"))
+						.define('C', Tags.Items.BARRELS_WOODEN)
+						.pattern("BCB")
+						.unlockedBy("has_" + getItemName(Items.BARREL.asItem()), has(Tags.Items.BARRELS_WOODEN))
+						.save(p, DesiresCreate.asResource("crafting/kinetics/" + c.getName()));
+			})
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.build()
 			.register();
 

@@ -18,10 +18,10 @@ public class DesiresSpriteShifts {
 
 
 	public static final Couple<CTSpriteShiftEntry>
-			KEG_TOP = keg("top"),
-			KEG_FRONT = keg("front"),
-			KEG_SIDE = keg("side"),
-			KEG_BOTTOM = keg("bottom");
+			KEG_TOP = reservoir("top"),
+			KEG_FRONT = reservoir("front"),
+			KEG_SIDE = reservoir("side"),
+			KEG_BOTTOM = reservoir("bottom");
 
 	//public static final CTSpriteShiftEntry
 	//	HYDRAULIC_SCAFFOLD = horizontal("scaffold/hydraulic_scaffold");
@@ -88,8 +88,8 @@ public class DesiresSpriteShifts {
 						DesiresCreate.asResource(medium ? prefixed + "_medium" : prefixed + "_large")));
 	}
 
-	private static Couple<CTSpriteShiftEntry> keg(String name) {
-		final String prefixed = "block/keg/keg_" + name;
+	private static Couple<CTSpriteShiftEntry> reservoir(String name) {
+		final String prefixed = "block/reservoir/reservoir_" + name;
 		return Couple.createWithContext(
 				medium -> CTSpriteShifter.getCT(AllCTTypes.RECTANGLE, DesiresCreate.asResource(prefixed + "_small"),
 						DesiresCreate.asResource(medium ? prefixed + "_medium" : prefixed + "_large")));

@@ -1,8 +1,6 @@
 package uwu.lopyluna.create_dd.mixins;
 
 import com.simibubi.create.content.contraptions.Contraption;
-import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
-import com.simibubi.create.content.logistics.vault.ItemVaultBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
@@ -13,6 +11,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileBlockEntity;
 
 @Mixin(value = Contraption.class, remap = false)
@@ -24,7 +23,7 @@ public abstract class MixinContraption {
     @Inject(at = @At("HEAD"), method = "getBlockEntityNBT(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/nbt/CompoundTag;", cancellable = true)
     protected void getBlockEntityNBT(Level world, BlockPos pos, CallbackInfoReturnable<CompoundTag> cir) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof ItemStockpileBlockEntity) {
+        if (blockEntity instanceof ItemStockpileBlockEntity || blockEntity instanceof FluidReservoirBlockEntity) {
             CompoundTag nbt = blockEntity.saveWithFullMetadata();
             nbt.remove("x");
             nbt.remove("y");

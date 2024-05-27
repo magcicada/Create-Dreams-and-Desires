@@ -22,6 +22,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
+@SuppressWarnings({"deprecation"})
 public class IndustrialFanBlock extends DirectionalKineticBlock implements IBE<IndustrialFanBlockEntity>, ICogWheel {
     public IndustrialFanBlock(Properties properties) {
         super(properties);
@@ -30,19 +31,19 @@ public class IndustrialFanBlock extends DirectionalKineticBlock implements IBE<I
     @Override
     public void onPlace(BlockState state, Level worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
         super.onPlace(state, worldIn, pos, oldState, isMoving);
-        blockUpdate(state, worldIn, pos);
+        blockUpdate(worldIn, pos);
     }
 
     @Override
     public void updateIndirectNeighbourShapes(BlockState stateIn, LevelAccessor worldIn, BlockPos pos, int flags, int count) {
         super.updateIndirectNeighbourShapes(stateIn, worldIn, pos, flags, count);
-        blockUpdate(stateIn, worldIn, pos);
+        blockUpdate(worldIn, pos);
     }
 
     @Override
     public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos,
                                 boolean isMoving) {
-        blockUpdate(state, worldIn, pos);
+        blockUpdate(worldIn, pos);
     }
 
     @Override
@@ -65,10 +66,13 @@ public class IndustrialFanBlock extends DirectionalKineticBlock implements IBE<I
                 .isShiftKeyDown() ? preferredFacing : preferredFacing.getOpposite());
     }
 
-    protected void blockUpdate(BlockState state, LevelAccessor worldIn, BlockPos pos) {
+    protected void blockUpdate(LevelAccessor worldIn, BlockPos pos) {
         if (worldIn instanceof WrappedWorld)
             return;
         notifyFanBlockEntity(worldIn, pos);
+        if (worldIn.isClientSide())
+            return;
+        withBlockEntityDo(worldIn, pos, IndustrialFanBlockEntity::queueGeneratorUpdate);
     }
 
     protected void notifyFanBlockEntity(LevelAccessor world, BlockPos pos) {
@@ -77,7 +81,7 @@ public class IndustrialFanBlock extends DirectionalKineticBlock implements IBE<I
 
     @Override
     public BlockState updateAfterWrenched(BlockState newState, UseOnContext context) {
-        blockUpdate(newState, context.getLevel(), context.getClickedPos());
+        blockUpdate(context.getLevel(), context.getClickedPos());
         return newState;
     }
 

@@ -1,4 +1,4 @@
-// 1.19.2	2024-05-26T09:25:08.9416182	Create: Dreams n' Desires Processing Recipes
+// 1.19.2	2024-05-27T11:30:17.7739751	Create: Dreams n' Desires Processing Recipes
 b8d00ac2807aff46d5d01626bad8d2858960a4e6 data/create_dd/recipes/freezing/blaze_cake.json
 360b8d3644c9aa6e4e8314814b7dbbf81a674866 data/create_dd/recipes/freezing/crying_obsidian.json
 0320e91da26b5e9b946db92fe7c45c0389a1bafb data/create_dd/recipes/freezing/ice.json
@@ -48,6 +48,7 @@ c80034b9c4cf8c87bd15b3e1134ef0a2a5ed06dc data/create_dd/recipes/sanding/weathere
 e9abd0a8bbac29e3941f9067a34d6f10bdc5be4c data/create_dd/recipes/sanding/weathered_cut_copper.json
 1a70dbdab4427f60a12978fb033cdcfd116f1448 data/create_dd/recipes/sanding/weathered_cut_copper_slab.json
 fb286805156112f47fa801269720abef8fb0e756 data/create_dd/recipes/sanding/weathered_cut_copper_stairs.json
+1a9eb975d775250d2d019d6004f9b22b8c57bfc6 data/create_dd/recipes/seething/cobblestone.json
 44fb9544f462a73407603e37fb6ed160b42a8eec data/create_dd/recipes/seething/crushed_raw_copper.json
 5d06b521cc62d04905722c961a1edf8f6d1282a8 data/create_dd/recipes/seething/crushed_raw_gold.json
 cbb3e33e5bdceb6b07fd1150740d477023631932 data/create_dd/recipes/seething/crushed_raw_iron.json

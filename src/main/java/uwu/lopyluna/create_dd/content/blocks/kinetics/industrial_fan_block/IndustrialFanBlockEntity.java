@@ -42,6 +42,13 @@ public class IndustrialFanBlockEntity extends GeneratingKineticBlockEntity imple
         updateAirFlow = true;
     }
 
+    @Nullable
+    @Override
+    public AirCurrent getAirCurrent() {
+        return airCurrent;
+    }
+
+
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
@@ -51,10 +58,10 @@ public class IndustrialFanBlockEntity extends GeneratingKineticBlockEntity imple
     @Override
     protected void read(CompoundTag compound, boolean clientPacket) {
         super.read(compound, clientPacket);
-        if (clientPacket)
-            airCurrent.rebuild();
         if (!wasMoved)
             isGenerator = compound.getBoolean("Generating");
+        if (clientPacket)
+            airCurrent.rebuild();
     }
 
     @Override
@@ -115,12 +122,6 @@ public class IndustrialFanBlockEntity extends GeneratingKineticBlockEntity imple
             return true;
         }
         return false;
-    }
-
-    @Nullable
-    @Override
-    public AirCurrent getAirCurrent() {
-        return airCurrent;
     }
 
     @Nullable

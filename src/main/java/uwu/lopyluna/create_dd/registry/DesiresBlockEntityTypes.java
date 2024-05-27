@@ -4,7 +4,7 @@ import com.simibubi.create.content.kinetics.base.*;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftInstance;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
-import uwu.lopyluna.create_dd.content.blocks.kinetics.gaugeometer.GaugeMeterBlockEntity;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.multimeter.MultiMeterBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.hydraulic_press.HydraulicPressBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.hydraulic_press.HydraulicPressInstance;
@@ -19,7 +19,7 @@ import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.*;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.kinetic_motor.KineticMotorBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.kinetic_motor.KineticMotorRenderer;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.transmission.InverseBoxBlockEntity;
-import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_keg.FluidKegBlockEntity;
+import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileBlockEntity;
 
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
@@ -52,9 +52,9 @@ public class DesiresBlockEntityTypes {
 			.validBlocks(DesiresBlocks.ITEM_STOCKPILE)
 			.register();
 
-	public static final BlockEntityEntry<FluidKegBlockEntity> FLUID_KEG = REGISTRATE
-			.blockEntity("fluid_keg", FluidKegBlockEntity::new)
-			.validBlocks(DesiresBlocks.FLUID_KEG)
+	public static final BlockEntityEntry<FluidReservoirBlockEntity> FLUID_RESERVOIR = REGISTRATE
+			.blockEntity("fluid_reservoir", FluidReservoirBlockEntity::new)
+			.validBlocks(DesiresBlocks.FLUID_RESERVOIR)
 			.register();
 
 	public static final BlockEntityEntry<FurnaceEngineBlockEntity> FURNACE_ENGINE = REGISTRATE
@@ -92,10 +92,10 @@ public class DesiresBlockEntityTypes {
 			.renderer(() -> KineticBlockEntityRenderer::new)
 			.register();
 
-	public static final BlockEntityEntry<GaugeMeterBlockEntity> GAUGEOMETER = REGISTRATE
-			.blockEntity("gaugeometer", GaugeMeterBlockEntity::new)
+	public static final BlockEntityEntry<MultiMeterBlockEntity> MULTIMETER = REGISTRATE
+			.blockEntity("multimeter", MultiMeterBlockEntity::new)
 			.instance(() -> ShaftInstance::new)
-			.validBlocks(DesiresBlocks.GAUGEOMETER)
+			.validBlocks(DesiresBlocks.MULTIMETER)
 			.renderer(() -> ShaftRenderer::new)
 			.register();
 

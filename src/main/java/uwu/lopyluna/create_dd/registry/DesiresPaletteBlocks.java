@@ -1,19 +1,24 @@
 package uwu.lopyluna.create_dd.registry;
 
+import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.DesiresCreate;
@@ -177,22 +182,22 @@ public class DesiresPaletteBlocks {
 			ORANGE_RUBBER_BLOCKS = rubber_decor("orange", MaterialColor.COLOR_ORANGE, Items.ORANGE_DYE);
 
 	public static final BlockEntry<Block>
-			BLACK_BLUEPRINT_BLOCK = blueprintBlocks("black", "Black", DesiresSpriteShifts.BLACK_BLUEPRINT_BLOCK, MaterialColor.COLOR_BLACK),
-			WHITE_BLUEPRINT_BLOCK = blueprintBlocks("white", "White", DesiresSpriteShifts.WHITE_BLUEPRINT_BLOCK, MaterialColor.SNOW),
-			BLUE_BLUEPRINT_BLOCK = blueprintBlocks("", "", DesiresSpriteShifts.BLUE_BLUEPRINT_BLOCK, MaterialColor.COLOR_BLUE, ""),
-			LIGHT_BLUE_BLUEPRINT_BLOCK = blueprintBlocks("light", "Light", DesiresSpriteShifts.LIGHT_BLUE_BLUEPRINT_BLOCK, MaterialColor.COLOR_LIGHT_BLUE),
-			RED_BLUEPRINT_BLOCK = blueprintBlocks("red", "Red", DesiresSpriteShifts.RED_BLUEPRINT_BLOCK, MaterialColor.COLOR_RED),
-			GREEN_BLUEPRINT_BLOCK = blueprintBlocks("green", "Green", DesiresSpriteShifts.GREEN_BLUEPRINT_BLOCK, MaterialColor.COLOR_GREEN),
-			LIME_BLUEPRINT_BLOCK = blueprintBlocks("lime", "Lime", DesiresSpriteShifts.LIME_BLUEPRINT_BLOCK, MaterialColor.COLOR_LIGHT_GREEN),
-			PINK_BLUEPRINT_BLOCK = blueprintBlocks("pink", "Pink", DesiresSpriteShifts.PINK_BLUEPRINT_BLOCK, MaterialColor.COLOR_PINK),
-			MAGENTA_BLUEPRINT_BLOCK = blueprintBlocks("magenta", "Magenta", DesiresSpriteShifts.MAGENTA_BLUEPRINT_BLOCK, MaterialColor.COLOR_MAGENTA),
-			YELLOW_BLUEPRINT_BLOCK = blueprintBlocks("yellow", "Yellow", DesiresSpriteShifts.YELLOW_BLUEPRINT_BLOCK, MaterialColor.COLOR_YELLOW),
-			GRAY_BLUEPRINT_BLOCK = blueprintBlocks("gray", "Gray", DesiresSpriteShifts.GRAY_BLUEPRINT_BLOCK, MaterialColor.COLOR_GRAY),
-			LIGHT_GRAY_BLUEPRINT_BLOCK = blueprintBlocks("light_gray", "Light Gray", DesiresSpriteShifts.LIGHT_GRAY_BLUEPRINT_BLOCK, MaterialColor.COLOR_LIGHT_GRAY),
-			BROWN_BLUEPRINT_BLOCK = blueprintBlocks("brown", "Brown", DesiresSpriteShifts.BROWN_BLUEPRINT_BLOCK, MaterialColor.COLOR_BROWN),
-			CYAN_BLUEPRINT_BLOCK = blueprintBlocks("cyan", "Cyan", DesiresSpriteShifts.CYAN_BLUEPRINT_BLOCK, MaterialColor.COLOR_CYAN),
-			PURPLE_BLUEPRINT_BLOCK = blueprintBlocks("purple", "Purple", DesiresSpriteShifts.PURPLE_BLUEPRINT_BLOCK, MaterialColor.COLOR_PURPLE),
-			ORANGE_BLUEPRINT_BLOCK = blueprintBlocks("orange", "Orange", DesiresSpriteShifts.ORANGE_BLUEPRINT_BLOCK, MaterialColor.COLOR_ORANGE)
+			BLACK_BLUEPRINT_BLOCK = blueprintBlocks("black", "Black", Items.BLACK_DYE, DesiresSpriteShifts.BLACK_BLUEPRINT_BLOCK, MaterialColor.COLOR_BLACK),
+			WHITE_BLUEPRINT_BLOCK = blueprintBlocks("white", "White", Items.WHITE_DYE, DesiresSpriteShifts.WHITE_BLUEPRINT_BLOCK, MaterialColor.SNOW),
+			BLUE_BLUEPRINT_BLOCK = blueprintBlocks("", "", Items.BLUE_DYE, DesiresSpriteShifts.BLUE_BLUEPRINT_BLOCK, MaterialColor.COLOR_BLUE, ""),
+			LIGHT_BLUE_BLUEPRINT_BLOCK = blueprintBlocks("light", "Light", Items.LIGHT_BLUE_DYE, DesiresSpriteShifts.LIGHT_BLUE_BLUEPRINT_BLOCK, MaterialColor.COLOR_LIGHT_BLUE),
+			RED_BLUEPRINT_BLOCK = blueprintBlocks("red", "Red", Items.RED_DYE, DesiresSpriteShifts.RED_BLUEPRINT_BLOCK, MaterialColor.COLOR_RED),
+			GREEN_BLUEPRINT_BLOCK = blueprintBlocks("green", "Green", Items.GREEN_DYE, DesiresSpriteShifts.GREEN_BLUEPRINT_BLOCK, MaterialColor.COLOR_GREEN),
+			LIME_BLUEPRINT_BLOCK = blueprintBlocks("lime", "Lime", Items.LIME_DYE, DesiresSpriteShifts.LIME_BLUEPRINT_BLOCK, MaterialColor.COLOR_LIGHT_GREEN),
+			PINK_BLUEPRINT_BLOCK = blueprintBlocks("pink", "Pink", Items.PINK_DYE, DesiresSpriteShifts.PINK_BLUEPRINT_BLOCK, MaterialColor.COLOR_PINK),
+			MAGENTA_BLUEPRINT_BLOCK = blueprintBlocks("magenta", "Magenta", Items.MAGENTA_DYE, DesiresSpriteShifts.MAGENTA_BLUEPRINT_BLOCK, MaterialColor.COLOR_MAGENTA),
+			YELLOW_BLUEPRINT_BLOCK = blueprintBlocks("yellow", "Yellow", Items.YELLOW_DYE, DesiresSpriteShifts.YELLOW_BLUEPRINT_BLOCK, MaterialColor.COLOR_YELLOW),
+			GRAY_BLUEPRINT_BLOCK = blueprintBlocks("gray", "Gray", Items.GRAY_DYE, DesiresSpriteShifts.GRAY_BLUEPRINT_BLOCK, MaterialColor.COLOR_GRAY),
+			LIGHT_GRAY_BLUEPRINT_BLOCK = blueprintBlocks("light_gray", "Light Gray", Items.LIGHT_GRAY_DYE, DesiresSpriteShifts.LIGHT_GRAY_BLUEPRINT_BLOCK, MaterialColor.COLOR_LIGHT_GRAY),
+			BROWN_BLUEPRINT_BLOCK = blueprintBlocks("brown", "Brown", Items.BROWN_DYE, DesiresSpriteShifts.BROWN_BLUEPRINT_BLOCK, MaterialColor.COLOR_BROWN),
+			CYAN_BLUEPRINT_BLOCK = blueprintBlocks("cyan", "Cyan", Items.CYAN_DYE, DesiresSpriteShifts.CYAN_BLUEPRINT_BLOCK, MaterialColor.COLOR_CYAN),
+			PURPLE_BLUEPRINT_BLOCK = blueprintBlocks("purple", "Purple", Items.PURPLE_DYE, DesiresSpriteShifts.PURPLE_BLUEPRINT_BLOCK, MaterialColor.COLOR_PURPLE),
+			ORANGE_BLUEPRINT_BLOCK = blueprintBlocks("orange", "Orange", Items.ORANGE_DYE, DesiresSpriteShifts.ORANGE_BLUEPRINT_BLOCK, MaterialColor.COLOR_ORANGE)
 	;
 
 
@@ -227,6 +232,31 @@ public class DesiresPaletteBlocks {
 							.sound(SoundType.POLISHED_DEEPSLATE))
 					.transform(pickaxeOnly())
 					.item()
+					.recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 4)
+							.define('D',
+								color.equals("black") ? Tags.Items.DYES_BLACK :
+								color.equals("white") ? Tags.Items.DYES_WHITE :
+								color.equals("blue") ? Tags.Items.DYES_BLUE :
+								color.equals("light_blue") ? Tags.Items.DYES_LIGHT_BLUE :
+								color.equals("red") ? Tags.Items.DYES_RED :
+								color.equals("green") ? Tags.Items.DYES_GREEN :
+								color.equals("lime") ? Tags.Items.DYES_LIME :
+								color.equals("pink") ? Tags.Items.DYES_PINK :
+								color.equals("magenta") ? Tags.Items.DYES_MAGENTA :
+								color.equals("yellow") ? Tags.Items.DYES_YELLOW :
+								color.equals("gray") ? Tags.Items.DYES_GRAY :
+								color.equals("light_gray") ? Tags.Items.DYES_LIGHT_GRAY :
+								color.equals("brown") ? Tags.Items.DYES_BROWN :
+								color.equals("cyan") ? Tags.Items.DYES_CYAN :
+								color.equals("purple") ? Tags.Items.DYES_PURPLE :
+								color.equals("orange") ? Tags.Items.DYES_ORANGE : Tags.Items.DYES)
+							.define('B', Items.SLIME_BALL)
+							.define('S', AllPaletteStoneTypes.SCORCHIA.baseBlock.get())
+							.pattern("BSB")
+							.pattern("SDS")
+							.pattern("BSB")
+							.unlockedBy("has_dyed_item", has(Tags.Items.DYES))
+							.save(p, DesiresCreate.asResource("crafting/decor/" + c.getName())))
 					.build()
 					.lang(upColor + " Asphalt Block")
 					.register();
@@ -242,4 +272,7 @@ public class DesiresPaletteBlocks {
 	// Load this class
 	public static void register() {}
 
+	protected static String getItemName(ItemLike pItemLike) {
+		return Registry.ITEM.getKey(pItemLike.asItem()).getPath();
+	}
 }
