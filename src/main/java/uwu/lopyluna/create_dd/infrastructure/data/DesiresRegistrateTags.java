@@ -6,6 +6,7 @@ import com.simibubi.create.AllTags;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import uwu.lopyluna.create_dd.DesiresCreate;
@@ -29,6 +30,73 @@ public class DesiresRegistrateTags {
 		;
 		prov.tag(forgeItemTag("dusts"))
 				.add(AllItems.POWDERED_OBSIDIAN.get())
+		;
+		prov.tag(DesiresTags.AllItemTags.SEETHABLE.tag)
+				.add(Items.ENDER_PEARL)
+				.add(Items.NETHERRACK)
+				.add(Items.SLIME_BALL)
+				.add(Items.OBSIDIAN)
+				.add(Items.COBBLESTONE)
+				.add(Items.CALCITE)
+				.add(Items.COAL_BLOCK)
+				.add(Items.DEEPSLATE_COAL_ORE)
+				.add(Items.ANCIENT_DEBRIS)
+				.add(AllItems.CRUSHED_COPPER.get())
+				.add(AllItems.CRUSHED_ZINC.get())
+				.add(AllItems.CRUSHED_GOLD.get())
+				.add(AllItems.CRUSHED_IRON.get())
+				.add(AllItems.CRUSHED_OSMIUM.get())
+				.add(AllItems.CRUSHED_PLATINUM.get())
+				.add(AllItems.CRUSHED_SILVER.get())
+				.add(AllItems.CRUSHED_TIN.get())
+				.add(AllItems.CRUSHED_LEAD.get())
+				.add(AllItems.CRUSHED_QUICKSILVER.get())
+				.add(AllItems.CRUSHED_BAUXITE.get())
+				.add(AllItems.CRUSHED_URANIUM.get())
+				.add(AllItems.CRUSHED_NICKEL.get())
+		;
+		prov.tag(DesiresTags.AllItemTags.FREEZABLE.tag)
+				.add(AllItems.BLAZE_CAKE.get())
+				.add(Items.ICE)
+				.add(Items.PACKED_ICE)
+				.add(Items.WATER_BUCKET)
+				.add(Items.MAGMA_CREAM)
+				.add(Items.SNOWBALL)
+				.add(Items.SNOW)
+				.add(Items.CRYING_OBSIDIAN)
+		;
+		prov.tag(DesiresTags.AllItemTags.SANDABLE.tag)
+				.add(Items.EXPOSED_COPPER)
+				.add(Items.WEATHERED_COPPER)
+				.add(Items.OXIDIZED_COPPER)
+				.add(Items.EXPOSED_CUT_COPPER)
+				.add(Items.WEATHERED_CUT_COPPER)
+				.add(Items.OXIDIZED_CUT_COPPER)
+				.add(Items.EXPOSED_CUT_COPPER_SLAB)
+				.add(Items.WEATHERED_CUT_COPPER_SLAB)
+				.add(Items.OXIDIZED_CUT_COPPER_SLAB)
+				.add(Items.EXPOSED_CUT_COPPER_STAIRS)
+				.add(Items.WEATHERED_CUT_COPPER_STAIRS)
+				.add(Items.OXIDIZED_CUT_COPPER_STAIRS)
+				.add(Items.POLISHED_ANDESITE)
+				.add(Items.POLISHED_ANDESITE_SLAB)
+				.add(Items.POLISHED_ANDESITE_STAIRS)
+				.add(Items.POLISHED_GRANITE)
+				.add(Items.POLISHED_GRANITE_SLAB)
+				.add(Items.POLISHED_GRANITE_STAIRS)
+				.add(Items.POLISHED_DIORITE)
+				.add(Items.POLISHED_DIORITE_SLAB)
+				.add(Items.POLISHED_DIORITE_STAIRS)
+				.add(Items.POLISHED_DEEPSLATE)
+				.add(Items.POLISHED_DEEPSLATE_SLAB)
+				.add(Items.POLISHED_DEEPSLATE_STAIRS)
+				.add(Items.POLISHED_DEEPSLATE_WALL)
+				.add(Items.POLISHED_BASALT)
+				.add(Items.MUD)
+				.add(Items.WARPED_NYLIUM)
+				.add(Items.CRIMSON_NYLIUM)
+				.add(Items.MAGMA_BLOCK)
+				.add(AllItems.ROSE_QUARTZ.get())
 		;
 
 	}

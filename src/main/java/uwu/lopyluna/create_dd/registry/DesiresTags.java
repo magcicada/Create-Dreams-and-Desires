@@ -134,6 +134,9 @@ public class DesiresTags {
 
 	public enum AllItemTags {
 
+		SEETHABLE,
+		SANDABLE,
+		FREEZABLE,
 		ADDITIONAL_DROPS_TOOL,
 		MAGNET_IGNORE,
 		SWORD(FORGE, "tools/sword"),
