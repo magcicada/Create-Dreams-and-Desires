@@ -1,4 +1,4 @@
-package uwu.lopyluna.create_dd.content.blocks.others;
+package uwu.lopyluna.create_dd.content.blocks.functional;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllShapes;
