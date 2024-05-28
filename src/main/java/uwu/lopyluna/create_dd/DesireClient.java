@@ -18,7 +18,6 @@ public class DesireClient {
 
 
     public static void clientInit(final FMLClientSetupEvent event) {
-        DesiresPartialModels.init();
 
         DesirePonderTags.register();
         DesiresPonderIndex.register();

@@ -70,6 +70,8 @@ public class DesiresCreate
 
         REGISTRATE.registerEventListeners(modEventBus);
 
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> DesiresPartialModels::init);
+
         DesiresSoundEvents.register(modEventBus);
         DesiresTags.init();
         DesiresClassicItems.register();
