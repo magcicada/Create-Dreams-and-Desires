@@ -1,4 +1,4 @@
-package uwu.lopyluna.create_dd.infrastructure.data.recipe;
+package uwu.lopyluna.create_dd.content.data_recipes;
 
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;

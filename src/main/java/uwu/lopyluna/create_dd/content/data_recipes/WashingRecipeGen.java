@@ -1,18 +1,9 @@
-package uwu.lopyluna.create_dd.infrastructure.data.recipe;
-
-import java.util.function.Supplier;
+package uwu.lopyluna.create_dd.content.data_recipes;
 
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
-import com.simibubi.create.foundation.data.recipe.CompatMetals;
-import com.simibubi.create.foundation.data.recipe.Mods;
-import com.tterrag.registrate.util.entry.ItemEntry;
 
 import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import uwu.lopyluna.create_dd.registry.DesiresPaletteStoneTypes;

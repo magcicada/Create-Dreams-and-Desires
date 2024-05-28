@@ -1,4 +1,4 @@
-package uwu.lopyluna.create_dd.infrastructure.data.recipe;
+package uwu.lopyluna.create_dd.content.data_recipes;
 
 import com.google.common.base.Supplier;
 import com.simibubi.create.AllBlocks;
@@ -23,6 +23,19 @@ import java.util.function.UnaryOperator;
 public class MechanicalCraftingRecipeGen extends CreateRecipeProvider {
 
     GeneratedRecipe
+
+            FURNACE_ENGINE = create(DesiresBlocks.FURNACE_ENGINE::get).returns(1)
+            .recipe(b -> b
+                    .key('S', AllTags.forgeItemTag("plates/brass"))
+                    .key('O', AllTags.forgeItemTag("dusts/obsidian"))
+                    .key('N', AllTags.forgeItemTag("nuggets/zinc"))
+                    .key('B', AllTags.forgeItemTag("storage_blocks/zinc"))
+                    .key('C', DesiresBlocks.INDUSTRIAL_CASING.get())
+                    .key('A', AllItems.ANDESITE_ALLOY.get())
+                    .patternLine(" S S ")
+                    .patternLine(" ACA ")
+                    .patternLine("NOBON")
+            ),
 
             HYDRAULIC_PRESS = create(DesiresBlocks.HYDRAULIC_PRESS::get).returns(1)
             .recipe(b -> b

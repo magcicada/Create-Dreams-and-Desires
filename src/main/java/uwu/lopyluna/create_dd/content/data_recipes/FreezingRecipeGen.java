@@ -1,4 +1,4 @@
-package uwu.lopyluna.create_dd.infrastructure.data.recipe;
+package uwu.lopyluna.create_dd.content.data_recipes;
 
 import com.simibubi.create.AllItems;
 import com.tterrag.registrate.util.entry.ItemEntry;
@@ -7,7 +7,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import uwu.lopyluna.create_dd.registry.DesiresRecipeTypes;
 
 import java.util.function.Supplier;

@@ -1,4 +1,4 @@
-package uwu.lopyluna.create_dd.infrastructure.data.recipe;
+package uwu.lopyluna.create_dd.content.data_recipes;
 
 import static com.simibubi.create.foundation.data.recipe.CompatMetals.ALUMINUM;
 import static com.simibubi.create.foundation.data.recipe.CompatMetals.LEAD;

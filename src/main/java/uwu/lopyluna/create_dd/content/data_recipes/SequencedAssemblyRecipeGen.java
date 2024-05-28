@@ -1,4 +1,4 @@
-package uwu.lopyluna.create_dd.infrastructure.data.recipe;
+package uwu.lopyluna.create_dd.content.data_recipes;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;

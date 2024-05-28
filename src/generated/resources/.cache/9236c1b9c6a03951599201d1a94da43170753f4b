@@ -1,4 +1,4 @@
-// 1.19.2	2024-05-27T14:54:10.7107046	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2024-05-27T17:57:01.4900914	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 9452bed2fb7ba829ea35644054add91456d3f5d9 assets/create_dd/blockstates/amethyst_block_pillar.json
 64dc32722d3ad05720fa9a200df1de7179cfd890 assets/create_dd/blockstates/basalt_pillar.json
 5fd6e80fe77786dd8fd0c5cfd6d866b44365aa96 assets/create_dd/blockstates/blackstone_pillar.json
@@ -1231,6 +1231,7 @@ ebef9afc91072ff8b4a8edf48ee5177781a66690 data/create_dd/advancements/recipes/cre
 cdf3c24d3448833e977b7d53faec03a558dc9202 data/create_dd/advancements/recipes/create_dd.base/crafting/fan_catalyst/sanding_sail.json
 0e50d780a44fa036678851804ada18ebe4b55cec data/create_dd/advancements/recipes/create_dd.base/crafting/fan_catalyst/smoking_sail.json
 50a949c7136ef8fc3c879c5d145b0e6640c71d36 data/create_dd/advancements/recipes/create_dd.base/crafting/fan_catalyst/splashing_sail.json
+5adf2ff9c6bdf8b410a2f06f3457a607a15c6659 data/create_dd/advancements/recipes/create_dd.base/crafting/industrial_fan.json
 09725bc9a964eba36203503c20a388f67562f9eb data/create_dd/advancements/recipes/create_dd.base/crafting/kinetics/fluid_reservoir.json
 033f60e16a1bc89800d3b943bf228d787050c0e2 data/create_dd/advancements/recipes/create_dd.base/crafting/kinetics/inverse_box.json
 a9280d5afeae91f3d146a7b7708c4cf03bd56404 data/create_dd/advancements/recipes/create_dd.base/crafting/kinetics/item_stockpile.json
@@ -2110,6 +2111,7 @@ b384bd0cf8ae9228699bd0df22c3ba7fbb1e34d8 data/create_dd/recipes/crafting/fan_cat
 7086033ded5d8b68b595f01dc5d58e1b5957a449 data/create_dd/recipes/crafting/fan_catalyst/sanding_sail.json
 8efc9e5136a0b6a046270358254e4d96d7ecc022 data/create_dd/recipes/crafting/fan_catalyst/smoking_sail.json
 6e0c075fc67126b12bcce5822954ab001fd504f3 data/create_dd/recipes/crafting/fan_catalyst/splashing_sail.json
+4ba7ad7647743073aefa70329a8d9469d0c2d849 data/create_dd/recipes/crafting/industrial_fan.json
 562acc782f8fb08687cc1f7376b58d9829cee53e data/create_dd/recipes/crafting/kinetics/fluid_reservoir.json
 6e55b55b72bb48444e6e11156e2c921f8c12a675 data/create_dd/recipes/crafting/kinetics/inverse_box.json
 21b752e3f5918ef6e87191fb7a1113b743ec5616 data/create_dd/recipes/crafting/kinetics/item_stockpile.json
@@ -2539,6 +2541,8 @@ f9fc6ab1b039ea4776c49ddfcd7669cb6f40cfcf data/forge/tags/fluids/sap.json
 595efaf27802507ac303f0657b0ecf406d25fbac data/forge/tags/items/buckets/sap.json
 4d1f31795de8705c21654699270df9848ccabf48 data/forge/tags/items/bury_blends.json
 e7ffb7ecec42111844ca2435b8b373ef27c7f75f data/forge/tags/items/crude_rubbers.json
+5c28c2550ac8f806ae3f2c3ed7cf731036a491d0 data/forge/tags/items/dusts.json
+5c28c2550ac8f806ae3f2c3ed7cf731036a491d0 data/forge/tags/items/dusts/obsidian.json
 4d1f31795de8705c21654699270df9848ccabf48 data/forge/tags/items/ingots.json
 4d1f31795de8705c21654699270df9848ccabf48 data/forge/tags/items/ingots/bury_blend.json
 d7243d2749a52435d55ab4c6a06bcccf82231f4f data/forge/tags/items/nuggets.json

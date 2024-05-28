@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": {
+      "item": "create:cogwheel"
+    },
+    "I": {
+      "item": "create_dd:industrial_casing"
+    },
+    "P": {
+      "item": "create:propeller"
+    }
+  },
+  "pattern": [
+    "CIP"
+  ],
+  "result": {
+    "count": 4,
+    "item": "create_dd:industrial_fan"
+  }
+}

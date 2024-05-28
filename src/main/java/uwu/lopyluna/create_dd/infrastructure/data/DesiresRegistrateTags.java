@@ -1,22 +1,36 @@
 package uwu.lopyluna.create_dd.infrastructure.data;
 
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 import uwu.lopyluna.create_dd.registry.DesiresTags;
 
+import static uwu.lopyluna.create_dd.registry.DesiresTags.forgeItemTag;
+
 public class DesiresRegistrateTags {
 
 	public static void addGenerators() {
 		DesiresCreate.REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, DesiresRegistrateTags::genBlockTags);
-		//DesiresCreate.REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, DesiresRegistrateTags::genItemTags);
+		DesiresCreate.REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, DesiresRegistrateTags::genItemTags);
 		//DesiresCreate.REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, DesiresRegistrateTags::genFluidTags);
 		//DesiresCreate.REGISTRATE.addDataGenerator(ProviderType.ENTITY_TAGS, DesiresRegistrateTags::genEntityTags);
+	}
+	private static void genItemTags(RegistrateTagsProvider<Item> prov) {
+
+		prov.tag(forgeItemTag("dusts/obsidian"))
+				.add(AllItems.POWDERED_OBSIDIAN.get())
+		;
+		prov.tag(forgeItemTag("dusts"))
+				.add(AllItems.POWDERED_OBSIDIAN.get())
+		;
+
 	}
 
 	private static void genBlockTags(RegistrateTagsProvider<Block> prov) {

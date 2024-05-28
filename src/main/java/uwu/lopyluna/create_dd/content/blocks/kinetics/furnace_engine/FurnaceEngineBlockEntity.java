@@ -38,6 +38,7 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
     public WeakReference<PoweredFlywheelBlockEntity> target = new WeakReference(null);
     public WeakReference<AbstractFurnaceBlockEntity> source = new WeakReference(null);
     float prevAngle = 0.0F;
+    int delayedTimer;
 
     public FurnaceEngineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -63,6 +64,12 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
         AbstractFurnaceBlockEntity furnace = this.getFurnace();
 
         if (furnace != null && flywheel != null) {
+            float efficiency = furnace.cookingProgress > 0 && furnace.cookingTotalTime > 0 ? 1.0f : 0.0f;
+            if (efficiency > 0.0F && delayedTimer < 20) {
+                delayedTimer++;
+            } else if (delayedTimer > 0) {
+                delayedTimer--;
+            }
             boolean verticalTarget = false;
             BlockState flywheelState = flywheel.getBlockState();
             Direction.Axis targetAxis = Direction.Axis.X;
@@ -80,12 +87,12 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
                     facing = (Direction)blockState.getValue(SteamEngineBlock.FACING);
                 }
 
-                float efficiency = furnace.cookingProgress > 0 && furnace.cookingTotalTime > 0 ? 1.0f : 0.0f;
-                if (efficiency > 0.0F) {
+                float delayedEfficiency = delayedTimer > 1 ? 1.0f : 0.0f;
+
+                if (delayedEfficiency > 0.0F) {
                     this.award(AllAdvancements.STEAM_ENGINE);
                 }
-
-                int conveyedSpeedLevel = efficiency == 0.0F ? 1 : (verticalTarget ? 1 : (int)GeneratingKineticBlockEntity.convertToDirection(1.0F, facing));
+                int conveyedSpeedLevel = delayedEfficiency == 0.0F ? 1 : (verticalTarget ? 1 : (int)GeneratingKineticBlockEntity.convertToDirection(1.0F, facing));
                 if (targetAxis == Direction.Axis.Z) {
                     conveyedSpeedLevel *= -1;
                 }
@@ -100,7 +107,7 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
                     conveyedSpeedLevel *= -1;
                 }
 
-                flywheel.update(this.worldPosition, conveyedSpeedLevel, efficiency);
+                flywheel.update(this.worldPosition, conveyedSpeedLevel, delayedEfficiency);
                 if (this.level.isClientSide) {
                     DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> {
                         return this::spawnParticles;

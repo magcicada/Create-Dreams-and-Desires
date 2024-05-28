@@ -161,6 +161,15 @@ public class DesiresBlocks {
 			.transform(pickaxeOnly())
 			.transform(BlockStressDefaults.setImpact(4.0))
 			.transform(BlockStressDefaults.setCapacity(16))
+			.recipe((c, p) -> {
+				ShapedRecipeBuilder.shaped(c.get(), 4)
+						.pattern("CIP")
+						.define('P', AllItems.PROPELLER.get())
+						.define('C', AllBlocks.COGWHEEL.get())
+						.define('I', INDUSTRIAL_CASING.get())
+						.unlockedBy("has_casing", has(INDUSTRIAL_CASING.get()))
+						.save(p, DesiresCreate.asResource("crafting/" + c.getName()));
+			})
 			.lang("Industrial Fan")
 			.item()
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
