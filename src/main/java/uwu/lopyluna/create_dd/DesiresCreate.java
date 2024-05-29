@@ -23,6 +23,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
+import uwu.lopyluna.create_dd.compat.DesiresMods;
+import uwu.lopyluna.create_dd.compat.registry.EncasedCompat;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngineBlock;
 import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
 import uwu.lopyluna.create_dd.infrastructure.data.DesiresDatagen;
@@ -92,6 +94,9 @@ public class DesiresCreate
         DesiresEntityDataSerializers.register(modEventBus);
         DesiresPackets.registerPackets();
 
+        if (DesiresMods.CREATECASING.isLoaded()) {
+            EncasedCompat.register();
+        }
 
 
         DesiresConfigs.register(modLoadingContext);

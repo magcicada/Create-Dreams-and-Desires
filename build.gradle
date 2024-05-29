@@ -68,7 +68,7 @@ minecraft {
         data {
             workingDirectory project.file('run-data')
 
-            args '--mod', "create_dd", '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/'), '--existing-mod', 'create'
+            args '--mod', "create_dd", '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/'), '--existing-mod', 'create', '--existing-mod', 'tconstruct'
         }
     }
 }
@@ -88,6 +88,17 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
+    //maven {
+    //    name = "DVS1 Maven FS"
+    //    url = "https://dvs1.progwml6.com/files/maven"
+    //}
+    //maven {
+    //    //Iglee's Repo
+    //    url = "https://iglee.fr:8081/releases"
+    //    content {
+    //        includeGroup "fr.iglee42"
+    //    }
+    //}
 
     flatDir {
         dirs "libs"
@@ -100,10 +111,14 @@ dependencies {
     implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}:slim") { transitive = false }
     implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
     implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
+    //implementation fg.deobf("fr.iglee42:CreateCasing:${minecraft_version}-${create_casing_version}") { transitive = false }
 
     compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}")
     compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}")
     runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
+
+    //compileOnly fg.deobf("slimeknights.mantle:Mantle:${minecraft_version}-${mantle_build}")
+    //compileOnly fg.deobf("slimeknights.tconstruct:TConstruct:${minecraft_version}-${tinkers_build}")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 

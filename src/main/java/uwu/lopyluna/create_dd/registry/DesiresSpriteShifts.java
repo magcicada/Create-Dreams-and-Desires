@@ -40,6 +40,18 @@ public class DesiresSpriteShifts {
 			HYDRAULIC_CASING = omni("hydraulic_casing");
 
 	public static final CTSpriteShiftEntry
+			CREATIVE_CASING_COGWHEEL_SIDE = vertical("creative_encased_cogwheel_side"),
+			OVERBURDEN_CASING_COGWHEEL_SIDE = vertical("overburden_encased_cogwheel_side"),
+			INDUSTRIAL_CASING_COGWHEEL_SIDE = vertical("industrial_encased_cogwheel_side"),
+			HYDRAULIC_CASING_COGWHEEL_SIDE = vertical("hydraulic_encased_cogwheel_side");
+
+	public static final CTSpriteShiftEntry
+			CREATIVE_CASING_COGWHEEL_OTHERSIDE = horizontal("creative_encased_cogwheel_side"),
+			OVERBURDEN_CASING_COGWHEEL_OTHERSIDE = horizontal("overburden_encased_cogwheel_side"),
+			INDUSTRIAL_CASING_COGWHEEL_OTHERSIDE = horizontal("industrial_encased_cogwheel_side"),
+			HYDRAULIC_CASING_COGWHEEL_OTHERSIDE = horizontal("hydraulic_encased_cogwheel_side");
+
+	public static final CTSpriteShiftEntry
 			 BLACK_BLUEPRINT_BLOCK = omniBlueprint("black"),
 			 WHITE_BLUEPRINT_BLOCK = omniBlueprint("white"),
 			 BLUE_BLUEPRINT_BLOCK = omni("blueprint_block"),
