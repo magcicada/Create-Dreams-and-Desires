@@ -65,7 +65,7 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
 
         if (furnace != null && flywheel != null) {
             float efficiency = furnace.cookingProgress > 0 && furnace.cookingTotalTime > 0 ? 1.0f : 0.0f;
-            if (efficiency > 0.0F && delayedTimer < 20) {
+            if (efficiency > 0.0F && delayedTimer < 5) {
                 delayedTimer++;
             } else if (delayedTimer > 0) {
                 delayedTimer--;

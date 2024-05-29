@@ -1,6 +1,6 @@
 package uwu.lopyluna.create_dd.mixins;
 
-import com.simibubi.create.content.kinetics.transmission.GearshiftBlockEntity;
+import com.simibubi.create.content.kinetics.transmission.ClutchBlockEntity;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -10,10 +10,10 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
-@Mixin(value = GearshiftBlockEntity.class, remap = false)
-public class MixinGearshiftBlockEntity extends SplitShaftBlockEntity {
+@Mixin(value = ClutchBlockEntity.class, remap = false)
+public class MixinClutchBlockEntity extends SplitShaftBlockEntity {
 
-    private MixinGearshiftBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public MixinClutchBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
@@ -28,10 +28,9 @@ public class MixinGearshiftBlockEntity extends SplitShaftBlockEntity {
         boolean inverted = !getBlockState().getValue(BlockStateProperties.INVERTED);
         if (hasSource()) {
             if (face != getSourceFacing() && ((powered && !inverted) || !powered && inverted))
-                return -1;
+                return 0;
         }
         return 1;
     }
-
 
 }

@@ -30,6 +30,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.Tags;
@@ -49,6 +50,7 @@ import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngi
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngineGenerator;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.PoweredFlywheelBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.kinetic_motor.KineticMotorBlock;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.redstone_divider.RedstoneDividerBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.transmission.InverseBoxBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirCTBehaviour;
@@ -176,23 +178,6 @@ public class DesiresBlocks {
 			.transform(customItemModel())
 			.register();
 
-	public static final BlockEntry<MultiMeterBlock> MULTIMETER = REGISTRATE.block("multimeter", MultiMeterBlock::new)
-			.initialProperties(SharedProperties::wooden)
-			.properties(p -> p.color(MaterialColor.PODZOL))
-			.transform(axeOrPickaxe())
-			.transform(BlockStressDefaults.setNoImpact())
-			.blockstate(new GaugeGenerator()::generate)
-			.onRegister(assignDataBehaviour(new KineticSpeedDisplaySource(), "kinetic_speed"))
-			.onRegister(assignDataBehaviour(new KineticStressDisplaySource(), "kinetic_stress"))
-			.recipe((c, p) -> ShapelessRecipeBuilder.shapeless(c.get(), 2)
-					.requires(AllBlocks.STRESSOMETER.get())
-					.requires(AllBlocks.SPEEDOMETER.get())
-					.unlockedBy("has_" + getItemName(Items.COMPASS), has(Items.COMPASS))
-					.save(p, DesiresCreate.asResource("crafting/multimeter")))
-			.item()
-			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
-			.transform(ModelGen.customItemModel("gauge", "_", "item"))
-			.register();
 
 	public static final BlockEntry<HydraulicPressBlock> HYDRAULIC_PRESS = REGISTRATE.block("hydraulic_press", HydraulicPressBlock::new)
 			.initialProperties(SharedProperties::copperMetal)
@@ -228,6 +213,49 @@ public class DesiresBlocks {
 			.item()
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.build()
+			.register();
+
+	public static final BlockEntry<MultiMeterBlock> MULTIMETER = REGISTRATE.block("multimeter", MultiMeterBlock::new)
+			.initialProperties(SharedProperties::wooden)
+			.properties(p -> p.color(MaterialColor.PODZOL))
+			.transform(axeOrPickaxe())
+			.transform(BlockStressDefaults.setNoImpact())
+			.blockstate(new GaugeGenerator()::generate)
+			.onRegister(assignDataBehaviour(new KineticSpeedDisplaySource(), "kinetic_speed"))
+			.onRegister(assignDataBehaviour(new KineticStressDisplaySource(), "kinetic_stress"))
+			.recipe((c, p) -> ShapelessRecipeBuilder.shapeless(c.get(), 2)
+					.requires(AllBlocks.STRESSOMETER.get())
+					.requires(AllBlocks.SPEEDOMETER.get())
+					.unlockedBy("has_" + getItemName(Items.COMPASS), has(Items.COMPASS))
+					.save(p, DesiresCreate.asResource("crafting/multimeter")))
+			.item()
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.transform(ModelGen.customItemModel("gauge", "_", "item"))
+			.register();
+
+	public static final BlockEntry<RedstoneDividerBlock> REDSTONE_DIVIDER = REGISTRATE.block("redstone_divider", RedstoneDividerBlock::new)
+			.initialProperties(SharedProperties::stone)
+			.properties(p -> p.noOcclusion().color(MaterialColor.PODZOL))
+			.addLayer(() -> RenderType::cutoutMipped)
+			.transform(BlockStressDefaults.setNoImpact())
+			.transform(axeOrPickaxe())
+			.blockstate((c, p) -> BlockStateGen.axisBlock(c, p, s -> {
+			int power = s.getValue(BlockStateProperties.POWER);
+				return AssetLookup.partialBaseModel(c, p, "power_" + (
+				power == 0 || power == 1 || power == 2 ? 0 :
+				power == 3 || power == 4 || power == 5 ? 1 :
+				power == 6 || power == 7 || power == 8 ? 2 :
+				power == 9 || power == 10 || power == 11 ? 3 : 4));
+			}))
+			.recipe((c, p) -> ShapelessRecipeBuilder.shapeless(c.get(), 1)
+					.requires(AllBlocks.ANDESITE_CASING.get())
+					.requires(AllBlocks.COGWHEEL.get())
+					.requires(Items.REDSTONE)
+					.unlockedBy("has_" + getItemName(AllBlocks.COGWHEEL.get()), has(AllBlocks.COGWHEEL.get()))
+					.save(p, DesiresCreate.asResource("crafting/kinetics/redstone_divider")))
+			.item()
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.transform(customItemModel())
 			.register();
 
 	public static final BlockEntry<InverseBoxBlock> INVERSE_BOX = REGISTRATE.block("inverse_box", InverseBoxBlock::new)

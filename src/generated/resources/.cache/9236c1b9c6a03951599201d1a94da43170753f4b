@@ -1,4 +1,4 @@
-// 1.19.2	2024-05-29T01:30:26.2379578	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2024-05-29T11:01:05.034432	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 9452bed2fb7ba829ea35644054add91456d3f5d9 assets/create_dd/blockstates/amethyst_block_pillar.json
 64dc32722d3ad05720fa9a200df1de7179cfd890 assets/create_dd/blockstates/basalt_pillar.json
 5fd6e80fe77786dd8fd0c5cfd6d866b44365aa96 assets/create_dd/blockstates/blackstone_pillar.json
@@ -247,6 +247,7 @@ a3d2232f068b253204ccf007179398334476703d assets/create_dd/blockstates/purple_pad
 9dcefc065b2d5e7e724f29964fd14b0c02789570 assets/create_dd/blockstates/raw_padded_rubber_stairs.json
 9c7154cfb0c651d6c83b837512949a90bc737cd2 assets/create_dd/blockstates/raw_padded_tiled_rubber.json
 44a304122f78a83e8618c1b457a79a126ca80d35 assets/create_dd/blockstates/raw_rubber_block.json
+854cf2447b4f07fa6e122e63d0c4868898bfbfb7 assets/create_dd/blockstates/redstone_divider.json
 9e4072d6b2ab057a41fce8a2fc39a0bbf966ac42 assets/create_dd/blockstates/red_asphalt_block.json
 6305b1c5739ba4af786f547af240243f232bc3f7 assets/create_dd/blockstates/red_blueprint_block.json
 85383c5faa03504c59d096d20fa44cb237c66215 assets/create_dd/blockstates/red_padded_mosaic_rubber.json
@@ -313,8 +314,8 @@ af62e1b2187e70334a3e36986b368feac281d63d assets/create_dd/blockstates/yellow_pad
 3f358d81d3da01f3d0fa242bf9928888a0702508 assets/create_dd/blockstates/yellow_padded_rubber_slab.json
 2736c91b94b9dd34ed0a702b4b538e6d63bc5c73 assets/create_dd/blockstates/yellow_padded_rubber_stairs.json
 7ac56fd4064658532ee94e7c8def9f604e9528aa assets/create_dd/blockstates/yellow_padded_tiled_rubber.json
-912dcb440dcd9bfd683ea5de463d47dd42fec296 assets/create_dd/lang/en_ud.json
-566e5859ad04aef680c3fe23de62db0cf3d19214 assets/create_dd/lang/en_us.json
+16c819d08607fa52d107597e7b85f17490a1d830 assets/create_dd/lang/en_ud.json
+fe990f5b1fbe4547e86406f3221ae0e6a656d948 assets/create_dd/lang/en_us.json
 186464982087eb2dd6aa9a5bf09cdb29e6326c49 assets/create_dd/models/block/amethyst_block_pillar.json
 37f5da0e49555aed59846ec90f8286e737feb179 assets/create_dd/models/block/amethyst_block_pillar_horizontal.json
 c9845fd31f14aa8e1a83ffc67249b5486a8ff5cc assets/create_dd/models/block/basalt_pillar.json
@@ -1139,6 +1140,7 @@ fdbcbe88cf3b0b6747f151c211e8971195d2c904 assets/create_dd/models/item/raw_padded
 80f19f3a8cfeebda6e2ee589ab43e15aff914476 assets/create_dd/models/item/raw_padded_tiled_rubber.json
 9e02fbbae3323b30eb72f6d83e86bc7cb60e64a9 assets/create_dd/models/item/raw_rubber.json
 6c830831a91f1216df578a2763458bb6dfe2d073 assets/create_dd/models/item/raw_rubber_block.json
+2f7f5376b886b063c32a929bdc5dacc21600b248 assets/create_dd/models/item/redstone_divider.json
 d199e1464a093d72dd9a27d4aaecc03562329dcd assets/create_dd/models/item/red_asphalt_block.json
 97c20d6525a3c2e5e0e95577765361aaa4a5c18b assets/create_dd/models/item/red_blueprint_block.json
 3322a7958564035108e9e81da9964819a6cb7688 assets/create_dd/models/item/red_padded_mosaic_rubber.json
@@ -1250,6 +1252,7 @@ cdf3c24d3448833e977b7d53faec03a558dc9202 data/create_dd/advancements/recipes/cre
 033f60e16a1bc89800d3b943bf228d787050c0e2 data/create_dd/advancements/recipes/create_dd.base/crafting/kinetics/inverse_box.json
 a9280d5afeae91f3d146a7b7708c4cf03bd56404 data/create_dd/advancements/recipes/create_dd.base/crafting/kinetics/item_stockpile.json
 c82c41318a7526966e80573901b0d2590b161fe9 data/create_dd/advancements/recipes/create_dd.base/crafting/kinetics/kinetic_motor.json
+9eaf519c291a266b2a4329fdf05aa6bbf9cb10ee data/create_dd/advancements/recipes/create_dd.base/crafting/kinetics/redstone_divider.json
 cd2c63f6d8cd0f9fe37b509451f0a150a80ce2f4 data/create_dd/advancements/recipes/create_dd.base/crafting/lapis_lazuli_shard_from_lapis_lazuli.json
 aff51371d6a78d404e307aa3510874e26c9fcde9 data/create_dd/advancements/recipes/create_dd.base/crafting/multimeter.json
 3f7941e16d06f0ffe7cbf8822b6e475d4ed7c16e data/create_dd/advancements/recipes/create_dd.base/crafting/raw_rubber_block_from_raw_rubber.json
@@ -1959,6 +1962,7 @@ fd7c7abb0e310e63091b57441d14fc1bd971bdc3 data/create_dd/loot_tables/blocks/purpl
 3953fe3967f996391c0fbc6af3e0a6e68568c46f data/create_dd/loot_tables/blocks/raw_padded_rubber_stairs.json
 b60ef5a2223542d1086539e9d78b25dcebc9ec6a data/create_dd/loot_tables/blocks/raw_padded_tiled_rubber.json
 f699ee2dd5617794dc8c3a2202e27dcb661e6332 data/create_dd/loot_tables/blocks/raw_rubber_block.json
+31b0a3b7cef5c44962014057996fea5b64cdc116 data/create_dd/loot_tables/blocks/redstone_divider.json
 3d371352d3df1aa1845fffc5e2e133b7c61cf400 data/create_dd/loot_tables/blocks/red_asphalt_block.json
 6b204f6375a0ddbca79f285c896bfc65267ff644 data/create_dd/loot_tables/blocks/red_blueprint_block.json
 fe5aacea67638de0b67f3618a2d7b50c9015bcc7 data/create_dd/loot_tables/blocks/red_padded_mosaic_rubber.json
@@ -2130,6 +2134,7 @@ b384bd0cf8ae9228699bd0df22c3ba7fbb1e34d8 data/create_dd/recipes/crafting/fan_cat
 6e55b55b72bb48444e6e11156e2c921f8c12a675 data/create_dd/recipes/crafting/kinetics/inverse_box.json
 21b752e3f5918ef6e87191fb7a1113b743ec5616 data/create_dd/recipes/crafting/kinetics/item_stockpile.json
 8afd6007c14a8e1b64d6f0e91d473bdeca8645ff data/create_dd/recipes/crafting/kinetics/kinetic_motor.json
+78ff227c7b447ebd9aa72ed3b97f4c2f4d02bfa7 data/create_dd/recipes/crafting/kinetics/redstone_divider.json
 4b801c5238138718ec092667653b68f4cd0bbf6a data/create_dd/recipes/crafting/lapis_lazuli_from_lapis_lazuli_shard.json
 0c91605846ba4eefd319835af51527a6a5fbc069 data/create_dd/recipes/crafting/lapis_lazuli_shard_from_lapis_lazuli.json
 538167a5ca2c2b4b12f85ef2a097038997bd9050 data/create_dd/recipes/crafting/multimeter.json
@@ -2576,8 +2581,8 @@ ac6313eb3c75d8e3c2d8e9b356740da183fd563b data/forge/tags/items/tools/pickaxe.jso
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/azalea_root_replaceable.json
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/dripstone_replaceable_blocks.json
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/lush_ground_replaceable.json
-1ca520806b567fef2f40a54dcb5fcc1b62b9de7e data/minecraft/tags/blocks/mineable/axe.json
-e9e03929519da73504c7b3a143fb6e37631a4968 data/minecraft/tags/blocks/mineable/pickaxe.json
+094485f59c53a71aeb92a372ea4312211651546a data/minecraft/tags/blocks/mineable/axe.json
+de425e5e0e9fd2043175cb80019b395170a91992 data/minecraft/tags/blocks/mineable/pickaxe.json
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/moss_replaceable.json
 2a7a1edb20dd28f4e45ac19e631d5813e24d6eff data/minecraft/tags/blocks/slabs.json
 f36a6393cb0327f020065a27637b9e43ddf88921 data/minecraft/tags/blocks/stairs.json

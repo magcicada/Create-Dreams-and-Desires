@@ -11,6 +11,8 @@
     "MixinAllOreFeatureConfigEntries",
     "MixinBlock",
     "MixinBlockMovementChecks",
+    "MixinClutchBlock",
+    "MixinClutchBlockEntity",
     "MixinContraption",
     "MixinGearshiftBlock",
     "MixinGearshiftBlockEntity",
