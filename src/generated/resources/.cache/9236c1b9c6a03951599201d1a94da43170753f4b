@@ -1,4 +1,4 @@
-// 1.19.2	2024-05-28T07:17:20.5947533	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2024-05-29T01:30:26.2379578	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 9452bed2fb7ba829ea35644054add91456d3f5d9 assets/create_dd/blockstates/amethyst_block_pillar.json
 64dc32722d3ad05720fa9a200df1de7179cfd890 assets/create_dd/blockstates/basalt_pillar.json
 5fd6e80fe77786dd8fd0c5cfd6d866b44365aa96 assets/create_dd/blockstates/blackstone_pillar.json
@@ -313,8 +313,8 @@ af62e1b2187e70334a3e36986b368feac281d63d assets/create_dd/blockstates/yellow_pad
 3f358d81d3da01f3d0fa242bf9928888a0702508 assets/create_dd/blockstates/yellow_padded_rubber_slab.json
 2736c91b94b9dd34ed0a702b4b538e6d63bc5c73 assets/create_dd/blockstates/yellow_padded_rubber_stairs.json
 7ac56fd4064658532ee94e7c8def9f604e9528aa assets/create_dd/blockstates/yellow_padded_tiled_rubber.json
-b87cfce9377f901f83ea292783330644b669ba63 assets/create_dd/lang/en_ud.json
-a223adcb899ba3a88f408cc34914346e0f632575 assets/create_dd/lang/en_us.json
+912dcb440dcd9bfd683ea5de463d47dd42fec296 assets/create_dd/lang/en_ud.json
+566e5859ad04aef680c3fe23de62db0cf3d19214 assets/create_dd/lang/en_us.json
 186464982087eb2dd6aa9a5bf09cdb29e6326c49 assets/create_dd/models/block/amethyst_block_pillar.json
 37f5da0e49555aed59846ec90f8286e737feb179 assets/create_dd/models/block/amethyst_block_pillar_horizontal.json
 c9845fd31f14aa8e1a83ffc67249b5486a8ff5cc assets/create_dd/models/block/basalt_pillar.json
@@ -862,6 +862,7 @@ fbc4bee5d8cc0f7f89b3dbb243b1dcf1c406412f assets/create_dd/models/block/yellow_pa
 11bb26ed9345afc8a535938bf3471479690aea9d assets/create_dd/models/block/yellow_padded_rubber_stairs_inner.json
 ad021bfe4c63edc32029bddb5dfa8910d6345bf1 assets/create_dd/models/block/yellow_padded_rubber_stairs_outer.json
 3b8d5bf322f34e3cacbf148c0dcaa210b9ba940e assets/create_dd/models/block/yellow_padded_tiled_rubber.json
+95efb951846f155a79ff76d1e3997f105d4864bb assets/create_dd/models/item/abstruse_mechanism.json
 83466a4d3dcc6c9da65b26840f2ebf9d3a290f9e assets/create_dd/models/item/amethyst_block_pillar.json
 c9fc3f62871b724a064d54a837020a56c1b5b185 assets/create_dd/models/item/basalt_pillar.json
 fca7a82c39404a2e6194896d227db6c6b54c6a22 assets/create_dd/models/item/blackstone_pillar.json
@@ -889,6 +890,7 @@ f9df04a75529a6029ca7fa7c201699bc0a4d1e90 assets/create_dd/models/item/brown_padd
 2b10e6269f18271da24f441ae58dcb0eeee8d3b7 assets/create_dd/models/item/brown_padded_rubber_stairs.json
 c8dd505c15fd6227cc059069b8b3e13154edd7b1 assets/create_dd/models/item/brown_padded_tiled_rubber.json
 f4a56df58d2199908ac84374db239389ade97108 assets/create_dd/models/item/bury_blend.json
+713d66e8af477e21056ccb1ca08a5f56369b9968 assets/create_dd/models/item/calculation_mechanism.json
 a16d87907786d661fee5996651fdb2521eef2069 assets/create_dd/models/item/coal_piece.json
 e0696741db7ca42c441e68992a6708af06bb87f5 assets/create_dd/models/item/cog_crank.json
 58b552d27d4b18dc070036e4739e68aa6fb1a81a assets/create_dd/models/item/creative_casing.json
@@ -1004,10 +1006,21 @@ a3ee268f5a05d4aed2b7908d15725fe9cd7c02a3 assets/create_dd/models/item/green_padd
 9bf067add92f1dacfa85e22d064b7bb61e223bbf assets/create_dd/models/item/haunting_sail.json
 f568c2ccfb49e9bfd28a0400898540937cb4217b assets/create_dd/models/item/hydraulic_casing.json
 0cbd633e096e0ed01316c00f7fa1250702d0289c assets/create_dd/models/item/hydraulic_press.json
+c86137e22def4df8afc9ff276b7d8cac65672df2 assets/create_dd/models/item/incomplete_abstruse_mechanism.json
+4dabf6906efe7a1189a1ebe120d7d5af7a3e1d3a assets/create_dd/models/item/incomplete_calculation_mechanism.json
+6c99678508abf7c69c16424546c67042d8d4cdde assets/create_dd/models/item/incomplete_inductive_mechanism.json
+ce5b04d48f0eb37fee61f084782e3a39e1b79ee9 assets/create_dd/models/item/incomplete_infernal_mechanism.json
+7f970901dfecca4883ebd9f4dae7ef3e8d5027d5 assets/create_dd/models/item/incomplete_integrated_circuit.json
+c4540c4868708dc135772e529f8002dec71b7891 assets/create_dd/models/item/incomplete_integrated_mechanism.json
 6c99678508abf7c69c16424546c67042d8d4cdde assets/create_dd/models/item/incomplete_kinetic_mechanism.json
+64e75f31d331306c1ff7cf061ce799a5c0ead1fa assets/create_dd/models/item/incomplete_sealed_mechanism.json
+93571da741da1d67793ed36e30f7e40c36be50e1 assets/create_dd/models/item/inductive_mechanism.json
 517f55d16ac7bc48229296cea5c738fe0809c6ee assets/create_dd/models/item/industrial_casing.json
 bc11f629b02a37ef233219907f537bc28eeae4c4 assets/create_dd/models/item/industrial_fan.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/create_dd/models/item/inert_blazeling_spawn_egg.json
+8f519a1cd497b494c846cf2717850396fa39819b assets/create_dd/models/item/infernal_mechanism.json
+4f2e0a375adcbee454bb6c73d4379a82dbba5ca8 assets/create_dd/models/item/integrated_circuit.json
+1cefd4d4c8b6950bf64d9c434bd20c97f2b283c5 assets/create_dd/models/item/integrated_mechanism.json
 cfa5b5d57dffc03a603933d70e2664698ca45fb0 assets/create_dd/models/item/inverse_box.json
 61f8379891d13196fa6db84bfdecd62c37f6491a assets/create_dd/models/item/item_stockpile.json
 93571da741da1d67793ed36e30f7e40c36be50e1 assets/create_dd/models/item/kinetic_mechanism.json
@@ -1138,6 +1151,7 @@ fedae97ab745a061bfd94bace7e559464669835b assets/create_dd/models/item/reversed_g
 06ddf6bc9c9e1b781a0a08913692689051a83fa9 assets/create_dd/models/item/rubber_block.json
 8f610de2dab89f6096de734abb3f1c86f425517b assets/create_dd/models/item/sanding_sail.json
 1bfecdb014c73036d270ecb04b1bf2cbe2f06cda assets/create_dd/models/item/sap_bucket.json
+291eb6ddca96fe09a7e4f1c8907c0bcff0f0731f assets/create_dd/models/item/sealed_mechanism.json
 2888635c9049da406f991301d6dc5681d6e298a7 assets/create_dd/models/item/seething_ablaze_powder.json
 de8b73de13ea12a0a7fd2ea2837ce952b330c4b4 assets/create_dd/models/item/seething_ablaze_rod.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/create_dd/models/item/seething_ablaze_spawn_egg.json

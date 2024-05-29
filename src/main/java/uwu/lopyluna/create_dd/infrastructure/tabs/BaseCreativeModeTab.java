@@ -1,4 +1,4 @@
-package uwu.lopyluna.create_dd.infrastructure.item;
+package uwu.lopyluna.create_dd.infrastructure.tabs;
 
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;

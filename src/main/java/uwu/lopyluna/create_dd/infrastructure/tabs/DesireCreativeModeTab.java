@@ -1,4 +1,4 @@
-package uwu.lopyluna.create_dd.infrastructure.item;
+package uwu.lopyluna.create_dd.infrastructure.tabs;
 
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.minecraft.client.Minecraft;

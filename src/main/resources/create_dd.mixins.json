@@ -12,6 +12,8 @@
     "MixinBlock",
     "MixinBlockMovementChecks",
     "MixinContraption",
+    "MixinGearshiftBlock",
+    "MixinGearshiftBlockEntity",
     "MixinKineticNetwork",
     "MixinMountedFluidStorage",
     "MixinMountedStorage",
