@@ -47,6 +47,7 @@ public class DeforesterSawItem extends BackTankAxeItem {
                                    Player player) {
         Minecraft mc = Minecraft.getInstance();
         boolean playerHeldShift = mc.options.keyShift.isDown();
+        //boolean playerHeldShift = player.isShiftKeyDown();
 
         if (deforesting || !(state.is(BlockTags.LOGS) || AllTags.AllBlockTags.SLIMY_LOGS.matches(state)) || !playerHeldShift)
             return;

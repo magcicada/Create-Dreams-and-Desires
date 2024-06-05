@@ -46,7 +46,7 @@ import static uwu.lopyluna.create_dd.registry.DesireTiers.Drill;
 @MethodsReturnNonnullByDefault
 @SuppressWarnings({"all"})
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class ExcavationDrillItem extends BackTankPickaxeItem implements CustomArmPoseItem {
+public class ExcavationDrillItem extends BackTankPickaxeItem {
     private static final Set<BlockPos> hashedBlocks = new HashSet<>();
     private static boolean veinExcavating = false;
     public ExcavationDrillItem(Properties pProperties) {
@@ -146,14 +146,15 @@ public class ExcavationDrillItem extends BackTankPickaxeItem implements CustomAr
         return true;
     }
 
-    @Override
-    @Nullable
-    public HumanoidModel.ArmPose getArmPose(ItemStack stack, AbstractClientPlayer player, InteractionHand hand) {
-        if (!player.swinging) {
-            return HumanoidModel.ArmPose.CROSSBOW_HOLD;
-        }
-        return null;
-    }
+    //@Override
+    //@Nullable
+    //@OnlyIn(Dist.CLIENT)
+    //public HumanoidModel.ArmPose getArmPose(ItemStack stack, AbstractClientPlayer player, InteractionHand hand) {
+    //    if (!player.swinging) {
+    //        return HumanoidModel.ArmPose.CROSSBOW_HOLD;
+    //    }
+    //    return null;
+    //}
 
     @Override
     @OnlyIn(Dist.CLIENT)
