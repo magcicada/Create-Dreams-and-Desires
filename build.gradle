@@ -68,7 +68,7 @@ minecraft {
         data {
             workingDirectory project.file('run-data')
 
-            args '--mod', "create_dd", '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/'), '--existing-mod', 'create', '--existing-mod', 'tconstruct'
+            args '--mod', "create_dd", '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/'), '--existing-mod', 'create'
         }
     }
 }

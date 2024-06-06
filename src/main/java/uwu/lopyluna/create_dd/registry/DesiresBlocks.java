@@ -249,7 +249,7 @@ public class DesiresBlocks {
 			}))
 			.recipe((c, p) -> ShapelessRecipeBuilder.shapeless(c.get(), 1)
 					.requires(AllBlocks.ANDESITE_CASING.get())
-					.requires(AllBlocks.COGWHEEL.get())
+					.requires(AllBlocks.LARGE_COGWHEEL.get())
 					.requires(Items.REDSTONE)
 					.unlockedBy("has_" + getItemName(AllBlocks.COGWHEEL.get()), has(AllBlocks.COGWHEEL.get()))
 					.save(p, DesiresCreate.asResource("crafting/kinetics/redstone_divider")))

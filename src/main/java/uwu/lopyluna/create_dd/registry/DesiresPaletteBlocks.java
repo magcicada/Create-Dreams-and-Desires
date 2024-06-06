@@ -1,5 +1,8 @@
 package uwu.lopyluna.create_dd.registry;
 
+import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllTags;
+import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.DataIngredient;
@@ -8,7 +11,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -23,6 +25,8 @@ import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.DesiresCreate;
 
+import static com.simibubi.create.foundation.data.CreateRegistrate.casingConnectivity;
+import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 import static com.tterrag.registrate.providers.RegistrateRecipeProvider.has;
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
@@ -40,11 +44,185 @@ public class DesiresPaletteBlocks {
 	public static SoundType rubberSoundType = new ForgeSoundType(0.9f, .6f, () -> DesiresSoundEvents.RUBBER_BREAK.get(), () -> SoundEvents.STEM_STEP, () -> DesiresSoundEvents.RUBBER_PLACE.get(), () -> SoundEvents.STEM_HIT, () -> SoundEvents.STEM_FALL);
 	public static TagKey<Item> rubberDecorTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", "rubber_decor"));
 	public static TagKey<Item> rawRubberDecorTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", "raw_rubber_decor"));
+	public static TagKey<Item> industrialIronDecorTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", "industrial_iron_decor"));
+	public static TagKey<Item> darkMetalDecorTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", "dark_metal_decor"));
+	public static TagKey<Item> asphaltBlocks = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", "asphalt_blocks"));
 
 	public static TagKey<Block> stairsBlockTag = optionalTag(ForgeRegistries.BLOCKS, new ResourceLocation("minecraft", "stairs"));
 	public static TagKey<Item> stairsItemTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("minecraft", "stairs"));
 	public static TagKey<Block> slabsBlockTag = optionalTag(ForgeRegistries.BLOCKS, new ResourceLocation("minecraft", "slabs"));
 	public static TagKey<Item> slabsItemTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("minecraft", "slabs"));
+
+	public static final BlockEntry<Block> HAZARD_BLOCK = REGISTRATE.block("hazard_block", Block::new)
+			.properties(p -> p.destroyTime(1.25f)
+					.speedFactor(0.8F)
+					.jumpFactor(0.8F)
+					.color(MaterialColor.COLOR_BLACK)
+					.sound(SoundType.POLISHED_DEEPSLATE))
+			.blockstate((c, p) -> p.simpleBlock(c.get()))
+			.onRegister(connectedTextures(() -> new EncasedCTBehaviour(DesiresSpriteShifts.HAZARD_BLOCK)))
+			.onRegister(casingConnectivity((block, cc) -> cc.make(block, DesiresSpriteShifts.HAZARD_BLOCK)))
+			.recipe((c, p) -> p.stonecutting(DataIngredient.tag(asphaltBlocks), c, 2))
+			.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
+			.item()
+			.build()
+			.register();
+
+	public static final BlockEntry<Block> DARK_METAL_BLOCK = REGISTRATE.block("dark_metal_block", Block::new)
+			.properties(p -> p.color(MaterialColor.COLOR_BLACK)
+					.sound(SoundType.NETHERITE_BLOCK)
+					.strength(0.5f,1.5f))
+			.blockstate((c, p) -> p.simpleBlock(c.get()))
+			.recipe((c, p) -> {
+				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), c, 2);
+				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), c, 1);
+				ShapedRecipeBuilder.shaped(c.get(), 4)
+						.pattern("CC")
+						.pattern("CC")
+						.define('C', AllBlocks.INDUSTRIAL_IRON_BLOCK.get())
+						.unlockedBy("has_" + c.getName(), has(c.get()))
+						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
+			})
+			.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
+			.item()
+			.tag(darkMetalDecorTag)
+			.build()
+			.register();
+
+	public static final BlockEntry<Block> DARK_METAL_PLATING = REGISTRATE.block("dark_metal_plating", Block::new)
+			.properties(p -> p.color(MaterialColor.COLOR_BLACK)
+					.sound(SoundType.NETHERITE_BLOCK)
+					.strength(0.5f,1.5f))
+			.blockstate((c, p) -> p.simpleBlock(c.get()))
+			.onRegister(connectedTextures(() -> new EncasedCTBehaviour(DesiresSpriteShifts.DARK_METAL_PLATING)))
+			.onRegister(casingConnectivity((block, cc) -> cc.make(block, DesiresSpriteShifts.DARK_METAL_PLATING)))
+			.recipe((c, p) -> {
+				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), c, 2);
+				p.stonecutting(DataIngredient.items(DARK_METAL_BLOCK.get()), c, 1);
+				p.stonecutting(DataIngredient.items(c.get()), DARK_METAL_BLOCK, 1);
+				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), c, 1);
+				ShapedRecipeBuilder.shaped(c.get(), 9)
+						.pattern("CCC")
+						.pattern("CCC")
+						.pattern("CCC")
+						.define('C', DARK_METAL_BLOCK.get())
+						.unlockedBy("has_" + c.getName(), has(c.get()))
+						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
+			})
+			.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
+			.item()
+			.tag(darkMetalDecorTag)
+			.build()
+			.register();
+
+	public static final BlockEntry<SlabBlock> DARK_METAL_SLAB = REGISTRATE.block("dark_metal_block_slab", SlabBlock::new)
+			.properties(p -> p.color(MaterialColor.COLOR_BLACK)
+					.sound(SoundType.NETHERITE_BLOCK)
+					.strength(0.5f,1.5f))
+			.blockstate((c, p) -> p.slabBlock(c.get(), DesiresCreate.asResource("block/dark_metal_block"),
+					DesiresCreate.asResource("block/dark_metal_block_slab"),
+					DesiresCreate.asResource("block/dark_metal_block"),
+					DesiresCreate.asResource("block/dark_metal_block")))
+			.tag(stairsBlockTag)
+			.recipe((c, p) -> {
+				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), c, 4);
+				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), c, 2);
+				ShapedRecipeBuilder.shaped(c.get(), 6)
+						.pattern("CCC")
+						.define('C', DARK_METAL_BLOCK.get())
+						.unlockedBy("has_" + c.getName(), has(c.get()))
+						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
+			})
+			.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
+			.item()
+			.tag(slabsItemTag)
+			.build()
+			.register();
+
+	public static final BlockEntry<StairBlock> DARK_METAL_STAIRS = REGISTRATE.block("dark_metal_block_stairs", p -> new StairBlock(DesiresPaletteBlocks.DARK_METAL_BLOCK.getDefaultState(), p))
+			.properties(p -> p.color(MaterialColor.COLOR_BLACK)
+					.sound(SoundType.NETHERITE_BLOCK)
+					.strength(0.5f,1.5f))
+			.blockstate((c, p) -> p.stairsBlock(c.get(), DesiresCreate.asResource("block/dark_metal_block")))
+			.tag(stairsBlockTag)
+			.recipe((c, p) -> {
+				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), c, 2);
+				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), c, 1);
+				ShapedRecipeBuilder.shaped(c.get(), 4)
+						.pattern("X  ").pattern("XX ").pattern("XXX")
+						.define('X', DARK_METAL_BLOCK.get())
+						.unlockedBy("has_" + c.getName(), has(c.get()))
+						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
+			})
+			.item()
+			.tag(darkMetalDecorTag, stairsItemTag)
+			.build()
+			.register();
+
+	public static final BlockEntry<Block> DARK_METAL_BRICKS = REGISTRATE.block("dark_metal_bricks", Block::new)
+			.properties(p -> p.color(MaterialColor.COLOR_BLACK)
+					.sound(SoundType.NETHERITE_BLOCK)
+					.strength(0.5f,1.5f))
+			.blockstate((c, p) -> p.simpleBlock(c.get()))
+			.recipe((c, p) -> {
+				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), c, 2);
+				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), c, 1);
+				ShapedRecipeBuilder.shaped(c.get(), 4)
+						.pattern("CC")
+						.pattern("CC")
+						.define('C', DARK_METAL_BLOCK.get())
+						.unlockedBy("has_" + c.getName(), has(c.get()))
+						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
+			})
+			.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
+			.item()
+			.tag(darkMetalDecorTag)
+			.build()
+			.register();
+
+	public static final BlockEntry<SlabBlock> DARK_METAL_BRICK_SLAB = REGISTRATE.block("dark_metal_brick_slab", SlabBlock::new)
+			.properties(p -> p.color(MaterialColor.COLOR_BLACK)
+					.sound(SoundType.NETHERITE_BLOCK)
+					.strength(0.5f,1.5f))
+			.blockstate((c, p) -> p.slabBlock(c.get(), DesiresCreate.asResource("block/dark_metal_bricks"),
+					DesiresCreate.asResource("block/dark_metal_bricks"),
+					DesiresCreate.asResource("block/dark_metal_bricks"),
+					DesiresCreate.asResource("block/dark_metal_bricks")))
+			.tag(stairsBlockTag)
+			.recipe((c, p) -> {
+				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), c, 4);
+				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), c, 2);
+				ShapedRecipeBuilder.shaped(c.get(), 6)
+						.pattern("CCC")
+						.define('C', DARK_METAL_BRICKS.get())
+						.unlockedBy("has_" + c.getName(), has(c.get()))
+						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
+			})
+			.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
+			.item()
+			.tag(slabsItemTag)
+			.build()
+			.register();
+
+	public static final BlockEntry<StairBlock> DARK_METAL_BRICK_STAIRS = REGISTRATE.block("dark_metal_brick_stairs", p -> new StairBlock(DesiresPaletteBlocks.DARK_METAL_BLOCK.getDefaultState(), p))
+			.properties(p -> p.color(MaterialColor.COLOR_BLACK)
+					.sound(SoundType.NETHERITE_BLOCK)
+					.strength(0.5f,1.5f))
+			.blockstate((c, p) -> p.stairsBlock(c.get(), DesiresCreate.asResource("block/dark_metal_bricks")))
+			.tag(stairsBlockTag)
+			.recipe((c, p) -> {
+				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), c, 2);
+				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), c, 1);
+				ShapedRecipeBuilder.shaped(c.get(), 4)
+						.pattern("X  ").pattern("XX ").pattern("XXX")
+						.define('X', DARK_METAL_BRICKS.get())
+						.unlockedBy("has_" + c.getName(), has(c.get()))
+						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
+			})
+			.item()
+			.tag(darkMetalDecorTag, stairsItemTag)
+			.build()
+			.register();
 
 	public static final BlockEntry<Block> PADDED_RUBBER = REGISTRATE.block("padded_rubber", Block::new)
 			.properties(p -> p.color(MaterialColor.TERRACOTTA_GRAY))
@@ -231,32 +409,36 @@ public class DesiresPaletteBlocks {
 							.color(MaterialColor.COLOR_BLACK)
 							.sound(SoundType.POLISHED_DEEPSLATE))
 					.transform(pickaxeOnly())
+					.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
 					.item()
-					.recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 4)
-							.define('D',
-								color.equals("black") ? Tags.Items.DYES_BLACK :
-								color.equals("white") ? Tags.Items.DYES_WHITE :
-								color.equals("blue") ? Tags.Items.DYES_BLUE :
-								color.equals("light_blue") ? Tags.Items.DYES_LIGHT_BLUE :
-								color.equals("red") ? Tags.Items.DYES_RED :
-								color.equals("green") ? Tags.Items.DYES_GREEN :
-								color.equals("lime") ? Tags.Items.DYES_LIME :
-								color.equals("pink") ? Tags.Items.DYES_PINK :
-								color.equals("magenta") ? Tags.Items.DYES_MAGENTA :
-								color.equals("yellow") ? Tags.Items.DYES_YELLOW :
-								color.equals("gray") ? Tags.Items.DYES_GRAY :
-								color.equals("light_gray") ? Tags.Items.DYES_LIGHT_GRAY :
-								color.equals("brown") ? Tags.Items.DYES_BROWN :
-								color.equals("cyan") ? Tags.Items.DYES_CYAN :
-								color.equals("purple") ? Tags.Items.DYES_PURPLE :
-								color.equals("orange") ? Tags.Items.DYES_ORANGE : Tags.Items.DYES)
-							.define('B', Items.SLIME_BALL)
-							.define('S', AllPaletteStoneTypes.SCORCHIA.baseBlock.get())
-							.pattern("BSB")
-							.pattern("SDS")
-							.pattern("BSB")
-							.unlockedBy("has_dyed_item", has(Tags.Items.DYES))
-							.save(p, DesiresCreate.asResource("crafting/decor/" + c.getName())))
+					.tag(asphaltBlocks)
+					.recipe((c, p) -> {
+						ShapedRecipeBuilder.shaped(c.get(), 4)
+								.define('D',
+									color.equals("black") ? Tags.Items.DYES_BLACK :
+									color.equals("white") ? Tags.Items.DYES_WHITE :
+									color.equals("blue") ? Tags.Items.DYES_BLUE :
+									color.equals("light_blue") ? Tags.Items.DYES_LIGHT_BLUE :
+									color.equals("red") ? Tags.Items.DYES_RED :
+									color.equals("green") ? Tags.Items.DYES_GREEN :
+									color.equals("lime") ? Tags.Items.DYES_LIME :
+									color.equals("pink") ? Tags.Items.DYES_PINK :
+									color.equals("magenta") ? Tags.Items.DYES_MAGENTA :
+									color.equals("yellow") ? Tags.Items.DYES_YELLOW :
+									color.equals("gray") ? Tags.Items.DYES_GRAY :
+									color.equals("light_gray") ? Tags.Items.DYES_LIGHT_GRAY :
+									color.equals("brown") ? Tags.Items.DYES_BROWN :
+									color.equals("cyan") ? Tags.Items.DYES_CYAN :
+									color.equals("purple") ? Tags.Items.DYES_PURPLE :
+									color.equals("orange") ? Tags.Items.DYES_ORANGE : Tags.Items.DYES)
+								.define('B', Items.SLIME_BALL)
+								.define('S', AllPaletteStoneTypes.SCORCHIA.baseBlock.get())
+								.pattern("BSB")
+								.pattern("SDS")
+								.pattern("BSB")
+								.unlockedBy("has_dyed_item", has(Tags.Items.DYES))
+								.save(p, DesiresCreate.asResource("crafting/decor/" + c.getName()));
+					})
 					.build()
 					.lang(upColor + " Asphalt Block")
 					.register();
