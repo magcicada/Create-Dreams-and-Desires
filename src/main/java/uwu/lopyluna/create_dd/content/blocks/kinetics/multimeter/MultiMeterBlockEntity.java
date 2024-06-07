@@ -1,7 +1,5 @@
 package uwu.lopyluna.create_dd.content.blocks.kinetics.multimeter;
 
-import com.simibubi.create.compat.computercraft.AbstractComputerBehaviour;
-import com.simibubi.create.compat.computercraft.ComputerCraftProxy;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
@@ -14,16 +12,11 @@ import com.simibubi.create.foundation.utility.LangBuilder;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import uwu.lopyluna.create_dd.registry.DesiresPackets;
 
 import java.util.List;
@@ -34,7 +27,6 @@ public class MultiMeterBlockEntity extends KineticBlockEntity implements IHaveGo
     public float dialTarget;
     public int color;
 
-    public AbstractComputerBehaviour computerBehaviour;
     static BlockPos lastSent;
 
     public MultiMeterBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
@@ -43,7 +35,6 @@ public class MultiMeterBlockEntity extends KineticBlockEntity implements IHaveGo
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
-        behaviours.add(computerBehaviour = ComputerCraftProxy.behaviour(this));
         registerAwardables(behaviours, AllAdvancements.STRESSOMETER, AllAdvancements.STRESSOMETER_MAXED);
     }
 
@@ -204,19 +195,5 @@ public class MultiMeterBlockEntity extends KineticBlockEntity implements IHaveGo
         award(AllAdvancements.STRESSOMETER);
         if (Mth.equal(dialTarget, 1))
             award(AllAdvancements.STRESSOMETER_MAXED);
-    }
-
-    @NotNull
-    @Override
-    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (computerBehaviour.isPeripheralCap(cap))
-            return computerBehaviour.getPeripheralCapability();
-        return super.getCapability(cap, side);
-    }
-
-    @Override
-    public void invalidateCaps() {
-        super.invalidateCaps();
-        computerBehaviour.removePeripheral();
     }
 }
