@@ -1,4 +1,4 @@
-// 1.19.2	2024-06-06T15:00:33.5598182	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2024-06-06T16:08:42.142449	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 9452bed2fb7ba829ea35644054add91456d3f5d9 assets/create_dd/blockstates/amethyst_block_pillar.json
 64dc32722d3ad05720fa9a200df1de7179cfd890 assets/create_dd/blockstates/basalt_pillar.json
 5fd6e80fe77786dd8fd0c5cfd6d866b44365aa96 assets/create_dd/blockstates/blackstone_pillar.json
@@ -2682,7 +2682,7 @@ ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/azalea_root_
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/dripstone_replaceable_blocks.json
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/lush_ground_replaceable.json
 094485f59c53a71aeb92a372ea4312211651546a data/minecraft/tags/blocks/mineable/axe.json
-de425e5e0e9fd2043175cb80019b395170a91992 data/minecraft/tags/blocks/mineable/pickaxe.json
+742cfdfe240dc4591b2fd4c5cbe96973129f67fd data/minecraft/tags/blocks/mineable/pickaxe.json
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/moss_replaceable.json
 2a7a1edb20dd28f4e45ac19e631d5813e24d6eff data/minecraft/tags/blocks/slabs.json
 1f101db2160a52114a17f284d2d8cefe785fab74 data/minecraft/tags/blocks/stairs.json

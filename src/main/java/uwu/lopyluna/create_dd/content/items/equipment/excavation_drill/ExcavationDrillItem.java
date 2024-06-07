@@ -1,17 +1,14 @@
 package uwu.lopyluna.create_dd.content.items.equipment.excavation_drill;
 
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
-import com.simibubi.create.foundation.item.CustomArmPoseItem;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import com.simibubi.create.foundation.utility.BlockHelper;
 import com.simibubi.create.foundation.utility.VecHelper;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -27,7 +24,6 @@ import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import uwu.lopyluna.create_dd.content.items.equipment.BackTankPickaxeItem;
 import uwu.lopyluna.create_dd.infrastructure.utility.BoreMining;
 import uwu.lopyluna.create_dd.registry.DesiresItems;
@@ -46,7 +42,7 @@ import static uwu.lopyluna.create_dd.registry.DesireTiers.Drill;
 @MethodsReturnNonnullByDefault
 @SuppressWarnings({"all"})
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class ExcavationDrillItem extends BackTankPickaxeItem implements CustomArmPoseItem {
+public class ExcavationDrillItem extends BackTankPickaxeItem {
     private static final Set<BlockPos> hashedBlocks = new HashSet<>();
     private static boolean veinExcavating = false;
     public ExcavationDrillItem(Properties pProperties) {
@@ -54,17 +50,17 @@ public class ExcavationDrillItem extends BackTankPickaxeItem implements CustomAr
     }
 
     public float getDestroySpeed(ItemStack pStack, BlockState pState) {
-        Minecraft mc = Minecraft.getInstance();
-        boolean playerHeldShift = mc.options.keyShift.isDown();
+        return pState.is(DesiresTags.forgeBlockTag("ores")) ? this.speed * 0.75f : this.speed;
+    }
 
-        return pState.is(pState.getBlock()) && playerHeldShift ? pState.is(DesiresTags.forgeBlockTag("ores")) ? this.speed * 0.4F : this.speed * 0.6F :
-                pState.is(pState.getBlock()) && !playerHeldShift ? this.speed * 1.25F : 0.5F;
+    @Override
+    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
+        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
     }
 
     public static void destroyVein(Level pLevel, BlockState state, BlockPos pos,
                                    Player player) {
-        Minecraft mc = Minecraft.getInstance();
-        boolean playerHeldShift = mc.options.keyShift.isDown();
+        boolean playerHeldShift = player.isShiftKeyDown();
 
         if (veinExcavating || !(state.is(DesiresTags.forgeBlockTag("ores"))) || !playerHeldShift)
             return;
@@ -93,9 +89,8 @@ public class ExcavationDrillItem extends BackTankPickaxeItem implements CustomAr
 
     @SubscribeEvent
     public static void onBlockDestroyed(BlockEvent.BreakEvent event) {
-        Minecraft mc = Minecraft.getInstance();
-        boolean playerHeldShift = mc.options.keyShift.isDown();
         Player player = event.getPlayer();
+        boolean playerHeldShift = player.isShiftKeyDown();
         Level level = (Level) event.getLevel();
         ItemStack heldItemMainhand = event.getPlayer().getItemInHand(InteractionHand.MAIN_HAND);
         BlockPos blockPos = event.getPos();
@@ -146,14 +141,15 @@ public class ExcavationDrillItem extends BackTankPickaxeItem implements CustomAr
         return true;
     }
 
-    @Override
-    @Nullable
-    public HumanoidModel.ArmPose getArmPose(ItemStack stack, AbstractClientPlayer player, InteractionHand hand) {
-        if (!player.swinging) {
-            return HumanoidModel.ArmPose.CROSSBOW_HOLD;
-        }
-        return null;
-    }
+    //@Override
+    //@OnlyIn(Dist.CLIENT)
+    //public HumanoidModel.ArmPose getArmPose(ItemStack stack, AbstractClientPlayer player, InteractionHand hand) {
+    //    if (!player.swinging) {
+    //        return HumanoidModel.ArmPose.CROSSBOW_HOLD;
+    //    } else {
+    //        return HumanoidModel.ArmPose.ITEM;
+    //    }
+    //}
 
     @Override
     @OnlyIn(Dist.CLIENT)

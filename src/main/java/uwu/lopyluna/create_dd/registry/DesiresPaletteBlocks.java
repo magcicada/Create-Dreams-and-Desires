@@ -62,6 +62,7 @@ public class DesiresPaletteBlocks {
 			.blockstate((c, p) -> p.simpleBlock(c.get()))
 			.onRegister(connectedTextures(() -> new EncasedCTBehaviour(DesiresSpriteShifts.HAZARD_BLOCK)))
 			.onRegister(casingConnectivity((block, cc) -> cc.make(block, DesiresSpriteShifts.HAZARD_BLOCK)))
+			.transform(pickaxeOnly())
 			.recipe((c, p) -> p.stonecutting(DataIngredient.tag(asphaltBlocks), c, 2))
 			.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
 			.item()
@@ -73,6 +74,7 @@ public class DesiresPaletteBlocks {
 					.sound(SoundType.NETHERITE_BLOCK)
 					.strength(0.5f,1.5f))
 			.blockstate((c, p) -> p.simpleBlock(c.get()))
+			.transform(pickaxeOnly())
 			.recipe((c, p) -> {
 				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), c, 2);
 				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), c, 1);
@@ -96,6 +98,7 @@ public class DesiresPaletteBlocks {
 			.blockstate((c, p) -> p.simpleBlock(c.get()))
 			.onRegister(connectedTextures(() -> new EncasedCTBehaviour(DesiresSpriteShifts.DARK_METAL_PLATING)))
 			.onRegister(casingConnectivity((block, cc) -> cc.make(block, DesiresSpriteShifts.DARK_METAL_PLATING)))
+			.transform(pickaxeOnly())
 			.recipe((c, p) -> {
 				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), c, 2);
 				p.stonecutting(DataIngredient.items(DARK_METAL_BLOCK.get()), c, 1);
@@ -123,6 +126,7 @@ public class DesiresPaletteBlocks {
 					DesiresCreate.asResource("block/dark_metal_block_slab"),
 					DesiresCreate.asResource("block/dark_metal_block"),
 					DesiresCreate.asResource("block/dark_metal_block")))
+			.transform(pickaxeOnly())
 			.tag(stairsBlockTag)
 			.recipe((c, p) -> {
 				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), c, 4);
@@ -144,6 +148,7 @@ public class DesiresPaletteBlocks {
 					.sound(SoundType.NETHERITE_BLOCK)
 					.strength(0.5f,1.5f))
 			.blockstate((c, p) -> p.stairsBlock(c.get(), DesiresCreate.asResource("block/dark_metal_block")))
+			.transform(pickaxeOnly())
 			.tag(stairsBlockTag)
 			.recipe((c, p) -> {
 				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), c, 2);
@@ -164,6 +169,7 @@ public class DesiresPaletteBlocks {
 					.sound(SoundType.NETHERITE_BLOCK)
 					.strength(0.5f,1.5f))
 			.blockstate((c, p) -> p.simpleBlock(c.get()))
+			.transform(pickaxeOnly())
 			.recipe((c, p) -> {
 				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), c, 2);
 				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), c, 1);
@@ -188,6 +194,7 @@ public class DesiresPaletteBlocks {
 					DesiresCreate.asResource("block/dark_metal_bricks"),
 					DesiresCreate.asResource("block/dark_metal_bricks"),
 					DesiresCreate.asResource("block/dark_metal_bricks")))
+			.transform(pickaxeOnly())
 			.tag(stairsBlockTag)
 			.recipe((c, p) -> {
 				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), c, 4);
@@ -209,6 +216,7 @@ public class DesiresPaletteBlocks {
 					.sound(SoundType.NETHERITE_BLOCK)
 					.strength(0.5f,1.5f))
 			.blockstate((c, p) -> p.stairsBlock(c.get(), DesiresCreate.asResource("block/dark_metal_bricks")))
+			.transform(pickaxeOnly())
 			.tag(stairsBlockTag)
 			.recipe((c, p) -> {
 				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), c, 2);
@@ -412,33 +420,31 @@ public class DesiresPaletteBlocks {
 					.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
 					.item()
 					.tag(asphaltBlocks)
-					.recipe((c, p) -> {
-						ShapedRecipeBuilder.shaped(c.get(), 4)
-								.define('D',
-									color.equals("black") ? Tags.Items.DYES_BLACK :
-									color.equals("white") ? Tags.Items.DYES_WHITE :
-									color.equals("blue") ? Tags.Items.DYES_BLUE :
-									color.equals("light_blue") ? Tags.Items.DYES_LIGHT_BLUE :
-									color.equals("red") ? Tags.Items.DYES_RED :
-									color.equals("green") ? Tags.Items.DYES_GREEN :
-									color.equals("lime") ? Tags.Items.DYES_LIME :
-									color.equals("pink") ? Tags.Items.DYES_PINK :
-									color.equals("magenta") ? Tags.Items.DYES_MAGENTA :
-									color.equals("yellow") ? Tags.Items.DYES_YELLOW :
-									color.equals("gray") ? Tags.Items.DYES_GRAY :
-									color.equals("light_gray") ? Tags.Items.DYES_LIGHT_GRAY :
-									color.equals("brown") ? Tags.Items.DYES_BROWN :
-									color.equals("cyan") ? Tags.Items.DYES_CYAN :
-									color.equals("purple") ? Tags.Items.DYES_PURPLE :
-									color.equals("orange") ? Tags.Items.DYES_ORANGE : Tags.Items.DYES)
-								.define('B', Items.SLIME_BALL)
-								.define('S', AllPaletteStoneTypes.SCORCHIA.baseBlock.get())
-								.pattern("BSB")
-								.pattern("SDS")
-								.pattern("BSB")
-								.unlockedBy("has_dyed_item", has(Tags.Items.DYES))
-								.save(p, DesiresCreate.asResource("crafting/decor/" + c.getName()));
-					})
+					.recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 4)
+                            .define('D',
+                                color.equals("black") ? Tags.Items.DYES_BLACK :
+                                color.equals("white") ? Tags.Items.DYES_WHITE :
+                                color.equals("blue") ? Tags.Items.DYES_BLUE :
+                                color.equals("light_blue") ? Tags.Items.DYES_LIGHT_BLUE :
+                                color.equals("red") ? Tags.Items.DYES_RED :
+                                color.equals("green") ? Tags.Items.DYES_GREEN :
+                                color.equals("lime") ? Tags.Items.DYES_LIME :
+                                color.equals("pink") ? Tags.Items.DYES_PINK :
+                                color.equals("magenta") ? Tags.Items.DYES_MAGENTA :
+                                color.equals("yellow") ? Tags.Items.DYES_YELLOW :
+                                color.equals("gray") ? Tags.Items.DYES_GRAY :
+                                color.equals("light_gray") ? Tags.Items.DYES_LIGHT_GRAY :
+                                color.equals("brown") ? Tags.Items.DYES_BROWN :
+                                color.equals("cyan") ? Tags.Items.DYES_CYAN :
+                                color.equals("purple") ? Tags.Items.DYES_PURPLE :
+                                color.equals("orange") ? Tags.Items.DYES_ORANGE : Tags.Items.DYES)
+                            .define('B', Items.SLIME_BALL)
+                            .define('S', AllPaletteStoneTypes.SCORCHIA.baseBlock.get())
+                            .pattern("BSB")
+                            .pattern("SDS")
+                            .pattern("BSB")
+                            .unlockedBy("has_dyed_item", has(Tags.Items.DYES))
+                            .save(p, DesiresCreate.asResource("crafting/decor/" + c.getName())))
 					.build()
 					.lang(upColor + " Asphalt Block")
 					.register();
