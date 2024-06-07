@@ -77,7 +77,7 @@ public class DesiresCreate
         DesiresSoundEvents.register(modEventBus);
         DesiresTags.init();
         DesiresClassicStuffPorting.register();
-        DesiresCreativeModeTabs.init();
+        DesiresCreativeModeTabs.register(modEventBus);
         DesiresSpriteShifts.register();
         DesiresBlocks.register();
         DesiresItems.register();

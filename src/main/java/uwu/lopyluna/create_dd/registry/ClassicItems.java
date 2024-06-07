@@ -12,7 +12,7 @@ import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 public class ClassicItems {
 
     static {
-        REGISTRATE.creativeModeTab(() -> DesiresCreativeModeTabs.CLASSIC_CREATIVE_TAB);
+        REGISTRATE.setCreativeTab(DesiresCreativeModeTabs.CLASSIC_CREATIVE_TAB);
     }
 
     public static final ItemEntry<Item>

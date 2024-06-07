@@ -3,6 +3,7 @@ package uwu.lopyluna.create_dd.content.data_recipes;
 import com.simibubi.create.AllItems;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
@@ -80,7 +81,7 @@ public class SandingRecipeGen extends DesireProcessingRecipeGen {
 				.output(secondaryChance, secondary.get(), 1));
 	}
 
-	public SandingRecipeGen(DataGenerator dataGenerator) {
+	public SandingRecipeGen(PackOutput dataGenerator) {
 		super(dataGenerator);
 	}
 

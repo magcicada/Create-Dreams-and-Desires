@@ -22,7 +22,7 @@ public class DesiresSoundEvents {
 	public static RegistryObject<SoundEvent> MUSIC_DISC_WALTZ_OF_THE_FLOWERS = registerSoundEvent("music_disc.waltz_of_the_flowers");
 
 	private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
-		return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(DesiresCreate.MOD_ID, name)));
+		return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(DesiresCreate.MOD_ID, name)));
 	}
 
 	public static void register(IEventBus eventBus) {

@@ -8,9 +8,8 @@ import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
 import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import uwu.lopyluna.create_dd.DesiresCreate;
@@ -24,7 +23,7 @@ public class ExcavationDrillRenderer extends CustomRenderedItemModelRenderer {
     private static final Vec3 GEAR_ROTATION_OFFSET = new Vec3(0, -3 / 16f, 1 / 16f);
 
     @Override
-    protected void render(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemTransforms.TransformType transformType,
+    protected void render(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
                           PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
         Minecraft mc = Minecraft.getInstance();
         boolean playerHeldAttack = mc.options.keyAttack.isDown();

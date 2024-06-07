@@ -1,13 +1,13 @@
 package uwu.lopyluna.create_dd.registry;
 
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import net.minecraft.world.level.material.MapColor;
 import uwu.lopyluna.create_dd.registry.helper.Lang;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.registry.helper.palettes.DPaletteBlockPattern;
@@ -28,17 +28,17 @@ public enum DesiresPaletteStoneTypes {
     BLACKSTONE(VANILLA_RANGE, r -> () -> Blocks.BLACKSTONE),
 
     WEATHERED_LIMESTONE(STANDARD_RANGE, r -> r.paletteStoneBlock("weathered_limestone", () -> Blocks.SANDSTONE, true, false)
-            .properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+            .properties(p -> p.mapColor(MapColor.COLOR_LIGHT_GRAY))
             .register()),
 
     GABBRO(STANDARD_RANGE, r -> r.paletteStoneBlock("gabbro", () -> Blocks.POLISHED_DEEPSLATE, true, false)
             .properties(p -> p.destroyTime(1.25f)
-            .color(MaterialColor.TERRACOTTA_LIGHT_GRAY))
+            .mapColor(MapColor.TERRACOTTA_LIGHT_GRAY))
             .register()),
 
     DOLOMITE(STANDARD_RANGE, r -> r.paletteStoneBlock("dolomite", () -> Blocks.TUFF, true, false)
             .properties(p -> p.destroyTime(1.25f)
-            .color(MaterialColor.TERRACOTTA_WHITE))
+            .mapColor(MapColor.TERRACOTTA_WHITE))
             .register())
     ;
 

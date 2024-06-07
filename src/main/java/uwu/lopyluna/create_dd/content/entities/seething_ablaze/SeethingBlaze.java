@@ -1,6 +1,5 @@
 package uwu.lopyluna.create_dd.content.entities.seething_ablaze;
 
-import com.mojang.math.Vector3f;
 import com.simibubi.create.content.trains.CubeParticleData;
 import com.simibubi.create.foundation.utility.Color;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -26,6 +25,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+import org.joml.Vector3f;
 
 import java.util.EnumSet;
 
@@ -105,35 +105,35 @@ public class SeethingBlaze extends Blaze {
      */
     @Override
     public void aiStep() {
-        if (!this.onGround && this.getDeltaMovement().y < 0.0D) {
+        if (!this.onGround() && this.getDeltaMovement().y < 0.0D) {
             this.setDeltaMovement(this.getDeltaMovement().multiply(1.0D, 0.6D, 1.0D));
         }
 
-        if (this.level.isClientSide) {
+        if (this.level().isClientSide) {
             if (this.random.nextInt(24) == 0 && !this.isSilent()) {
-                this.level.playLocalSound(this.getX() + 0.5D, this.getY() + 0.5D, this.getZ() + 0.5D, SoundEvents.BLAZE_BURN, this.getSoundSource(), 1.0F + this.random.nextFloat(), this.random.nextFloat() * 0.7F + 0.3F, false);
+                this.level().playLocalSound(this.getX() + 0.5D, this.getY() + 0.5D, this.getZ() + 0.5D, SoundEvents.BLAZE_BURN, this.getSoundSource(), 1.0F + this.random.nextFloat(), this.random.nextFloat() * 0.7F + 0.3F, false);
             }
 
             Vector3f colorBright = new Color(0x64C9FD).asVectorF();
             Vector3f colorDark = new Color(0x3f74e8).asVectorF();
 
             if (random.nextFloat() < 1 / 3f)
-                this.level.addParticle(new DustParticleOptions(colorDark, 1), this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
+                this.level().addParticle(new DustParticleOptions(colorDark, 1), this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
 
             if (random.nextFloat() < 1 / 3f)
-                this.level.addParticle(new DustParticleOptions(colorBright, 1), this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
+                this.level().addParticle(new DustParticleOptions(colorBright, 1), this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
 
             if (random.nextFloat() < 1 / 48f)
-                this.level.addParticle(ParticleTypes.LARGE_SMOKE, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
+                this.level().addParticle(ParticleTypes.LARGE_SMOKE, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
 
             if (random.nextFloat() < 1 / 3f)
-                this.level.addParticle(new CubeParticleData(192, 122, 85, 0.075f, 10, true), this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.01D, 0.0D);
+                this.level().addParticle(new CubeParticleData(192, 122, 85, 0.075f, 10, true), this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.01D, 0.0D);
 
             if (random.nextFloat() < 1 / 3f)
-                this.level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
+                this.level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
 
             if (random.nextFloat() < 1 / 3f)
-                this.level.addParticle(new CubeParticleData(192, 122, 85, 0.075f, 10, true), this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.01D, 0.0D);
+                this.level().addParticle(new CubeParticleData(192, 122, 85, 0.075f, 10, true), this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.01D, 0.0D);
 
         }
 
@@ -275,13 +275,13 @@ public class SeethingBlaze extends Blaze {
                         if (this.attackStep > 1) {
                             double d4 = Math.sqrt(Math.sqrt(d0)) * 0.5D;
                             if (!this.blaze.isSilent()) {
-                                this.blaze.level.levelEvent(null, 1018, this.blaze.blockPosition(), 0);
+                                this.blaze.level().levelEvent(null, 1018, this.blaze.blockPosition(), 0);
                             }
 
                             for(int i = 0; i < 1; ++i) {
-                                LargeFireball largeFireball = new LargeFireball(this.blaze.level, this.blaze, this.blaze.getRandom().triangle(d1, 2.297D * d4), d2, this.blaze.getRandom().triangle(d3, 2.297D * d4), 2);
+                                LargeFireball largeFireball = new LargeFireball(this.blaze.level(), this.blaze, this.blaze.getRandom().triangle(d1, 2.297D * d4), d2, this.blaze.getRandom().triangle(d3, 2.297D * d4), 2);
                                 largeFireball.setPos(largeFireball.getX(), this.blaze.getY(0.5D) + 0.5D, largeFireball.getZ());
-                                this.blaze.level.addFreshEntity(largeFireball);
+                                this.blaze.level().addFreshEntity(largeFireball);
                             }
                         }
                     }

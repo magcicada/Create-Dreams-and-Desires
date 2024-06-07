@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
@@ -274,7 +275,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
         if (controllerBE == null)
             return false;
         return containedFluidTooltip(tooltip, isPlayerSneaking,
-                controllerBE.getCapability(net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY));
+                controllerBE.getCapability(ForgeCapabilities.FLUID_HANDLER));
     }
 
 
@@ -356,7 +357,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
         if (!fluidCapability.isPresent())
             refreshCapability();
-        if (cap == net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
+        if (cap == ForgeCapabilities.FLUID_HANDLER)
             return fluidCapability.cast();
         return super.getCapability(cap, side);
     }

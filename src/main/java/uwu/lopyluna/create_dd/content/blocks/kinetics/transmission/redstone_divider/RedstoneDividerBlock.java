@@ -1,4 +1,4 @@
-package uwu.lopyluna.create_dd.content.blocks.kinetics.redstone_divider;
+package uwu.lopyluna.create_dd.content.blocks.kinetics.transmission.redstone_divider;
 
 import com.simibubi.create.content.kinetics.RotationPropagator;
 import com.simibubi.create.content.kinetics.base.AbstractEncasedShaftBlock;

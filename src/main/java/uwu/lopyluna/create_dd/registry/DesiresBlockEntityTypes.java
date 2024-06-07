@@ -18,7 +18,7 @@ import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankRenderer
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.*;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.kinetic_motor.KineticMotorBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.kinetic_motor.KineticMotorRenderer;
-import uwu.lopyluna.create_dd.content.blocks.kinetics.redstone_divider.RedstoneDividerBlockEntity;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.transmission.redstone_divider.RedstoneDividerBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.transmission.InverseBoxBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileBlockEntity;

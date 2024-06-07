@@ -5,8 +5,8 @@ import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.fluids.transfer.GenericItemEmptying;
 import com.simibubi.create.content.fluids.transfer.GenericItemFilling;
 import com.simibubi.create.foundation.block.IBE;
+import com.simibubi.create.foundation.blockEntity.ComparatorUtil;
 import com.simibubi.create.foundation.fluid.FluidHelper;
-import com.simibubi.create.foundation.item.ItemHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -45,6 +45,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
@@ -162,7 +163,7 @@ public class FluidReservoirBlock extends Block implements IWrenchable, IBE<Fluid
         if (be == null)
             return InteractionResult.FAIL;
 
-        LazyOptional<IFluidHandler> tankCapability = be.getCapability(net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY);
+        LazyOptional<IFluidHandler> tankCapability = be.getCapability(ForgeCapabilities.FLUID_HANDLER);
         if (!tankCapability.isPresent())
             return InteractionResult.PASS;
         IFluidHandler fluidTank = tankCapability.orElse(null);
@@ -312,10 +313,8 @@ public class FluidReservoirBlock extends Block implements IWrenchable, IBE<Fluid
 
     @Override
     public int getAnalogOutputSignal(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos) {
-        return getBlockEntityOptional(pLevel, pPos)
-                .map(vte -> vte.getCapability(net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY))
-                .map(lo -> lo.map(ItemHelper::calcRedstoneFromInventory)
-                        .orElse(0))
+        return getBlockEntityOptional(pLevel, pPos).map(FluidReservoirBlockEntity::getControllerBE)
+                .map(be -> ComparatorUtil.fractionToRedstoneLevel(be.getFillState()))
                 .orElse(0);
     }
 

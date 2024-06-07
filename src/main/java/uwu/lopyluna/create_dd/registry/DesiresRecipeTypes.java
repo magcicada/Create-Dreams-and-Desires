@@ -3,8 +3,8 @@ package uwu.lopyluna.create_dd.registry;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder.ProcessingRecipeFactory;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
+import net.minecraft.core.registries.Registries;
 import uwu.lopyluna.create_dd.registry.helper.Lang;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.*;
@@ -27,8 +27,6 @@ public enum DesiresRecipeTypes implements IRecipeTypeInfo {
 	SANDING(SandingRecipe::new),
 	FREEZING(FreezingRecipe::new),
 	SEETHING(SeethingRecipe::new);
-
-
 
 	private final ResourceLocation id;
 	private final RegistryObject<RecipeSerializer<?>> serializerObject;
@@ -76,7 +74,7 @@ public enum DesiresRecipeTypes implements IRecipeTypeInfo {
 
 	private static class Registers {
 		private static final DeferredRegister<RecipeSerializer<?>> SERIALIZER_REGISTER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, DesiresCreate.MOD_ID);
-		private static final DeferredRegister<RecipeType<?>> TYPE_REGISTER = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, DesiresCreate.MOD_ID);
+		private static final DeferredRegister<RecipeType<?>> TYPE_REGISTER = DeferredRegister.create(Registries.RECIPE_TYPE, DesiresCreate.MOD_ID);
 	}
 
 }

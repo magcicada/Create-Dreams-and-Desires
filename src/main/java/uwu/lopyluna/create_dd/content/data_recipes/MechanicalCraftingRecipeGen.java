@@ -8,6 +8,7 @@ import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
 import com.simibubi.create.foundation.data.recipe.MechanicalCraftingRecipeBuilder;
 import com.simibubi.create.foundation.utility.RegisteredObjects;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
@@ -128,7 +129,7 @@ public class MechanicalCraftingRecipeGen extends CreateRecipeProvider {
 
     ;
 
-    public MechanicalCraftingRecipeGen(DataGenerator p_i48262_1_) {
+    public MechanicalCraftingRecipeGen(PackOutput p_i48262_1_) {
         super(p_i48262_1_);
     }
 
@@ -168,11 +169,6 @@ public class MechanicalCraftingRecipeGen extends CreateRecipeProvider {
                 b.build(consumer, location);
             });
         }
-    }
-
-    @Override
-    public String getName() {
-        return DesiresCreate.NAME + " Mechanical Crafting Recipes";
     }
     
 }

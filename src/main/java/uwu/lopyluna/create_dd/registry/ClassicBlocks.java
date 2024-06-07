@@ -4,7 +4,7 @@ import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 
 public class ClassicBlocks {
     static {
-        REGISTRATE.creativeModeTab(() -> DesiresCreativeModeTabs.CLASSIC_CREATIVE_TAB);
+        REGISTRATE.setCreativeTab(DesiresCreativeModeTabs.CLASSIC_CREATIVE_TAB);
     }
 
 

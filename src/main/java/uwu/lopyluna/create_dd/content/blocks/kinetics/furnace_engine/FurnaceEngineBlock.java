@@ -221,7 +221,7 @@ public class FurnaceEngineBlock extends FaceAttachedHorizontalDirectionalBlock i
             }
 
             BlockState newState = world.getBlockState(shaftPos);
-            if (!newState.getMaterial().isReplaceable())
+            if (!newState.canBeReplaced())
                 return PlacementOffset.fail();
 
             Direction.Axis axis = shaft.getValue(FlywheelBlock.AXIS);

@@ -1,6 +1,5 @@
 package uwu.lopyluna.create_dd.registry;
 
-import com.mojang.math.Vector3f;
 import com.simibubi.create.content.kinetics.fan.processing.AllFanProcessingTypes;
 import com.simibubi.create.content.kinetics.fan.processing.FanProcessingType;
 import com.simibubi.create.content.kinetics.fan.processing.FanProcessingTypeRegistry;
@@ -17,7 +16,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -31,6 +29,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.content.entities.inert_blazeling.InertBlaze;
 import uwu.lopyluna.create_dd.content.entities.seething_ablaze.SeethingBlaze;
@@ -110,7 +109,7 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
             SANDING_WRAPPER.setItem(0, stack);
             Optional<SandingRecipe> recipe = DesiresRecipeTypes.SANDING.find(SANDING_WRAPPER, level);
             if (recipe.isPresent())
-                return RecipeApplier.applyRecipeOn(stack, recipe.get());
+                return RecipeApplier.applyRecipeOn(level, stack, recipe.get());
             return null;
         }
 
@@ -236,7 +235,7 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
             SEETHING_WRAPPER.setItem(0, stack);
             Optional<SeethingRecipe> recipe = DesiresRecipeTypes.SEETHING.find(SEETHING_WRAPPER, level);
             if (recipe.isPresent())
-                return RecipeApplier.applyRecipeOn(stack, recipe.get());
+                return RecipeApplier.applyRecipeOn(level, stack, recipe.get());
             return null;
         }
 
@@ -283,7 +282,7 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
 
             if (!entity.fireImmune()) {
                 entity.setSecondsOnFire(10);
-                entity.hurt(DamageSource.LAVA, 10);
+                entity.hurt(level.damageSources().lava(), 10);
             }
 
             if (entity instanceof LivingEntity livingEntity) {
@@ -353,7 +352,7 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
             FREEZING_WRAPPER.setItem(0, stack);
             Optional<FreezingRecipe> recipe = DesiresRecipeTypes.FREEZING.find(FREEZING_WRAPPER, level);
             if (recipe.isPresent())
-                return RecipeApplier.applyRecipeOn(stack, recipe.get());
+                return RecipeApplier.applyRecipeOn(level, stack, recipe.get());
             return null;
         }
 
@@ -398,7 +397,7 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
             }
 
             if (entity instanceof EnderMan || entity.getType() == EntityType.BLAZE) {
-                entity.hurt(DamageSource.FREEZE, 8);
+                entity.hurt(level.damageSources().freeze(), 8);
             }
 
             if (entity instanceof LivingEntity livingEntity) {

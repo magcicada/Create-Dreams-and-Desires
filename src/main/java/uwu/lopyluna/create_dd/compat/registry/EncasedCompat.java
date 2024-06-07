@@ -14,7 +14,7 @@ public class EncasedCompat {
     //ON HOLD FOR NOW DUE TO ISSUES
 
     static {
-        REGISTRATE.creativeModeTab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB);
+        REGISTRATE.setCreativeTab(DesiresCreativeModeTabs.BASE_CREATIVE_TAB);
     }
 
     //public static final BlockEntry<? extends Block>

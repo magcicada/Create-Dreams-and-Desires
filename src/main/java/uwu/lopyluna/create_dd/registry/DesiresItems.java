@@ -7,15 +7,13 @@ import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.item.CombustibleItem;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.ItemEntry;
-import net.minecraft.core.Registry;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.content.items.equipment.NameableRecordItem;
@@ -24,6 +22,7 @@ import uwu.lopyluna.create_dd.content.items.equipment.excavation_drill.Excavatio
 import uwu.lopyluna.create_dd.content.items.equipment.gilded_rose_tools.*;
 import uwu.lopyluna.create_dd.content.items.equipment.magnet.MagnetItem;
 
+import static com.tterrag.registrate.providers.RegistrateRecipeProvider.getItemName;
 import static com.tterrag.registrate.providers.RegistrateRecipeProvider.has;
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 import static uwu.lopyluna.create_dd.registry.DesiresTags.forgeItemTag;
@@ -33,7 +32,7 @@ import static uwu.lopyluna.create_dd.registry.DesiresTags.optionalTag;
 public class DesiresItems {
 
 	static {
-		REGISTRATE.creativeModeTab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB);
+		REGISTRATE.setCreativeTab(DesiresCreativeModeTabs.BASE_CREATIVE_TAB);
 	}
 
 	public static final ItemEntry<SequencedAssemblyItem>
@@ -49,14 +48,14 @@ public class DesiresItems {
 			.tag(forgeItemTag("raw_rubbers"))
 			.recipe((c, p) -> {
 				Item output = DesiresBlocks.RAW_RUBBER_BLOCK.get().asItem();
-				ShapedRecipeBuilder.shaped(output, 1)
+				ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, output, 1)
 						.pattern("CCC")
 						.pattern("CCC")
 						.pattern("CCC")
 						.define('C', c.get())
 						.unlockedBy("has_" + getItemName(output), has(output))
 						.save(p, DesiresCreate.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
-				ShapelessRecipeBuilder.shapeless(c.get(), 9)
+				ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, c.get(), 9)
 						.requires(output)
 						.unlockedBy("has_" + c.getName(), has(c.get()))
 						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
@@ -71,19 +70,19 @@ public class DesiresItems {
 			.tag(forgeItemTag("rubbers"), forgeItemTag("crude_rubbers"))
 			.recipe((c, p) -> {
 				Item output = DesiresBlocks.RUBBER_BLOCK.get().asItem();
-				ShapedRecipeBuilder.shaped(output, 1)
+				ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, output, 1)
 						.pattern("CCC")
 						.pattern("CCC")
 						.pattern("CCC")
 						.define('C', c.get())
 						.unlockedBy("has_" + getItemName(output), has(output))
 						.save(p, DesiresCreate.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
-				ShapelessRecipeBuilder.shapeless(c.get(), 9)
+				ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, c.get(), 9)
 						.requires(output)
 						.unlockedBy("has_" + c.getName(), has(c.get()))
 						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
 
-				SimpleCookingRecipeBuilder.cooking(Ingredient.of(RAW_RUBBER.get()), c.get(), 2, 600, RecipeSerializer.SMOKING_RECIPE)
+				SimpleCookingRecipeBuilder.smoking(Ingredient.of(RAW_RUBBER.get()),RecipeCategory.BUILDING_BLOCKS , c.get(), 2, 600)
 						.unlockedBy("has_" + getItemName(RAW_RUBBER.get()), has(RAW_RUBBER.get()))
 						.save(p, DesiresCreate.asResource("smoking/" + c.getId().getPath()));
 			})
@@ -95,7 +94,7 @@ public class DesiresItems {
 					new ResourceLocation("item/generated")).texture("layer0",
 					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
 			.tag(forgeItemTag("ingots/bury_blend"), forgeItemTag("ingots"), forgeItemTag("bury_blends"))
-			.recipe((c, p) -> ShapelessRecipeBuilder.shapeless(c.get(), 2)
+			.recipe((c, p) -> ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, c.get(), 2)
 					.requires(Items.LAPIS_LAZULI)
 					.requires(AllItems.CRUSHED_IRON.get())
 					.requires(AllItems.CRUSHED_IRON.get())
@@ -112,13 +111,13 @@ public class DesiresItems {
 			.tag(forgeItemTag("nuggets/lapis"), forgeItemTag("nuggets"))
 			.recipe((c, p) -> {
 				Item output = Items.LAPIS_LAZULI;
-				ShapedRecipeBuilder.shaped(output, 1)
+				ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, output, 1)
 						.pattern("CC")
 						.pattern("CC")
 						.define('C', c.get())
 						.unlockedBy("has_" + getItemName(output), has(output))
 						.save(p, DesiresCreate.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
-				ShapelessRecipeBuilder.shapeless(c.get(), 4)
+				ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, c.get(), 4)
 						.requires(output)
 						.unlockedBy("has_" + c.getName(), has(c.get()))
 						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
@@ -132,13 +131,13 @@ public class DesiresItems {
 			.tag(forgeItemTag("nuggets/diamond"), forgeItemTag("nuggets"))
 			.recipe((c, p) -> {
 				Item output = Items.DIAMOND;
-				ShapedRecipeBuilder.shaped(output, 1)
+				ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, output, 1)
 					.pattern("CC")
 					.pattern("CC")
 						.define('C', c.get())
 						.unlockedBy("has_" + getItemName(output), has(output))
 						.save(p, DesiresCreate.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
-				ShapelessRecipeBuilder.shapeless(c.get(), 4)
+				ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, c.get(), 4)
 						.requires(output)
 						.unlockedBy("has_" + c.getName(), has(c.get()))
 						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
@@ -153,14 +152,14 @@ public class DesiresItems {
 			.tag(forgeItemTag("nuggets/coal"), forgeItemTag("nuggets"))
 			.recipe((c, p) -> {
 				Item output = Items.COAL;
-				ShapelessRecipeBuilder.shapeless(output, 1)
+				ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, output, 1)
 						.requires(c.get()).requires(c.get())
 						.requires(c.get()).requires(c.get())
 						.requires(c.get()).requires(c.get())
 						.requires(c.get()).requires(c.get())
 						.unlockedBy("has_" + getItemName(output), has(output))
 						.save(p, DesiresCreate.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
-				ShapelessRecipeBuilder.shapeless(c.get(), 8)
+				ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, c.get(), 8)
 						.requires(output)
 						.unlockedBy("has_" + c.getName(), has(c.get()))
 						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
@@ -172,7 +171,7 @@ public class DesiresItems {
 					new ResourceLocation("item/generated")).texture("layer0",
 					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
 			.recipe((c, p) -> {
-				ShapedRecipeBuilder.shaped(c.get(), 1)
+				ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 1)
 						.pattern("I I")
 						.pattern("B Q")
 						.pattern("BNQ")
@@ -182,7 +181,7 @@ public class DesiresItems {
 						.define('N', Items.NETHERITE_INGOT)
 						.unlockedBy("has_" + c.getName(), has(c.get()))
 						.save(p, DesiresCreate.asResource("crafting/equipment/flipped_" + c.getName()));
-				ShapedRecipeBuilder.shaped(c.get(), 1)
+				ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 1)
 						.pattern("I I")
 						.pattern("Q B")
 						.pattern("QNB")
@@ -250,7 +249,7 @@ public class DesiresItems {
 			.model(AssetLookup.itemModelWithPartials())
 			.properties(p -> p.rarity(Rarity.UNCOMMON))
 			.recipe((c, p) -> {
-				ShapedRecipeBuilder.shaped(c.get(), 1)
+				ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 1)
 						.pattern(" II")
 						.pattern("AKI")
 						.pattern(" S ")
@@ -260,7 +259,7 @@ public class DesiresItems {
 						.define('S', Items.STICK)
 						.unlockedBy("has_" + getItemName(KINETIC_MECHANISM.get().asItem()), has(KINETIC_MECHANISM.get()))
 						.save(p, DesiresCreate.asResource("crafting/equipment/flipped_" + c.getName()));
-				ShapedRecipeBuilder.shaped(c.get(), 1)
+				ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 1)
 						.pattern("II ")
 						.pattern("IKA")
 						.pattern(" S ")
@@ -284,24 +283,24 @@ public class DesiresItems {
 					p -> new NameableRecordItem(10, DesiresSoundEvents.MUSIC_DISC_WALTZ_OF_THE_FLOWERS, p, 16600, "Tchaikovsky - Waltz of the Flowers"))
 			.properties(p -> p.rarity(Rarity.RARE)
 					.stacksTo(1))
-			.recipe((c, p) -> p.stonecutting(DataIngredient.items(AllItems.ROSE_QUARTZ), c, 1))
+			.recipe((c, p) -> p.stonecutting(DataIngredient.items(AllItems.ROSE_QUARTZ.get()), RecipeCategory.BUILDING_BLOCKS, c, 1))
 			.tag(optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("minecraft", "music_discs")))
 			.tag(optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("minecraft", "creeper_drop_music_discs")))
 			.lang("Music Disc")
 			.register();
 
-	public static final ItemEntry<SpawnEggItem> INERT_BLAZELING_SPAWN_EGG = REGISTRATE.item("inert_blazeling_spawn_egg",
-					p -> new SpawnEggItem(DesiresEntityTypes.INERT_BLAZELING.get(), 5451574, 13661252, p))
-			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
-					new ResourceLocation("item/template_spawn_egg")))
-			.register();
+	//public static final ItemEntry<SpawnEggItem> INERT_BLAZELING_SPAWN_EGG = REGISTRATE.item("inert_blazeling_spawn_egg",
+	//				p -> new SpawnEggItem(DesiresEntityTypes.INERT_BLAZELING.get(), 5451574, 13661252, p))
+	//		.model((c, p) -> p.withExistingParent(c.getId().getPath(),
+	//				new ResourceLocation("item/template_spawn_egg")))
+	//		.register();
 
-	public static final ItemEntry<SpawnEggItem> SEETHING_ABLAZE_SPAWN_EGG = REGISTRATE.item("seething_ablaze_spawn_egg",
-					p -> new SpawnEggItem(DesiresEntityTypes.SEETHING_ABLAZE.get(), 44543, 56063, p))
-			.tag(AllTags.AllItemTags.BLAZE_BURNER_FUEL_SPECIAL.tag)
-			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
-					new ResourceLocation("item/template_spawn_egg")))
-			.register();
+	//public static final ItemEntry<SpawnEggItem> SEETHING_ABLAZE_SPAWN_EGG = REGISTRATE.item("seething_ablaze_spawn_egg",
+	//				p -> new SpawnEggItem(DesiresEntityTypes.SEETHING_ABLAZE.get(), 44543, 56063, p))
+	//		.tag(AllTags.AllItemTags.BLAZE_BURNER_FUEL_SPECIAL.tag)
+	//		.model((c, p) -> p.withExistingParent(c.getId().getPath(),
+	//				new ResourceLocation("item/template_spawn_egg")))
+	//		.register();
 
 	public static final ItemEntry<CombustibleItem> SEETHING_ABLAZE_ROD = REGISTRATE.item("seething_ablaze_rod", CombustibleItem::new)
 			.tag(AllTags.AllItemTags.BLAZE_BURNER_FUEL_SPECIAL.tag)
@@ -311,7 +310,7 @@ public class DesiresItems {
 					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
 			.recipe((c, p) -> {
 				Item output = DesiresItems.SEETHING_ABLAZE_POWDER.get().asItem();
-				ShapelessRecipeBuilder.shapeless(output, 2)
+				ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, output, 2)
 						.requires(c.get())
 						.unlockedBy("has_" + c.getName(), has(c.get()))
 						.save(p, DesiresCreate.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
@@ -335,12 +334,6 @@ public class DesiresItems {
 		return REGISTRATE.item(name, SequencedAssemblyItem::new)
 				.register();
 	}
-
-
-	protected static String getItemName(ItemLike pItemLike) {
-		return Registry.ITEM.getKey(pItemLike.asItem()).getPath();
-	}
-
 	// Load this class
 
 	public static void register() {}

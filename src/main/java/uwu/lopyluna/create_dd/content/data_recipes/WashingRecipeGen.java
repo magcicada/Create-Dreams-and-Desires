@@ -4,6 +4,7 @@ import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import uwu.lopyluna.create_dd.registry.DesiresPaletteStoneTypes;
@@ -35,7 +36,7 @@ public class WashingRecipeGen extends DesireProcessingRecipeGen {
 		return create(() -> block, b -> b.output(result));
 	}
 
-	public WashingRecipeGen(DataGenerator dataGenerator) {
+	public WashingRecipeGen(PackOutput dataGenerator) {
 		super(dataGenerator);
 	}
 

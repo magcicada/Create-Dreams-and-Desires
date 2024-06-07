@@ -5,14 +5,16 @@ import com.simibubi.create.content.contraptions.mounted.MountedContraption;
 import com.simibubi.create.content.kinetics.base.BlockBreakingMovementBehaviour;
 import com.simibubi.create.content.kinetics.drill.DrillBlock;
 import com.simibubi.create.content.trains.entity.CarriageContraption;
+import com.simibubi.create.foundation.damageTypes.CreateDamageSources;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.level.Level;
 
 public class BoreBlockMovementBehaviour extends BlockBreakingMovementBehaviour {
 
     @Override
-    protected DamageSource getDamageSource() {
-        return DrillBlock.damageSourceDrill;
+    protected DamageSource getDamageSource(Level level) {
+        return CreateDamageSources.drill(level);
     }
 
     protected float getBlockBreakingSpeed(MovementContext context) {

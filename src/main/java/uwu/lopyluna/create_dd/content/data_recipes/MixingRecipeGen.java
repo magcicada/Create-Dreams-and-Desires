@@ -4,6 +4,7 @@ import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
 import uwu.lopyluna.create_dd.registry.DesiresFluids;
 import uwu.lopyluna.create_dd.registry.DesiresItems;
@@ -27,7 +28,7 @@ public class MixingRecipeGen extends DesireProcessingRecipeGen {
             .require(Items.LAPIS_LAZULI)
             .output(DesiresItems.BURY_BLEND.get(), 1));
 
-    public MixingRecipeGen(DataGenerator generator) {
+    public MixingRecipeGen(PackOutput generator) {
         super(generator);
     }
 

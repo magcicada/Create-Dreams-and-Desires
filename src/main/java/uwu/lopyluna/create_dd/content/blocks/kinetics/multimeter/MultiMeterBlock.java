@@ -1,6 +1,5 @@
 package uwu.lopyluna.create_dd.content.blocks.kinetics.multimeter;
 
-import com.mojang.math.Vector3f;
 import com.simibubi.create.content.kinetics.base.DirectionalAxisKineticBlock;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.foundation.block.IBE;
@@ -24,12 +23,13 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
+import org.joml.Vector3f;
 import uwu.lopyluna.create_dd.registry.DesiresBlockEntityTypes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-@SuppressWarnings({"deprecation"})
+@SuppressWarnings({"deprecation", "all"})
 public class MultiMeterBlock extends DirectionalAxisKineticBlock implements IBE<MultiMeterBlockEntity> {
     public static final GaugeShaper GAUGE = GaugeShaper.make();
 

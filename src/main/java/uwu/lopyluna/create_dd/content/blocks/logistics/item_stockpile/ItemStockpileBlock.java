@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.ForgeSoundType;
 import uwu.lopyluna.create_dd.registry.DesiresBlockEntityTypes;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
@@ -122,10 +123,10 @@ public class ItemStockpileBlock extends Block implements IWrenchable, IBE<ItemSt
 	@Override
 	public int getAnalogOutputSignal(BlockState pState, Level pLevel, BlockPos pPos) {
 		return getBlockEntityOptional(pLevel, pPos)
-			.map(vte -> vte.getCapability(net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY))
-			.map(lo -> lo.map(ItemHelper::calcRedstoneFromInventory)
-				.orElse(0))
-			.orElse(0);
+				.map(vte -> vte.getCapability(ForgeCapabilities.ITEM_HANDLER))
+				.map(lo -> lo.map(ItemHelper::calcRedstoneFromInventory)
+						.orElse(0))
+				.orElse(0);
 	}
 
 	@Override

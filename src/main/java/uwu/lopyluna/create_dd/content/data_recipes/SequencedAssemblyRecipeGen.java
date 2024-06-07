@@ -6,6 +6,7 @@ import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.registry.DesiresItems;
@@ -38,7 +39,7 @@ public class SequencedAssemblyRecipeGen extends CreateRecipeProvider {
 
     ;
 
-    public SequencedAssemblyRecipeGen(DataGenerator p_i48262_1_) {
+    public SequencedAssemblyRecipeGen(PackOutput p_i48262_1_) {
         super(p_i48262_1_);
     }
 
@@ -48,11 +49,6 @@ public class SequencedAssemblyRecipeGen extends CreateRecipeProvider {
                         .build(c);
         all.add(generatedRecipe);
         return generatedRecipe;
-    }
-
-    @Override
-    public String getName() {
-        return DesiresCreate.NAME + " Sequenced Assembly Recipes";
     }
     
 }

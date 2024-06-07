@@ -7,19 +7,18 @@ import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
-import net.minecraft.core.Registry;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -38,7 +37,7 @@ import static uwu.lopyluna.create_dd.registry.helper.BlockTransformer.rubber_dec
 public class DesiresPaletteBlocks {
 
 	static {
-		REGISTRATE.creativeModeTab(() -> DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB);
+		REGISTRATE.setCreativeTab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB);
 	}
 
 	public static SoundType rubberSoundType = new ForgeSoundType(0.9f, .6f, () -> DesiresSoundEvents.RUBBER_BREAK.get(), () -> SoundEvents.STEM_STEP, () -> DesiresSoundEvents.RUBBER_PLACE.get(), () -> SoundEvents.STEM_HIT, () -> SoundEvents.STEM_FALL);
@@ -57,28 +56,28 @@ public class DesiresPaletteBlocks {
 			.properties(p -> p.destroyTime(1.25f)
 					.speedFactor(0.8F)
 					.jumpFactor(0.8F)
-					.color(MaterialColor.COLOR_BLACK)
+					.mapColor(MapColor.COLOR_BLACK)
 					.sound(SoundType.POLISHED_DEEPSLATE))
 			.blockstate((c, p) -> p.simpleBlock(c.get()))
 			.onRegister(connectedTextures(() -> new EncasedCTBehaviour(DesiresSpriteShifts.HAZARD_BLOCK)))
 			.onRegister(casingConnectivity((block, cc) -> cc.make(block, DesiresSpriteShifts.HAZARD_BLOCK)))
 			.transform(pickaxeOnly())
-			.recipe((c, p) -> p.stonecutting(DataIngredient.tag(asphaltBlocks), c, 2))
+			.recipe((c, p) -> p.stonecutting(DataIngredient.tag(asphaltBlocks), RecipeCategory.BUILDING_BLOCKS, c, 2))
 			.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
 			.item()
 			.build()
 			.register();
 
 	public static final BlockEntry<Block> DARK_METAL_BLOCK = REGISTRATE.block("dark_metal_block", Block::new)
-			.properties(p -> p.color(MaterialColor.COLOR_BLACK)
+			.properties(p -> p.mapColor(MapColor.COLOR_BLACK)
 					.sound(SoundType.NETHERITE_BLOCK)
 					.strength(0.5f,1.5f))
 			.blockstate((c, p) -> p.simpleBlock(c.get()))
 			.transform(pickaxeOnly())
 			.recipe((c, p) -> {
-				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), c, 2);
-				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), c, 1);
-				ShapedRecipeBuilder.shaped(c.get(), 4)
+				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), RecipeCategory.BUILDING_BLOCKS, c, 2);
+				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 1);
+				ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 4)
 						.pattern("CC")
 						.pattern("CC")
 						.define('C', AllBlocks.INDUSTRIAL_IRON_BLOCK.get())
@@ -92,7 +91,7 @@ public class DesiresPaletteBlocks {
 			.register();
 
 	public static final BlockEntry<Block> DARK_METAL_PLATING = REGISTRATE.block("dark_metal_plating", Block::new)
-			.properties(p -> p.color(MaterialColor.COLOR_BLACK)
+			.properties(p -> p.mapColor(MapColor.COLOR_BLACK)
 					.sound(SoundType.NETHERITE_BLOCK)
 					.strength(0.5f,1.5f))
 			.blockstate((c, p) -> p.simpleBlock(c.get()))
@@ -100,11 +99,11 @@ public class DesiresPaletteBlocks {
 			.onRegister(casingConnectivity((block, cc) -> cc.make(block, DesiresSpriteShifts.DARK_METAL_PLATING)))
 			.transform(pickaxeOnly())
 			.recipe((c, p) -> {
-				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), c, 2);
-				p.stonecutting(DataIngredient.items(DARK_METAL_BLOCK.get()), c, 1);
-				p.stonecutting(DataIngredient.items(c.get()), DARK_METAL_BLOCK, 1);
-				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), c, 1);
-				ShapedRecipeBuilder.shaped(c.get(), 9)
+				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), RecipeCategory.BUILDING_BLOCKS, c, 2);
+				p.stonecutting(DataIngredient.items(DARK_METAL_BLOCK.get()), RecipeCategory.BUILDING_BLOCKS, c, 1);
+				p.stonecutting(DataIngredient.items(c.get()), RecipeCategory.BUILDING_BLOCKS, DARK_METAL_BLOCK, 1);
+				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 1);
+				ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 9)
 						.pattern("CCC")
 						.pattern("CCC")
 						.pattern("CCC")
@@ -119,7 +118,7 @@ public class DesiresPaletteBlocks {
 			.register();
 
 	public static final BlockEntry<SlabBlock> DARK_METAL_SLAB = REGISTRATE.block("dark_metal_block_slab", SlabBlock::new)
-			.properties(p -> p.color(MaterialColor.COLOR_BLACK)
+			.properties(p -> p.mapColor(MapColor.COLOR_BLACK)
 					.sound(SoundType.NETHERITE_BLOCK)
 					.strength(0.5f,1.5f))
 			.blockstate((c, p) -> p.slabBlock(c.get(), DesiresCreate.asResource("block/dark_metal_block"),
@@ -129,9 +128,9 @@ public class DesiresPaletteBlocks {
 			.transform(pickaxeOnly())
 			.tag(stairsBlockTag)
 			.recipe((c, p) -> {
-				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), c, 4);
-				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), c, 2);
-				ShapedRecipeBuilder.shaped(c.get(), 6)
+				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), RecipeCategory.BUILDING_BLOCKS, c, 4);
+				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 2);
+				ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 6)
 						.pattern("CCC")
 						.define('C', DARK_METAL_BLOCK.get())
 						.unlockedBy("has_" + c.getName(), has(c.get()))
@@ -144,16 +143,16 @@ public class DesiresPaletteBlocks {
 			.register();
 
 	public static final BlockEntry<StairBlock> DARK_METAL_STAIRS = REGISTRATE.block("dark_metal_block_stairs", p -> new StairBlock(DesiresPaletteBlocks.DARK_METAL_BLOCK.getDefaultState(), p))
-			.properties(p -> p.color(MaterialColor.COLOR_BLACK)
+			.properties(p -> p.mapColor(MapColor.COLOR_BLACK)
 					.sound(SoundType.NETHERITE_BLOCK)
 					.strength(0.5f,1.5f))
 			.blockstate((c, p) -> p.stairsBlock(c.get(), DesiresCreate.asResource("block/dark_metal_block")))
 			.transform(pickaxeOnly())
 			.tag(stairsBlockTag)
 			.recipe((c, p) -> {
-				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), c, 2);
-				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), c, 1);
-				ShapedRecipeBuilder.shaped(c.get(), 4)
+				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), RecipeCategory.BUILDING_BLOCKS, c, 2);
+				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 1);
+				ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 4)
 						.pattern("X  ").pattern("XX ").pattern("XXX")
 						.define('X', DARK_METAL_BLOCK.get())
 						.unlockedBy("has_" + c.getName(), has(c.get()))
@@ -165,15 +164,15 @@ public class DesiresPaletteBlocks {
 			.register();
 
 	public static final BlockEntry<Block> DARK_METAL_BRICKS = REGISTRATE.block("dark_metal_bricks", Block::new)
-			.properties(p -> p.color(MaterialColor.COLOR_BLACK)
+			.properties(p -> p.mapColor(MapColor.COLOR_BLACK)
 					.sound(SoundType.NETHERITE_BLOCK)
 					.strength(0.5f,1.5f))
 			.blockstate((c, p) -> p.simpleBlock(c.get()))
 			.transform(pickaxeOnly())
 			.recipe((c, p) -> {
-				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), c, 2);
-				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), c, 1);
-				ShapedRecipeBuilder.shaped(c.get(), 4)
+				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), RecipeCategory.BUILDING_BLOCKS, c, 2);
+				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 1);
+				ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 4)
 						.pattern("CC")
 						.pattern("CC")
 						.define('C', DARK_METAL_BLOCK.get())
@@ -187,7 +186,7 @@ public class DesiresPaletteBlocks {
 			.register();
 
 	public static final BlockEntry<SlabBlock> DARK_METAL_BRICK_SLAB = REGISTRATE.block("dark_metal_brick_slab", SlabBlock::new)
-			.properties(p -> p.color(MaterialColor.COLOR_BLACK)
+			.properties(p -> p.mapColor(MapColor.COLOR_BLACK)
 					.sound(SoundType.NETHERITE_BLOCK)
 					.strength(0.5f,1.5f))
 			.blockstate((c, p) -> p.slabBlock(c.get(), DesiresCreate.asResource("block/dark_metal_bricks"),
@@ -197,9 +196,9 @@ public class DesiresPaletteBlocks {
 			.transform(pickaxeOnly())
 			.tag(stairsBlockTag)
 			.recipe((c, p) -> {
-				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), c, 4);
-				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), c, 2);
-				ShapedRecipeBuilder.shaped(c.get(), 6)
+				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), RecipeCategory.BUILDING_BLOCKS, c, 4);
+				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 2);
+				ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 6)
 						.pattern("CCC")
 						.define('C', DARK_METAL_BRICKS.get())
 						.unlockedBy("has_" + c.getName(), has(c.get()))
@@ -212,16 +211,16 @@ public class DesiresPaletteBlocks {
 			.register();
 
 	public static final BlockEntry<StairBlock> DARK_METAL_BRICK_STAIRS = REGISTRATE.block("dark_metal_brick_stairs", p -> new StairBlock(DesiresPaletteBlocks.DARK_METAL_BLOCK.getDefaultState(), p))
-			.properties(p -> p.color(MaterialColor.COLOR_BLACK)
+			.properties(p -> p.mapColor(MapColor.COLOR_BLACK)
 					.sound(SoundType.NETHERITE_BLOCK)
 					.strength(0.5f,1.5f))
 			.blockstate((c, p) -> p.stairsBlock(c.get(), DesiresCreate.asResource("block/dark_metal_bricks")))
 			.transform(pickaxeOnly())
 			.tag(stairsBlockTag)
 			.recipe((c, p) -> {
-				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), c, 2);
-				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), c, 1);
-				ShapedRecipeBuilder.shaped(c.get(), 4)
+				p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), RecipeCategory.BUILDING_BLOCKS, c, 2);
+				p.stonecutting(DataIngredient.tag(darkMetalDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 1);
+				ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 4)
 						.pattern("X  ").pattern("XX ").pattern("XXX")
 						.define('X', DARK_METAL_BRICKS.get())
 						.unlockedBy("has_" + c.getName(), has(c.get()))
@@ -233,11 +232,11 @@ public class DesiresPaletteBlocks {
 			.register();
 
 	public static final BlockEntry<Block> PADDED_RUBBER = REGISTRATE.block("padded_rubber", Block::new)
-			.properties(p -> p.color(MaterialColor.TERRACOTTA_GRAY))
+			.properties(p -> p.mapColor(MapColor.TERRACOTTA_GRAY))
 			.properties(p -> p.sound(rubberSoundType))
 			.properties(p -> p.strength(0.5f,1.5f))
-			.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rubberDecorTag), c, 1))
-			.recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 4)
+			.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rubberDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 1))
+			.recipe((c, p) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 4)
 					.pattern("CC")
 					.pattern("CC")
 					.define('C', DesiresBlocks.RUBBER_BLOCK.get())
@@ -250,8 +249,8 @@ public class DesiresPaletteBlocks {
 
 	public static final BlockEntry<Block> PADDED_TILED_RUBBER =
 			REGISTRATE.block("padded_tiled_rubber", Block::new)
-					.properties(p -> p.color(MaterialColor.TERRACOTTA_GRAY)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
-					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rubberDecorTag), c, 1))
+					.properties(p -> p.mapColor(MapColor.TERRACOTTA_GRAY)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
+					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rubberDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 1))
 					.item()
 					.tag(rubberDecorTag)
 					.build()
@@ -259,8 +258,8 @@ public class DesiresPaletteBlocks {
 
 	public static final BlockEntry<Block> PADDED_MOSAIC_RUBBER =
 			REGISTRATE.block("padded_mosaic_rubber", Block::new)
-					.properties(p -> p.color(MaterialColor.TERRACOTTA_GRAY)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
-					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rubberDecorTag), c, 1))
+					.properties(p -> p.mapColor(MapColor.TERRACOTTA_GRAY)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
+					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rubberDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 1))
 					.item()
 					.tag(rubberDecorTag)
 					.build()
@@ -268,9 +267,9 @@ public class DesiresPaletteBlocks {
 
 	public static final BlockEntry<SlabBlock> PADDED_RUBBER_SLAB =
 			REGISTRATE.block("padded_rubber_slab", SlabBlock::new)
-					.properties(p -> p.color(MaterialColor.TERRACOTTA_GRAY)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
+					.properties(p -> p.mapColor(MapColor.TERRACOTTA_GRAY)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
 					.tag(slabsBlockTag)
-					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rubberDecorTag), c, 2))
+					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rubberDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 2))
 					.blockstate((c, p) -> p.slabBlock(c.get(), DesiresCreate.asResource("block/padded_rubber"),
 							DesiresCreate.asResource("block/padded_rubber_slab"),
 							DesiresCreate.asResource("block/padded_rubber"),
@@ -282,9 +281,9 @@ public class DesiresPaletteBlocks {
 
 	public static final BlockEntry<StairBlock> PADDED_RUBBER_STAIRS =
 			REGISTRATE.block("padded_rubber_stairs", p -> new StairBlock(DesiresPaletteBlocks.PADDED_RUBBER.getDefaultState(), p))
-					.properties(p -> p.color(MaterialColor.TERRACOTTA_GRAY)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
+					.properties(p -> p.mapColor(MapColor.TERRACOTTA_GRAY)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
 					.tag(stairsBlockTag)
-					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rubberDecorTag), c, 1))
+					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rubberDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 1))
 					.blockstate((c, p) -> p.stairsBlock(c.get(), DesiresCreate.asResource("block/padded_tiled_rubber")))
 					.item()
 					.tag(rubberDecorTag, stairsItemTag)
@@ -292,10 +291,10 @@ public class DesiresPaletteBlocks {
 					.register();
 
 	public static final BlockEntry<Block> RAW_PADDED_RUBBER = REGISTRATE.block("raw_padded_rubber", Block::new)
-			.properties(p -> p.color(MaterialColor.TERRACOTTA_WHITE))
+			.properties(p -> p.mapColor(MapColor.TERRACOTTA_WHITE))
 			.properties(p -> p.sound(rubberSoundType))
 			.properties(p -> p.strength(0.5f,1.5f))
-			.recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 4)
+			.recipe((c, p) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 4)
 					.pattern("CC")
 					.pattern("CC")
 					.define('C', DesiresBlocks.RAW_RUBBER_BLOCK.get())
@@ -308,8 +307,8 @@ public class DesiresPaletteBlocks {
 
 	public static final BlockEntry<Block> RAW_PADDED_TILED_RUBBER =
 			REGISTRATE.block("raw_padded_tiled_rubber", Block::new)
-					.properties(p -> p.color(MaterialColor.TERRACOTTA_WHITE)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
-					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rawRubberDecorTag), c, 1))
+					.properties(p -> p.mapColor(MapColor.TERRACOTTA_WHITE)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
+					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rawRubberDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 1))
 					.item()
 					.tag(rawRubberDecorTag)
 					.build()
@@ -317,8 +316,8 @@ public class DesiresPaletteBlocks {
 	
 	public static final BlockEntry<Block> RAW_PADDED_MOSAIC_RUBBER =
 			REGISTRATE.block("raw_padded_mosaic_rubber", Block::new)
-					.properties(p -> p.color(MaterialColor.TERRACOTTA_WHITE)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
-					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rawRubberDecorTag), c, 1))
+					.properties(p -> p.mapColor(MapColor.TERRACOTTA_WHITE)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
+					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rawRubberDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 1))
 					.item()
 					.tag(rawRubberDecorTag)
 					.build()
@@ -326,9 +325,9 @@ public class DesiresPaletteBlocks {
 	
 	public static final BlockEntry<SlabBlock> RAW_PADDED_RUBBER_SLAB =
 			REGISTRATE.block("raw_padded_rubber_slab", SlabBlock::new)
-					.properties(p -> p.color(MaterialColor.TERRACOTTA_WHITE)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
+					.properties(p -> p.mapColor(MapColor.TERRACOTTA_WHITE)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
 					.tag(slabsBlockTag)
-					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rawRubberDecorTag), c, 2))
+					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rawRubberDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 2))
 					.blockstate((c, p) -> p.slabBlock(c.get(), DesiresCreate.asResource("block/" + "raw_padded_rubber"),
 							DesiresCreate.asResource("block/" + "raw_padded_rubber_slab"),
 							DesiresCreate.asResource("block/" + "raw_padded_rubber"),
@@ -340,9 +339,9 @@ public class DesiresPaletteBlocks {
 	
 	public static final BlockEntry<StairBlock> RAW_PADDED_RUBBER_STAIRS =
 			REGISTRATE.block("raw_padded_rubber_stairs", p -> new StairBlock(DesiresPaletteBlocks.PADDED_RUBBER.getDefaultState(), p))
-					.properties(p -> p.color(MaterialColor.TERRACOTTA_WHITE)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
+					.properties(p -> p.mapColor(MapColor.TERRACOTTA_WHITE)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
 					.tag(stairsBlockTag)
-					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rawRubberDecorTag), c, 1))
+					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rawRubberDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 1))
 					.blockstate((c, p) -> p.stairsBlock(c.get(), DesiresCreate.asResource("block/" + "raw_padded_tiled_rubber")))
 					.item()
 					.tag(rawRubberDecorTag, stairsItemTag)
@@ -350,40 +349,40 @@ public class DesiresPaletteBlocks {
 					.register();
 
 	public static final BlockEntry<Block>
-			BLACK_RUBBER_BLOCKS = rubber_decor("black", MaterialColor.COLOR_BLACK, Items.BLACK_DYE),
-			WHITE_RUBBER_BLOCKS = rubber_decor("white", MaterialColor.SNOW, Items.WHITE_DYE),
-			BLUE_RUBBER_BLOCKS = rubber_decor("blue", MaterialColor.COLOR_BLUE, Items.BLUE_DYE),
-			LIGHT_BLUE_RUBBER_BLOCKS = rubber_decor("light_blue", MaterialColor.COLOR_LIGHT_BLUE, Items.LIGHT_BLUE_DYE),
-			RED_RUBBER_BLOCKS = rubber_decor("red", MaterialColor.COLOR_RED, Items.RED_DYE),
-			GREEN_RUBBER_BLOCKS = rubber_decor("green", MaterialColor.COLOR_GREEN, Items.GREEN_DYE),
-			LIME_RUBBER_BLOCKS = rubber_decor("lime", MaterialColor.COLOR_LIGHT_GREEN, Items.LIME_DYE),
-			PINK_RUBBER_BLOCKS = rubber_decor("pink", MaterialColor.COLOR_PINK, Items.PINK_DYE),
-			MAGENTA_RUBBER_BLOCKS = rubber_decor("magenta", MaterialColor.COLOR_MAGENTA, Items.MAGENTA_DYE),
-			YELLOW_RUBBER_BLOCKS = rubber_decor("yellow", MaterialColor.COLOR_YELLOW, Items.YELLOW_DYE),
-			GRAY_RUBBER_BLOCKS = rubber_decor("gray", MaterialColor.COLOR_GRAY, Items.GRAY_DYE),
-			LIGHT_GRAY_RUBBER_BLOCKS = rubber_decor("light_gray", MaterialColor.COLOR_LIGHT_GRAY, Items.LIGHT_GRAY_DYE),
-			BROWN_RUBBER_BLOCKS = rubber_decor("brown", MaterialColor.COLOR_BROWN, Items.BROWN_DYE),
-			CYAN_RUBBER_BLOCKS = rubber_decor("cyan", MaterialColor.COLOR_CYAN, Items.CYAN_DYE),
-			PURPLE_RUBBER_BLOCKS = rubber_decor("purple", MaterialColor.COLOR_PURPLE, Items.PURPLE_DYE),
-			ORANGE_RUBBER_BLOCKS = rubber_decor("orange", MaterialColor.COLOR_ORANGE, Items.ORANGE_DYE);
+			BLACK_RUBBER_BLOCKS = rubber_decor("black", MapColor.COLOR_BLACK, Items.BLACK_DYE),
+			WHITE_RUBBER_BLOCKS = rubber_decor("white", MapColor.SNOW, Items.WHITE_DYE),
+			BLUE_RUBBER_BLOCKS = rubber_decor("blue", MapColor.COLOR_BLUE, Items.BLUE_DYE),
+			LIGHT_BLUE_RUBBER_BLOCKS = rubber_decor("light_blue", MapColor.COLOR_LIGHT_BLUE, Items.LIGHT_BLUE_DYE),
+			RED_RUBBER_BLOCKS = rubber_decor("red", MapColor.COLOR_RED, Items.RED_DYE),
+			GREEN_RUBBER_BLOCKS = rubber_decor("green", MapColor.COLOR_GREEN, Items.GREEN_DYE),
+			LIME_RUBBER_BLOCKS = rubber_decor("lime", MapColor.COLOR_LIGHT_GREEN, Items.LIME_DYE),
+			PINK_RUBBER_BLOCKS = rubber_decor("pink", MapColor.COLOR_PINK, Items.PINK_DYE),
+			MAGENTA_RUBBER_BLOCKS = rubber_decor("magenta", MapColor.COLOR_MAGENTA, Items.MAGENTA_DYE),
+			YELLOW_RUBBER_BLOCKS = rubber_decor("yellow", MapColor.COLOR_YELLOW, Items.YELLOW_DYE),
+			GRAY_RUBBER_BLOCKS = rubber_decor("gray", MapColor.COLOR_GRAY, Items.GRAY_DYE),
+			LIGHT_GRAY_RUBBER_BLOCKS = rubber_decor("light_gray", MapColor.COLOR_LIGHT_GRAY, Items.LIGHT_GRAY_DYE),
+			BROWN_RUBBER_BLOCKS = rubber_decor("brown", MapColor.COLOR_BROWN, Items.BROWN_DYE),
+			CYAN_RUBBER_BLOCKS = rubber_decor("cyan", MapColor.COLOR_CYAN, Items.CYAN_DYE),
+			PURPLE_RUBBER_BLOCKS = rubber_decor("purple", MapColor.COLOR_PURPLE, Items.PURPLE_DYE),
+			ORANGE_RUBBER_BLOCKS = rubber_decor("orange", MapColor.COLOR_ORANGE, Items.ORANGE_DYE);
 
 	public static final BlockEntry<Block>
-			BLACK_BLUEPRINT_BLOCK = blueprintBlocks("black", "Black", Items.BLACK_DYE, DesiresSpriteShifts.BLACK_BLUEPRINT_BLOCK, MaterialColor.COLOR_BLACK),
-			WHITE_BLUEPRINT_BLOCK = blueprintBlocks("white", "White", Items.WHITE_DYE, DesiresSpriteShifts.WHITE_BLUEPRINT_BLOCK, MaterialColor.SNOW),
-			BLUE_BLUEPRINT_BLOCK = blueprintBlocks("", "", Items.BLUE_DYE, DesiresSpriteShifts.BLUE_BLUEPRINT_BLOCK, MaterialColor.COLOR_BLUE, ""),
-			LIGHT_BLUE_BLUEPRINT_BLOCK = blueprintBlocks("light", "Light", Items.LIGHT_BLUE_DYE, DesiresSpriteShifts.LIGHT_BLUE_BLUEPRINT_BLOCK, MaterialColor.COLOR_LIGHT_BLUE),
-			RED_BLUEPRINT_BLOCK = blueprintBlocks("red", "Red", Items.RED_DYE, DesiresSpriteShifts.RED_BLUEPRINT_BLOCK, MaterialColor.COLOR_RED),
-			GREEN_BLUEPRINT_BLOCK = blueprintBlocks("green", "Green", Items.GREEN_DYE, DesiresSpriteShifts.GREEN_BLUEPRINT_BLOCK, MaterialColor.COLOR_GREEN),
-			LIME_BLUEPRINT_BLOCK = blueprintBlocks("lime", "Lime", Items.LIME_DYE, DesiresSpriteShifts.LIME_BLUEPRINT_BLOCK, MaterialColor.COLOR_LIGHT_GREEN),
-			PINK_BLUEPRINT_BLOCK = blueprintBlocks("pink", "Pink", Items.PINK_DYE, DesiresSpriteShifts.PINK_BLUEPRINT_BLOCK, MaterialColor.COLOR_PINK),
-			MAGENTA_BLUEPRINT_BLOCK = blueprintBlocks("magenta", "Magenta", Items.MAGENTA_DYE, DesiresSpriteShifts.MAGENTA_BLUEPRINT_BLOCK, MaterialColor.COLOR_MAGENTA),
-			YELLOW_BLUEPRINT_BLOCK = blueprintBlocks("yellow", "Yellow", Items.YELLOW_DYE, DesiresSpriteShifts.YELLOW_BLUEPRINT_BLOCK, MaterialColor.COLOR_YELLOW),
-			GRAY_BLUEPRINT_BLOCK = blueprintBlocks("gray", "Gray", Items.GRAY_DYE, DesiresSpriteShifts.GRAY_BLUEPRINT_BLOCK, MaterialColor.COLOR_GRAY),
-			LIGHT_GRAY_BLUEPRINT_BLOCK = blueprintBlocks("light_gray", "Light Gray", Items.LIGHT_GRAY_DYE, DesiresSpriteShifts.LIGHT_GRAY_BLUEPRINT_BLOCK, MaterialColor.COLOR_LIGHT_GRAY),
-			BROWN_BLUEPRINT_BLOCK = blueprintBlocks("brown", "Brown", Items.BROWN_DYE, DesiresSpriteShifts.BROWN_BLUEPRINT_BLOCK, MaterialColor.COLOR_BROWN),
-			CYAN_BLUEPRINT_BLOCK = blueprintBlocks("cyan", "Cyan", Items.CYAN_DYE, DesiresSpriteShifts.CYAN_BLUEPRINT_BLOCK, MaterialColor.COLOR_CYAN),
-			PURPLE_BLUEPRINT_BLOCK = blueprintBlocks("purple", "Purple", Items.PURPLE_DYE, DesiresSpriteShifts.PURPLE_BLUEPRINT_BLOCK, MaterialColor.COLOR_PURPLE),
-			ORANGE_BLUEPRINT_BLOCK = blueprintBlocks("orange", "Orange", Items.ORANGE_DYE, DesiresSpriteShifts.ORANGE_BLUEPRINT_BLOCK, MaterialColor.COLOR_ORANGE)
+			BLACK_BLUEPRINT_BLOCK = blueprintBlocks("black", "Black", Items.BLACK_DYE, DesiresSpriteShifts.BLACK_BLUEPRINT_BLOCK, MapColor.COLOR_BLACK),
+			WHITE_BLUEPRINT_BLOCK = blueprintBlocks("white", "White", Items.WHITE_DYE, DesiresSpriteShifts.WHITE_BLUEPRINT_BLOCK, MapColor.SNOW),
+			BLUE_BLUEPRINT_BLOCK = blueprintBlocks("", "", Items.BLUE_DYE, DesiresSpriteShifts.BLUE_BLUEPRINT_BLOCK, MapColor.COLOR_BLUE, ""),
+			LIGHT_BLUE_BLUEPRINT_BLOCK = blueprintBlocks("light", "Light", Items.LIGHT_BLUE_DYE, DesiresSpriteShifts.LIGHT_BLUE_BLUEPRINT_BLOCK, MapColor.COLOR_LIGHT_BLUE),
+			RED_BLUEPRINT_BLOCK = blueprintBlocks("red", "Red", Items.RED_DYE, DesiresSpriteShifts.RED_BLUEPRINT_BLOCK, MapColor.COLOR_RED),
+			GREEN_BLUEPRINT_BLOCK = blueprintBlocks("green", "Green", Items.GREEN_DYE, DesiresSpriteShifts.GREEN_BLUEPRINT_BLOCK, MapColor.COLOR_GREEN),
+			LIME_BLUEPRINT_BLOCK = blueprintBlocks("lime", "Lime", Items.LIME_DYE, DesiresSpriteShifts.LIME_BLUEPRINT_BLOCK, MapColor.COLOR_LIGHT_GREEN),
+			PINK_BLUEPRINT_BLOCK = blueprintBlocks("pink", "Pink", Items.PINK_DYE, DesiresSpriteShifts.PINK_BLUEPRINT_BLOCK, MapColor.COLOR_PINK),
+			MAGENTA_BLUEPRINT_BLOCK = blueprintBlocks("magenta", "Magenta", Items.MAGENTA_DYE, DesiresSpriteShifts.MAGENTA_BLUEPRINT_BLOCK, MapColor.COLOR_MAGENTA),
+			YELLOW_BLUEPRINT_BLOCK = blueprintBlocks("yellow", "Yellow", Items.YELLOW_DYE, DesiresSpriteShifts.YELLOW_BLUEPRINT_BLOCK, MapColor.COLOR_YELLOW),
+			GRAY_BLUEPRINT_BLOCK = blueprintBlocks("gray", "Gray", Items.GRAY_DYE, DesiresSpriteShifts.GRAY_BLUEPRINT_BLOCK, MapColor.COLOR_GRAY),
+			LIGHT_GRAY_BLUEPRINT_BLOCK = blueprintBlocks("light_gray", "Light Gray", Items.LIGHT_GRAY_DYE, DesiresSpriteShifts.LIGHT_GRAY_BLUEPRINT_BLOCK, MapColor.COLOR_LIGHT_GRAY),
+			BROWN_BLUEPRINT_BLOCK = blueprintBlocks("brown", "Brown", Items.BROWN_DYE, DesiresSpriteShifts.BROWN_BLUEPRINT_BLOCK, MapColor.COLOR_BROWN),
+			CYAN_BLUEPRINT_BLOCK = blueprintBlocks("cyan", "Cyan", Items.CYAN_DYE, DesiresSpriteShifts.CYAN_BLUEPRINT_BLOCK, MapColor.COLOR_CYAN),
+			PURPLE_BLUEPRINT_BLOCK = blueprintBlocks("purple", "Purple", Items.PURPLE_DYE, DesiresSpriteShifts.PURPLE_BLUEPRINT_BLOCK, MapColor.COLOR_PURPLE),
+			ORANGE_BLUEPRINT_BLOCK = blueprintBlocks("orange", "Orange", Items.ORANGE_DYE, DesiresSpriteShifts.ORANGE_BLUEPRINT_BLOCK, MapColor.COLOR_ORANGE)
 	;
 
 
@@ -414,13 +413,13 @@ public class DesiresPaletteBlocks {
 							.speedFactor(0.001F)
 							.jumpFactor(1.25F)
 							.friction(0.35F)
-							.color(MaterialColor.COLOR_BLACK)
+							.mapColor(MapColor.COLOR_BLACK)
 							.sound(SoundType.POLISHED_DEEPSLATE))
 					.transform(pickaxeOnly())
 					.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
 					.item()
 					.tag(asphaltBlocks)
-					.recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 4)
+					.recipe((c, p) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 4)
                             .define('D',
                                 color.equals("black") ? Tags.Items.DYES_BLACK :
                                 color.equals("white") ? Tags.Items.DYES_WHITE :
@@ -459,8 +458,4 @@ public class DesiresPaletteBlocks {
 	}
 	// Load this class
 	public static void register() {}
-
-	protected static String getItemName(ItemLike pItemLike) {
-		return Registry.ITEM.getKey(pItemLike.asItem()).getPath();
-	}
 }

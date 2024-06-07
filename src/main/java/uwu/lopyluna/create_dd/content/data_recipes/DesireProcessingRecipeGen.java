@@ -9,14 +9,15 @@ import com.simibubi.create.foundation.utility.RegisteredObjects;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import uwu.lopyluna.create_dd.DesiresCreate;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
@@ -25,13 +26,13 @@ public abstract class DesireProcessingRecipeGen extends CreateRecipeProvider {
     protected static final List<DesireProcessingRecipeGen> GENERATORS = new ArrayList<>();
 
 
-    public static void registerAll(DataGenerator gen) {
-        GENERATORS.add(new WashingRecipeGen(gen));
-        GENERATORS.add(new SandingRecipeGen(gen));
-        GENERATORS.add(new FreezingRecipeGen(gen));
-        GENERATORS.add(new SeethingRecipeGen(gen));
-        GENERATORS.add(new ItemApplicationRecipeGen(gen));
-        GENERATORS.add(new MixingRecipeGen(gen));
+    public static void registerAll(DataGenerator gen, PackOutput output) {
+        GENERATORS.add(new WashingRecipeGen(output));
+        GENERATORS.add(new SandingRecipeGen(output));
+        GENERATORS.add(new FreezingRecipeGen(output));
+        GENERATORS.add(new SeethingRecipeGen(output));
+        GENERATORS.add(new ItemApplicationRecipeGen(output));
+        GENERATORS.add(new MixingRecipeGen(output));
 
         gen.addProvider(true, new DataProvider() {
 
@@ -41,19 +42,15 @@ public abstract class DesireProcessingRecipeGen extends CreateRecipeProvider {
             }
 
             @Override
-            public void run(CachedOutput dc) throws IOException {
-                GENERATORS.forEach(g -> {
-                    try {
-                        g.run(dc);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                });
+            public CompletableFuture<?> run(CachedOutput dc) {
+                return CompletableFuture.allOf(GENERATORS.stream()
+                        .map(gen -> gen.run(dc))
+                        .toArray(CompletableFuture[]::new));
             }
         });
     }
 
-    public DesireProcessingRecipeGen(DataGenerator generator) {
+    public DesireProcessingRecipeGen(PackOutput generator) {
         super(generator);
     }
 
@@ -127,10 +124,10 @@ public abstract class DesireProcessingRecipeGen extends CreateRecipeProvider {
         };
     }
 
-    @Override
-    public String getName() {
-        return "Create's Processing Recipes: " + getRecipeType().getId()
-                .getPath();
-    }
+    //@Override
+    //public String getName() {
+    //    return "Create's Processing Recipes: " + getRecipeType().getId()
+    //            .getPath();
+    //}
 
 }

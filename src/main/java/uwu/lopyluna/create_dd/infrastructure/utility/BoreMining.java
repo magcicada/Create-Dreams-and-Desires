@@ -16,7 +16,7 @@ public class BoreMining {
 
         List<BlockPos> positions = new ArrayList<>();
 
-        BlockHitResult traceResult = player.level.clip(new ClipContext(player.getEyePosition(1f),
+        BlockHitResult traceResult = player.level().clip(new ClipContext(player.getEyePosition(1f),
                 (player.getEyePosition(1f).add(player.getViewVector(1f).scale(6f))),
                 ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
         if(traceResult.getType() == HitResult.Type.MISS) {

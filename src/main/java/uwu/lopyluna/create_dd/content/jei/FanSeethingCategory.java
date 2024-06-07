@@ -11,8 +11,8 @@ import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.gui.element.GuiGameElement;
 import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
-import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -32,7 +32,8 @@ public class FanSeethingCategory extends DProcessingViaFanCategory.MultiOutput<S
     }
 
     @Override
-    protected void renderAttachedBlock(IRecipeSlotsView iRecipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
+    protected void renderAttachedBlock(GuiGraphics graphics) {
+        PoseStack poseStack = graphics.pose();
 
         float offsetMain = (Mth.sin(AnimationTickHolder.getRenderTime() / 16f) + 0.5f) / 16f;
         float offset1 = offsetMain * 0.5f;
@@ -43,26 +44,26 @@ public class FanSeethingCategory extends DProcessingViaFanCategory.MultiOutput<S
                 .scale(SCALE)
                 .atLocal(0, 0, 2)
                 .lighting(AnimatedKinetics.DEFAULT_LIGHTING)
-                .render(matrixStack);
+                .render(graphics);
 
         GuiGameElement.of(AllPartialModels.BLAZE_SUPER)
                 .rotate(0, 180, 0)
                 .scale(SCALE * 1.1)
                 .atLocal(1, 0.1 + offsetHead, 2.65)
                 .lighting(AnimatedKinetics.DEFAULT_LIGHTING)
-                .render(matrixStack);
+                .render(graphics);
 
         GuiGameElement.of(AllPartialModels.BLAZE_BURNER_SUPER_RODS)
                 .rotate(0, 180, 0)
                 .scale(SCALE)
                 .atLocal(1, 0 + offset1, 3)
-                .render(matrixStack);
+                .render(graphics);
 
         GuiGameElement.of(AllPartialModels.BLAZE_BURNER_SUPER_RODS_2)
                 .rotate(0, 180, 0)
                 .scale(SCALE)
                 .atLocal(1, 0.2 + offset2, 3)
-                .render(matrixStack);
+                .render(graphics);
 
         SpriteShiftEntry spriteShift = AllSpriteShifts.SUPER_BURNER_FLAME;
 
@@ -94,7 +95,7 @@ public class FanSeethingCategory extends DProcessingViaFanCategory.MultiOutput<S
         CachedBufferer.partial(AllPartialModels.BLAZE_BURNER_FLAME, Blocks.AIR.defaultBlockState())
                 .shiftUVScrolling(spriteShift, (float) uScroll, (float) vScroll)
                 .light(LightTexture.FULL_BRIGHT)
-                .renderInto(matrixStack, vb);
+                .renderInto(poseStack, vb);
     }
 
 }

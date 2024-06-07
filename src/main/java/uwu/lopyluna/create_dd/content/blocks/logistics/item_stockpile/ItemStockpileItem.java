@@ -98,8 +98,7 @@ public class ItemStockpileItem extends BlockItem {
 				BlockState blockState = world.getBlockState(offsetPos);
 				if (ItemStockpileBlock.isVault(blockState))
 					continue;
-				if (!blockState.getMaterial()
-					.isReplaceable())
+				if (!blockState.canBeReplaced())
 					return;
 				tanksToPlace++;
 			}

@@ -1,8 +1,6 @@
 package uwu.lopyluna.create_dd.content.items.port;
 
-import net.minecraft.core.NonNullList;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
@@ -21,9 +19,6 @@ public class ConversionItem extends Item {
         super(pProperties);
         converted = convertInto.asItem();
     }
-
-    @Override
-    public void fillItemCategory(CreativeModeTab pCategory, NonNullList<ItemStack> pItems) {}
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {

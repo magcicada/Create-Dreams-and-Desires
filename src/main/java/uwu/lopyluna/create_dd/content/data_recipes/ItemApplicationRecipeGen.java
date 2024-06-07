@@ -4,6 +4,7 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.tags.ItemTags;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 import uwu.lopyluna.create_dd.registry.DesiresItems;
@@ -11,7 +12,7 @@ import uwu.lopyluna.create_dd.registry.DesiresItems;
 import static uwu.lopyluna.create_dd.registry.DesiresTags.forgeItemTag;
 
 public class ItemApplicationRecipeGen extends DesireProcessingRecipeGen {
-    public ItemApplicationRecipeGen(DataGenerator generator) {
+    public ItemApplicationRecipeGen(PackOutput generator) {
         super(generator);
     }
 

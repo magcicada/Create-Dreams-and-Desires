@@ -8,7 +8,6 @@
   "refmap": "create_dd.refmap.json",
   "mixins": [
     "AccessorMountedFluidStorage",
-    "MixinAllOreFeatureConfigEntries",
     "MixinBlock",
     "MixinBlockMovementChecks",
     "MixinClutchBlock",

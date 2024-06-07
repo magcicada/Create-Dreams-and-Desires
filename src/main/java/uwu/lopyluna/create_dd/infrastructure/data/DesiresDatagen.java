@@ -2,6 +2,7 @@ package uwu.lopyluna.create_dd.infrastructure.data;
 
 import com.tterrag.registrate.providers.ProviderType;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraftforge.data.event.GatherDataEvent;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.content.data_recipes.DesireProcessingRecipeGen;
@@ -18,12 +19,13 @@ public class DesiresDatagen {
 		addExtraRegistrateData();
 
 		DataGenerator generator = event.getGenerator();
+		PackOutput output = generator.getPackOutput();
 
 		if (event.includeServer()) {
 
-			generator.addProvider(true, new SequencedAssemblyRecipeGen(generator));
-			generator.addProvider(true, new MechanicalCraftingRecipeGen(generator));
-			DesireProcessingRecipeGen.registerAll(generator);
+			generator.addProvider(true, new SequencedAssemblyRecipeGen(output));
+			generator.addProvider(true, new MechanicalCraftingRecipeGen(output));
+			DesireProcessingRecipeGen.registerAll(generator, output);
 		}
 	}
 

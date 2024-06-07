@@ -2,7 +2,6 @@ package uwu.lopyluna.create_dd.registry;
 
 import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.math.Vector3f;
 import com.simibubi.create.foundation.utility.Color;
 import com.tterrag.registrate.builders.FluidBuilder.FluidTypeFactory;
 import com.tterrag.registrate.util.entry.FluidEntry;
@@ -24,6 +23,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import org.jetbrains.annotations.NotNull;
+import org.joml.Vector3f;
 import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
 
 import javax.annotation.Nullable;
@@ -121,7 +121,7 @@ public class DesiresFluids {
 				
 				@Override
 				public @NotNull Vector3f modifyFogColor(Camera camera, float partialTick, ClientLevel level,
-					int renderDistance, float darkenWorldAmount, Vector3f fluidFogColor) {
+														int renderDistance, float darkenWorldAmount, Vector3f fluidFogColor) {
 					Vector3f customFogColor = TintedFluidType.this.getCustomFogColor();
 					return customFogColor == null ? fluidFogColor : customFogColor;
 				}

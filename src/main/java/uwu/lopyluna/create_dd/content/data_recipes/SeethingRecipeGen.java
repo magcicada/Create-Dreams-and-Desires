@@ -16,6 +16,7 @@ import com.simibubi.create.foundation.data.recipe.Mods;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -108,11 +109,7 @@ public class SeethingRecipeGen extends DesireProcessingRecipeGen {
 		return null;
 	}
 
-	protected static String getItemName(ItemLike pItemLike) {
-		return Registry.ITEM.getKey(pItemLike.asItem()).getPath();
-	}
-
-	public SeethingRecipeGen(DataGenerator dataGenerator) {
+	public SeethingRecipeGen(PackOutput dataGenerator) {
 		super(dataGenerator);
 	}
 

@@ -1,7 +1,7 @@
 package uwu.lopyluna.create_dd.registry;
 
 import com.simibubi.create.foundation.utility.Lang;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
@@ -278,7 +278,7 @@ public class DesiresTags {
 			if (optional) {
 				tag = optionalTag(ForgeRegistries.ENTITY_TYPES, id);
 			} else {
-				tag = TagKey.create(Registry.ENTITY_TYPE_REGISTRY, id);
+				tag = TagKey.create(Registries.ENTITY_TYPE, id);
 			}
 			this.alwaysDatagen = alwaysDatagen;
 		}
@@ -323,7 +323,7 @@ public class DesiresTags {
 			if (optional) {
 				tag = optionalTag(ForgeRegistries.RECIPE_SERIALIZERS, id);
 			} else {
-				tag = TagKey.create(Registry.RECIPE_SERIALIZER_REGISTRY, id);
+				tag = TagKey.create(Registries.RECIPE_SERIALIZER, id);
 			}
 			this.alwaysDatagen = alwaysDatagen;
 		}
