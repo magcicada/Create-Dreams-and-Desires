@@ -33,8 +33,10 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @SuppressWarnings({"deprecation", "all"})
-@Mixin(value = GearshiftBlock.class, remap = false)
+@Mixin(value = GearshiftBlock.class)
 public class MixinGearshiftBlock extends AbstractEncasedShaftBlock implements AccessGearshiftBlock {
+
+    @Shadow(remap = false) public void detachKinetics(Level worldIn, BlockPos pos, boolean reAttachNextTick) {}
 
     private static final BooleanProperty INVERTED = BlockStateProperties.INVERTED;
 
@@ -58,19 +60,6 @@ public class MixinGearshiftBlock extends AbstractEncasedShaftBlock implements Ac
             }
         }
         return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
-    }
-
-    @Final
-    @Shadow
-    public void detachKinetics(Level worldIn, BlockPos pos, boolean reAttachNextTick) {
-        BlockEntity be = worldIn.getBlockEntity(pos);
-        if (be == null || !(be instanceof KineticBlockEntity))
-            return;
-        RotationPropagator.handleRemoved(worldIn, pos, (KineticBlockEntity) be);
-
-        // Re-attach next tick
-        if (reAttachNextTick)
-            worldIn.scheduleTick(pos, this, 0, TickPriority.EXTREMELY_HIGH);
     }
 
     @Override
