@@ -29,7 +29,7 @@ public class MixinClutchBlock extends GearshiftBlock {
      * @author IThundxr
      * @reason skip the detachKinetics call as it is called earlier down the line by the above mixin and needs to be called before the setBlock instead of after
      */
-    @Redirect(method = "neighborChanged", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/kinetics/transmission/ClutchBlock;detachKinetics(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Z)V"))
+    @Redirect(method = "neighborChanged", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/kinetics/transmission/ClutchBlock;detachKinetics(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Z)V"), remap = false)
     private void create_dd$skipDetachKinetics(ClutchBlock instance, Level level, BlockPos blockPos, boolean b) {}
 
     @WrapOperation(method = "neighborChanged", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;I)Z"))

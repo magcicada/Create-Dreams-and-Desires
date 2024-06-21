@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(value = GearshiftBlockEntity.class, remap = false)
+@Mixin(value = GearshiftBlockEntity.class)
 public abstract class MixinGearshiftBlockEntity extends SplitShaftBlockEntity {
 
     private MixinGearshiftBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {

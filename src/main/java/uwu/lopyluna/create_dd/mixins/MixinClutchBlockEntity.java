@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(value = ClutchBlockEntity.class, remap = false)
+@Mixin(value = ClutchBlockEntity.class)
 public abstract class MixinClutchBlockEntity extends SplitShaftBlockEntity {
     public MixinClutchBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
