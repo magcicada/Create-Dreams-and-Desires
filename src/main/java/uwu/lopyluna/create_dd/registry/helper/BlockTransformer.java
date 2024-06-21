@@ -22,6 +22,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.registry.DesiresCreativeModeTabs;
 import uwu.lopyluna.create_dd.registry.DesiresPaletteBlocks;
 import uwu.lopyluna.create_dd.registry.DesiresSoundEvents;
 
@@ -34,7 +35,7 @@ import static com.tterrag.registrate.providers.RegistrateRecipeProvider.has;
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 import static uwu.lopyluna.create_dd.registry.DesiresTags.optionalTag;
 
-@SuppressWarnings({"unused", "deprecation"})
+@SuppressWarnings({"unused", "deprecation", "all"})
 public class BlockTransformer {
 
     public static BlockEntry<Block> rubber_decor(String colorId, MapColor mapColor, Item dye) {
@@ -52,6 +53,7 @@ public class BlockTransformer {
                 .properties(p -> p.mapColor(mapColor)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
                 .recipe((c, p) -> p.stonecutting(DataIngredient.tag(dyeRubberDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 1))
                 .item()
+                .tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
                 .tag(dyeRubberDecorTag)
                 .build()
                 .register();
@@ -67,6 +69,7 @@ public class BlockTransformer {
                         .unlockedBy("has_" + c.getName(), has(c.get()))
                         .save(p, DesiresCreate.asResource("crafting/decor/" + c.getName() + "_from_" + c.getName())))
                 .item()
+                .tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
                 .tag(dyeRubberDecorTag, rubberDecorTag)
                 .build()
                 .register();
@@ -77,6 +80,7 @@ public class BlockTransformer {
                 .recipe((c, p) -> p.stonecutting(DataIngredient.tag(dyeRubberDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 1))
                 .blockstate((c, p) -> p.stairsBlock(c.get(), DesiresCreate.asResource("block/" + colorId + "_padded_tiled_rubber")))
                 .item()
+                .tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
                 .tag(dyeRubberDecorTag, stairsItemTag)
                 .build()
                 .register();
@@ -89,6 +93,7 @@ public class BlockTransformer {
                         DesiresCreate.asResource("block/" + colorId + "_padded_rubber"),
                         DesiresCreate.asResource("block/" + colorId + "_padded_rubber")))
                 .item()
+                .tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
                 .tag(slabsItemTag)
                 .build()
                 .register();
@@ -96,6 +101,7 @@ public class BlockTransformer {
                 .properties(p -> p.mapColor(mapColor)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
                 .recipe((c, p) -> p.stonecutting(DataIngredient.tag(dyeRubberDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 1))
                 .item()
+                .tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
                 .tag(dyeRubberDecorTag)
                 .build()
                 .register();
@@ -134,6 +140,7 @@ public class BlockTransformer {
                 .properties(p -> p.strength(0.025f,0.25f))
                 .lang(colorLang + " Blueprint Block")
                 .item()
+                .tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
                 .tag(blueprintDecorTag)
                 .build()
                 .register();
@@ -172,6 +179,7 @@ public class BlockTransformer {
                 .properties(p -> p.strength(0.025f,0.25f))
                 .lang(colorLang + "Blueprint Block")
                 .item()
+                .tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
                 .tag(blueprintDecorTag)
                 .build()
                 .register();

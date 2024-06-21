@@ -14,6 +14,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import uwu.lopyluna.create_dd.registry.DesiresCreativeModeTabs;
 import uwu.lopyluna.create_dd.registry.DesiresPaletteStoneTypes;
 
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
@@ -41,7 +42,7 @@ public class DPalettesVariantEntry {
 						.apply(name)::accept);
 
 			ItemBuilder<BlockItem, ? extends BlockBuilder<? extends Block, CreateRegistrate>> itemBuilder =
-				builder.item();
+				builder.item().tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey());
 
 			TagKey<Block>[] blockTags = pattern.getBlockTags();
 			if (blockTags != null)

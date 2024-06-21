@@ -83,7 +83,7 @@ public class DesiresCreate
         DesiresItems.register();
         DesiresFluids.register();
         DesiresPaletteBlocks.register();
-        ClassicBlocks.register();
+        //ClassicBlocks.register();
         ClassicItems.register();
         ClassicBlockEntityTypes.register();
         DesiresEntityTypes.register();
@@ -94,9 +94,9 @@ public class DesiresCreate
         DesiresEntityDataSerializers.register(modEventBus);
         DesiresPackets.registerPackets();
 
-        if (DesiresMods.CREATECASING.isLoaded()) {
-            EncasedCompat.register();
-        }
+        //if (DesiresMods.CREATECASING.isLoaded()) {
+        //    EncasedCompat.register();
+        //}
 
 
         DesiresConfigs.register(modLoadingContext);

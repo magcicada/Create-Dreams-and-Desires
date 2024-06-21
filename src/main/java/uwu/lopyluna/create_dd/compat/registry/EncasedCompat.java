@@ -13,10 +13,6 @@ import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 public class EncasedCompat {
     //ON HOLD FOR NOW DUE TO ISSUES
 
-    static {
-        REGISTRATE.setCreativeTab(DesiresCreativeModeTabs.BASE_CREATIVE_TAB);
-    }
-
     //public static final BlockEntry<? extends Block>
     //CREATIVE_ENCASED_SHAFT = fr.iglee42.createcasing.api.CreateCasingApi.createEncasedShaft(
     //        REGISTRATE, "creative", DesiresBlocks.CREATIVE_CASING::get, DesiresSpriteShifts.CREATIVE_CASING),

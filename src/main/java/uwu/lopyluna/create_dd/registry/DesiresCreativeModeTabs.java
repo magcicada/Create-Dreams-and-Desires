@@ -41,23 +41,23 @@ public class DesiresCreativeModeTabs {
 	public static final RegistryObject<CreativeModeTab> PALETTES_CREATIVE_TAB = REGISTER.register("palettes",
 			() -> CreativeModeTab.builder()
 					.title(Components.translatable("itemGroup.create_dd.palettes"))
-					.withTabsBefore(DesiresCreativeModeTabs.BASE_CREATIVE_TAB.getKey())
+					.withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
 					.icon(DesiresPaletteBlocks.LIGHT_BLUE_BLUEPRINT_BLOCK::asStack)
-					.displayItems(new DesiresCreativeModeTabs.RegistrateDisplayItemsGenerator(false, DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB))
+					.displayItems(new DesiresCreativeModeTabs.RegistrateDisplayItemsGenerator(true, DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB))
 					.build());
 	public static final RegistryObject<CreativeModeTab> CLASSIC_CREATIVE_TAB = REGISTER.register("classic",
 			() -> CreativeModeTab.builder()
 					.title(Components.translatable("itemGroup.create_dd.classic"))
-					.withTabsBefore(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
+					.withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
 					.icon(ClassicItems.integrated_circuit::asStack)
-					.displayItems(new DesiresCreativeModeTabs.RegistrateDisplayItemsGenerator(false, DesiresCreativeModeTabs.CLASSIC_CREATIVE_TAB))
+					.displayItems(new DesiresCreativeModeTabs.RegistrateDisplayItemsGenerator(true, DesiresCreativeModeTabs.CLASSIC_CREATIVE_TAB))
 					.build());
 	public static final RegistryObject<CreativeModeTab> BETA_CREATIVE_TAB = REGISTER.register("beta",
 			() -> CreativeModeTab.builder()
 					.title(Components.translatable("itemGroup.create_dd.beta"))
-					.withTabsBefore(DesiresCreativeModeTabs.CLASSIC_CREATIVE_TAB.getKey())
+					.withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
 					.icon(DesiresBlocks.CREATIVE_CASING::asStack)
-					.displayItems(new DesiresCreativeModeTabs.RegistrateDisplayItemsGenerator(false, DesiresCreativeModeTabs.BETA_CREATIVE_TAB))
+					.displayItems(new DesiresCreativeModeTabs.RegistrateDisplayItemsGenerator(true, DesiresCreativeModeTabs.BETA_CREATIVE_TAB))
 					.build());
 
 

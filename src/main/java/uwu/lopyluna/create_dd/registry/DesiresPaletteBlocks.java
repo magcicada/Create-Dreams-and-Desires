@@ -33,12 +33,8 @@ import static uwu.lopyluna.create_dd.registry.DesiresTags.optionalTag;
 import static uwu.lopyluna.create_dd.registry.helper.BlockTransformer.blueprintBlocks;
 import static uwu.lopyluna.create_dd.registry.helper.BlockTransformer.rubber_decor;
 
-@SuppressWarnings({"unused", "deprecation"})
+@SuppressWarnings({"unused", "deprecation",  "all"})
 public class DesiresPaletteBlocks {
-
-	static {
-		REGISTRATE.setCreativeTab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB);
-	}
 
 	public static SoundType rubberSoundType = new ForgeSoundType(0.9f, .6f, () -> DesiresSoundEvents.RUBBER_BREAK.get(), () -> SoundEvents.STEM_STEP, () -> DesiresSoundEvents.RUBBER_PLACE.get(), () -> SoundEvents.STEM_HIT, () -> SoundEvents.STEM_FALL);
 	public static TagKey<Item> rubberDecorTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", "rubber_decor"));
@@ -65,6 +61,7 @@ public class DesiresPaletteBlocks {
 			.recipe((c, p) -> p.stonecutting(DataIngredient.tag(asphaltBlocks), RecipeCategory.BUILDING_BLOCKS, c, 2))
 			.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
 			.item()
+			.tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
 			.build()
 			.register();
 
@@ -86,6 +83,7 @@ public class DesiresPaletteBlocks {
 			})
 			.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
 			.item()
+			.tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
 			.tag(darkMetalDecorTag)
 			.build()
 			.register();
@@ -113,6 +111,7 @@ public class DesiresPaletteBlocks {
 			})
 			.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
 			.item()
+			.tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
 			.tag(darkMetalDecorTag)
 			.build()
 			.register();
@@ -138,6 +137,7 @@ public class DesiresPaletteBlocks {
 			})
 			.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
 			.item()
+			.tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
 			.tag(slabsItemTag)
 			.build()
 			.register();
@@ -159,6 +159,7 @@ public class DesiresPaletteBlocks {
 						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
 			})
 			.item()
+			.tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
 			.tag(darkMetalDecorTag, stairsItemTag)
 			.build()
 			.register();
@@ -181,6 +182,7 @@ public class DesiresPaletteBlocks {
 			})
 			.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
 			.item()
+			.tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
 			.tag(darkMetalDecorTag)
 			.build()
 			.register();
@@ -206,6 +208,7 @@ public class DesiresPaletteBlocks {
 			})
 			.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
 			.item()
+			.tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
 			.tag(slabsItemTag)
 			.build()
 			.register();
@@ -227,6 +230,7 @@ public class DesiresPaletteBlocks {
 						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
 			})
 			.item()
+			.tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
 			.tag(darkMetalDecorTag, stairsItemTag)
 			.build()
 			.register();
@@ -243,6 +247,7 @@ public class DesiresPaletteBlocks {
 					.unlockedBy("has_" + c.getName(), has(c.get()))
 					.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + c.getName())))
 			.item()
+			.tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
 			.tag(rubberDecorTag, optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", "rubber_decors")))
 			.build()
 			.register();
@@ -252,6 +257,7 @@ public class DesiresPaletteBlocks {
 					.properties(p -> p.mapColor(MapColor.TERRACOTTA_GRAY)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
 					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rubberDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 1))
 					.item()
+			.tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
 					.tag(rubberDecorTag)
 					.build()
 					.register();
@@ -261,6 +267,7 @@ public class DesiresPaletteBlocks {
 					.properties(p -> p.mapColor(MapColor.TERRACOTTA_GRAY)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
 					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rubberDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 1))
 					.item()
+			.tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
 					.tag(rubberDecorTag)
 					.build()
 					.register();
@@ -275,6 +282,7 @@ public class DesiresPaletteBlocks {
 							DesiresCreate.asResource("block/padded_rubber"),
 							DesiresCreate.asResource("block/padded_rubber")))
 					.item()
+			.tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
 					.tag(slabsItemTag)
 					.build()
 					.register();
@@ -286,6 +294,7 @@ public class DesiresPaletteBlocks {
 					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rubberDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 1))
 					.blockstate((c, p) -> p.stairsBlock(c.get(), DesiresCreate.asResource("block/padded_tiled_rubber")))
 					.item()
+			.tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
 					.tag(rubberDecorTag, stairsItemTag)
 					.build()
 					.register();
@@ -301,6 +310,7 @@ public class DesiresPaletteBlocks {
 					.unlockedBy("has_" + c.getName(), has(c.get()))
 					.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + c.getName())))
 			.item()
+			.tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
 			.tag(rawRubberDecorTag)
 			.build()
 			.register();
@@ -310,6 +320,7 @@ public class DesiresPaletteBlocks {
 					.properties(p -> p.mapColor(MapColor.TERRACOTTA_WHITE)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
 					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rawRubberDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 1))
 					.item()
+			.tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
 					.tag(rawRubberDecorTag)
 					.build()
 					.register();
@@ -319,6 +330,7 @@ public class DesiresPaletteBlocks {
 					.properties(p -> p.mapColor(MapColor.TERRACOTTA_WHITE)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
 					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rawRubberDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 1))
 					.item()
+			.tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
 					.tag(rawRubberDecorTag)
 					.build()
 					.register();
@@ -333,6 +345,7 @@ public class DesiresPaletteBlocks {
 							DesiresCreate.asResource("block/" + "raw_padded_rubber"),
 							DesiresCreate.asResource("block/" + "raw_padded_rubber")))
 					.item()
+			.tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
 					.tag(slabsItemTag)
 					.build()
 					.register();
@@ -344,6 +357,7 @@ public class DesiresPaletteBlocks {
 					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rawRubberDecorTag), RecipeCategory.BUILDING_BLOCKS, c, 1))
 					.blockstate((c, p) -> p.stairsBlock(c.get(), DesiresCreate.asResource("block/" + "raw_padded_tiled_rubber")))
 					.item()
+			.tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
 					.tag(rawRubberDecorTag, stairsItemTag)
 					.build()
 					.register();
@@ -418,6 +432,7 @@ public class DesiresPaletteBlocks {
 					.transform(pickaxeOnly())
 					.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
 					.item()
+			.tab(DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
 					.tag(asphaltBlocks)
 					.recipe((c, p) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 4)
                             .define('D',

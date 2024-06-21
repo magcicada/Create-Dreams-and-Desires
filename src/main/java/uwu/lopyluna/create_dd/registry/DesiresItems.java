@@ -11,6 +11,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -30,10 +31,6 @@ import static uwu.lopyluna.create_dd.registry.DesiresTags.optionalTag;
 
 @SuppressWarnings({"unused", "deprecation", "all"})
 public class DesiresItems {
-
-	static {
-		REGISTRATE.setCreativeTab(DesiresCreativeModeTabs.BASE_CREATIVE_TAB);
-	}
 
 	public static final ItemEntry<SequencedAssemblyItem>
 			INCOMPLETE_KINETIC_MECHANISM = sequencedItem("incomplete_kinetic_mechanism");
@@ -61,6 +58,7 @@ public class DesiresItems {
 						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
 			})
 			.lang("Raw Rubber")
+			.tab(DesiresCreativeModeTabs.BASE_CREATIVE_TAB.getKey())
 			.register();
 
 	public static final ItemEntry<Item> RUBBER = REGISTRATE.item("rubber", Item::new)
@@ -87,6 +85,7 @@ public class DesiresItems {
 						.save(p, DesiresCreate.asResource("smoking/" + c.getId().getPath()));
 			})
 			.lang("Rubber")
+			.tab(DesiresCreativeModeTabs.BASE_CREATIVE_TAB.getKey())
 			.register();
 
 	public static final ItemEntry<Item> BURY_BLEND = REGISTRATE.item("bury_blend", Item::new)
@@ -102,6 +101,7 @@ public class DesiresItems {
 					.unlockedBy("has_" + getItemName(Items.LAPIS_LAZULI), has(Items.LAPIS_LAZULI))
 					.save(p, DesiresCreate.asResource("crafting/bury_blend")))
 			.lang("Bury Blend")
+			.tab(DesiresCreativeModeTabs.BASE_CREATIVE_TAB.getKey())
 			.register();
 
 	public static final ItemEntry<Item> LAPIS_LAZULI_SHARD = REGISTRATE.item("lapis_lazuli_shard", Item::new)
@@ -122,6 +122,7 @@ public class DesiresItems {
 						.unlockedBy("has_" + c.getName(), has(c.get()))
 						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
 			})
+			.tab(DesiresCreativeModeTabs.BASE_CREATIVE_TAB.getKey())
 			.register();
 
 	public static final ItemEntry<Item> DIAMOND_SHARD = REGISTRATE.item("diamond_shard", Item::new)
@@ -142,6 +143,7 @@ public class DesiresItems {
 						.unlockedBy("has_" + c.getName(), has(c.get()))
 						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
 			})
+			.tab(DesiresCreativeModeTabs.BASE_CREATIVE_TAB.getKey())
 			.register();
 
 	public static final ItemEntry<CombustibleItem> COAL_PIECE = REGISTRATE.item("coal_piece", CombustibleItem::new)
@@ -164,6 +166,7 @@ public class DesiresItems {
 						.unlockedBy("has_" + c.getName(), has(c.get()))
 						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
 			})
+			.tab(DesiresCreativeModeTabs.BASE_CREATIVE_TAB.getKey())
 			.register();
 
 	public static final ItemEntry<MagnetItem> MAGNET = REGISTRATE.item("magnet", MagnetItem::new)
@@ -193,6 +196,7 @@ public class DesiresItems {
 						.save(p, DesiresCreate.asResource("crafting/equipment/" + c.getName()));
 			})
 			.lang("Magnet")
+			.tab(DesiresCreativeModeTabs.BASE_CREATIVE_TAB.getKey())
 			.register();
 
 	public static final ItemEntry<GRSwordItem> GILDED_ROSE_SWORD = REGISTRATE.item("gilded_rose_sword",
@@ -203,6 +207,7 @@ public class DesiresItems {
 			.properties(p -> p.rarity(Rarity.UNCOMMON))
 			.tag(DesiresTags.AllItemTags.ADDITIONAL_DROPS_TOOL.tag)
 			.tag(DesiresTags.AllItemTags.SWORD.tag)
+			.tab(DesiresCreativeModeTabs.BASE_CREATIVE_TAB.getKey())
 			.register();
 
 	public static final ItemEntry<GRPickaxeItem> GILDED_ROSE_PICKAXE = REGISTRATE.item("gilded_rose_pickaxe",
@@ -213,6 +218,7 @@ public class DesiresItems {
 			.properties(p -> p.rarity(Rarity.UNCOMMON))
 			.tag(DesiresTags.AllItemTags.ADDITIONAL_DROPS_TOOL.tag)
 			.tag(DesiresTags.AllItemTags.PICKAXE.tag)
+			.tab(DesiresCreativeModeTabs.BASE_CREATIVE_TAB.getKey())
 			.register();
 
 	public static final ItemEntry<GRAxeItem> GILDED_ROSE_AXE = REGISTRATE.item("gilded_rose_axe",
@@ -223,6 +229,7 @@ public class DesiresItems {
 			.properties(p -> p.rarity(Rarity.UNCOMMON))
 			.tag(DesiresTags.AllItemTags.ADDITIONAL_DROPS_TOOL.tag)
 			.tag(DesiresTags.AllItemTags.AXE.tag)
+			.tab(DesiresCreativeModeTabs.BASE_CREATIVE_TAB.getKey())
 			.register();
 
 	public static final ItemEntry<GRShovelItem> GILDED_ROSE_SHOVEL = REGISTRATE.item("gilded_rose_shovel",
@@ -233,6 +240,7 @@ public class DesiresItems {
 			.properties(p -> p.rarity(Rarity.UNCOMMON))
 			.tag(DesiresTags.AllItemTags.ADDITIONAL_DROPS_TOOL.tag)
 			.tag(DesiresTags.AllItemTags.SHOVEL.tag)
+			.tab(DesiresCreativeModeTabs.BASE_CREATIVE_TAB.getKey())
 			.register();
 
 	public static final ItemEntry<GRHoeItem> GILDED_ROSE_HOE = REGISTRATE.item("gilded_rose_hoe",
@@ -243,6 +251,7 @@ public class DesiresItems {
 			.properties(p -> p.rarity(Rarity.UNCOMMON))
 			.tag(DesiresTags.AllItemTags.ADDITIONAL_DROPS_TOOL.tag)
 			.tag(DesiresTags.AllItemTags.HOE.tag)
+			.tab(DesiresCreativeModeTabs.BASE_CREATIVE_TAB.getKey())
 			.register();
 
 	public static final ItemEntry<DeforesterSawItem> DEFORESTER_SAW = REGISTRATE.item("deforester_saw", DeforesterSawItem::new)
@@ -271,12 +280,14 @@ public class DesiresItems {
 						.save(p, DesiresCreate.asResource("crafting/equipment/" + c.getName()));
 			})
 			.tag(DesiresTags.AllItemTags.AXE.tag)
+			.tab(DesiresCreativeModeTabs.BASE_CREATIVE_TAB.getKey())
 			.register();
 
 	public static final ItemEntry<ExcavationDrillItem> EXCAVATION_DRILL = REGISTRATE.item("excavation_drill", ExcavationDrillItem::new)
 			.model(AssetLookup.itemModelWithPartials())
 			.properties(p -> p.rarity(Rarity.UNCOMMON))
 			.tag(DesiresTags.AllItemTags.PICKAXE.tag)
+			.tab(DesiresCreativeModeTabs.BASE_CREATIVE_TAB.getKey())
 			.register();
 
 	public static final ItemEntry<NameableRecordItem> MUSIC_DISC_WALTZ_OF_THE_FLOWERS = REGISTRATE.item("music_disc_waltz_of_the_flowers",
@@ -286,6 +297,7 @@ public class DesiresItems {
 			.recipe((c, p) -> p.stonecutting(DataIngredient.items(AllItems.ROSE_QUARTZ.get()), RecipeCategory.BUILDING_BLOCKS, c, 1))
 			.tag(optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("minecraft", "music_discs")))
 			.tag(optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("minecraft", "creeper_drop_music_discs")))
+			.tab(DesiresCreativeModeTabs.BASE_CREATIVE_TAB.getKey())
 			.lang("Music Disc")
 			.register();
 
@@ -315,6 +327,7 @@ public class DesiresItems {
 						.unlockedBy("has_" + c.getName(), has(c.get()))
 						.save(p, DesiresCreate.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
 			})
+			.tab(DesiresCreativeModeTabs.BASE_CREATIVE_TAB.getKey())
 			.register();
 
 	public static final ItemEntry<CombustibleItem> SEETHING_ABLAZE_POWDER = REGISTRATE.item("seething_ablaze_powder", CombustibleItem::new)
@@ -322,11 +335,15 @@ public class DesiresItems {
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/generated")).texture("layer0",
 					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
+			.tab(DesiresCreativeModeTabs.BASE_CREATIVE_TAB.getKey())
 			.register();
 
 
 	private static ItemEntry<Item> item(String name) {
+		ResourceKey<CreativeModeTab> tab = DesiresCreativeModeTabs.BASE_CREATIVE_TAB.getKey();
+		assert tab != null;
 		return REGISTRATE.item(name, Item::new)
+				.tab(tab)
 				.register();
 	}
 
