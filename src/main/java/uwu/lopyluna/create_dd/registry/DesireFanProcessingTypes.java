@@ -1,6 +1,5 @@
 package uwu.lopyluna.create_dd.registry;
 
-import com.simibubi.create.content.kinetics.fan.processing.AllFanProcessingTypes;
 import com.simibubi.create.content.kinetics.fan.processing.FanProcessingType;
 import com.simibubi.create.content.kinetics.fan.processing.FanProcessingTypeRegistry;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
@@ -38,22 +37,19 @@ import uwu.lopyluna.create_dd.content.recipes.SandingRecipe;
 import uwu.lopyluna.create_dd.content.recipes.SeethingRecipe;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
-public class DesireFanProcessingTypes extends AllFanProcessingTypes {
+public class DesireFanProcessingTypes {
     public static final SandingType SANDING = register("sanding", new SandingType());
     public static final FreezingType FREEZING = register("freezing", new FreezingType());
     public static final SeethingType SEETHING = register("seething", new SeethingType());
 
-    private static final Map<String, FanProcessingType> LEGACY_NAME_MAP;
     static {
         Object2ReferenceOpenHashMap<String, FanProcessingType> map = new Object2ReferenceOpenHashMap<>();
         map.put("SANDING", SANDING);
         map.put("FREEZING", FREEZING);
         map.put("SEETHING", SEETHING);
         map.trim();
-        LEGACY_NAME_MAP = map;
     }
 
     private static <T extends FanProcessingType> T register(String id, T type) {
@@ -61,20 +57,7 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
         return type;
     }
 
-    @Nullable
-    public static FanProcessingType ofLegacyName(String name) {
-        return LEGACY_NAME_MAP.get(name);
-    }
-
     public static void register() {
-    }
-
-    public static FanProcessingType parseLegacy(String str) {
-        FanProcessingType type = ofLegacyName(str);
-        if (type != null) {
-            return type;
-        }
-        return FanProcessingType.parse(str);
     }
 
     public static class SandingType implements FanProcessingType {
@@ -92,7 +75,7 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
 
         @Override
         public int getPriority() {
-            return 1000;
+            return 691000;
         }
 
         @Override
@@ -108,9 +91,7 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
         public List<ItemStack> process(ItemStack stack, Level level) {
             SANDING_WRAPPER.setItem(0, stack);
             Optional<SandingRecipe> recipe = DesiresRecipeTypes.SANDING.find(SANDING_WRAPPER, level);
-            if (recipe.isPresent())
-                return RecipeApplier.applyRecipeOn(level, stack, recipe.get());
-            return null;
+            return recipe.map(sandingRecipe -> RecipeApplier.applyRecipeOn(level, stack, sandingRecipe)).orElse(null);
         }
 
         @Override
@@ -209,17 +190,14 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
             }
             BlockState blockState = level.getBlockState(pos);
             if (DesiresTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SEETHING.matches(blockState)) {
-                if (blockState.hasProperty(BlazeBurnerBlock.HEAT_LEVEL) && !blockState.getValue(BlazeBurnerBlock.HEAT_LEVEL).isAtLeast(BlazeBurnerBlock.HeatLevel.SEETHING)) {
-                    return false;
-                }
-                return true;
+                return !blockState.hasProperty(BlazeBurnerBlock.HEAT_LEVEL) || blockState.getValue(BlazeBurnerBlock.HEAT_LEVEL).isAtLeast(BlazeBurnerBlock.HeatLevel.SEETHING);
             }
             return false;
         }
 
         @Override
         public int getPriority() {
-            return 1200;
+            return 691200;
         }
 
         @Override
@@ -234,9 +212,7 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
         public List<ItemStack> process(ItemStack stack, Level level) {
             SEETHING_WRAPPER.setItem(0, stack);
             Optional<SeethingRecipe> recipe = DesiresRecipeTypes.SEETHING.find(SEETHING_WRAPPER, level);
-            if (recipe.isPresent())
-                return RecipeApplier.applyRecipeOn(level, stack, recipe.get());
-            return null;
+            return recipe.map(seethingRecipe -> RecipeApplier.applyRecipeOn(level, stack, seethingRecipe)).orElse(null);
         }
 
         @Override
@@ -336,7 +312,7 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
 
         @Override
         public int getPriority() {
-            return 1100;
+            return 691100;
         }
 
         @Override
@@ -351,9 +327,7 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
         public List<ItemStack> process(ItemStack stack, Level level) {
             FREEZING_WRAPPER.setItem(0, stack);
             Optional<FreezingRecipe> recipe = DesiresRecipeTypes.FREEZING.find(FREEZING_WRAPPER, level);
-            if (recipe.isPresent())
-                return RecipeApplier.applyRecipeOn(level, stack, recipe.get());
-            return null;
+            return recipe.map(freezingRecipe -> RecipeApplier.applyRecipeOn(level, stack, freezingRecipe)).orElse(null);
         }
 
         @Override
