@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "C": {
       "item": "minecraft:campfire"
@@ -19,5 +20,6 @@
   "result": {
     "count": 4,
     "item": "create_dd:smoking_sail"
-  }
+  },
+  "show_notification": true
 }

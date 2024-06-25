@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "C": {
       "item": "create:cogwheel"
@@ -17,5 +18,6 @@
   "result": {
     "count": 4,
     "item": "create_dd:industrial_fan"
-  }
+  },
+  "show_notification": true
 }

@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "B": {
       "tag": "forge:plates/iron"
@@ -13,5 +14,6 @@
   ],
   "result": {
     "item": "create_dd:item_stockpile"
-  }
+  },
+  "show_notification": true
 }

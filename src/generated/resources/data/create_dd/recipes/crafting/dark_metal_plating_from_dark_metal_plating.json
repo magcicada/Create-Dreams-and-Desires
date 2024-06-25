@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "C": {
       "item": "create_dd:dark_metal_block"
@@ -13,5 +14,6 @@
   "result": {
     "count": 9,
     "item": "create_dd:dark_metal_plating"
-  }
+  },
+  "show_notification": true
 }

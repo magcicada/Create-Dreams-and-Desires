@@ -16,5 +16,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "create_dd:blocks/small_dolomite_brick_stairs"
 }

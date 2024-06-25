@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "C": {
       "item": "create_dd:lapis_lazuli_shard"
@@ -11,5 +12,6 @@
   ],
   "result": {
     "item": "minecraft:lapis_lazuli"
-  }
+  },
+  "show_notification": true
 }

@@ -30,5 +30,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "create_dd:blocks/cut_weathered_limestone_slab"
 }

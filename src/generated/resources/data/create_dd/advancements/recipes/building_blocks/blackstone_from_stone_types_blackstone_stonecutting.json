@@ -28,5 +28,6 @@
     "recipes": [
       "create_dd:blackstone_from_stone_types_blackstone_stonecutting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

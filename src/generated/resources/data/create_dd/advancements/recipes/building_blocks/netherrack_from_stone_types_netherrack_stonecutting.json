@@ -28,5 +28,6 @@
     "recipes": [
       "create_dd:netherrack_from_stone_types_netherrack_stonecutting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

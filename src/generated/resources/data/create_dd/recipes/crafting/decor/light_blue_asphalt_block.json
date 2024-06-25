@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "B": {
       "item": "minecraft:slime_ball"
@@ -19,5 +20,6 @@
   "result": {
     "count": 4,
     "item": "create_dd:light_blue_asphalt_block"
-  }
+  },
+  "show_notification": true
 }

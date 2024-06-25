@@ -28,5 +28,6 @@
     "recipes": [
       "create_dd:packed_mud_from_stone_types_packed_mud_stonecutting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

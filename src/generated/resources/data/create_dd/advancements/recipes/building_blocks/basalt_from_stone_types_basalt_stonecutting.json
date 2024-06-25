@@ -28,5 +28,6 @@
     "recipes": [
       "create_dd:basalt_from_stone_types_basalt_stonecutting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

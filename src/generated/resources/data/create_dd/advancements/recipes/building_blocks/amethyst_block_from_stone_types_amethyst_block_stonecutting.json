@@ -28,5 +28,6 @@
     "recipes": [
       "create_dd:amethyst_block_from_stone_types_amethyst_block_stonecutting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

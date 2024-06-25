@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "C": {
       "tag": "create_dd:rubber_decors"
@@ -15,5 +16,6 @@
   ],
   "result": {
     "item": "create_dd:orange_padded_rubber"
-  }
+  },
+  "show_notification": true
 }

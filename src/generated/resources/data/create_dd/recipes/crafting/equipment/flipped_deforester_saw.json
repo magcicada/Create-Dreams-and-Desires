@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "A": {
       "item": "create:andesite_alloy"
@@ -21,5 +22,6 @@
   ],
   "result": {
     "item": "create_dd:deforester_saw"
-  }
+  },
+  "show_notification": true
 }
