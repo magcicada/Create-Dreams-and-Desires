@@ -13,6 +13,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import uwu.lopyluna.create_dd.registry.DesiresItems;
 import uwu.lopyluna.create_dd.registry.DesiresTags;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -101,7 +102,7 @@ public class GRPickaxeItem extends PickaxeItem {
     @Override
     public ItemStack getCraftingRemainingItem(ItemStack itemStack) {
         if (DesiresTags.AllItemTags.ADDITIONAL_DROPS_TOOL.matches(itemStack)) {
-            return new ItemStack(this.getCraftingRemainingItem());
+            return new ItemStack(DesiresItems.GILDED_ROSE_PICKAXE.get());
         } else return super.getCraftingRemainingItem(itemStack);
     }
 
