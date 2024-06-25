@@ -301,19 +301,6 @@ public class DesiresItems {
 			.lang("Music Disc")
 			.register();
 
-	//public static final ItemEntry<SpawnEggItem> INERT_BLAZELING_SPAWN_EGG = REGISTRATE.item("inert_blazeling_spawn_egg",
-	//				p -> new SpawnEggItem(DesiresEntityTypes.INERT_BLAZELING.get(), 5451574, 13661252, p))
-	//		.model((c, p) -> p.withExistingParent(c.getId().getPath(),
-	//				new ResourceLocation("item/template_spawn_egg")))
-	//		.register();
-
-	//public static final ItemEntry<SpawnEggItem> SEETHING_ABLAZE_SPAWN_EGG = REGISTRATE.item("seething_ablaze_spawn_egg",
-	//				p -> new SpawnEggItem(DesiresEntityTypes.SEETHING_ABLAZE.get(), 44543, 56063, p))
-	//		.tag(AllTags.AllItemTags.BLAZE_BURNER_FUEL_SPECIAL.tag)
-	//		.model((c, p) -> p.withExistingParent(c.getId().getPath(),
-	//				new ResourceLocation("item/template_spawn_egg")))
-	//		.register();
-
 	public static final ItemEntry<CombustibleItem> SEETHING_ABLAZE_ROD = REGISTRATE.item("seething_ablaze_rod", CombustibleItem::new)
 			.tag(AllTags.AllItemTags.BLAZE_BURNER_FUEL_SPECIAL.tag)
 			.onRegister(i -> i.setBurnTime(9600))

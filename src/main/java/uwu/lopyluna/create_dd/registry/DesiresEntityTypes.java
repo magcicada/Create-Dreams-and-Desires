@@ -1,5 +1,6 @@
 package uwu.lopyluna.create_dd.registry;
 
+import com.simibubi.create.AllTags;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
 import com.simibubi.create.foundation.data.CreateEntityBuilder;
 import com.tterrag.registrate.util.entry.EntityEntry;
@@ -29,7 +30,7 @@ import uwu.lopyluna.create_dd.DesiresCreate;
 
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 
-@SuppressWarnings({"unused", "all"})
+@SuppressWarnings({"unused","all"})
 public class DesiresEntityTypes {
 
 	public static final EntityEntry<SeethingBlaze> SEETHING_ABLAZE = REGISTRATE.entity("seething_ablaze", SeethingBlaze::new, MobCategory.MONSTER)
@@ -48,6 +49,9 @@ public class DesiresEntityTypes {
 					.clientTrackingRange(8))
 			.renderer(() -> SeethingBlazeRenderer::new)
 			.attributes(SeethingBlaze::createAttributes)
+			.spawnEgg(0x2677B5, 0x54479E)
+						.tag(AllTags.AllItemTags.BLAZE_BURNER_FUEL_SPECIAL.tag)
+			.build()
 			.register();
 
 	public static final EntityEntry<InertBlaze> INERT_BLAZELING = REGISTRATE.entity("inert_blazeling", InertBlaze::new, MobCategory.CREATURE)
@@ -65,6 +69,7 @@ public class DesiresEntityTypes {
 					.sized(0.6F, 0.75F)
 					.clientTrackingRange(4))
 			.attributes(InertBlaze::createAttributes)
+			.spawnEgg(0x804424,0x8B7A3D ).build()
 			.register();
 
 
