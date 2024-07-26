@@ -7,7 +7,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -20,13 +19,12 @@ import uwu.lopyluna.create_dd.registry.DesiresTags;
 public class MixinBlock {
 //Thanks IThundxr for this
 
-    @SuppressWarnings({"deprecation", "unused"})
     @WrapOperation(method = "playerDestroy", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;causeFoodExhaustion(F)V"))
     private void create_dd$roseToolFortune(Player instance, float pExhaustion, Operation<Void> original, @Local(argsOnly = true) Level pLevel, @Local(argsOnly = true) Player pPlayer,
                                            @Local(argsOnly = true) BlockPos pPos, @Local(argsOnly = true) BlockState pState, @Local(argsOnly = true) ItemStack pTool) {
         if (DesiresTags.AllItemTags.ADDITIONAL_DROPS_TOOL.matches(pTool)) {
-            int fortuneLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, pTool);
-            int lootingLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MOB_LOOTING, pTool);
+            int fortuneLevel = pTool.getEnchantmentLevel(Enchantments.BLOCK_FORTUNE);
+            int lootingLevel = pTool.getEnchantmentLevel(Enchantments.MOB_LOOTING);
 
             pTool.setTag(null);
             pTool.enchant(Enchantments.BLOCK_FORTUNE, fortuneLevel + fortuneLevel + lootingLevel + 1);

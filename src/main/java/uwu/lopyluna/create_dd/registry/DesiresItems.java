@@ -19,6 +19,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.content.items.equipment.NameableRecordItem;
+import uwu.lopyluna.create_dd.content.items.equipment.clockwork_crossbow.ClockworkCrossbow;
 import uwu.lopyluna.create_dd.content.items.equipment.deforester_saw.DeforesterSawItem;
 import uwu.lopyluna.create_dd.content.items.equipment.excavation_drill.ExcavationDrillItem;
 import uwu.lopyluna.create_dd.content.items.equipment.gilded_rose_tools.*;
@@ -278,6 +279,15 @@ public class DesiresItems {
 			.model(AssetLookup.itemModelWithPartials())
 			.properties(p -> p.rarity(Rarity.UNCOMMON))
 			.tag(DesiresTags.AllItemTags.PICKAXE.tag)
+			.register();
+
+	public static final ItemEntry<ClockworkCrossbow> CLOCKWORK_CROSSBOW = REGISTRATE.item("clockwork_crossbow", ClockworkCrossbow::new)
+			.model(AssetLookup.itemModelWithPartials())
+			.properties(p -> p.stacksTo(1).defaultDurability(500).durability(500).rarity(Rarity.UNCOMMON))
+			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
+					new ResourceLocation("item/crossbow")).texture("layer0",
+					new ResourceLocation("minecraft","item/crossbow_standby")))
+			.tag(DesiresTags.AllItemTags.CROSSBOW.tag)
 			.register();
 
 	public static final ItemEntry<NameableRecordItem> MUSIC_DISC_WALTZ_OF_THE_FLOWERS = REGISTRATE.item("music_disc_waltz_of_the_flowers",

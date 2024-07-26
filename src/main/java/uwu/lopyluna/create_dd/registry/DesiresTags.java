@@ -139,6 +139,7 @@ public class DesiresTags {
 		FREEZABLE,
 		ADDITIONAL_DROPS_TOOL,
 		MAGNET_IGNORE,
+		CROSSBOW(FORGE, "tools/crossbow"),
 		SWORD(FORGE, "tools/sword"),
 		PICKAXE(FORGE, "tools/pickaxe"),
 		DRILL(FORGE, "tools/drill"),

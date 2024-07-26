@@ -1,4 +1,4 @@
-// 1.19.2	2024-06-06T16:08:42.142449	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2024-07-24T22:16:57.4329547	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 9452bed2fb7ba829ea35644054add91456d3f5d9 assets/create_dd/blockstates/amethyst_block_pillar.json
 64dc32722d3ad05720fa9a200df1de7179cfd890 assets/create_dd/blockstates/basalt_pillar.json
 5fd6e80fe77786dd8fd0c5cfd6d866b44365aa96 assets/create_dd/blockstates/blackstone_pillar.json
@@ -322,8 +322,8 @@ af62e1b2187e70334a3e36986b368feac281d63d assets/create_dd/blockstates/yellow_pad
 3f358d81d3da01f3d0fa242bf9928888a0702508 assets/create_dd/blockstates/yellow_padded_rubber_slab.json
 2736c91b94b9dd34ed0a702b4b538e6d63bc5c73 assets/create_dd/blockstates/yellow_padded_rubber_stairs.json
 7ac56fd4064658532ee94e7c8def9f604e9528aa assets/create_dd/blockstates/yellow_padded_tiled_rubber.json
-26e730752cb77da8aed0c9b7ef1c85df3b864c41 assets/create_dd/lang/en_ud.json
-1ca9ad3e49296c22eae336b432f7e6d87597fe6b assets/create_dd/lang/en_us.json
+537004f59efeaa43131e643e2e01e26fc9ddf9b2 assets/create_dd/lang/en_ud.json
+94c3a142253ed13ddfb891b7fed469b8b40de129 assets/create_dd/lang/en_us.json
 186464982087eb2dd6aa9a5bf09cdb29e6326c49 assets/create_dd/models/block/amethyst_block_pillar.json
 37f5da0e49555aed59846ec90f8286e737feb179 assets/create_dd/models/block/amethyst_block_pillar_horizontal.json
 c9845fd31f14aa8e1a83ffc67249b5486a8ff5cc assets/create_dd/models/block/basalt_pillar.json
@@ -914,6 +914,7 @@ f9df04a75529a6029ca7fa7c201699bc0a4d1e90 assets/create_dd/models/item/brown_padd
 c8dd505c15fd6227cc059069b8b3e13154edd7b1 assets/create_dd/models/item/brown_padded_tiled_rubber.json
 f4a56df58d2199908ac84374db239389ade97108 assets/create_dd/models/item/bury_blend.json
 713d66e8af477e21056ccb1ca08a5f56369b9968 assets/create_dd/models/item/calculation_mechanism.json
+17a937c58311be0af560309b9490a7308f9c040f assets/create_dd/models/item/clockwork_crossbow.json
 a16d87907786d661fee5996651fdb2521eef2069 assets/create_dd/models/item/coal_piece.json
 e0696741db7ca42c441e68992a6708af06bb87f5 assets/create_dd/models/item/cog_crank.json
 58b552d27d4b18dc070036e4739e68aa6fb1a81a assets/create_dd/models/item/creative_casing.json
@@ -2674,6 +2675,7 @@ f3235c60944033cf5211bfaafca2b38b6ea11be0 data/forge/tags/items/nuggets/lapis.jso
 c399378151e4bc0eed41b2f36de251402cc16919 data/forge/tags/items/raw_rubbers.json
 e7ffb7ecec42111844ca2435b8b373ef27c7f75f data/forge/tags/items/rubbers.json
 c60dc8abaf1cb14a8e968bf046353bfe2c8355b1 data/forge/tags/items/tools/axe.json
+0be9e280fa0478c68c5a26eda02ff3ac54dc5104 data/forge/tags/items/tools/crossbow.json
 9af1419c0cd5795da94f8a75a6ed6527fcb24033 data/forge/tags/items/tools/hoe.json
 ac6313eb3c75d8e3c2d8e9b356740da183fd563b data/forge/tags/items/tools/pickaxe.json
 6c8e3bb5924a8d209bea83fedd4b785a982c680c data/forge/tags/items/tools/shovel.json
