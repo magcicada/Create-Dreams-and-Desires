@@ -1,4 +1,4 @@
-// 1.19.2	2024-07-24T22:16:57.4329547	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2024-07-27T09:12:34.2228253	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 9452bed2fb7ba829ea35644054add91456d3f5d9 assets/create_dd/blockstates/amethyst_block_pillar.json
 64dc32722d3ad05720fa9a200df1de7179cfd890 assets/create_dd/blockstates/basalt_pillar.json
 5fd6e80fe77786dd8fd0c5cfd6d866b44365aa96 assets/create_dd/blockstates/blackstone_pillar.json
@@ -322,8 +322,8 @@ af62e1b2187e70334a3e36986b368feac281d63d assets/create_dd/blockstates/yellow_pad
 3f358d81d3da01f3d0fa242bf9928888a0702508 assets/create_dd/blockstates/yellow_padded_rubber_slab.json
 2736c91b94b9dd34ed0a702b4b538e6d63bc5c73 assets/create_dd/blockstates/yellow_padded_rubber_stairs.json
 7ac56fd4064658532ee94e7c8def9f604e9528aa assets/create_dd/blockstates/yellow_padded_tiled_rubber.json
-537004f59efeaa43131e643e2e01e26fc9ddf9b2 assets/create_dd/lang/en_ud.json
-94c3a142253ed13ddfb891b7fed469b8b40de129 assets/create_dd/lang/en_us.json
+19d39257919025e8e4927e9cd4da1c16a8f4d27e assets/create_dd/lang/en_ud.json
+8018b9296fd1db03ea35a40c0054bd43e7bb8d41 assets/create_dd/lang/en_us.json
 186464982087eb2dd6aa9a5bf09cdb29e6326c49 assets/create_dd/models/block/amethyst_block_pillar.json
 37f5da0e49555aed59846ec90f8286e737feb179 assets/create_dd/models/block/amethyst_block_pillar_horizontal.json
 c9845fd31f14aa8e1a83ffc67249b5486a8ff5cc assets/create_dd/models/block/basalt_pillar.json
@@ -905,6 +905,7 @@ c186408bb65845b4a0f4c8b9242102b2a3a6da5a assets/create_dd/models/item/blue_padde
 402c469907e10b560c97ff47f3d412ca6d82283f assets/create_dd/models/item/blue_padded_rubber_stairs.json
 af3d7f392f4c995d0aaf8e5733aec6954b2c32e1 assets/create_dd/models/item/blue_padded_tiled_rubber.json
 852cd6e6af77140961c58fd93b75f351c13af116 assets/create_dd/models/item/bore_block.json
+105166161afabb7f0c120139c9f15de2c503c8b9 assets/create_dd/models/item/brass_gearbox.json
 05029bf1be4b4361fb91b194be69d2d58f9ed2ab assets/create_dd/models/item/brown_asphalt_block.json
 53b5bd5e6bef90d2164bbf52a0f7a05674c56120 assets/create_dd/models/item/brown_blueprint_block.json
 f9df04a75529a6029ca7fa7c201699bc0a4d1e90 assets/create_dd/models/item/brown_padded_mosaic_rubber.json
@@ -1265,7 +1266,7 @@ d042e346c34a92dce730da83e59d97ef291a5a6b data/create/tags/blocks/fan_processing_
 c73ec4cdf2cbfc34299f2e60ce77ce282ec4fdfe data/create/tags/blocks/safe_nbt.json
 4c644c5405bf84e53e820f8dfb50bc683bf29818 data/create/tags/blocks/windmill_sails.json
 bcbfa252017f73a721d5ec6771f9b37b720a342f data/create/tags/blocks/wrench_pickup.json
-7e38351c8a05e80a5177aa067ee75ff7bbbd4573 data/create/tags/items/blaze_burner_fuel/special.json
+41c91402647baa6456352d7294e060940dcc004a data/create/tags/items/blaze_burner_fuel/special.json
 0395d2a14e0fcdb5ad3f5c9da75ecc5e2641497c data/create/tags/items/casing.json
 1d0b98508bea5a445348e980a140917b17e867e3 data/create_dd/advancements/recipes/building_blocks/amethyst_block_from_stone_types_amethyst_block_stonecutting.json
 e388e69885a0e0fd8b7c8899e196ea32bf3f6caa data/create_dd/advancements/recipes/building_blocks/basalt_from_stone_types_basalt_stonecutting.json
@@ -1800,6 +1801,7 @@ c39456a02ddc25516cde4ed476ad491e45a41f58 data/create_dd/loot_tables/blocks/blue_
 ec4d2d3c3e64255a5e71a874abdb97ddcb5a600b data/create_dd/loot_tables/blocks/blue_padded_rubber_stairs.json
 8bd15112f2143fdadc5d214f9c6296471b2c61a2 data/create_dd/loot_tables/blocks/blue_padded_tiled_rubber.json
 80b98ac490d5e2dffc984e3f175d7cfc0c5b524a data/create_dd/loot_tables/blocks/bore_block.json
+b1ee15fd129292336860ba3499345858959a22e5 data/create_dd/loot_tables/blocks/brass_gearbox.json
 7e59c400f00a79ef514212e5cdb8f9157257f084 data/create_dd/loot_tables/blocks/brown_asphalt_block.json
 444cd52c47f3ced8a23ede24f748ea14b359dbcb data/create_dd/loot_tables/blocks/brown_blueprint_block.json
 12b047a77b28d918b6e3552e73c942bc45dff82f data/create_dd/loot_tables/blocks/brown_padded_mosaic_rubber.json
@@ -2683,8 +2685,8 @@ ac6313eb3c75d8e3c2d8e9b356740da183fd563b data/forge/tags/items/tools/pickaxe.jso
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/azalea_root_replaceable.json
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/dripstone_replaceable_blocks.json
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/lush_ground_replaceable.json
-094485f59c53a71aeb92a372ea4312211651546a data/minecraft/tags/blocks/mineable/axe.json
-742cfdfe240dc4591b2fd4c5cbe96973129f67fd data/minecraft/tags/blocks/mineable/pickaxe.json
+dc465ca5aac93819da46be8dee5448ddf0c036b9 data/minecraft/tags/blocks/mineable/axe.json
+5f36a3953b4c8400b1ebc1bc32925b6ba75bc8c1 data/minecraft/tags/blocks/mineable/pickaxe.json
 ec4bbe9a0b8cd867984f70502fc64d71599db532 data/minecraft/tags/blocks/moss_replaceable.json
 2a7a1edb20dd28f4e45ac19e631d5813e24d6eff data/minecraft/tags/blocks/slabs.json
 1f101db2160a52114a17f284d2d8cefe785fab74 data/minecraft/tags/blocks/stairs.json

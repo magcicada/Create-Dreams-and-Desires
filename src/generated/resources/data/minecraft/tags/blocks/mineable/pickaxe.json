@@ -197,6 +197,7 @@
     "create_dd:hydraulic_press",
     "create_dd:bore_block",
     "create_dd:multimeter",
+    "create_dd:brass_gearbox",
     "create_dd:redstone_divider",
     "create_dd:inverse_box",
     "create_dd:kinetic_motor",

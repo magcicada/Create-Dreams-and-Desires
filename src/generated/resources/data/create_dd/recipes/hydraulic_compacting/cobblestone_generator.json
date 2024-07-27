@@ -1,0 +1,21 @@
+{
+  "type": "create_dd:hydraulic_compacting",
+  "ingredients": [
+    {
+      "amount": 100,
+      "fluid": "minecraft:lava",
+      "nbt": {}
+    },
+    {
+      "amount": 500,
+      "fluid": "minecraft:water",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "count": 10,
+      "item": "minecraft:cobblestone"
+    }
+  ]
+}

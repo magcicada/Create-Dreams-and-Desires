@@ -1,0 +1,16 @@
+{
+  "type": "create_dd:hydraulic_compacting",
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "amount": 500,
+      "fluid": "create_dd:sap",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "create_dd:raw_rubber"
+    }
+  ]
+}

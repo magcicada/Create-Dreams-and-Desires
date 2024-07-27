@@ -1,0 +1,26 @@
+{
+  "type": "create_dd:hydraulic_compacting",
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "item": "minecraft:gravel"
+    },
+    {
+      "item": "minecraft:deepslate"
+    },
+    {
+      "item": "minecraft:andesite"
+    },
+    {
+      "amount": 500,
+      "fluid": "minecraft:lava",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "count": 2,
+      "item": "minecraft:tuff"
+    }
+  ]
+}

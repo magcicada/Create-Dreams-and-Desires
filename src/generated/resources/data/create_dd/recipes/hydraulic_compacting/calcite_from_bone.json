@@ -1,12 +1,12 @@
 {
-  "type": "create:mixing",
+  "type": "create_dd:hydraulic_compacting",
   "heatRequirement": "heated",
   "ingredients": [
     {
-      "item": "minecraft:diorite"
+      "item": "minecraft:bone_block"
     },
     {
-      "item": "minecraft:bone_block"
+      "item": "minecraft:diorite"
     }
   ],
   "results": [
