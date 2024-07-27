@@ -1,5 +1,6 @@
 package uwu.lopyluna.create_dd.registry;
 
+import com.simibubi.create.AllTags;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder.ProcessingRecipeFactory;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
@@ -15,15 +16,14 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 import uwu.lopyluna.create_dd.DesiresCreate;
-import uwu.lopyluna.create_dd.content.recipes.FreezingRecipe;
-import uwu.lopyluna.create_dd.content.recipes.SandingRecipe;
-import uwu.lopyluna.create_dd.content.recipes.SeethingRecipe;
+import uwu.lopyluna.create_dd.content.recipes.*;
 
 import java.util.Optional;
 import java.util.function.Supplier;
 
 public enum DesiresRecipeTypes implements IRecipeTypeInfo {
 
+	HYDRAULIC_COMPACTING(HydraulicCompactingRecipe::new),
 	SANDING(SandingRecipe::new),
 	FREEZING(FreezingRecipe::new),
 	SEETHING(SeethingRecipe::new);

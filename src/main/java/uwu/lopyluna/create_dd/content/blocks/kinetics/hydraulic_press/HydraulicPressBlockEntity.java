@@ -1,25 +1,21 @@
 package uwu.lopyluna.create_dd.content.blocks.kinetics.hydraulic_press;
 
-import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.kinetics.belt.transport.TransportedItemStack;
-import com.simibubi.create.content.kinetics.crafter.MechanicalCraftingRecipe;
 import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
+import com.simibubi.create.content.kinetics.press.PressingBehaviour;
+import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.foundation.advancement.AllAdvancements;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.LangBuilder;
-import com.simibubi.create.infrastructure.config.AllConfigs;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingRecipe;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -30,6 +26,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
+import uwu.lopyluna.create_dd.registry.DesiresRecipeTypes;
 
 import java.util.List;
 
@@ -108,18 +105,14 @@ public class HydraulicPressBlockEntity extends MechanicalPressBlockEntity {
         return super.getCapability(cap, side);
     }
 
-    public static <C extends Container> boolean canCompress(Recipe<C> recipe) {
-        if (!(recipe instanceof CraftingRecipe))
-            return false;
-        NonNullList<Ingredient> ingredients = recipe.getIngredients();
-        return (ingredients.size() == 4 || ingredients.size() == 9);
+    @Override
+    protected <C extends Container> boolean matchStaticFilters(Recipe<C> recipe) {
+        return recipe.getType() == DesiresRecipeTypes.HYDRAULIC_COMPACTING.getType();
     }
 
     @Override
-    protected <C extends Container> boolean matchStaticFilters(Recipe<C> recipe) {
-        return (recipe instanceof CraftingRecipe && !(recipe instanceof MechanicalCraftingRecipe) && canCompress(recipe)
-                && !AllRecipeTypes.shouldIgnoreInAutomation(recipe))
-                || recipe.getType() == AllRecipeTypes.COMPACTING.getType();
+    protected List<Recipe<?>> getMatchingRecipes() {
+        return super.getMatchingRecipes();
     }
 
     @Override
@@ -133,6 +126,39 @@ public class HydraulicPressBlockEntity extends MechanicalPressBlockEntity {
         drainFluid();
         if (getProcessFluid(Fluids.LAVA))
             award(AllAdvancements.PRESS);
+    }
+
+    @Override
+    protected void applyBasinRecipe() {
+        drainFluid();
+        super.applyBasinRecipe();
+    }
+
+    @Override
+    protected boolean updateBasin() {
+        if (!canProcessWithFluid()) {
+            return true;
+        } else {
+            return super.updateBasin();
+        }
+    }
+
+    @Override
+    public void onPressingCompleted() {
+        if (pressingBehaviour.onBasin() && matchBasinRecipe(currentRecipe)
+                && getBasin().filter(BasinBlockEntity::canContinueProcessing)
+                .isPresent())
+            startProcessingBasin();
+        else
+            basinChecker.scheduleUpdate();
+    }
+
+    @Override
+    public void startProcessingBasin() {
+        if (pressingBehaviour.running && pressingBehaviour.runningTicks <= PressingBehaviour.CYCLE / 2)
+            return;
+        super.startProcessingBasin();
+        pressingBehaviour.start(PressingBehaviour.Mode.BASIN);
     }
 
     protected void drainFluid() {
@@ -150,6 +176,15 @@ public class HydraulicPressBlockEntity extends MechanicalPressBlockEntity {
     public boolean canProcessWithFluid() {
         return (!tank.isEmpty() && (getProcessFluid(Fluids.LAVA) || getProcessFluid(Fluids.WATER))
                 && (tank.getPrimaryHandler().getFluidAmount() >= 1000));
+    }
+
+    @Override
+    public boolean tryProcessInBasin(boolean simulate) {
+        if (!canProcessWithFluid()) {
+            return false;
+        } else {
+            return super.tryProcessInBasin(simulate);
+        }
     }
 
     @Override

@@ -32,6 +32,7 @@ public abstract class DesireProcessingRecipeGen extends CreateRecipeProvider {
         GENERATORS.add(new SeethingRecipeGen(gen));
         GENERATORS.add(new ItemApplicationRecipeGen(gen));
         GENERATORS.add(new MixingRecipeGen(gen));
+        GENERATORS.add(new HydraulicCompactingRecipeGen(gen));
 
         gen.addProvider(true, new DataProvider() {
 

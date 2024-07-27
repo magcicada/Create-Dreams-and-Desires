@@ -16,12 +16,6 @@ public class MixingRecipeGen extends DesireProcessingRecipeGen {
             .require(DesiresFluids.SAP.get(), 500)
             .output(DesiresItems.RAW_RUBBER.get(), 1)),
 
-            CALCITE = create("calcite", b -> b
-            .require(Items.DIORITE)
-            .require(Items.BONE_BLOCK)
-            .output(Items.CALCITE, 2)
-            .requiresHeat(HeatCondition.HEATED)),
-
             BURY_BLEND = create("bury_blend", b -> b
             .require(AllItems.CRUSHED_IRON.get())
             .require(Items.LAPIS_LAZULI)

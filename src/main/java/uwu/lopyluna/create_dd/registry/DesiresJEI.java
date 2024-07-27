@@ -4,8 +4,10 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.compat.jei.*;
 import com.simibubi.create.compat.jei.category.*;
+import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.foundation.config.ConfigBase;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
+import uwu.lopyluna.create_dd.content.jei.*;
 import uwu.lopyluna.create_dd.registry.helper.Lang;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -22,10 +24,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
 import uwu.lopyluna.create_dd.DesiresCreate;
-import uwu.lopyluna.create_dd.content.jei.DProcessingViaFanCategory;
-import uwu.lopyluna.create_dd.content.jei.FanFreezingCategory;
-import uwu.lopyluna.create_dd.content.jei.FanSandingCategory;
-import uwu.lopyluna.create_dd.content.jei.FanSeethingCategory;
 import uwu.lopyluna.create_dd.content.recipes.FreezingRecipe;
 import uwu.lopyluna.create_dd.content.recipes.SandingRecipe;
 import uwu.lopyluna.create_dd.content.recipes.SeethingRecipe;
@@ -64,6 +62,14 @@ public class DesiresJEI implements IModPlugin {
 
 		CreateRecipeCategory<?>
 
+		hydraulic_compacting = builder(BasinRecipe.class)
+				.addTypedRecipes(DesiresRecipeTypes.HYDRAULIC_COMPACTING)
+				.catalyst(DesiresBlocks.HYDRAULIC_PRESS::get)
+				.catalyst(AllBlocks.BASIN::get)
+				.doubleItemIcon(DesiresBlocks.HYDRAULIC_PRESS.get(), AllBlocks.BASIN.get())
+				.emptyBackground(177, 103)
+				.build("hydraulic_compacting", HydraulicCompactingCategory::new),
+
 		sanding = builder(SandingRecipe.class)
 				.addTypedRecipes(DesiresRecipeTypes.SANDING)
 				.catalystStack(DProcessingViaFanCategory.getFan("fan_sanding"))
@@ -100,6 +106,9 @@ public class DesiresJEI implements IModPlugin {
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
 		allCategories.forEach(c -> c.registerCatalysts(registration));
+
+		registration.getJeiHelpers().getRecipeType(new ResourceLocation("create", "pressing")).ifPresent(type ->
+				registration.addRecipeCatalyst(new ItemStack(DesiresBlocks.HYDRAULIC_PRESS.get()), type));
 
 		registration.getJeiHelpers().getRecipeType(new ResourceLocation("create", "fan_washing")).ifPresent(type ->
 				registration.addRecipeCatalyst(new ItemStack(DesiresBlocks.INDUSTRIAL_FAN.get()), type));

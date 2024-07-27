@@ -11,6 +11,7 @@ public class DesiresLangPartial {
         consume(consumer, "create_dd.recipe.fan_sanding", "Bulk Sanding");
         consume(consumer, "create_dd.recipe.fan_freezing", "Bulk Freezing");
         consume(consumer, "create_dd.recipe.fan_seething", "Bulk Seething");
+        consume(consumer, "create_dd.recipe.hydraulic_compacting", "Hydraulic Compacting");
         consume(consumer, "itemGroup.create_dd.base", "Create: Dreams n' Desires");
         consume(consumer, "itemGroup.create_dd.palettes", "DnDesires Building Blocks");
         consume(consumer, "itemGroup.create_dd.beta", "DnDesires Beta Stuff");
