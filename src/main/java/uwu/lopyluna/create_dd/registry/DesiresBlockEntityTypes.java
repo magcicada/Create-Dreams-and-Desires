@@ -4,6 +4,9 @@ import com.simibubi.create.content.kinetics.base.*;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftInstance;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.brass_gearbox.BrassGearboxBlockEntity;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.brass_gearbox.BrassGearboxInstance;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.brass_gearbox.BrassGearboxRenderer;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.multimeter.MultiMeterBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.hydraulic_press.HydraulicPressBlockEntity;
@@ -105,6 +108,13 @@ public class DesiresBlockEntityTypes {
 			.instance(() -> SplitShaftInstance::new, false)
 			.validBlocks(DesiresBlocks.REDSTONE_DIVIDER)
 			.renderer(() -> SplitShaftRenderer::new)
+			.register();
+
+	public static final BlockEntityEntry<BrassGearboxBlockEntity> BRASS_GEARBOX = REGISTRATE
+			.blockEntity("brass_gearbox", BrassGearboxBlockEntity::new)
+			.instance(() -> BrassGearboxInstance::new, false)
+			.validBlocks(DesiresBlocks.BRASS_GEARBOX)
+			.renderer(() -> BrassGearboxRenderer::new)
 			.register();
 
 	public static void register() {}

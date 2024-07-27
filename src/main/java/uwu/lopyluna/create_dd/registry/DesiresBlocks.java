@@ -1,8 +1,6 @@
 package uwu.lopyluna.create_dd.registry;
 
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllItems;
-import com.simibubi.create.AllTags;
+import com.simibubi.create.*;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.gauge.GaugeGenerator;
@@ -38,6 +36,7 @@ import net.minecraftforge.common.util.ForgeSoundType;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.content.blocks.contraptions.bore_block.BoreBlock;
 import uwu.lopyluna.create_dd.content.blocks.contraptions.bore_block.BoreBlockMovementBehaviour;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.brass_gearbox.BrassGearboxBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.multimeter.MultiMeterBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlockItem;
@@ -232,6 +231,18 @@ public class DesiresBlocks {
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.transform(ModelGen.customItemModel("gauge", "_", "item"))
 			.register();
+
+	public static final BlockEntry<BrassGearboxBlock> BRASS_GEARBOX = REGISTRATE.block("brass_gearbox", BrassGearboxBlock::new)
+			.initialProperties(SharedProperties::stone)
+			.properties(p -> p.noOcclusion().color(MaterialColor.PODZOL))
+			.transform(BlockStressDefaults.setNoImpact())
+			.transform(axeOrPickaxe())
+			.blockstate((c, p) -> AssetLookup.partialBaseModel(c, p))
+			.item()
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.transform(customItemModel())
+			.register();
+
 
 	public static final BlockEntry<RedstoneDividerBlock> REDSTONE_DIVIDER = REGISTRATE.block("redstone_divider", RedstoneDividerBlock::new)
 			.initialProperties(SharedProperties::stone)

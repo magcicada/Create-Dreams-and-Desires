@@ -308,7 +308,6 @@ public class DesiresItems {
 
 	public static final ItemEntry<SpawnEggItem> SEETHING_ABLAZE_SPAWN_EGG = REGISTRATE.item("seething_ablaze_spawn_egg",
 					p -> new SpawnEggItem(DesiresEntityTypes.SEETHING_ABLAZE.get(), 44543, 56063, p))
-			.tag(AllTags.AllItemTags.BLAZE_BURNER_FUEL_SPECIAL.tag)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/template_spawn_egg")))
 			.register();
