@@ -23,6 +23,7 @@ import uwu.lopyluna.create_dd.content.blocks.kinetics.kinetic_motor.KineticMotor
 import uwu.lopyluna.create_dd.content.blocks.kinetics.kinetic_motor.KineticMotorRenderer;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.redstone_divider.RedstoneDividerBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.transmission.InverseBoxBlockEntity;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.worm_gear.WormGearBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileBlockEntity;
 
@@ -112,9 +113,16 @@ public class DesiresBlockEntityTypes {
 
 	public static final BlockEntityEntry<BrassGearboxBlockEntity> BRASS_GEARBOX = REGISTRATE
 			.blockEntity("brass_gearbox", BrassGearboxBlockEntity::new)
-			.instance(() -> BrassGearboxInstance::new, false)
+			.instance(() -> BrassGearboxInstance::new, true)
 			.validBlocks(DesiresBlocks.BRASS_GEARBOX)
 			.renderer(() -> BrassGearboxRenderer::new)
+			.register();
+
+	public static final BlockEntityEntry<WormGearBlockEntity> WORM_GEAR = REGISTRATE
+			.blockEntity("worm_gear", WormGearBlockEntity::new)
+			.instance(() -> SingleRotatingInstance::new, false)
+			.validBlocks(DesiresBlocks.WORM_GEAR)
+			.renderer(() -> KineticBlockEntityRenderer::new)
 			.register();
 
 	public static void register() {}

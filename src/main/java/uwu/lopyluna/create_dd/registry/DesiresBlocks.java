@@ -31,6 +31,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.util.ForgeSoundType;
 import uwu.lopyluna.create_dd.DesiresCreate;
@@ -51,6 +52,7 @@ import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.PoweredFlyw
 import uwu.lopyluna.create_dd.content.blocks.kinetics.kinetic_motor.KineticMotorBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.redstone_divider.RedstoneDividerBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.transmission.InverseBoxBlock;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.worm_gear.WormGearBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirCTBehaviour;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirItem;
@@ -323,6 +325,28 @@ public class DesiresBlocks {
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.transform(customItemModel())
 			.register();
+
+	public static final BlockEntry<WormGearBlock> WORM_GEAR =
+			REGISTRATE.block("worm_gear", WormGearBlock::new)
+					.initialProperties(SharedProperties::stone)
+					.properties(p -> p.color(MaterialColor.COLOR_LIGHT_GRAY))
+					.transform(axeOrPickaxe())
+					.blockstate((c, p) -> p.directionalBlock(c.get(), s -> {
+						boolean isFlipped = s.getValue(WormGearBlock.FACING)
+								.getAxisDirection() == Direction.AxisDirection.NEGATIVE;
+						String partName = s.getValue(WormGearBlock.PART)
+								.getSerializedName();
+						String flipped = isFlipped ? "_flipped" : "";
+						ModelFile existing = AssetLookup.partialBaseModel(c, p, partName);
+						if (!isFlipped)
+							return existing;
+						return p.models().withExistingParent("block/worm_gear/block" + "_" + partName + flipped, existing.getLocation())
+								.texture("2", p.modLoc("block/" + c.getName() + flipped));
+					}))
+					.transform(BlockStressDefaults.setNoImpact())
+					.item()
+					.transform(customItemModel("_", "block_single"))
+					.register();
 
 	public static final BlockEntry<FurnaceEngineBlock> FURNACE_ENGINE =
 			REGISTRATE.block("furnace_engine", FurnaceEngineBlock::new)

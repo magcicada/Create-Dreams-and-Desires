@@ -17,6 +17,7 @@
     "MixinForgeHooks",
     "MixinGearshiftBlock",
     "MixinGearshiftBlockEntity",
+    "MixinKineticBlockEntity",
     "MixinKineticNetwork",
     "MixinMountedFluidStorage",
     "MixinMountedStorage",

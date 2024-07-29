@@ -1,5 +1,6 @@
 package uwu.lopyluna.create_dd.registry.helper;
 
+import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
 import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
 import com.simibubi.create.foundation.block.connected.HorizontalCTBehaviour;
@@ -17,10 +18,12 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.content.blocks.functional.VelvetBlock;
 import uwu.lopyluna.create_dd.registry.DesiresPaletteBlocks;
 import uwu.lopyluna.create_dd.registry.DesiresSoundEvents;
 
@@ -35,6 +38,18 @@ import static uwu.lopyluna.create_dd.registry.DesiresTags.optionalTag;
 
 @SuppressWarnings({"unused", "deprecation"})
 public class BlockTransformer {
+
+    public static BlockEntry<VelvetBlock> velvetBlock(String colorId, MaterialColor mapColor, Item dye) {
+        return REGISTRATE.block(colorId + "_velvet_block", VelvetBlock::new)
+                .initialProperties(Material.WOOL)
+                .properties(p -> p.color(mapColor)).properties(p -> p.sound(SoundType.WOOL))
+                .properties(p -> p.strength(0.5f,1.5f))
+                .blockstate((c, p) -> p.simpleBlock(c.get(), p.models().cubeAll(c.getName(), new ResourceLocation(Create.ID, "block/seat/top_" + colorId))))
+                .item()
+                .build()
+                .register();
+    }
+
 
     public static BlockEntry<Block> rubber_decor(String colorId, MaterialColor mapColor, Item dye) {
         SoundType rubberSoundType = new ForgeSoundType(0.9f, .6f, () -> DesiresSoundEvents.RUBBER_BREAK.get(),

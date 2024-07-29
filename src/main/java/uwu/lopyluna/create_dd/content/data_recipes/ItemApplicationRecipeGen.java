@@ -5,11 +5,15 @@ import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.ItemTags;
+import net.minecraftforge.common.Tags;
+import uwu.lopyluna.create_dd.registry.DTags;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 import uwu.lopyluna.create_dd.registry.DesiresItems;
+import uwu.lopyluna.create_dd.registry.DesiresPaletteBlocks;
 
 import static uwu.lopyluna.create_dd.registry.DesiresTags.forgeItemTag;
 
+@SuppressWarnings("unused")
 public class ItemApplicationRecipeGen extends DesireProcessingRecipeGen {
     public ItemApplicationRecipeGen(DataGenerator generator) {
         super(generator);
@@ -50,6 +54,87 @@ public class ItemApplicationRecipeGen extends DesireProcessingRecipeGen {
             .require(forgeItemTag("nuggets/coal")) //Item to Apply
             .output(AllBlocks.COGWHEEL.get())); //Output
 
+    GeneratedRecipe
+        BLACK_VELVET_BLOCK = create("black_velvet_block", b -> b
+            .require(DTags.tag("item", "minecraft", "wool"))
+            .require(Tags.Items.NUGGETS_GOLD)
+            .output(DesiresPaletteBlocks.BLACK_VELVET_BLOCK.get())),
+
+        WHITE_VELVET_BLOCK = create("white_velvet_block", b -> b
+                .require(DTags.tag("item", "minecraft", "wool"))
+                .require(Tags.Items.NUGGETS_GOLD)
+                .output(DesiresPaletteBlocks.WHITE_VELVET_BLOCK.get())),
+
+        BLUE_VELVET_BLOCK = create("blue_velvet_block", b -> b
+                .require(DTags.tag("item", "minecraft", "wool"))
+                .require(Tags.Items.NUGGETS_GOLD)
+                .output(DesiresPaletteBlocks.BLUE_VELVET_BLOCK.get())),
+
+        LIGHT_BLUE_VELVET_BLOCK = create("light_blue_velvet_block", b -> b
+                .require(DTags.tag("item", "minecraft", "wool"))
+                .require(Tags.Items.NUGGETS_GOLD)
+                .output(DesiresPaletteBlocks.LIGHT_BLUE_VELVET_BLOCK.get())),
+
+        RED_VELVET_BLOCK = create("red_velvet_block", b -> b
+                .require(DTags.tag("item", "minecraft", "wool"))
+                .require(Tags.Items.NUGGETS_GOLD)
+                .output(DesiresPaletteBlocks.RED_VELVET_BLOCK.get())),
+
+        GREEN_VELVET_BLOCK = create("green_velvet_block", b -> b
+                .require(DTags.tag("item", "minecraft", "wool"))
+                .require(Tags.Items.NUGGETS_GOLD)
+                .output(DesiresPaletteBlocks.GREEN_VELVET_BLOCK.get())),
+
+        LIME_VELVET_BLOCK = create("lime_velvet_block", b -> b
+                .require(DTags.tag("item", "minecraft", "wool"))
+                .require(Tags.Items.NUGGETS_GOLD)
+                .output(DesiresPaletteBlocks.LIME_VELVET_BLOCK.get())),
+
+        PINK_VELVET_BLOCK = create("pink_velvet_block", b -> b
+                .require(DTags.tag("item", "minecraft", "wool"))
+                .require(Tags.Items.NUGGETS_GOLD)
+                .output(DesiresPaletteBlocks.PINK_VELVET_BLOCK.get())),
+
+        MAGENTA_VELVET_BLOCK = create("magenta_velvet_block", b -> b
+                .require(DTags.tag("item", "minecraft", "wool"))
+                .require(Tags.Items.NUGGETS_GOLD)
+                .output(DesiresPaletteBlocks.MAGENTA_VELVET_BLOCK.get())),
+
+        YELLOW_VELVET_BLOCK = create("yellow_velvet_block", b -> b
+                .require(DTags.tag("item", "minecraft", "wool"))
+                .require(Tags.Items.NUGGETS_GOLD)
+                .output(DesiresPaletteBlocks.YELLOW_VELVET_BLOCK.get())),
+
+        GRAY_VELVET_BLOCK = create("gray_velvet_block", b -> b
+                .require(DTags.tag("item", "minecraft", "wool"))
+                .require(Tags.Items.NUGGETS_GOLD)
+                .output(DesiresPaletteBlocks.GRAY_VELVET_BLOCK.get())),
+
+        LIGHT_GRAY_VELVET_BLOCK = create("light_gray_velvet_block", b -> b
+                .require(DTags.tag("item", "minecraft", "wool"))
+                .require(Tags.Items.NUGGETS_GOLD)
+                .output(DesiresPaletteBlocks.LIGHT_GRAY_VELVET_BLOCK.get())),
+
+        BROWN_VELVET_BLOCK = create("brown_velvet_block", b -> b
+                .require(DTags.tag("item", "minecraft", "wool"))
+                .require(Tags.Items.NUGGETS_GOLD)
+                .output(DesiresPaletteBlocks.BROWN_VELVET_BLOCK.get())),
+
+        CYAN_VELVET_BLOCK = create("cyan_velvet_block", b -> b
+                .require(DTags.tag("item", "minecraft", "wool"))
+                .require(Tags.Items.NUGGETS_GOLD)
+                .output(DesiresPaletteBlocks.CYAN_VELVET_BLOCK.get())),
+
+        PURPLE_VELVET_BLOCK = create("purple_velvet_block", b -> b
+                .require(DTags.tag("item", "minecraft", "wool"))
+                .require(Tags.Items.NUGGETS_GOLD)
+                .output(DesiresPaletteBlocks.PURPLE_VELVET_BLOCK.get())),
+
+        ORANGE_VELVET_BLOCK = create("orange_velvet_block", b -> b
+                .require(DTags.tag("item", "minecraft", "wool"))
+                .require(Tags.Items.NUGGETS_GOLD)
+                .output(DesiresPaletteBlocks.ORANGE_VELVET_BLOCK.get()))
+    ;
 
     @Override
     protected AllRecipeTypes getRecipeType() {

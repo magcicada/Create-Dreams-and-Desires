@@ -1,0 +1,108 @@
+{
+  "variants": {
+    "facing=down,part=end": {
+      "model": "create_dd:block/worm_gear/block_end_flipped",
+      "x": 180
+    },
+    "facing=down,part=middle": {
+      "model": "create_dd:block/worm_gear/block_middle_flipped",
+      "x": 180
+    },
+    "facing=down,part=single": {
+      "model": "create_dd:block/worm_gear/block_single_flipped",
+      "x": 180
+    },
+    "facing=down,part=start": {
+      "model": "create_dd:block/worm_gear/block_start_flipped",
+      "x": 180
+    },
+    "facing=east,part=end": {
+      "model": "create_dd:block/worm_gear/block_end",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,part=middle": {
+      "model": "create_dd:block/worm_gear/block_middle",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,part=single": {
+      "model": "create_dd:block/worm_gear/block_single",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,part=start": {
+      "model": "create_dd:block/worm_gear/block_start",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,part=end": {
+      "model": "create_dd:block/worm_gear/block_end_flipped",
+      "x": 90
+    },
+    "facing=north,part=middle": {
+      "model": "create_dd:block/worm_gear/block_middle_flipped",
+      "x": 90
+    },
+    "facing=north,part=single": {
+      "model": "create_dd:block/worm_gear/block_single_flipped",
+      "x": 90
+    },
+    "facing=north,part=start": {
+      "model": "create_dd:block/worm_gear/block_start_flipped",
+      "x": 90
+    },
+    "facing=south,part=end": {
+      "model": "create_dd:block/worm_gear/block_end",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,part=middle": {
+      "model": "create_dd:block/worm_gear/block_middle",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,part=single": {
+      "model": "create_dd:block/worm_gear/block_single",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,part=start": {
+      "model": "create_dd:block/worm_gear/block_start",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,part=end": {
+      "model": "create_dd:block/worm_gear/block_end"
+    },
+    "facing=up,part=middle": {
+      "model": "create_dd:block/worm_gear/block_middle"
+    },
+    "facing=up,part=single": {
+      "model": "create_dd:block/worm_gear/block_single"
+    },
+    "facing=up,part=start": {
+      "model": "create_dd:block/worm_gear/block_start"
+    },
+    "facing=west,part=end": {
+      "model": "create_dd:block/worm_gear/block_end_flipped",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,part=middle": {
+      "model": "create_dd:block/worm_gear/block_middle_flipped",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,part=single": {
+      "model": "create_dd:block/worm_gear/block_single_flipped",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,part=start": {
+      "model": "create_dd:block/worm_gear/block_start_flipped",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

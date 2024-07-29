@@ -1,0 +1,6 @@
+{
+  "parent": "create_dd:block/worm_gear/block_middle",
+  "textures": {
+    "2": "create_dd:block/worm_gear_flipped"
+  }
+}

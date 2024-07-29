@@ -24,6 +24,7 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.content.blocks.functional.VelvetBlock;
 
 import static com.simibubi.create.foundation.data.CreateRegistrate.casingConnectivity;
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
@@ -31,8 +32,7 @@ import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 import static com.tterrag.registrate.providers.RegistrateRecipeProvider.has;
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 import static uwu.lopyluna.create_dd.registry.DesiresTags.optionalTag;
-import static uwu.lopyluna.create_dd.registry.helper.BlockTransformer.blueprintBlocks;
-import static uwu.lopyluna.create_dd.registry.helper.BlockTransformer.rubber_decor;
+import static uwu.lopyluna.create_dd.registry.helper.BlockTransformer.*;
 
 @SuppressWarnings({"unused", "deprecation"})
 public class DesiresPaletteBlocks {
@@ -348,6 +348,25 @@ public class DesiresPaletteBlocks {
 					.tag(rawRubberDecorTag, stairsItemTag)
 					.build()
 					.register();
+
+	public static final BlockEntry<VelvetBlock>
+			BLACK_VELVET_BLOCK = velvetBlock("black", MaterialColor.COLOR_BLACK, Items.BLACK_DYE),
+			WHITE_VELVET_BLOCK = velvetBlock("white", MaterialColor.SNOW, Items.WHITE_DYE),
+			BLUE_VELVET_BLOCK = velvetBlock("blue", MaterialColor.COLOR_BLUE, Items.BLUE_DYE),
+			LIGHT_BLUE_VELVET_BLOCK = velvetBlock("light_blue", MaterialColor.COLOR_LIGHT_BLUE, Items.LIGHT_BLUE_DYE),
+			RED_VELVET_BLOCK = velvetBlock("red", MaterialColor.COLOR_RED, Items.RED_DYE),
+			GREEN_VELVET_BLOCK = velvetBlock("green", MaterialColor.COLOR_GREEN, Items.GREEN_DYE),
+			LIME_VELVET_BLOCK = velvetBlock("lime", MaterialColor.COLOR_LIGHT_GREEN, Items.LIME_DYE),
+			PINK_VELVET_BLOCK = velvetBlock("pink", MaterialColor.COLOR_PINK, Items.PINK_DYE),
+			MAGENTA_VELVET_BLOCK = velvetBlock("magenta", MaterialColor.COLOR_MAGENTA, Items.MAGENTA_DYE),
+			YELLOW_VELVET_BLOCK = velvetBlock("yellow", MaterialColor.COLOR_YELLOW, Items.YELLOW_DYE),
+			GRAY_VELVET_BLOCK = velvetBlock("gray", MaterialColor.COLOR_GRAY, Items.GRAY_DYE),
+			LIGHT_GRAY_VELVET_BLOCK = velvetBlock("light_gray", MaterialColor.COLOR_LIGHT_GRAY, Items.LIGHT_GRAY_DYE),
+			BROWN_VELVET_BLOCK = velvetBlock("brown", MaterialColor.COLOR_BROWN, Items.BROWN_DYE),
+			CYAN_VELVET_BLOCK = velvetBlock("cyan", MaterialColor.COLOR_CYAN, Items.CYAN_DYE),
+			PURPLE_VELVET_BLOCK = velvetBlock("purple", MaterialColor.COLOR_PURPLE, Items.PURPLE_DYE),
+			ORANGE_VELVET_BLOCK = velvetBlock("orange", MaterialColor.COLOR_ORANGE, Items.ORANGE_DYE);
+	;
 
 	public static final BlockEntry<Block>
 			BLACK_RUBBER_BLOCKS = rubber_decor("black", MaterialColor.COLOR_BLACK, Items.BLACK_DYE),
