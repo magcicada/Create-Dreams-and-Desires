@@ -25,6 +25,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 import uwu.lopyluna.create_dd.content.items.equipment.BackTankPickaxeItem;
+import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
 import uwu.lopyluna.create_dd.infrastructure.utility.BoreMining;
 import uwu.lopyluna.create_dd.registry.DesiresItems;
 import uwu.lopyluna.create_dd.registry.DesiresTags;
@@ -60,7 +61,7 @@ public class ExcavationDrillItem extends BackTankPickaxeItem {
 
     public static void destroyVein(Level pLevel, BlockState state, BlockPos pos,
                                    Player player) {
-        boolean playerHeldShift = player.isShiftKeyDown();
+        boolean playerHeldShift = DesiresConfigs.client().invertExcavationDrillFunction.get() != player.isShiftKeyDown();
 
         if (veinExcavating || !(state.is(DesiresTags.forgeBlockTag("ores"))) || !playerHeldShift)
             return;
@@ -90,7 +91,7 @@ public class ExcavationDrillItem extends BackTankPickaxeItem {
     @SubscribeEvent
     public static void onBlockDestroyed(BlockEvent.BreakEvent event) {
         Player player = event.getPlayer();
-        boolean playerHeldShift = player.isShiftKeyDown();
+        boolean playerHeldShift = DesiresConfigs.client().invertExcavationDrillFunction.get() != player.isShiftKeyDown();
         Level level = (Level) event.getLevel();
         ItemStack heldItemMainhand = event.getPlayer().getItemInHand(InteractionHand.MAIN_HAND);
         BlockPos blockPos = event.getPos();

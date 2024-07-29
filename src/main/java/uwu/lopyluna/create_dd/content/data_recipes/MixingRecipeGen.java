@@ -2,18 +2,17 @@ package uwu.lopyluna.create_dd.content.data_recipes;
 
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.content.processing.recipe.HeatCondition;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Items;
 import uwu.lopyluna.create_dd.registry.DesiresFluids;
 import uwu.lopyluna.create_dd.registry.DesiresItems;
 
-@SuppressWarnings({"all"})
+@SuppressWarnings({"unused"})
 public class MixingRecipeGen extends DesireProcessingRecipeGen {
 
     GeneratedRecipe
             RAW_RUBBER = create("raw_rubber", b -> b
-            .require(DesiresFluids.SAP.get(), 500)
+            .require(DesiresFluids.SAP.get(), 1000)
             .output(DesiresItems.RAW_RUBBER.get(), 1)),
 
             BURY_BLEND = create("bury_blend", b -> b

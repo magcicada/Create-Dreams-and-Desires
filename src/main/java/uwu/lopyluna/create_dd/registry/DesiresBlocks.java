@@ -237,7 +237,7 @@ public class DesiresBlocks {
 			.properties(p -> p.noOcclusion().color(MaterialColor.PODZOL))
 			.transform(BlockStressDefaults.setNoImpact())
 			.transform(axeOrPickaxe())
-			.blockstate((c, p) -> AssetLookup.partialBaseModel(c, p))
+			.blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.partialBaseModel(ctx, prov)))
 			.item()
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.transform(customItemModel())

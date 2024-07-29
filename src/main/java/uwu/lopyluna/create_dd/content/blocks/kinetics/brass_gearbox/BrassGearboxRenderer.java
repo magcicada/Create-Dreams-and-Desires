@@ -13,8 +13,8 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import uwu.lopyluna.create_dd.registry.DesiresPartialModels;
 
 public class BrassGearboxRenderer extends KineticBlockEntityRenderer<BrassGearboxBlockEntity> {
     public BrassGearboxRenderer(BlockEntityRendererProvider.Context context) {
@@ -25,12 +25,47 @@ public class BrassGearboxRenderer extends KineticBlockEntityRenderer<BrassGearbo
     protected void renderSafe(BrassGearboxBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
                               int light, int overlay) {
         super.renderSafe(be, partialTicks, ms, buffer, light, overlay);
-        if (Backend.canUseInstancing(be.getLevel()))
-            return;
 
         BlockState blockState = be.getBlockState();
-        Block block = blockState.getBlock();
-        if (!(block instanceof IRotate def))
+
+        if (!blockState.getValue(BrassGearboxBlock.UP_SHAFT)) {
+            CachedBufferer.partial(DesiresPartialModels.TOP_BRASS_PANEL, be.getBlockState())
+                .light(light)
+                .renderInto(ms, buffer.getBuffer(RenderType.solid())
+                );
+        }
+        if (!blockState.getValue(BrassGearboxBlock.DOWN_SHAFT)) {
+            CachedBufferer.partial(DesiresPartialModels.BOTTOM_BRASS_PANEL, be.getBlockState())
+                .light(light)
+                .renderInto(ms, buffer.getBuffer(RenderType.solid())
+                );
+        }
+        if (!blockState.getValue(BrassGearboxBlock.NORTH_SHAFT)) {
+            CachedBufferer.partial(DesiresPartialModels.NORTH_BRASS_PANEL, be.getBlockState())
+                .light(light)
+                .renderInto(ms, buffer.getBuffer(RenderType.solid())
+                );
+        }
+        if (!blockState.getValue(BrassGearboxBlock.EAST_SHAFT)) {
+            CachedBufferer.partial(DesiresPartialModels.EAST_BRASS_PANEL, be.getBlockState())
+                .light(light)
+                .renderInto(ms, buffer.getBuffer(RenderType.solid())
+                );
+        }
+        if (!blockState.getValue(BrassGearboxBlock.SOUTH_SHAFT)) {
+            CachedBufferer.partial(DesiresPartialModels.SOUTH_BRASS_PANEL, be.getBlockState())
+                .light(light)
+                .renderInto(ms, buffer.getBuffer(RenderType.solid())
+                );
+        }
+        if (!blockState.getValue(BrassGearboxBlock.WEST_SHAFT)) {
+            CachedBufferer.partial(DesiresPartialModels.WEST_BRASS_PANEL, be.getBlockState())
+                .light(light)
+                .renderInto(ms, buffer.getBuffer(RenderType.solid())
+                );
+        }
+
+        if (Backend.canUseInstancing(be.getLevel()))
             return;
 
         Direction.Axis axisX =  Direction.Axis.X;
@@ -41,7 +76,8 @@ public class BrassGearboxRenderer extends KineticBlockEntityRenderer<BrassGearbo
         float angleY = getAngleForTe(be, pos, axisY);
         float angleZ = getAngleForTe(be, pos, axisZ);
 
-
+        if (!(blockState.getBlock() instanceof IRotate def))
+            return;
         for (Direction d : Iterate.directions) {
             if (!def.hasShaftTowards(be.getLevel(), be.getBlockPos(), blockState, d))
                 continue;
@@ -55,6 +91,5 @@ public class BrassGearboxRenderer extends KineticBlockEntityRenderer<BrassGearbo
 
             shaft.renderInto(ms, buffer.getBuffer(RenderType.solid()));
         }
-
     }
 }

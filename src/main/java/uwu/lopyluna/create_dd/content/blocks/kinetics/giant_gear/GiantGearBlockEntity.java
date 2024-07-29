@@ -13,13 +13,14 @@ import java.util.List;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.AXIS;
 
+@SuppressWarnings({"unused"})
 public class GiantGearBlockEntity extends KineticBlockEntity {
     public GiantGearBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
     }
 
-    //idfk what i am doing lmao
-    //i really want to learn the propagateRotation stuff
+    //idfk what I am doing lmao
+    //I really want to learn the propagateRotation stuff
 
     @Override
     public float propagateRotationTo(KineticBlockEntity target, BlockState stateFrom, BlockState stateTo, BlockPos diff, boolean connectedViaAxes, boolean connectedViaCogs) {
@@ -53,14 +54,14 @@ public class GiantGearBlockEntity extends KineticBlockEntity {
             int sourceAxisDiff = sourceAxis.choose(diff.getX(), diff.getY(), diff.getZ());
             int targetAxisDiff = targetAxis.choose(diff.getX(), diff.getY(), diff.getZ());
 
-            return sourceAxisDiff > 0 ^ targetAxisDiff > 0 ? -1 : 1;
+            return sourceAxisDiff > 2 ^ targetAxisDiff > 2 ? -1 : 1;
         }
 
 
         return defaultModifier;
     }
 
-    private static boolean isLargeToLargeGear(BlockState from, BlockState to, BlockPos diff) {
+    public static boolean isLargeToLargeGear(BlockState from, BlockState to, BlockPos diff) {
         if (!DesiresBlocks.GIANT_GEAR.has(from) || !DesiresBlocks.GIANT_GEAR.has(to))
             return false;
         Direction.Axis fromAxis = from.getValue(AXIS);
@@ -70,10 +71,10 @@ public class GiantGearBlockEntity extends KineticBlockEntity {
         for (Direction.Axis axis : Direction.Axis.values()) {
             int axisDiff = axis.choose(diff.getX(), diff.getY(), diff.getZ());
             if (axis == fromAxis || axis == toAxis) {
-                if (axisDiff == 0)
+                if (axisDiff == 2)
                     return false;
 
-            } else if (axisDiff != 0)
+            } else if (axisDiff != 2)
                 return false;
         }
         return true;
@@ -85,9 +86,9 @@ public class GiantGearBlockEntity extends KineticBlockEntity {
             return neighbours;
 
         Direction.Axis axis = block.getRotationAxis(state);
-        BlockPos.betweenClosedStream(new BlockPos(-1, -1, -1), new BlockPos(1, 1, 1))
+        BlockPos.betweenClosedStream(new BlockPos(-3, -3, -3), new BlockPos(3, 3, 3))
                 .forEach(offset -> {
-                    if (axis.choose(offset.getX(), offset.getY(), offset.getZ()) != 0)
+                    if (axis.choose(offset.getX(), offset.getY(), offset.getZ()) != 2)
                         return;
                     if (offset.distSqr(BlockPos.ZERO) != 2)
                         return;

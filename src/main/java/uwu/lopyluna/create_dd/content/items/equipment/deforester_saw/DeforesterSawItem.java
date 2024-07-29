@@ -5,7 +5,6 @@ import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import com.simibubi.create.foundation.utility.VecHelper;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
@@ -23,6 +22,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 import uwu.lopyluna.create_dd.content.items.equipment.BackTankAxeItem;
+import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
 import uwu.lopyluna.create_dd.registry.DesiresItems;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -45,7 +45,7 @@ public class DeforesterSawItem extends BackTankAxeItem {
     // Moved away from Item#onBlockDestroyed as it does not get called in Creative
     public static void destroyTree(Level pLevel, BlockState state, BlockPos pos,
                                    Player player) {
-        boolean playerHeldShift = player.isShiftKeyDown();
+        boolean playerHeldShift = DesiresConfigs.client().invertDeforesterSawFunction.get() != player.isShiftKeyDown();
 
         if (deforesting || !(state.is(BlockTags.LOGS) || AllTags.AllBlockTags.SLIMY_LOGS.matches(state)) || !playerHeldShift)
             return;

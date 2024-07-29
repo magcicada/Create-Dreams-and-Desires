@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
 
 public class ExcavationDrillRenderer extends CustomRenderedItemModelRenderer {
     protected static final PartialModel ITEM = new PartialModel(DesiresCreate.asResource("item/excavation_drill/item"));
@@ -28,7 +29,7 @@ public class ExcavationDrillRenderer extends CustomRenderedItemModelRenderer {
                           PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
         Minecraft mc = Minecraft.getInstance();
         boolean playerHeldAttack = mc.options.keyAttack.isDown();
-        boolean playerHeldShift = mc.options.keyShift.isDown();
+        boolean playerHeldShift = DesiresConfigs.client().invertExcavationDrillFunction.get() != mc.options.keyShift.isDown();
         TransformStack stacker = TransformStack.cast(ms);
         float worldTime = AnimationTickHolder.getRenderTime();
         renderer.render(ITEM.get(), light);

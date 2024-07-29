@@ -1,12 +1,18 @@
 package uwu.lopyluna.create_dd.infrastructure.config;
 
 import com.simibubi.create.foundation.config.ConfigBase;
-import com.simibubi.create.foundation.config.ui.ConfigAnnotations;
 
+@SuppressWarnings({"unused"})
 public class DClient extends ConfigBase {
 
 	public final ConfigGroup client = group(0, "client",
 			Comments.client);
+
+	public final ConfigGroup equipments = group(1, "equipments", Comments.equipments);
+	public final ConfigBool invertDeforesterSawFunction = b(false, "invertDeforesterSawFunction",
+			Comments.invertDeforesterSawFunction);
+	public final ConfigBool invertExcavationDrillFunction = b(false, "invertExcavationDrillFunction",
+			Comments.invertDeforesterSawFunction);
 
 	// custom fluid fog
 	public final ConfigGroup fluidFogSettings = group(1, "fluidFogSettings", Comments.fluidFogSettings);
@@ -25,9 +31,17 @@ public class DClient extends ConfigBase {
 	private static class Comments {
 		static String client = "Client-only settings - If you're looking for general settings, look inside your worlds serverconfig folder!";
 
-		static String ponder = "Ponder settings";
+
+		static String equipments = "Configure Equipment settings";
+		static String invertDeforesterSawFunction = "Invert Deforester Saw activation function";
+		static String invertExcavationDrillFunction = "Invert Excavation Drill activation function";
+
+
 		static String fluidFogSettings = "Configure your vision range when submerged in Create Dream n' Desire's custom fluids";
 		static String sapTransparencyMultiplier = "The vision range through honey will be multiplied by this factor";
+
+
+		static String ponder = "Ponder settings";
 	}
 
 }

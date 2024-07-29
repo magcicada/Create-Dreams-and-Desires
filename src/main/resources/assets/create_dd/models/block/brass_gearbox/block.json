@@ -3,7 +3,7 @@
 	"parent": "block/block",
 	"textures": {
 		"1": "create:block/brass_gearbox",
-		"particle": "create:block/brass_casing_connected"
+		"particle": "create:block/brass_casing"
 	},
 	"elements": [
 		{

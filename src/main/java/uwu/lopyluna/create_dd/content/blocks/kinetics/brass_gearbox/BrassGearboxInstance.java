@@ -1,19 +1,19 @@
 package uwu.lopyluna.create_dd.content.blocks.kinetics.brass_gearbox;
 
 import com.jozufozu.flywheel.api.InstanceData;
-import com.jozufozu.flywheel.api.Instancer;
-import com.jozufozu.flywheel.api.Material;
 import com.jozufozu.flywheel.api.MaterialManager;
+import com.jozufozu.flywheel.core.Materials;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityInstance;
 import com.simibubi.create.content.kinetics.base.flwdata.RotatingData;
+import com.simibubi.create.foundation.render.AllMaterialSpecs;
 import com.simibubi.create.foundation.utility.Iterate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import uwu.lopyluna.create_dd.registry.DesiresPartialModels;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -29,15 +29,38 @@ public class BrassGearboxInstance extends KineticBlockEntityInstance<BrassGearbo
 
         keys = new EnumMap<>(Direction.class);
 
-        Block block = blockState.getBlock();
-        if (!(block instanceof IRotate def))
-            return;
-
         int blockLight = world.getBrightness(LightLayer.BLOCK, pos);
         int skyLight = world.getBrightness(LightLayer.SKY, pos);
-        updateSourceFacing();
+        updateSourceFacing(blockEntity);
 
-        Material<RotatingData> rotatingMaterial = getRotatingMaterial();
+        if (!blockState.getValue(BrassGearboxBlock.UP_SHAFT)) materialManager.defaultSolid().material(Materials.TRANSFORMED)
+                .getModel(DesiresPartialModels.TOP_BRASS_PANEL, blockState).createInstance()
+                .setBlockLight(blockLight)
+                .setSkyLight(blockLight);
+        if (!blockState.getValue(BrassGearboxBlock.DOWN_SHAFT)) materialManager.defaultSolid().material(Materials.TRANSFORMED)
+                .getModel(DesiresPartialModels.BOTTOM_BRASS_PANEL, blockState).createInstance()
+                .setBlockLight(blockLight)
+                .setSkyLight(blockLight);
+        if (!blockState.getValue(BrassGearboxBlock.NORTH_SHAFT)) materialManager.defaultSolid().material(Materials.TRANSFORMED)
+                .getModel(DesiresPartialModels.NORTH_BRASS_PANEL, blockState).createInstance()
+                .setBlockLight(blockLight)
+                .setSkyLight(blockLight);
+        if (!blockState.getValue(BrassGearboxBlock.EAST_SHAFT)) materialManager.defaultSolid().material(Materials.TRANSFORMED)
+                .getModel(DesiresPartialModels.EAST_BRASS_PANEL, blockState).createInstance()
+                .setBlockLight(blockLight)
+                .setSkyLight(blockLight);
+        if (!blockState.getValue(BrassGearboxBlock.SOUTH_SHAFT)) materialManager.defaultSolid().material(Materials.TRANSFORMED)
+                .getModel(DesiresPartialModels.SOUTH_BRASS_PANEL, blockState).createInstance()
+                .setBlockLight(blockLight)
+                .setSkyLight(blockLight);
+        if (!blockState.getValue(BrassGearboxBlock.WEST_SHAFT)) materialManager.defaultSolid().material(Materials.TRANSFORMED)
+                .getModel(DesiresPartialModels.WEST_BRASS_PANEL, blockState).createInstance()
+                .setBlockLight(blockLight)
+                .setSkyLight(blockLight);
+
+        Block block = blockEntity.getBlockState().getBlock();
+        if (!(block instanceof IRotate def))
+            return;
 
         for (Direction d : Iterate.directions) {
             final Direction.Axis axis = d.getAxis();
@@ -45,26 +68,22 @@ public class BrassGearboxInstance extends KineticBlockEntityInstance<BrassGearbo
             if (!def.hasShaftTowards(blockEntity.getLevel(), blockEntity.getBlockPos(), blockState, d))
                 continue;
 
-            Instancer<RotatingData> shaft = rotatingMaterial.getModel(AllPartialModels.SHAFT_HALF, blockState, d);
-            RotatingData key = shaft.createInstance();
+            RotatingData key = materialManager.defaultSolid().material(AllMaterialSpecs.ROTATING)
+                    .getModel(AllPartialModels.SHAFT_HALF, blockState, d).createInstance();
+
             key.setRotationAxis(Direction.get(Direction.AxisDirection.POSITIVE, axis).step())
-                    .setRotationalSpeed(getSpeed(d))
-                    .setRotationOffset(getRotationOffset(axis)).setColor(blockEntity)
+                    .setRotationalSpeed(getSpeed(d, blockEntity))
+                    .setRotationOffset(getRotationOffset(axis))
                     .setPosition(getInstancePosition())
                     .setBlockLight(blockLight)
                     .setSkyLight(skyLight);
+
             keys.put(d, key);
-            //if (d == Direction.UP) keys.put(d, key);
-            //if (d == Direction.DOWN) keys.put(d, key);
-            //if (d == Direction.NORTH) keys.put(d, key);
-            //if (d == Direction.EAST) keys.put(d, key);
-            //if (d == Direction.SOUTH) keys.put(d, key);
-            //if (d == Direction.WEST) keys.put(d, key);
         }
     }
 
 
-    private float getSpeed(Direction direction) {
+    private float getSpeed(Direction direction, BrassGearboxBlockEntity blockEntity) {
         float speed = blockEntity.getSpeed();
 
         if (speed != 0 && sourceFacing != null) {
@@ -76,11 +95,10 @@ public class BrassGearboxInstance extends KineticBlockEntityInstance<BrassGearbo
         return speed;
     }
 
-    protected void updateSourceFacing() {
+    protected void updateSourceFacing(BrassGearboxBlockEntity blockEntity) {
         if (blockEntity.hasSource()) {
-            assert blockEntity.source != null;
-            BlockPos source = blockEntity.source.subtract(pos);
-            sourceFacing = Direction.getNearest(source.getX(), source.getY(), source.getZ());
+            BlockPos source = blockEntity.source != null ? blockEntity.source.subtract(pos) : null;
+            sourceFacing = source != null ? Direction.getNearest(source.getX(), source.getY(), source.getZ()) : null;
         } else {
             sourceFacing = null;
         }
@@ -88,12 +106,12 @@ public class BrassGearboxInstance extends KineticBlockEntityInstance<BrassGearbo
 
     @Override
     public void update() {
-        updateSourceFacing();
+        updateSourceFacing(blockEntity);
         for (Map.Entry<Direction, RotatingData> key : keys.entrySet()) {
             Direction direction = key.getKey();
             Direction.Axis axis = direction.getAxis();
 
-            updateRotation(key.getValue(), axis, getSpeed(direction));
+            updateRotation(key.getValue(), axis, getSpeed(direction, blockEntity));
         }
     }
 

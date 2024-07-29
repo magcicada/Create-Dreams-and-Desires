@@ -9,6 +9,9 @@ import uwu.lopyluna.create_dd.registry.DesiresFluids;
 import uwu.lopyluna.create_dd.registry.DesiresItems;
 import uwu.lopyluna.create_dd.registry.DesiresRecipeTypes;
 
+import static uwu.lopyluna.create_dd.registry.DTags.tag;
+
+@SuppressWarnings({"unused"})
 public class HydraulicCompactingRecipeGen extends DesireProcessingRecipeGen {
     public HydraulicCompactingRecipeGen(DataGenerator generator) {
         super(generator);
@@ -16,8 +19,15 @@ public class HydraulicCompactingRecipeGen extends DesireProcessingRecipeGen {
     GeneratedRecipe RAW_RUBBER = create("raw_rubber_from_sap", b -> b
             .requiresHeat(HeatCondition.HEATED)
             .require(DesiresFluids.SAP.get(), 500)
-            .output(DesiresItems.RAW_RUBBER.get(), 1)
+            .output(DesiresItems.RAW_RUBBER.get(), 2)
     );
+
+    GeneratedRecipe SAP = create("sap_from_logs", b -> b
+            .requiresHeat(HeatCondition.HEATED)
+            .require(tag("item", "forge", "stripped_logs"), 500)
+            .output(DesiresFluids.SAP.get(), 500)
+    );
+
     GeneratedRecipe TUFF = create("tuff_from_gravel", b -> b
             .requiresHeat(HeatCondition.SUPERHEATED)
             .require(Items.GRAVEL)
