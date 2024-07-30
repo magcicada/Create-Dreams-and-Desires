@@ -13,6 +13,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
+@SuppressWarnings("deprecation")
 public class VelvetBlock extends Block {
     public VelvetBlock(Properties pProperties) {
         super(pProperties);
@@ -20,7 +21,7 @@ public class VelvetBlock extends Block {
 
     @Override
     public void fallOn(Level pLevel, BlockState pState, BlockPos pPos, Entity pEntity, float pFallDistance) {
-        super.fallOn(pLevel, pState, pPos, pEntity, pFallDistance * 0.25F);
+        super.fallOn(pLevel, pState, pPos, pEntity, pFallDistance * 0.1F);
     }
 
 

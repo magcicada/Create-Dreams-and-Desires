@@ -22,9 +22,15 @@ public class HydraulicCompactingRecipeGen extends DesireProcessingRecipeGen {
             .output(DesiresItems.RAW_RUBBER.get(), 2)
     );
 
-    GeneratedRecipe SAP = create("sap_from_logs", b -> b
+    GeneratedRecipe SAP_LOGS = create("sap_from_logs", b -> b
             .requiresHeat(HeatCondition.HEATED)
-            .require(tag("item", "forge", "stripped_logs"), 500)
+            .require(tag("item", "forge", "stripped_logs"), 2)
+            .output(DesiresFluids.SAP.get(), 500)
+    );
+
+    GeneratedRecipe SAP_WOOD = create("sap_from_wood", b -> b
+            .requiresHeat(HeatCondition.HEATED)
+            .require(tag("item", "forge", "stripped_wood"), 1)
             .output(DesiresFluids.SAP.get(), 500)
     );
 

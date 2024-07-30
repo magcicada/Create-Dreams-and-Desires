@@ -61,7 +61,7 @@ public class ExcavationDrillItem extends BackTankPickaxeItem {
 
     public static void destroyVein(Level pLevel, BlockState state, BlockPos pos,
                                    Player player) {
-        boolean playerHeldShift = DesiresConfigs.client().invertExcavationDrillFunction.get() != player.isShiftKeyDown();
+        boolean playerHeldShift = pLevel.isClientSide() ? DesiresConfigs.client().invertDeforesterSawFunction.get() != player.isShiftKeyDown() : player.isShiftKeyDown();
 
         if (veinExcavating || !(state.is(DesiresTags.forgeBlockTag("ores"))) || !playerHeldShift)
             return;
@@ -91,7 +91,7 @@ public class ExcavationDrillItem extends BackTankPickaxeItem {
     @SubscribeEvent
     public static void onBlockDestroyed(BlockEvent.BreakEvent event) {
         Player player = event.getPlayer();
-        boolean playerHeldShift = DesiresConfigs.client().invertExcavationDrillFunction.get() != player.isShiftKeyDown();
+        boolean playerHeldShift = player.getLevel().isClientSide() ? DesiresConfigs.client().invertDeforesterSawFunction.get() != player.isShiftKeyDown() : player.isShiftKeyDown();
         Level level = (Level) event.getLevel();
         ItemStack heldItemMainhand = event.getPlayer().getItemInHand(InteractionHand.MAIN_HAND);
         BlockPos blockPos = event.getPos();

@@ -8,7 +8,6 @@ import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
 import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.world.item.ItemStack;
@@ -29,7 +28,8 @@ public class ExcavationDrillRenderer extends CustomRenderedItemModelRenderer {
                           PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
         Minecraft mc = Minecraft.getInstance();
         boolean playerHeldAttack = mc.options.keyAttack.isDown();
-        boolean playerHeldShift = DesiresConfigs.client().invertExcavationDrillFunction.get() != mc.options.keyShift.isDown();
+        assert mc.level != null;
+        boolean playerHeldShift = mc.level.isClientSide() ? DesiresConfigs.client().invertExcavationDrillFunction.get() != mc.options.keyShift.isDown() : mc.options.keyShift.isDown();
         TransformStack stacker = TransformStack.cast(ms);
         float worldTime = AnimationTickHolder.getRenderTime();
         renderer.render(ITEM.get(), light);

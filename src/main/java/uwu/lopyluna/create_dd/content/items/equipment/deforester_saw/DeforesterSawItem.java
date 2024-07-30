@@ -45,7 +45,7 @@ public class DeforesterSawItem extends BackTankAxeItem {
     // Moved away from Item#onBlockDestroyed as it does not get called in Creative
     public static void destroyTree(Level pLevel, BlockState state, BlockPos pos,
                                    Player player) {
-        boolean playerHeldShift = DesiresConfigs.client().invertDeforesterSawFunction.get() != player.isShiftKeyDown();
+        boolean playerHeldShift = pLevel.isClientSide() ? DesiresConfigs.client().invertDeforesterSawFunction.get() != player.isShiftKeyDown() : player.isShiftKeyDown();
 
         if (deforesting || !(state.is(BlockTags.LOGS) || AllTags.AllBlockTags.SLIMY_LOGS.matches(state)) || !playerHeldShift)
             return;

@@ -1,5 +1,6 @@
 package uwu.lopyluna.create_dd.registry.helper;
 
+import com.simibubi.create.AllTags;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
 import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
@@ -45,6 +46,7 @@ public class BlockTransformer {
                 .properties(p -> p.color(mapColor)).properties(p -> p.sound(SoundType.WOOL))
                 .properties(p -> p.strength(0.5f,1.5f))
                 .blockstate((c, p) -> p.simpleBlock(c.get(), p.models().cubeAll(c.getName(), new ResourceLocation(Create.ID, "block/seat/top_" + colorId))))
+                .tag(AllTags.AllBlockTags.WINDMILL_SAILS.tag)
                 .item()
                 .build()
                 .register();

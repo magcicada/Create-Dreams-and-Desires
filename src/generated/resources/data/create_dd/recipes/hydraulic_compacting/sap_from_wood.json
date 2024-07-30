@@ -3,8 +3,8 @@
   "heatRequirement": "heated",
   "ingredients": [
     {
-      "amount": 2,
-      "fluidTag": "forge:stripped_logs"
+      "amount": 1,
+      "fluidTag": "forge:stripped_wood"
     }
   ],
   "results": [

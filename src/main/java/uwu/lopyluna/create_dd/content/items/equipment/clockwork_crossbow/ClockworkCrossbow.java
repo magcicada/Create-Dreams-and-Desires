@@ -19,6 +19,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.event.ForgeEventFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
 import uwu.lopyluna.create_dd.registry.DesiresItems;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -28,6 +29,8 @@ import java.util.function.Predicate;
 @ParametersAreNonnullByDefault
 @SuppressWarnings({"unused"})
 public class ClockworkCrossbow extends ProjectileWeaponItem implements Vanishable {
+
+    private static boolean isPlayerCreative = false;
 
     private static final String currentTicksInShots = "currentTicksInShots";
     private static final String currentTicksInReloadShots = "currentTicksInReloadShots";
@@ -75,6 +78,7 @@ public class ClockworkCrossbow extends ProjectileWeaponItem implements Vanishabl
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
         Player pPlayer = (Player)pEntity;
+        isPlayerCreative = pPlayer.isCreative();
         if (!pPlayer.isSpectator()) {
             ItemStack pProjectile = getProjectile(pPlayer, pStack);
             boolean crossbowMainHand = DesiresItems.CLOCKWORK_CROSSBOW.isIn(pPlayer.getMainHandItem());
@@ -229,26 +233,28 @@ public class ClockworkCrossbow extends ProjectileWeaponItem implements Vanishabl
         int maxTicksInShots = maxTicksInShots(quickChargeLevel);
         int maxTicksInReloadShots = maxTicksInReloadShots(quickChargeLevel);
 
-        pTooltipComponents.add(Component.literal("inaccuracy " + (0.5F + ((getCurrentTotalShots(pStack) / 10.0F) / (((powerLevel * 0.55F) + 1.0F))))).withStyle(ChatFormatting.GOLD));
-        pTooltipComponents.add(Component.literal("velocity " + (1.0F + ((1.0F + (getCurrentTotalShots(pStack) / 2.0F)) * ((powerLevel * 0.35F) + 0.5F)))).withStyle(ChatFormatting.GOLD));
+        assert pLevel != null;
+        if (pLevel.isClientSide()) {
+            if (isPlayerCreative && DesiresConfigs.client().equipmentsDebug.get()) {
+                pTooltipComponents.add(Component.literal("inaccuracy " + (0.5F + ((getCurrentTotalShots(pStack) / 10.0F) / (((powerLevel * 0.55F) + 1.0F))))).withStyle(ChatFormatting.GOLD));
+                pTooltipComponents.add(Component.literal("velocity " + (1.0F + ((1.0F + (getCurrentTotalShots(pStack) / 2.0F)) * ((powerLevel * 0.35F) + 0.5F)))).withStyle(ChatFormatting.GOLD));
 
-        pTooltipComponents.add(Component.literal("maxTicksInShots " + maxTicksInShots).withStyle(ChatFormatting.GOLD));
-        pTooltipComponents.add(Component.literal("currentTicksInShots " + getCurrentTicksInShots(pStack)).withStyle(ChatFormatting.YELLOW));
-        pTooltipComponents.add(Component.literal("maxTicksInReloadShots " + maxTicksInReloadShots).withStyle(ChatFormatting.GOLD));
-        pTooltipComponents.add(Component.literal("currentTicksInReloadShots " + getCurrentTicksInReloadShots(pStack)).withStyle(ChatFormatting.YELLOW));
-        pTooltipComponents.add(Component.literal("maxTotalShots " + maxTotalShots).withStyle(ChatFormatting.GOLD));
-        pTooltipComponents.add(Component.literal("currentTotalShots " + getCurrentTotalShots(pStack)).withStyle(ChatFormatting.YELLOW));
-        pTooltipComponents.add(Component.literal("affirmativeShots " + isAffirmativeShots(pStack)).withStyle(ChatFormatting.DARK_AQUA));
-        pTooltipComponents.add(Component.literal("readyShots " + isReadyShots(pStack)).withStyle(ChatFormatting.DARK_PURPLE));
-        pTooltipComponents.add(Component.literal("maxCooldown " + maxCooldown).withStyle(ChatFormatting.GOLD));
-        pTooltipComponents.add(Component.literal("currentCooldown " + getCurrentCooldown(pStack)).withStyle(ChatFormatting.YELLOW));
-        pTooltipComponents.add(Component.literal("affirmativeCooldown " + isAffirmativeCooldown(pStack)).withStyle(ChatFormatting.DARK_AQUA));
-        pTooltipComponents.add(Component.literal("readyCooldown " + isReadyCooldown(pStack)).withStyle(ChatFormatting.DARK_PURPLE));
-        pTooltipComponents.add(Component.literal("isCurrentlyShooting " + isCurrentlyShooting(pStack)).withStyle(ChatFormatting.DARK_PURPLE));
-        pTooltipComponents.add(Component.literal("isDoneShooting " + isDoneShooting(pStack)).withStyle(ChatFormatting.DARK_AQUA));
-
-
-
+                pTooltipComponents.add(Component.literal("maxTicksInShots " + maxTicksInShots).withStyle(ChatFormatting.GOLD));
+                pTooltipComponents.add(Component.literal("currentTicksInShots " + getCurrentTicksInShots(pStack)).withStyle(ChatFormatting.YELLOW));
+                pTooltipComponents.add(Component.literal("maxTicksInReloadShots " + maxTicksInReloadShots).withStyle(ChatFormatting.GOLD));
+                pTooltipComponents.add(Component.literal("currentTicksInReloadShots " + getCurrentTicksInReloadShots(pStack)).withStyle(ChatFormatting.YELLOW));
+                pTooltipComponents.add(Component.literal("maxTotalShots " + maxTotalShots).withStyle(ChatFormatting.GOLD));
+                pTooltipComponents.add(Component.literal("currentTotalShots " + getCurrentTotalShots(pStack)).withStyle(ChatFormatting.YELLOW));
+                pTooltipComponents.add(Component.literal("affirmativeShots " + isAffirmativeShots(pStack)).withStyle(ChatFormatting.DARK_AQUA));
+                pTooltipComponents.add(Component.literal("readyShots " + isReadyShots(pStack)).withStyle(ChatFormatting.DARK_PURPLE));
+                pTooltipComponents.add(Component.literal("maxCooldown " + maxCooldown).withStyle(ChatFormatting.GOLD));
+                pTooltipComponents.add(Component.literal("currentCooldown " + getCurrentCooldown(pStack)).withStyle(ChatFormatting.YELLOW));
+                pTooltipComponents.add(Component.literal("affirmativeCooldown " + isAffirmativeCooldown(pStack)).withStyle(ChatFormatting.DARK_AQUA));
+                pTooltipComponents.add(Component.literal("readyCooldown " + isReadyCooldown(pStack)).withStyle(ChatFormatting.DARK_PURPLE));
+                pTooltipComponents.add(Component.literal("isCurrentlyShooting " + isCurrentlyShooting(pStack)).withStyle(ChatFormatting.DARK_PURPLE));
+                pTooltipComponents.add(Component.literal("isDoneShooting " + isDoneShooting(pStack)).withStyle(ChatFormatting.DARK_AQUA));
+            }
+        }
     }
 
     public @NotNull InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {

@@ -14,6 +14,10 @@ public class DClient extends ConfigBase {
 	public final ConfigBool invertExcavationDrillFunction = b(false, "invertExcavationDrillFunction",
 			Comments.invertDeforesterSawFunction);
 
+
+	public final ConfigBool equipmentsDebug = b(false, "equipmentsDebug",
+			Comments.equipmentsDebug);
+
 	// custom fluid fog
 	public final ConfigGroup fluidFogSettings = group(1, "fluidFogSettings", Comments.fluidFogSettings);
 	public final ConfigFloat sapTransparencyMultiplier =
@@ -35,6 +39,7 @@ public class DClient extends ConfigBase {
 		static String equipments = "Configure Equipment settings";
 		static String invertDeforesterSawFunction = "Invert Deforester Saw activation function";
 		static String invertExcavationDrillFunction = "Invert Excavation Drill activation function";
+		static String equipmentsDebug = "Debug Equipments (only works in Creative mode)";
 
 
 		static String fluidFogSettings = "Configure your vision range when submerged in Create Dream n' Desire's custom fluids";
