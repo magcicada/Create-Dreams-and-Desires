@@ -147,6 +147,8 @@
   "block.create_dd.hazard_block": "Hazard Block",
   "block.create_dd.hydraulic_casing": "Hydraulic Casing",
   "block.create_dd.hydraulic_press": "Hydraulic Press",
+  "block.create_dd.incomplete_large_water_wheel": "Incomplete Large Water Wheel",
+  "block.create_dd.incomplete_water_wheel": "Incomplete Water Wheel",
   "block.create_dd.industrial_casing": "Industrial Casing",
   "block.create_dd.industrial_fan": "Industrial Fan",
   "block.create_dd.inverse_box": "Inverse Box",

@@ -2,15 +2,15 @@
   "type": "create:item_application",
   "ingredients": [
     {
-      "item": "minecraft:pink_wool"
+      "item": "create:water_wheel"
     },
     {
-      "tag": "forge:nuggets/gold"
+      "tag": "minecraft:logs"
     }
   ],
   "results": [
     {
-      "item": "create_dd:pink_velvet_block"
+      "item": "create_dd:incomplete_large_water_wheel"
     }
   ]
 }

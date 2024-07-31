@@ -2,15 +2,15 @@
   "type": "create:item_application",
   "ingredients": [
     {
-      "item": "minecraft:cyan_wool"
+      "item": "create_dd:incomplete_water_wheel"
     },
     {
-      "tag": "forge:nuggets/gold"
+      "tag": "minecraft:logs"
     }
   ],
   "results": [
     {
-      "item": "create_dd:cyan_velvet_block"
+      "item": "create:water_wheel"
     }
   ]
 }

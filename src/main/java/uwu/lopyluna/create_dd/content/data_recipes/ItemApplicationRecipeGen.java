@@ -5,9 +5,9 @@ import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
-import uwu.lopyluna.create_dd.registry.DTags;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 import uwu.lopyluna.create_dd.registry.DesiresItems;
 import uwu.lopyluna.create_dd.registry.DesiresPaletteBlocks;
@@ -54,6 +54,46 @@ public class ItemApplicationRecipeGen extends DesireProcessingRecipeGen {
             .require(AllBlocks.LARGE_COGWHEEL.get()) //Block
             .require(forgeItemTag("nuggets/coal")) //Item to Apply
             .output(AllBlocks.COGWHEEL.get())); //Output
+
+    GeneratedRecipe INCOMPLETE_WATERWHEEL = create("incomplete_water_wheel", b -> b
+            .require(AllBlocks.SHAFT.get()) //Block
+            .require(ItemTags.LOGS) //Item to Apply
+            .output(DesiresBlocks.INCOMPLETE_WATER_WHEEL.get())); //Output
+
+    GeneratedRecipe WATERWHEEL = create("water_wheel", b -> b
+            .require(DesiresBlocks.INCOMPLETE_WATER_WHEEL.get()) //Block
+            .require(ItemTags.LOGS) //Item to Apply
+            .output(AllBlocks.WATER_WHEEL.get())); //Output
+
+    GeneratedRecipe INCOMPLETE_LARGE_WATERWHEEL = create("incomplete_large_water_wheel", b -> b
+            .require(AllBlocks.WATER_WHEEL.get()) //Block
+            .require(ItemTags.LOGS) //Item to Apply
+            .output(DesiresBlocks.INCOMPLETE_LARGE_WATER_WHEEL.get())); //Output
+
+    GeneratedRecipe LARGE_WATERWHEEL = create("large_water_wheel", b -> b
+            .require(DesiresBlocks.INCOMPLETE_LARGE_WATER_WHEEL.get()) //Block
+            .require(ItemTags.LOGS) //Item to Apply
+            .output(AllBlocks.LARGE_WATER_WHEEL.get())); //Output
+
+    GeneratedRecipe DOWNGRADE_INCOMPLETE_WATERWHEEL = create("incomplete_water_wheel", b -> b
+            .require(DesiresBlocks.INCOMPLETE_WATER_WHEEL.get()) //Block
+            .require(Items.COAL) //Item to Apply
+            .output(AllBlocks.SHAFT.get())); //Output
+
+    GeneratedRecipe DOWNGRADE_WATERWHEEL = create("water_wheel", b -> b
+            .require(AllBlocks.WATER_WHEEL.get()) //Block
+            .require(Items.COAL) //Item to Apply
+            .output(DesiresBlocks.INCOMPLETE_WATER_WHEEL.get())); //Output
+
+    GeneratedRecipe DOWNGRADE_INCOMPLETE_LARGE_WATERWHEEL = create("incomplete_large_water_wheel", b -> b
+            .require(DesiresBlocks.INCOMPLETE_LARGE_WATER_WHEEL.get()) //Block
+            .require(Items.COAL) //Item to Apply
+            .output(AllBlocks.WATER_WHEEL.get())); //Output
+
+    GeneratedRecipe DOWNGRADE_LARGE_WATERWHEEL = create("large_water_wheel", b -> b
+            .require(AllBlocks.LARGE_WATER_WHEEL.get()) //Block
+            .require(Items.COAL) //Item to Apply
+            .output(DesiresBlocks.INCOMPLETE_LARGE_WATER_WHEEL.get())); //Output
 
     GeneratedRecipe
         BLACK_VELVET_BLOCK = create("black_velvet_block", b -> b

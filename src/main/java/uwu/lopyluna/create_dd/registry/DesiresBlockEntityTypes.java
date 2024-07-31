@@ -97,6 +97,13 @@ public class DesiresBlockEntityTypes {
 			.renderer(() -> KineticBlockEntityRenderer::new)
 			.register();
 
+	public static final BlockEntityEntry<KineticBlockEntity> AXIS_BLOCK = REGISTRATE
+			.blockEntity("axis_block", KineticBlockEntity::new)
+			.instance(() -> CutoutRotatingInstance::new, false)
+			.validBlocks(DesiresBlocks.INCOMPLETE_WATER_WHEEL, DesiresBlocks.INCOMPLETE_LARGE_WATER_WHEEL)
+			.renderer(() -> KineticBlockEntityRenderer::new)
+			.register();
+
 	public static final BlockEntityEntry<MultiMeterBlockEntity> MULTIMETER = REGISTRATE
 			.blockEntity("multimeter", MultiMeterBlockEntity::new)
 			.instance(() -> ShaftInstance::new)
@@ -113,7 +120,7 @@ public class DesiresBlockEntityTypes {
 
 	public static final BlockEntityEntry<BrassGearboxBlockEntity> BRASS_GEARBOX = REGISTRATE
 			.blockEntity("brass_gearbox", BrassGearboxBlockEntity::new)
-			.instance(() -> BrassGearboxInstance::new, true)
+			.instance(() -> BrassGearboxInstance::new, false)
 			.validBlocks(DesiresBlocks.BRASS_GEARBOX)
 			.renderer(() -> BrassGearboxRenderer::new)
 			.register();

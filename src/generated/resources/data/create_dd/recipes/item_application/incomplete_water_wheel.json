@@ -2,15 +2,15 @@
   "type": "create:item_application",
   "ingredients": [
     {
-      "item": "minecraft:black_wool"
+      "item": "create:shaft"
     },
     {
-      "tag": "forge:nuggets/gold"
+      "tag": "minecraft:logs"
     }
   ],
   "results": [
     {
-      "item": "create_dd:black_velvet_block"
+      "item": "create_dd:incomplete_water_wheel"
     }
   ]
 }

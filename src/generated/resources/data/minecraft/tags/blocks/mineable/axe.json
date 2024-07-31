@@ -11,6 +11,8 @@
     "create_dd:kinetic_motor",
     "create_dd:cog_crank",
     "create_dd:worm_gear",
+    "create_dd:incomplete_water_wheel",
+    "create_dd:incomplete_large_water_wheel",
     "create_dd:splashing_sail",
     "create_dd:haunting_sail",
     "create_dd:smoking_sail",

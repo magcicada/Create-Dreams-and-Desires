@@ -37,6 +37,7 @@ import net.minecraftforge.common.util.ForgeSoundType;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.content.blocks.contraptions.bore_block.BoreBlock;
 import uwu.lopyluna.create_dd.content.blocks.contraptions.bore_block.BoreBlockMovementBehaviour;
+import uwu.lopyluna.create_dd.content.blocks.functional.AxisBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.brass_gearbox.BrassGearboxBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.multimeter.MultiMeterBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlock;
@@ -345,6 +346,7 @@ public class DesiresBlocks {
 					}))
 					.transform(BlockStressDefaults.setNoImpact())
 					.item()
+					.tab(() -> DesiresCreativeModeTabs.BETA_CREATIVE_TAB)
 					.transform(customItemModel("_", "block_single"))
 					.register();
 
@@ -391,6 +393,28 @@ public class DesiresBlocks {
 			.properties(p -> p.noOcclusion().sound(SoundType.METAL).color(MaterialColor.COLOR_YELLOW))
 			.transform(pickaxeOnly())
 			.lang("Giant Gear")
+			.register();
+
+	public static final BlockEntry<AxisBlock> INCOMPLETE_WATER_WHEEL = REGISTRATE.block("incomplete_water_wheel", AxisBlock::small)
+			.initialProperties(SharedProperties::wooden)
+			.properties(p -> p.noOcclusion().color(MaterialColor.DIRT))
+			.transform(axeOrPickaxe())
+			.blockstate(BlockStateGen.axisBlockProvider(true))
+			.addLayer(() -> RenderType::cutoutMipped)
+			.item()
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.transform(customItemModel())
+			.register();
+
+	public static final BlockEntry<AxisBlock> INCOMPLETE_LARGE_WATER_WHEEL = REGISTRATE.block("incomplete_large_water_wheel", AxisBlock::large)
+			.initialProperties(SharedProperties::wooden)
+			.properties(p -> p.noOcclusion().color(MaterialColor.DIRT))
+			.transform(axeOrPickaxe())
+			.blockstate(BlockStateGen.axisBlockProvider(true))
+			.addLayer(() -> RenderType::cutoutMipped)
+			.item()
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.transform(customItemModel())
 			.register();
 
 
