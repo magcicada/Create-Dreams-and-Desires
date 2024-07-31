@@ -23,13 +23,14 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import org.jetbrains.annotations.NotNull;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.registry.DesiresItems;
 import uwu.lopyluna.create_dd.registry.DesiresRecipeTypes;
 
 import java.util.function.Supplier;
 
-@SuppressWarnings({"unused", "deprecation", "all"})
+@SuppressWarnings({"unused", "deprecation"})
 public class SeethingRecipeGen extends DesireProcessingRecipeGen {
 
 	GeneratedRecipe
@@ -108,7 +109,7 @@ public class SeethingRecipeGen extends DesireProcessingRecipeGen {
 		return null;
 	}
 
-	protected static String getItemName(ItemLike pItemLike) {
+	protected static @NotNull String getItemName(ItemLike pItemLike) {
 		return Registry.ITEM.getKey(pItemLike.asItem()).getPath();
 	}
 
@@ -117,7 +118,7 @@ public class SeethingRecipeGen extends DesireProcessingRecipeGen {
 	}
 
 	@Override
-	protected DesiresRecipeTypes getRecipeType() {
+	protected @NotNull DesiresRecipeTypes getRecipeType() {
 		return DesiresRecipeTypes.SEETHING;
 	}
 

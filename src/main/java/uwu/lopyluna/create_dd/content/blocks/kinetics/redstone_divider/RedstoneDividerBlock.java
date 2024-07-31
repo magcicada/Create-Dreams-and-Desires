@@ -21,7 +21,7 @@ import uwu.lopyluna.create_dd.registry.DesiresBlockEntityTypes;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-@SuppressWarnings({"deprecation", "all"})
+@SuppressWarnings({"deprecation"})
 public class RedstoneDividerBlock extends AbstractEncasedShaftBlock implements IBE<RedstoneDividerBlockEntity> {
     public static final IntegerProperty POWER = BlockStateProperties.POWER;
 
@@ -73,7 +73,7 @@ public class RedstoneDividerBlock extends AbstractEncasedShaftBlock implements I
 
     public void detachKinetics(Level worldIn, BlockPos pos, boolean reAttachNextTick) {
         BlockEntity be = worldIn.getBlockEntity(pos);
-        if (be == null || !(be instanceof KineticBlockEntity))
+        if (!(be instanceof KineticBlockEntity))
             return;
         RotationPropagator.handleRemoved(worldIn, pos, (KineticBlockEntity) be);
 
@@ -85,9 +85,8 @@ public class RedstoneDividerBlock extends AbstractEncasedShaftBlock implements I
     @Override
     public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         BlockEntity be = worldIn.getBlockEntity(pos);
-        if (be == null || !(be instanceof KineticBlockEntity))
+        if (!(be instanceof KineticBlockEntity kte))
             return;
-        KineticBlockEntity kte = (KineticBlockEntity) be;
         RotationPropagator.handleAdded(worldIn, pos, kte);
     }
 }

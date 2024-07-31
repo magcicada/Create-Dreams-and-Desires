@@ -5,6 +5,7 @@ import com.simibubi.create.AllItems;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Items;
 import uwu.lopyluna.create_dd.DesiresCreate;
@@ -14,7 +15,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.UnaryOperator;
 
 @ParametersAreNonnullByDefault
-@SuppressWarnings({"unused", "all"})
+@MethodsReturnNonnullByDefault
+@SuppressWarnings({"unused"})
 public class SequencedAssemblyRecipeGen extends CreateRecipeProvider {
 
     GeneratedRecipe

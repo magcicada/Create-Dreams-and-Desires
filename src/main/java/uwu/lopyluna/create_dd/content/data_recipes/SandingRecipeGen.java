@@ -2,6 +2,7 @@ package uwu.lopyluna.create_dd.content.data_recipes;
 
 import com.simibubi.create.AllItems;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -13,6 +14,7 @@ import uwu.lopyluna.create_dd.registry.DesiresRecipeTypes;
 import java.util.function.Supplier;
 
 
+@MethodsReturnNonnullByDefault
 @SuppressWarnings({"unused"})
 public class SandingRecipeGen extends DesireProcessingRecipeGen {
 
@@ -56,7 +58,6 @@ public class SandingRecipeGen extends DesireProcessingRecipeGen {
 
 			POLISHED_ROSE_QUARTZ = convert(AllItems.ROSE_QUARTZ, AllItems.POLISHED_ROSE_QUARTZ);
 
-	;
 
 	public GeneratedRecipe convert(Block block, Block result) {
 		return create(() -> block, b -> b.output(result));

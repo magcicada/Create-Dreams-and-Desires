@@ -10,6 +10,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTank
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.LangBuilder;
 import net.minecraft.ChatFormatting;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -25,6 +26,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import org.jetbrains.annotations.NotNull;
 import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
 import uwu.lopyluna.create_dd.registry.DesiresRecipeTypes;
 
@@ -32,7 +34,8 @@ import java.util.List;
 
 import static net.minecraft.ChatFormatting.GRAY;
 
-@SuppressWarnings({"removal", "all"})
+@MethodsReturnNonnullByDefault
+@SuppressWarnings({"removal"})
 public class HydraulicPressBlockEntity extends MechanicalPressBlockEntity {
 
     SmartFluidTankBehaviour tank;
@@ -96,7 +99,7 @@ public class HydraulicPressBlockEntity extends MechanicalPressBlockEntity {
     }
 
     @Override
-    public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
+    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, Direction side) {
         if (cap == net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY &&
                 side.getAxis() == getBlockState().getValue(HydraulicPressBlock.HORIZONTAL_FACING).getClockWise().getAxis() &&
                 side.getAxis() != Direction.Axis.Y)
@@ -136,7 +139,7 @@ public class HydraulicPressBlockEntity extends MechanicalPressBlockEntity {
 
     @Override
     protected boolean updateBasin() {
-        if (!canProcessWithFluid()) {
+        if (canProcessWithFluid()) {
             return true;
         } else {
             return super.updateBasin();
@@ -174,13 +177,13 @@ public class HydraulicPressBlockEntity extends MechanicalPressBlockEntity {
     }
 
     public boolean canProcessWithFluid() {
-        return (!tank.isEmpty() && (getProcessFluid(Fluids.LAVA) || getProcessFluid(Fluids.WATER))
-                && (tank.getPrimaryHandler().getFluidAmount() >= 1000));
+        return (tank.isEmpty() || (!getProcessFluid(Fluids.LAVA) && !getProcessFluid(Fluids.WATER))
+                || (tank.getPrimaryHandler().getFluidAmount() < 1000));
     }
 
     @Override
     public boolean tryProcessInBasin(boolean simulate) {
-        if (!canProcessWithFluid()) {
+        if (canProcessWithFluid()) {
             return false;
         } else {
             return super.tryProcessInBasin(simulate);
@@ -189,7 +192,7 @@ public class HydraulicPressBlockEntity extends MechanicalPressBlockEntity {
 
     @Override
     public boolean tryProcessInWorld(ItemEntity itemEntity, boolean simulate) {
-        if (!canProcessWithFluid()) {
+        if (canProcessWithFluid()) {
             return false;
         } else {
             return super.tryProcessInWorld(itemEntity, simulate);
@@ -198,7 +201,7 @@ public class HydraulicPressBlockEntity extends MechanicalPressBlockEntity {
 
     @Override
     public boolean tryProcessOnBelt(TransportedItemStack input, List<ItemStack> outputList, boolean simulate) {
-        if (!canProcessWithFluid()) {
+        if (canProcessWithFluid()) {
             return false;
         } else {
             return super.tryProcessOnBelt(input, outputList, simulate);

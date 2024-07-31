@@ -7,7 +7,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -26,7 +25,7 @@ import java.util.Optional;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-@SuppressWarnings({"all"})
+@SuppressWarnings({})
 public class BackTankAxeItem extends AxeItem {
     int getUses;
 
@@ -65,16 +64,15 @@ public class BackTankAxeItem extends AxeItem {
                 CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer)player, blockpos, itemstack);
             }
 
-            InteractionHand Interactionhand = null;
-            if (!BacktankUtil.canAbsorbDamage(player, getUses))
-                itemstack.hurtAndBreak(1, player, p -> {
-                    assert Interactionhand != null;
-                    p.broadcastBreakEvent(Interactionhand);
-                });
+            if (!BacktankUtil.canAbsorbDamage(player, getUses)) {
+                assert player != null;
+                itemstack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(pContext.getHand()));
+            }
 
             level.setBlock(blockpos, optional3.get(), 11);
             level.gameEvent(GameEvent.BLOCK_CHANGE, blockpos, GameEvent.Context.of(player, optional3.get()));
             if (!BacktankUtil.canAbsorbDamage(player, getUses)) {
+                assert player != null;
                 itemstack.hurtAndBreak(1, player, (p_150686_) ->
                         p_150686_.broadcastBreakEvent(pContext.getHand()));
             }
@@ -87,18 +85,14 @@ public class BackTankAxeItem extends AxeItem {
     @Override
     public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
         if (!BacktankUtil.canAbsorbDamage(pAttacker, getUses))
-            pStack.hurtAndBreak(1, pAttacker, p -> {
-                p.broadcastBreakEvent(EquipmentSlot.MAINHAND);
-            });
+            pStack.hurtAndBreak(1, pAttacker, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         return true;
     }
 
     @Override
     public boolean mineBlock(ItemStack pStack, Level pLevel, BlockState pState, BlockPos pPos, LivingEntity pEntityLiving) {
         if (!BacktankUtil.canAbsorbDamage(pEntityLiving, getUses) && !pLevel.isClientSide && pState.getDestroySpeed(pLevel, pPos) != 0.0F) {
-            pStack.hurtAndBreak(1, pEntityLiving, (p_40992_) -> {
-                p_40992_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
-            });
+            pStack.hurtAndBreak(1, pEntityLiving, (p_40992_) -> p_40992_.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         }
 
         return true;
@@ -106,13 +100,11 @@ public class BackTankAxeItem extends AxeItem {
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        if (enchantment == Enchantments.VANISHING_CURSE)
-            return true;
         if (enchantment == Enchantments.UNBREAKING)
             return false;
         if (enchantment == Enchantments.MENDING)
             return false;
-        return false;
+        return enchantment == Enchantments.VANISHING_CURSE;
     }
 
     @Override

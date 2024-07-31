@@ -5,14 +5,14 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import uwu.lopyluna.create_dd.infrastructure.ponder.DesirePonderTags;
 import uwu.lopyluna.create_dd.infrastructure.ponder.DesiresPonderIndex;
 import uwu.lopyluna.create_dd.registry.DesiresParticleTypes;
-import uwu.lopyluna.create_dd.registry.DesiresPartialModels;
 
+@SuppressWarnings({"unused"})
 public class DesireClient {
 
 
 
     public static void onCtorClient(IEventBus modEventBus, IEventBus forgeEventBus) {
-        modEventBus.addListener(DesireClient::clientInit);;
+        modEventBus.addListener(DesireClient::clientInit);
         modEventBus.addListener(DesiresParticleTypes::registerFactories);
     }
 

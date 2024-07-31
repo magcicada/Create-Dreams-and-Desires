@@ -32,7 +32,7 @@ import javax.annotation.Nullable;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-@SuppressWarnings({"unchecked", "unused", "rawtypes", "all"})
+@SuppressWarnings({"unchecked", "unused", "rawtypes"})
 public class FurnaceEngineBlockEntity extends SmartBlockEntity {
     protected ScrollOptionBehaviour<WindmillBearingBlockEntity.RotationDirection> movementDirection;
     public WeakReference<PoweredFlywheelBlockEntity> target = new WeakReference(null);
@@ -51,9 +51,7 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
             PoweredFlywheelBlockEntity flywheel = this.getFlywheel();
             return flywheel == null || !flywheel.hasSource();
         });
-        this.movementDirection.withCallback(($) -> {
-            this.onDirectionChanged();
-        });
+        this.movementDirection.withCallback(($) -> this.onDirectionChanged());
         behaviours.add(this.movementDirection);
     }
 
@@ -70,12 +68,11 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
             } else if (delayedTimer > 0) {
                 delayedTimer--;
             }
-            boolean verticalTarget = false;
+            boolean verticalTarget;
             BlockState flywheelState = flywheel.getBlockState();
             Direction.Axis targetAxis = Direction.Axis.X;
             Block var7 = flywheelState.getBlock();
-            if (var7 instanceof IRotate) {
-                IRotate ir = (IRotate)var7;
+            if (var7 instanceof IRotate ir) {
                 targetAxis = ir.getRotationAxis(flywheelState);
             }
 
@@ -84,7 +81,7 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
             if (DesiresBlocks.FURNACE_ENGINE.has(blockState)) {
                 Direction facing = SteamEngineBlock.getFacing(blockState);
                 if (facing.getAxis() == Direction.Axis.Y) {
-                    facing = (Direction)blockState.getValue(SteamEngineBlock.FACING);
+                    facing = blockState.getValue(SteamEngineBlock.FACING);
                 }
 
                 float delayedEfficiency = delayedTimer > 1 ? 1.0f : 0.0f;
@@ -108,21 +105,23 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
                 }
 
                 flywheel.update(this.worldPosition, conveyedSpeedLevel, delayedEfficiency);
+                assert this.level != null;
                 if (this.level.isClientSide) {
-                    DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> {
-                        return this::spawnParticles;
-                    });
+                    DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> this::spawnParticles);
                 }
             }
-        } else if (!this.level.isClientSide()) {
-            if (flywheel != null) {
-                if (flywheel.getBlockPos().subtract(this.worldPosition).equals(flywheel.enginePos)) {
-                    if (flywheel.engineEfficiency != 0.0F) {
-                        Direction facing = SteamEngineBlock.getFacing(this.getBlockState());
-                        if (this.level.isLoaded(this.worldPosition.relative(facing.getOpposite()))) {
-                            flywheel.update(this.worldPosition, 0, 0.0F);
-                        }
+        } else {
+            assert this.level != null;
+            if (!this.level.isClientSide()) {
+                if (flywheel != null) {
+                    if (flywheel.getBlockPos().subtract(this.worldPosition).equals(flywheel.enginePos)) {
+                        if (flywheel.engineEfficiency != 0.0F) {
+                            Direction facing = SteamEngineBlock.getFacing(this.getBlockState());
+                            if (this.level.isLoaded(this.worldPosition.relative(facing.getOpposite()))) {
+                                flywheel.update(this.worldPosition, 0, 0.0F);
+                            }
 
+                        }
                     }
                 }
             }
@@ -149,13 +148,15 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
                                 AbstractFurnaceBlockEntity sourceBE = this.source.get();
                                 if (sourceBE != null) {
                                     float volume = 3.0F / 2;
+                                    assert this.level != null;
                                     float pitch = 0.28F + this.level.random.nextFloat() * 0.1F;
                                     this.level.playLocalSound(this.worldPosition.getX(), this.worldPosition.getY(), this.worldPosition.getZ(), SoundEvents.CANDLE_EXTINGUISH, SoundSource.BLOCKS, volume, pitch, false);
                                     AllSoundEvents.STEAM.playAt(this.level, this.worldPosition, volume / 16.0F, 0.25F, false);
                                 }
 
                                 Direction facing = FurnaceEngineBlock.getFacing(this.getBlockState());
-                                Vec3 offset = VecHelper.rotate((new Vec3(0.0, 0.0, 1.0)).add(VecHelper.offsetRandomly(Vec3.ZERO, this.level.random, 1.0F).multiply(1.0, 1.0, 0.0).normalize().scale(0.5)), (double)AngleHelper.verticalAngle(facing), Direction.Axis.X);
+                                assert this.level != null;
+                                Vec3 offset = VecHelper.rotate((new Vec3(0.0, 0.0, 1.0)).add(VecHelper.offsetRandomly(Vec3.ZERO, this.level.random, 1.0F).multiply(1.0, 1.0, 0.0).normalize().scale(0.5)), AngleHelper.verticalAngle(facing), Direction.Axis.X);
                                 offset = VecHelper.rotate(offset, AngleHelper.horizontalAngle(facing), Direction.Axis.Y);
                                 Vec3 v = offset.scale(0.5).add(Vec3.atCenterOf(this.worldPosition));
                                 Vec3 m = offset.subtract(Vec3.atLowerCornerOf(facing.getNormal()).scale(0.75));
@@ -181,9 +182,9 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
             }
 
             Direction facing = FurnaceEngineBlock.getFacing(this.getBlockState());
+            assert this.level != null;
             BlockEntity anyShaftAt = this.level.getBlockEntity(this.worldPosition.relative(facing, 2));
-            if (anyShaftAt instanceof PoweredFlywheelBlockEntity) {
-                PoweredFlywheelBlockEntity ps = (PoweredFlywheelBlockEntity)anyShaftAt;
+            if (anyShaftAt instanceof PoweredFlywheelBlockEntity ps) {
                 if (ps.canBePoweredBy(this.worldPosition)) {
                     flywheel = ps;
                     this.target = new WeakReference(ps);
@@ -201,9 +202,9 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
             }
 
             Direction facing = FurnaceEngineBlock.getFacing(this.getBlockState());
+            assert this.level != null;
             BlockEntity be = this.level.getBlockEntity(this.worldPosition.relative(facing.getOpposite()));
-            if (be instanceof AbstractFurnaceBlockEntity) {
-                AbstractFurnaceBlockEntity furnaceBe = (AbstractFurnaceBlockEntity)be;
+            if (be instanceof AbstractFurnaceBlockEntity furnaceBe) {
                 furnace = furnaceBe;
                 this.source = new WeakReference(furnaceBe);
             }
@@ -214,7 +215,7 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
     @Nullable
     @OnlyIn(Dist.CLIENT)
     public Float getTargetAngle() {
-        float angle = 0.0F;
+        float angle;
         BlockState blockState = this.getBlockState();
         if (!DesiresBlocks.FURNACE_ENGINE.has(blockState)) {
             return null;
@@ -222,7 +223,7 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
             Direction facing = SteamEngineBlock.getFacing(blockState);
             PoweredFlywheelBlockEntity flywheel = this.getFlywheel();
             Direction.Axis facingAxis = facing.getAxis();
-            Direction.Axis axis = Direction.Axis.Y;
+            Direction.Axis axis;
             if (flywheel == null) {
                 return null;
             } else {

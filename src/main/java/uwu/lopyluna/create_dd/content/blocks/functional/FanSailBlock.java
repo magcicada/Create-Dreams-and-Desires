@@ -65,6 +65,7 @@ public class FanSailBlock extends WrenchableDirectionalBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockState state = super.getStateForPlacement(context);
+        assert state != null;
         return state.setValue(FACING, state.getValue(FACING)
                 .getOpposite());
     }

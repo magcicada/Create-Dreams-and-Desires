@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 
+@SuppressWarnings({"unused"})
 public class KineticMotorBlockEntity extends GeneratingKineticBlockEntity {
     public static final int DEFAULT_SPEED = 16;
     public static final int MAX_SPEED = 32;
@@ -43,9 +44,7 @@ public class KineticMotorBlockEntity extends GeneratingKineticBlockEntity {
         this.generatedSpeed = new KineticMotorScrollValueBehaviour(Lang.translateDirect("kinetics.creative_motor.rotation_speed"), this, new MotorValueBox());
         this.generatedSpeed.between(-max, max);
         this.generatedSpeed.value = 16;
-        this.generatedSpeed.withCallback((i) -> {
-            this.updateGeneratedRotation();
-        });
+        this.generatedSpeed.withCallback((i) -> this.updateGeneratedRotation());
         behaviours.add(this.generatedSpeed);
     }
 
@@ -84,10 +83,10 @@ public class KineticMotorBlockEntity extends GeneratingKineticBlockEntity {
         return true;
     }
     public float getGeneratedSpeed() {
-        return !DesiresBlocks.KINETIC_MOTOR.has(this.getBlockState()) ? 0.0F : convertToDirection((float)this.generatedSpeed.getValue(), (Direction)this.getBlockState().getValue(KineticMotorBlock.FACING));
+        return !DesiresBlocks.KINETIC_MOTOR.has(this.getBlockState()) ? 0.0F : convertToDirection((float)this.generatedSpeed.getValue(), this.getBlockState().getValue(KineticMotorBlock.FACING));
     }
 
-    class MotorValueBox extends ValueBoxTransform.Sided {
+    static class MotorValueBox extends ValueBoxTransform.Sided {
         MotorValueBox() {
         }
 
@@ -96,22 +95,22 @@ public class KineticMotorBlockEntity extends GeneratingKineticBlockEntity {
         }
 
         public Vec3 getLocalOffset(BlockState state) {
-            Direction facing = (Direction)state.getValue(KineticMotorBlock.FACING);
+            Direction facing = state.getValue(KineticMotorBlock.FACING);
             return super.getLocalOffset(state).add(Vec3.atLowerCornerOf(facing.getNormal()).scale(-0.0625));
         }
 
         public void rotate(BlockState state, PoseStack ms) {
             super.rotate(state, ms);
-            Direction facing = (Direction)state.getValue(KineticMotorBlock.FACING);
+            Direction facing = state.getValue(KineticMotorBlock.FACING);
             if (facing.getAxis() != Axis.Y) {
                 if (this.getSide() == Direction.UP) {
-                    TransformStack.cast(ms).rotateZ((double)(-AngleHelper.horizontalAngle(facing) + 180.0F));
+                    TransformStack.cast(ms).rotateZ(-AngleHelper.horizontalAngle(facing) + 180.0F);
                 }
             }
         }
 
         protected boolean isSideActive(BlockState state, Direction direction) {
-            Direction facing = (Direction)state.getValue(KineticMotorBlock.FACING);
+            Direction facing = state.getValue(KineticMotorBlock.FACING);
             if (facing.getAxis() != Axis.Y && direction == Direction.DOWN) {
                 return false;
             } else {

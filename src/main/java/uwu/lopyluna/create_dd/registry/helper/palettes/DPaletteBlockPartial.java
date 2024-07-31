@@ -28,7 +28,7 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.registry.DesiresPaletteStoneTypes;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.function.Supplier;
 
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
@@ -44,7 +44,7 @@ public abstract class DPaletteBlockPartial<B extends Block> {
 	public static final DPaletteBlockPartial<?>[] ALL_PARTIALS = { STAIR, SLAB, WALL };
 	public static final DPaletteBlockPartial<?>[] FOR_POLISHED = { STAIR, UNIQUE_SLAB, WALL };
 
-	private String name;
+	private final String name;
 
 	private DPaletteBlockPartial(String name) {
 		this.name = name;
@@ -123,26 +123,26 @@ public abstract class DPaletteBlockPartial<B extends Block> {
 
 		@Override
 		protected Iterable<TagKey<Block>> getBlockTags() {
-			return Arrays.asList(BlockTags.STAIRS);
+			return List.of(BlockTags.STAIRS);
 		}
 
 		@Override
 		protected Iterable<TagKey<Item>> getItemTags() {
-			return Arrays.asList(ItemTags.STAIRS);
+			return List.of(ItemTags.STAIRS);
 		}
 
 		@Override
 		protected void createRecipes(DesiresPaletteStoneTypes type, BlockEntry<? extends Block> patternBlock,
 									 DataGenContext<Block, ? extends Block> c, RegistrateRecipeProvider p) {
-			p.stairs(DataIngredient.items(patternBlock), c::get, c.getName(), false);
-			p.stonecutting(DataIngredient.tag(type.materialTag), c::get, 1);
+			p.stairs(DataIngredient.items(patternBlock), c, c.getName(), false);
+			p.stonecutting(DataIngredient.tag(type.materialTag), c, 1);
 		}
 
 	}
 
 	private static class Slab extends DPaletteBlockPartial<SlabBlock> {
 
-		private boolean customSide;
+		private final boolean customSide;
 
 		public Slab(boolean customSide) {
 			super("slab");
@@ -185,19 +185,19 @@ public abstract class DPaletteBlockPartial<B extends Block> {
 
 		@Override
 		protected Iterable<TagKey<Block>> getBlockTags() {
-			return Arrays.asList(BlockTags.SLABS);
+			return List.of(BlockTags.SLABS);
 		}
 
 		@Override
 		protected Iterable<TagKey<Item>> getItemTags() {
-			return Arrays.asList(ItemTags.SLABS);
+			return List.of(ItemTags.SLABS);
 		}
 
 		@Override
 		protected void createRecipes(DesiresPaletteStoneTypes type, BlockEntry<? extends Block> patternBlock,
 									 DataGenContext<Block, ? extends Block> c, RegistrateRecipeProvider p) {
-			p.slab(DataIngredient.items(patternBlock), c::get, c.getName(), false);
-			p.stonecutting(DataIngredient.tag(type.materialTag), c::get, 2);
+			p.slab(DataIngredient.items(patternBlock), c, c.getName(), false);
+			p.stonecutting(DataIngredient.tag(type.materialTag), c, 2);
 			DataIngredient ingredient = DataIngredient.items(c.get());
 			ShapelessRecipeBuilder.shapeless(patternBlock.get())
 				.requires(ingredient)
@@ -242,18 +242,18 @@ public abstract class DPaletteBlockPartial<B extends Block> {
 
 		@Override
 		protected Iterable<TagKey<Block>> getBlockTags() {
-			return Arrays.asList(BlockTags.WALLS);
+			return List.of(BlockTags.WALLS);
 		}
 
 		@Override
 		protected Iterable<TagKey<Item>> getItemTags() {
-			return Arrays.asList(ItemTags.WALLS);
+			return List.of(ItemTags.WALLS);
 		}
 
 		@Override
 		protected void createRecipes(DesiresPaletteStoneTypes type, BlockEntry<? extends Block> patternBlock,
 									 DataGenContext<Block, ? extends Block> c, RegistrateRecipeProvider p) {
-			p.stonecutting(DataIngredient.tag(type.materialTag), c::get, 1);
+			p.stonecutting(DataIngredient.tag(type.materialTag), c, 1);
 			DataIngredient ingredient = DataIngredient.items(patternBlock);
 			ShapedRecipeBuilder.shaped(c.get(), 6)
 				.pattern("XXX")

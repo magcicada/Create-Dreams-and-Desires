@@ -18,6 +18,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.Blocks;
+import org.jetbrains.annotations.NotNull;
 import uwu.lopyluna.create_dd.content.recipes.SeethingRecipe;
 
 public class FanSeethingCategory extends DProcessingViaFanCategory.MultiOutput<SeethingRecipe> {
@@ -32,7 +33,7 @@ public class FanSeethingCategory extends DProcessingViaFanCategory.MultiOutput<S
     }
 
     @Override
-    protected void renderAttachedBlock(IRecipeSlotsView iRecipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
+    protected void renderAttachedBlock(@NotNull IRecipeSlotsView iRecipeSlotsView, @NotNull PoseStack matrixStack, double mouseX, double mouseY) {
 
         float offsetMain = (Mth.sin(AnimationTickHolder.getRenderTime() / 16f) + 0.5f) / 16f;
         float offset1 = offsetMain * 0.5f;

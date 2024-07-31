@@ -55,6 +55,7 @@ import java.util.stream.Stream;
 
 @SuppressWarnings({"deprecation"})
 @ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 @Mod.EventBusSubscriber
 public class FurnaceEngineBlock extends FaceAttachedHorizontalDirectionalBlock implements SimpleWaterloggedBlock, IWrenchable, IBE<FurnaceEngineBlockEntity> {
 
@@ -178,7 +179,7 @@ public class FurnaceEngineBlock extends FaceAttachedHorizontalDirectionalBlock i
         VoxelShape wall_east = Stream.of(Block.box(4, 2, 1.5, 14, 14, 14.5), Block.box(3, 3.5, 0, 13, 12.5, 1.5), Block.box(-3, -1, -1, 4, 17, 17), Block.box(3, 3.5, 14.5, 13, 12.5, 16), Block.box(4, 0, 3.5, 11, 2, 12.5), Block.box(4, 14, 3.5, 11, 16, 12.5)
         ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
         VoxelShape wall_west = Stream.of(Block.box(2, 2, 1.5, 12, 14, 14.5), Block.box(3, 3.5, 14.5, 13, 12.5, 16), Block.box(12, -1, -1, 19, 17, 17), Block.box(3, 3.5, 0, 13, 12.5, 1.5), Block.box(5, 0, 3.5, 12, 2, 12.5), Block.box(5, 14, 3.5, 12, 16, 12.5)
-        ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();;
+        ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
         AttachFace face = pState.getValue(FACE);
         Direction direction = pState.getValue(FACING);

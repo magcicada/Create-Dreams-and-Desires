@@ -1,7 +1,6 @@
 package uwu.lopyluna.create_dd.mixins;
 
 import com.simibubi.create.content.contraptions.MountedStorage;
-import com.simibubi.create.content.logistics.vault.ItemVaultBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.ItemStackHandler;
 import org.spongepowered.asm.mixin.Mixin;

@@ -4,6 +4,7 @@ import com.simibubi.create.foundation.ponder.PonderRegistrationHelper;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import uwu.lopyluna.create_dd.DesiresCreate;
 
+@SuppressWarnings("unused")
 public class DesiresPonderIndex {
 
 	static final PonderRegistrationHelper HELPER = new PonderRegistrationHelper(DesiresCreate.MOD_ID);

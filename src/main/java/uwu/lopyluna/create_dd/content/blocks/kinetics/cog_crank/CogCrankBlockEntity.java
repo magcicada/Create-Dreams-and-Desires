@@ -32,15 +32,14 @@ public class CogCrankBlockEntity extends HandCrankBlockEntity {
     }
     @Override
     public void turn(boolean back) {
-        boolean update = false;
-
-        if (getGeneratedSpeed() == 0 || back != backwards)
-            update = true;
+        boolean update = getGeneratedSpeed() == 0 || back != backwards;
 
         inUse = 10;
         this.backwards = back;
-        if (update && !level.isClientSide)
-            updateGeneratedRotation();
+        if (update) {
+            assert level != null;
+            if (!level.isClientSide) updateGeneratedRotation();
+        }
     }
     @Override
     public float getIndependentAngle(float partialTicks) {
@@ -50,11 +49,9 @@ public class CogCrankBlockEntity extends HandCrankBlockEntity {
     @Override
     public float getGeneratedSpeed() {
         Block block = getBlockState().getBlock();
-        if (!(block instanceof CogCrankBlock))
+        if (!(block instanceof CogCrankBlock crank))
             return 0;
-        CogCrankBlock crank = (CogCrankBlock) block;
-        int speed = (inUse == 0 ? 0 : clockwise() ? -1 : 1) * crank.getRotationSpeed();
-        return speed;
+        return (inUse == 0 ? 0 : clockwise() ? -1 : 1) * crank.getRotationSpeed();
     }
     @Override
     protected boolean clockwise() {
@@ -86,9 +83,12 @@ public class CogCrankBlockEntity extends HandCrankBlockEntity {
         if (inUse > 0) {
             inUse--;
 
-            if (inUse == 0 && !level.isClientSide) {
-                sequenceContext = null;
-                updateGeneratedRotation();
+            if (inUse == 0) {
+                assert level != null;
+                if (!level.isClientSide) {
+                    sequenceContext = null;
+                    updateGeneratedRotation();
+                }
             }
         }
     }

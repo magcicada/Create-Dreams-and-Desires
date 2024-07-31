@@ -42,6 +42,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@SuppressWarnings({"unused"})
 public class DesireFanProcessingTypes extends AllFanProcessingTypes {
     public static final SandingType SANDING = register("sanding", new SandingType());
     public static final FreezingType FREEZING = register("freezing", new FreezingType());
@@ -109,9 +110,7 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
         public List<ItemStack> process(ItemStack stack, Level level) {
             SANDING_WRAPPER.setItem(0, stack);
             Optional<SandingRecipe> recipe = DesiresRecipeTypes.SANDING.find(SANDING_WRAPPER, level);
-            if (recipe.isPresent())
-                return RecipeApplier.applyRecipeOn(stack, recipe.get());
-            return null;
+            return recipe.map(sandingRecipe -> RecipeApplier.applyRecipeOn(stack, sandingRecipe)).orElse(null);
         }
 
         @Override
@@ -210,10 +209,7 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
             }
             BlockState blockState = level.getBlockState(pos);
             if (DesiresTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SEETHING.matches(blockState)) {
-                if (blockState.hasProperty(BlazeBurnerBlock.HEAT_LEVEL) && !blockState.getValue(BlazeBurnerBlock.HEAT_LEVEL).isAtLeast(BlazeBurnerBlock.HeatLevel.SEETHING)) {
-                    return false;
-                }
-                return true;
+                return !blockState.hasProperty(BlazeBurnerBlock.HEAT_LEVEL) || blockState.getValue(BlazeBurnerBlock.HEAT_LEVEL).isAtLeast(BlazeBurnerBlock.HeatLevel.SEETHING);
             }
             return false;
         }
@@ -235,9 +231,7 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
         public List<ItemStack> process(ItemStack stack, Level level) {
             SEETHING_WRAPPER.setItem(0, stack);
             Optional<SeethingRecipe> recipe = DesiresRecipeTypes.SEETHING.find(SEETHING_WRAPPER, level);
-            if (recipe.isPresent())
-                return RecipeApplier.applyRecipeOn(stack, recipe.get());
-            return null;
+            return recipe.map(seethingRecipe -> RecipeApplier.applyRecipeOn(stack, seethingRecipe)).orElse(null);
         }
 
         @Override
@@ -352,9 +346,7 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
         public List<ItemStack> process(ItemStack stack, Level level) {
             FREEZING_WRAPPER.setItem(0, stack);
             Optional<FreezingRecipe> recipe = DesiresRecipeTypes.FREEZING.find(FREEZING_WRAPPER, level);
-            if (recipe.isPresent())
-                return RecipeApplier.applyRecipeOn(stack, recipe.get());
-            return null;
+            return recipe.map(freezingRecipe -> RecipeApplier.applyRecipeOn(stack, freezingRecipe)).orElse(null);
         }
 
         @Override

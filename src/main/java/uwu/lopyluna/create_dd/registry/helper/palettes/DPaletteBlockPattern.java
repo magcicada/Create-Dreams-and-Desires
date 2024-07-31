@@ -28,6 +28,7 @@ import java.util.function.Supplier;
 import static uwu.lopyluna.create_dd.registry.helper.palettes.DPaletteBlockPartial.ALL_PARTIALS;
 import static uwu.lopyluna.create_dd.registry.helper.palettes.DPaletteBlockPartial.FOR_POLISHED;
 
+@SuppressWarnings({"unused", "all"})
 public class DPaletteBlockPattern {
 
 	public static final DPaletteBlockPattern
@@ -246,16 +247,16 @@ public class DPaletteBlockPattern {
 
 		;
 
-		public CTType type;
-		private Function<String, ResourceLocation> srcFactory;
-		private Function<String, ResourceLocation> targetFactory;
+		public final CTType type;
+		private final Function<String, ResourceLocation> srcFactory;
+		private final Function<String, ResourceLocation> targetFactory;
 
-		private CTs(CTType type, Function<String, ResourceLocation> factory) {
+		CTs(CTType type, Function<String, ResourceLocation> factory) {
 			this(type, factory, factory);
 		}
 
-		private CTs(CTType type, Function<String, ResourceLocation> srcFactory,
-			Function<String, ResourceLocation> targetFactory) {
+		CTs(CTType type, Function<String, ResourceLocation> srcFactory,
+            Function<String, ResourceLocation> targetFactory) {
 			this.type = type;
 			this.srcFactory = srcFactory;
 			this.targetFactory = targetFactory;

@@ -2,13 +2,14 @@ package uwu.lopyluna.create_dd.infrastructure.config;
 
 import com.simibubi.create.foundation.config.ConfigBase;
 
+@SuppressWarnings({"unused"})
 public class DEquipment extends ConfigBase {
 	//Plans to change this
-	//public final ConfigInt maxSymmetryWandRange = i(50, 10, "maxSymmetryWandRange", Comments.symmetryRange);
+	//public final ConfigInt maxSymmetryWandRange = i(50, 10, "maxSymmetryWandRange", Comments.symmetryRange);*
 
-//	public final ConfigInt excavationDrillMaximumBlocks = i(64, "excavationDrillMaximumBlocks", Comments.excavationDrillMaximumBlocks);
-//	public final ConfigInt deforestingSawMaximumBlocks = i(128, "deforestingSawMaximumBlocks", Comments.deforestingSawMaximumBlocks);
-//	public final ConfigInt backpackRange = i(4, 1, "backpackRange", Comments.backpackRange);
+//	public final ConfigInt excavationDrillMaximumBlocks = i(64, "excavationDrillMaximumBlocks", Comments.excavationDrillMaximumBlocks);*
+//	public final ConfigInt deforestingSawMaximumBlocks = i(128, "deforestingSawMaximumBlocks", Comments.deforestingSawMaximumBlocks);*
+//	public final ConfigInt backpackRange = i(4, 1, "backpackRange", Comments.backpackRange);*
 //	public final ConfigInt zapperUndoLogLength = i(5, 0, "zapperUndoLogLength", Comments.zapperUndoLogLength);
 
 	@Override

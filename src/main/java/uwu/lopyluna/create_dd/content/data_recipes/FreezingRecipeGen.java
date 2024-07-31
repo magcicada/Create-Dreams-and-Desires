@@ -2,6 +2,7 @@ package uwu.lopyluna.create_dd.content.data_recipes;
 
 import com.simibubi.create.AllItems;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -11,7 +12,7 @@ import uwu.lopyluna.create_dd.registry.DesiresRecipeTypes;
 
 import java.util.function.Supplier;
 
-
+@MethodsReturnNonnullByDefault
 @SuppressWarnings({"unused"})
 public class FreezingRecipeGen extends DesireProcessingRecipeGen {
 
@@ -25,8 +26,6 @@ public class FreezingRecipeGen extends DesireProcessingRecipeGen {
 			SNOW = convert(Items.SNOWBALL, Items.SNOW),
 			SNOW_BLOCK = convert(Items.SNOW, Items.SNOW_BLOCK),
 			OBSIDIAN = convert(Items.CRYING_OBSIDIAN, Items.OBSIDIAN);
-
-	;
 
 	public GeneratedRecipe convert(Block block, Block result) {
 		return create(() -> block, b -> b.output(result));

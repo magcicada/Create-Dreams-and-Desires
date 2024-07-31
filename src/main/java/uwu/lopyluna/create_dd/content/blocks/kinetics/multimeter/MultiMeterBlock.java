@@ -97,9 +97,8 @@ public class MultiMeterBlock extends DirectionalAxisKineticBlock implements IBE<
     @Override
     public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, RandomSource rand) {
         BlockEntity be = worldIn.getBlockEntity(pos);
-        if (be == null || !(be instanceof MultiMeterBlockEntity))
+        if (!(be instanceof MultiMeterBlockEntity gaugeBE))
             return;
-        MultiMeterBlockEntity gaugeBE = (MultiMeterBlockEntity) be;
         if (gaugeBE.dialTarget == 0)
             return;
         int color = gaugeBE.color;

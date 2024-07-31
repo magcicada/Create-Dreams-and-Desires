@@ -34,7 +34,6 @@ import static uwu.lopyluna.create_dd.registry.DesireTiers.Deforester;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-@SuppressWarnings({"all"})
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class DeforesterSawItem extends BackTankAxeItem {
     private static boolean deforesting = false; // required as to not run into "recursions" over forge events on tree cutting

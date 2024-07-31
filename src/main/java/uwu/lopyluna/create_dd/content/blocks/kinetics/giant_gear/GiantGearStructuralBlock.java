@@ -3,6 +3,7 @@ package uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear;
 import com.simibubi.create.content.equipment.goggles.IProxyHoveringInformation;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.render.MultiPosDestructionHandler;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.core.BlockPos;
@@ -35,7 +36,8 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 @ParametersAreNonnullByDefault
-@SuppressWarnings({"deprecation", "all"})
+@MethodsReturnNonnullByDefault
+@SuppressWarnings({"deprecation"})
 public class GiantGearStructuralBlock extends DirectionalBlock implements IWrenchable, IProxyHoveringInformation {
 
     public GiantGearStructuralBlock(Properties pProperties) {

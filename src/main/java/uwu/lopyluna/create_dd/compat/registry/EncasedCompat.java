@@ -1,11 +1,7 @@
 package uwu.lopyluna.create_dd.compat.registry;
 
 
-import com.tterrag.registrate.util.entry.BlockEntry;
-import net.minecraft.world.level.block.Block;
-import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 import uwu.lopyluna.create_dd.registry.DesiresCreativeModeTabs;
-import uwu.lopyluna.create_dd.registry.DesiresSpriteShifts;
 
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 
@@ -17,7 +13,7 @@ public class EncasedCompat {
         REGISTRATE.creativeModeTab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB);
     }
 
-    //public static final BlockEntry<? extends Block>
+    //public static final BlockEntry<? extends Block>;
     //CREATIVE_ENCASED_SHAFT = fr.iglee42.createcasing.api.CreateCasingApi.createEncasedShaft(
     //        REGISTRATE, "creative", DesiresBlocks.CREATIVE_CASING::get, DesiresSpriteShifts.CREATIVE_CASING),
     //CREATIVE_ENCASED_COGWHEEL = fr.iglee42.createcasing.api.CreateCasingApi.createEncasedCogwheel(

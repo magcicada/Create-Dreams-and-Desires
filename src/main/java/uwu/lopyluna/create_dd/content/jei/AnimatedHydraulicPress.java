@@ -11,7 +11,7 @@ import uwu.lopyluna.create_dd.registry.DesiresPartialModels;
 
 public class AnimatedHydraulicPress extends AnimatedKinetics {
 
-    private boolean basin;
+    private final boolean basin;
 
     public AnimatedHydraulicPress(boolean basin) {
         this.basin = basin;

@@ -29,7 +29,7 @@ import uwu.lopyluna.create_dd.DesiresCreate;
 
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 
-@SuppressWarnings({"unused", "all"})
+@SuppressWarnings({"unused", "SameParameterValue"})
 public class DesiresEntityTypes {
 
 	public static final EntityEntry<SeethingBlaze> SEETHING_ABLAZE = REGISTRATE.entity("seething_ablaze", SeethingBlaze::new, MobCategory.MONSTER)

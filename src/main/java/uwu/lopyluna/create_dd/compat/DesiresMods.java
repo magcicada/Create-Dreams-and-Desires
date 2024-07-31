@@ -9,6 +9,7 @@ import uwu.lopyluna.create_dd.registry.helper.Lang;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+@SuppressWarnings({"unused"})
 public enum DesiresMods {
     TCONSTRUCT,
     CREATECASING;

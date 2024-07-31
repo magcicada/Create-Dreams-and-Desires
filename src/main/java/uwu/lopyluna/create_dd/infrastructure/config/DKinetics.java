@@ -2,6 +2,7 @@ package uwu.lopyluna.create_dd.infrastructure.config;
 
 import com.simibubi.create.foundation.config.ConfigBase;
 
+@SuppressWarnings({"unused"})
 public class DKinetics extends ConfigBase {
 
 	public final ConfigFloat cogCrankHungerMultiplier = f(.01f, 0, 1, "cogCrankHungerMultiplier", Comments.cogCrankHungerMultiplier);
@@ -10,13 +11,13 @@ public class DKinetics extends ConfigBase {
 	public final ConfigInt fanPushDistance = i(40, 5, "fanPushDistance", Comments.fanPushDistance);
 	public final ConfigInt fanPullDistance = i(40, 5, "fanPullDistance", Comments.fanPullDistance);
 	public final ConfigInt fanRotationArgmax = i(256, 64, "fanRotationArgmax", Comments.rpm, Comments.fanRotationArgmax);
-	//public final ConfigInt fanBlockCheckRate = i(30, 10, "fanBlockCheckRate", Comments.fanBlockCheckRate);
-	//public final ConfigInt fanProcessingTime = i(75, 0, "fanProcessingTime", Comments.fanProcessingTime);
+	//public final ConfigInt fanBlockCheckRate = i(30, 10, "fanBlockCheckRate", Comments.fanBlockCheckRate);*
+	//public final ConfigInt fanProcessingTime = i(75, 0, "fanProcessingTime", Comments.fanProcessingTime);*
 
-	//public final ConfigInt maxRubberBeltLength = i(32, 2, "maxRubberBeltLength", Comments.maxRubberBeltLength);
+	//public final ConfigInt maxRubberBeltLength = i(32, 2, "maxRubberBeltLength", Comments.maxRubberBeltLength);*
 
-	//public final ConfigBool weakenedHarvestPartiallyGrown = b(true, "weakenedHarvestPartiallyGrown", Comments.weakenedHarvestPartiallyGrown);
-	//public final ConfigBool weakenedHarvesterReplants = b(false, "weakenedHarvesterReplants", Comments.weakenedHarvesterReplants);
+	//public final ConfigBool weakenedHarvestPartiallyGrown = b(true, "weakenedHarvestPartiallyGrown", Comments.weakenedHarvestPartiallyGrown);*
+	//public final ConfigBool weakenedHarvesterReplants = b(false, "weakenedHarvesterReplants", Comments.weakenedHarvesterReplants);*
 
 	public final ConfigGroup stats = group(1, "stats", Comments.stats);
 

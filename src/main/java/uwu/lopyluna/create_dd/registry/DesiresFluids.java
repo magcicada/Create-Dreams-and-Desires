@@ -12,21 +12,14 @@ import net.minecraft.client.renderer.FogRenderer.FogMode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.BlockAndTintGetter;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
-import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.fluids.FluidInteractionRegistry;
-import net.minecraftforge.fluids.FluidInteractionRegistry.InteractionInformation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import org.jetbrains.annotations.NotNull;
 import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
 
-import javax.annotation.Nullable;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -57,37 +50,11 @@ public class DesiresFluids {
 
 	public static void register() {}
 
-	public static void registerFluidInteractions() {
-		FluidInteractionRegistry.addInteraction(ForgeMod.LAVA_TYPE.get(), new InteractionInformation(
-				SAP.get().getFluidType(),
-				fluidState -> {
-					if (fluidState.isSource()) {
-						return Blocks.OBSIDIAN.defaultBlockState();
-					} else {
-						return DesiresPaletteStoneTypes.GABBRO.getBaseBlock()
-								.get()
-								.defaultBlockState();
-					}
-				}
-		));
-
-	}
-
-	@Nullable
-	public static BlockState getLavaInteraction(FluidState fluidState) {
-		Fluid fluid = fluidState.getType();
-		if (fluid.isSame(SAP.get()))
-			return DesiresPaletteStoneTypes.GABBRO.getBaseBlock()
-				.get()
-				.defaultBlockState();
-		return null;
-	}
-
 	public static abstract class TintedFluidType extends FluidType {
 
 		protected static final int NO_TINT = 0xffffffff;
-		private ResourceLocation stillTexture;
-		private ResourceLocation flowingTexture;
+		private final ResourceLocation stillTexture;
+		private final ResourceLocation flowingTexture;
 
 		public TintedFluidType(Properties properties, ResourceLocation stillTexture, ResourceLocation flowingTexture) {
 			super(properties);

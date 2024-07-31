@@ -2,6 +2,7 @@ package uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile;
 
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.foundation.utility.VecHelper;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -16,8 +17,10 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import uwu.lopyluna.create_dd.registry.DesiresBlockEntityTypes;
 
+@MethodsReturnNonnullByDefault
 public class ItemStockpileItem extends BlockItem {
 
 	public ItemStockpileItem(Block p_i48527_1_, Properties p_i48527_2_) {
@@ -25,7 +28,7 @@ public class ItemStockpileItem extends BlockItem {
 	}
 
 	@Override
-	public InteractionResult place(BlockPlaceContext ctx) {
+	public InteractionResult place(@NotNull BlockPlaceContext ctx) {
 		InteractionResult initialResult = super.place(ctx);
 		if (!initialResult.consumesAction())
 			return initialResult;
@@ -34,8 +37,8 @@ public class ItemStockpileItem extends BlockItem {
 	}
 
 	@Override
-	protected boolean updateCustomBlockEntityTag(BlockPos p_195943_1_, Level p_195943_2_, Player p_195943_3_,
-		ItemStack p_195943_4_, BlockState p_195943_5_) {
+	protected boolean updateCustomBlockEntityTag(@NotNull BlockPos p_195943_1_, Level p_195943_2_, Player p_195943_3_,
+												 @NotNull ItemStack p_195943_4_, @NotNull BlockState p_195943_5_) {
 		MinecraftServer minecraftserver = p_195943_2_.getServer();
 		if (minecraftserver == null)
 			return false;

@@ -5,7 +5,6 @@ import com.jozufozu.flywheel.core.PartialModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
-import com.simibubi.create.content.kinetics.steamEngine.PoweredShaftBlockEntity;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
 import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.render.SuperByteBuffer;
@@ -19,6 +18,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.state.BlockState;
 import uwu.lopyluna.create_dd.registry.DesiresPartialModels;
 
+@SuppressWarnings({"unused"})
 public class FurnaceEngineRenderer extends SafeBlockEntityRenderer<FurnaceEngineBlockEntity> {
     public FurnaceEngineRenderer(BlockEntityRendererProvider.Context context) {
     }

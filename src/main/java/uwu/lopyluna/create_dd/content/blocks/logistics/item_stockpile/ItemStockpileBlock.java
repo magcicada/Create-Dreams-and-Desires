@@ -4,6 +4,7 @@ import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.item.ItemHelper;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.sounds.SoundEvents;
@@ -26,27 +27,32 @@ import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import javax.annotation.ParametersAreNullableByDefault;
+import java.util.Objects;
 
-@SuppressWarnings({"removal", "all"})
+@SuppressWarnings({"removal", "deprecation"})
 @ParametersAreNullableByDefault
 @ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class ItemStockpileBlock extends Block implements IWrenchable, IBE<ItemStockpileBlockEntity> {
 	public static final BooleanProperty LARGE = BooleanProperty.create("large");
 
 	public ItemStockpileBlock(Properties p_i48440_1_) {
-		super(p_i48440_1_);
+		super(Objects.requireNonNull(p_i48440_1_));
 		registerDefaultState(defaultBlockState().setValue(LARGE, false));
 	}
 
 	@Override
 	protected void createBlockStateDefinition(Builder<Block, BlockState> pBuilder) {
-		pBuilder.add(LARGE);
+        assert pBuilder != null;
+        pBuilder.add(LARGE);
 		super.createBlockStateDefinition(pBuilder);
 	}
 
 	@Override
 	public void onPlace(BlockState pState, Level pLevel, BlockPos pPos, BlockState pOldState, boolean pIsMoving) {
-		if (pOldState.getBlock() == pState.getBlock())
+        assert pOldState != null;
+        assert pState != null;
+        if (pOldState.getBlock() == pState.getBlock())
 			return;
 		if (pIsMoving)
 			return;
@@ -55,35 +61,41 @@ public class ItemStockpileBlock extends Block implements IWrenchable, IBE<ItemSt
 
 	@Override
 	public InteractionResult onWrenched(BlockState state, UseOnContext context) {
-		if (context.getClickedFace().getAxis().isVertical()) {
+        assert context != null;
+        if (context.getClickedFace().getAxis().isVertical()) {
 			BlockEntity be = context.getLevel()
 				.getBlockEntity(context.getClickedPos());
-			if (be instanceof ItemStockpileBlockEntity) {
-				ItemStockpileBlockEntity vault = (ItemStockpileBlockEntity) be;
-				ConnectivityHandler.splitMulti(vault);
+			if (be instanceof ItemStockpileBlockEntity vault) {
+                ConnectivityHandler.splitMulti(vault);
 				vault.removeController(true);
 			}
-			state = state.setValue(LARGE, false);
+            assert state != null;
+            state = state.setValue(LARGE, false);
 		}
-		InteractionResult onWrenched = IWrenchable.super.onWrenched(state, context);
-		return onWrenched;
+        return IWrenchable.super.onWrenched(state, context);
 	}
 
 	@Override
 	public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean pIsMoving) {
-		if (state.hasBlockEntity() && (state.getBlock() != newState.getBlock() || !newState.hasBlockEntity())) {
-			BlockEntity be = world.getBlockEntity(pos);
-			if (!(be instanceof ItemStockpileBlockEntity))
-				return;
-			ItemStockpileBlockEntity vaultBE = (ItemStockpileBlockEntity) be;
-			ItemHelper.dropContents(world, pos, vaultBE.inventory);
-			world.removeBlockEntity(pos);
-			ConnectivityHandler.splitMulti(vaultBE);
-		}
+        assert state != null;
+        if (state.hasBlockEntity()) {
+            assert newState != null;
+            if (state.getBlock() != newState.getBlock() || !newState.hasBlockEntity()) {
+                assert world != null;
+                assert pos != null;
+                BlockEntity be = world.getBlockEntity(pos);
+                if (!(be instanceof ItemStockpileBlockEntity vaultBE))
+                    return;
+                ItemHelper.dropContents(world, pos, vaultBE.inventory);
+                world.removeBlockEntity(pos);
+                ConnectivityHandler.splitMulti(vaultBE);
+            }
+        }
 	}
 
 	public static boolean isVault(BlockState state) {
-		return DesiresBlocks.ITEM_STOCKPILE.has(state);
+        assert state != null;
+        return DesiresBlocks.ITEM_STOCKPILE.has(state);
 	}
 
 	@Nullable
@@ -96,7 +108,7 @@ public class ItemStockpileBlock extends Block implements IWrenchable, IBE<ItemSt
 	public static boolean isLarge(BlockState state) {
 		if (!isVault(state))
 			return false;
-		return state.getValue(LARGE);
+        return state.getValue(LARGE);
 	}
 
 	// Vaults are less noisy when placed in batch

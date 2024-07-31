@@ -22,13 +22,15 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import org.jetbrains.annotations.NotNull;
 import uwu.lopyluna.create_dd.registry.DesiresBlockEntityTypes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import javax.annotation.ParametersAreNullableByDefault;
 import java.util.List;
+import java.util.Objects;
 
-@SuppressWarnings({"removal", "unchecked", "all"})
+@SuppressWarnings({"unchecked"})
 @ParametersAreNullableByDefault
 @ParametersAreNonnullByDefault
 public class ItemStockpileBlockEntity extends SmartBlockEntity implements IMultiBlockEntityContainer.Inventory {
@@ -64,7 +66,8 @@ public class ItemStockpileBlockEntity extends SmartBlockEntity implements IMulti
 
 	protected void updateConnectivity() {
 		updateConnectivity = false;
-		if (level.isClientSide())
+        assert level != null;
+        if (level.isClientSide())
 			return;
 		if (!isController())
 			return;
@@ -76,7 +79,8 @@ public class ItemStockpileBlockEntity extends SmartBlockEntity implements IMulti
 		if (controllerBE == null)
 			return;
 
-		level.blockEntityChanged(controllerBE.worldPosition);
+        assert level != null;
+        level.blockEntityChanged(controllerBE.worldPosition);
 		
 		BlockPos pos = controllerBE.getBlockPos();
 		for (int y = 0; y < controllerBE.length; y++) {
@@ -94,7 +98,7 @@ public class ItemStockpileBlockEntity extends SmartBlockEntity implements IMulti
 
 		if (lastKnownPos == null)
 			lastKnownPos = getBlockPos();
-		else if (!lastKnownPos.equals(worldPosition) && worldPosition != null) {
+		else if (!lastKnownPos.equals(worldPosition)) {
 			onPositionChanged();
 			return;
 		}
@@ -123,14 +127,16 @@ public class ItemStockpileBlockEntity extends SmartBlockEntity implements IMulti
 	public ItemStockpileBlockEntity getControllerBE() {
 		if (isController())
 			return this;
-		BlockEntity blockEntity = level.getBlockEntity(controller);
+        assert level != null;
+        BlockEntity blockEntity = level.getBlockEntity(controller);
 		if (blockEntity instanceof ItemStockpileBlockEntity)
 			return (ItemStockpileBlockEntity) blockEntity;
 		return null;
 	}
 
 	public void removeController(boolean keepContents) {
-		if (level.isClientSide())
+        assert level != null;
+        if (level.isClientSide())
 			return;
 		updateConnectivity = true;
 		controller = null;
@@ -140,7 +146,7 @@ public class ItemStockpileBlockEntity extends SmartBlockEntity implements IMulti
 		BlockState state = getBlockState();
 		if (ItemStockpileBlock.isVault(state)) {
 			state = state.setValue(ItemStockpileBlock.LARGE, false);
-			getLevel().setBlock(worldPosition, state, 22);
+			Objects.requireNonNull(getLevel()).setBlock(worldPosition, state, 22);
 		}
 
 		itemCapability.invalidate();
@@ -150,9 +156,11 @@ public class ItemStockpileBlockEntity extends SmartBlockEntity implements IMulti
 
 	@Override
 	public void setController(BlockPos controller) {
-		if (level.isClientSide && !isVirtual())
+        assert level != null;
+        if (level.isClientSide && !isVirtual())
 			return;
-		if (controller.equals(this.controller))
+        assert controller != null;
+        if (controller.equals(this.controller))
 			return;
 		this.controller = controller;
 		itemCapability.invalidate();
@@ -173,7 +181,8 @@ public class ItemStockpileBlockEntity extends SmartBlockEntity implements IMulti
 		int prevSize = radius;
 		int prevLength = length;
 
-		updateConnectivity = compound.contains("Uninitialized");
+        assert compound != null;
+        updateConnectivity = compound.contains("Uninitialized");
 		controller = null;
 		lastKnownPos = null;
 
@@ -193,15 +202,19 @@ public class ItemStockpileBlockEntity extends SmartBlockEntity implements IMulti
 		}
 
 		boolean changeOfController =
-			controllerBefore == null ? controller != null : !controllerBefore.equals(controller);
-		if (hasLevel() && (changeOfController || prevSize != radius || prevLength != length))
-			level.setBlocksDirty(getBlockPos(), Blocks.AIR.defaultBlockState(), getBlockState());
+                !Objects.equals(controllerBefore, controller);
+		if (hasLevel() && (changeOfController || prevSize != radius || prevLength != length)) {
+            assert level != null;
+            level.setBlocksDirty(getBlockPos(), Blocks.AIR.defaultBlockState(), getBlockState());
+        }
 	}
 
 	@Override
 	protected void write(CompoundTag compound, boolean clientPacket) {
-		if (updateConnectivity)
-			compound.putBoolean("Uninitialized", true);
+		assert compound != null;
+		if (updateConnectivity) {
+            compound.putBoolean("Uninitialized", true);
+        }
 		if (lastKnownPos != null)
 			compound.put("LastKnownPos", NbtUtils.writeBlockPos(lastKnownPos));
 		if (!isController())
@@ -224,17 +237,20 @@ public class ItemStockpileBlockEntity extends SmartBlockEntity implements IMulti
 	}
 
 	public void applyInventoryToBlock(ItemStackHandler handler) {
-		for (int i = 0; i < inventory.getSlots(); i++)
-			inventory.setStackInSlot(i, i < handler.getSlots() ? handler.getStackInSlot(i) : ItemStack.EMPTY);
+		for (int i = 0; i < inventory.getSlots(); i++) {
+            assert handler != null;
+            inventory.setStackInSlot(i, i < handler.getSlots() ? handler.getStackInSlot(i) : ItemStack.EMPTY);
+        }
 	}
 
 	@Override
-	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
+	public <T> @NotNull LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
 		if (isItemHandlerCap(cap)) {
 			initCapability();
 			return itemCapability.cast();
 		}
-		return super.getCapability(cap, side);
+        assert cap != null;
+        return super.getCapability(cap, side);
 	}
 
 	private void initCapability() {
@@ -254,7 +270,8 @@ public class ItemStockpileBlockEntity extends SmartBlockEntity implements IMulti
 			for (int xOffset = 0; xOffset < radius; xOffset++) {
 				for (int zOffset = 0; zOffset < radius; zOffset++) {
 					BlockPos vaultPos = worldPosition.offset(xOffset, yOffset, zOffset);
-					ItemStockpileBlockEntity vaultAt = 	ConnectivityHandler.partAt(DesiresBlockEntityTypes.ITEM_STOCKPILE.get(), level, vaultPos);
+                    assert level != null;
+                    ItemStockpileBlockEntity vaultAt = 	ConnectivityHandler.partAt(DesiresBlockEntityTypes.ITEM_STOCKPILE.get(), level, vaultPos);
 					invs[yOffset * radius * radius + xOffset * radius + zOffset] =
 						vaultAt != null ? vaultAt.inventory : new ItemStackHandler();
 				}
@@ -276,7 +293,8 @@ public class ItemStockpileBlockEntity extends SmartBlockEntity implements IMulti
 	public void notifyMultiUpdated() {
 		BlockState state = this.getBlockState();
 		if (ItemStockpileBlock.isVault(state)) { // safety
-			level.setBlock(getBlockPos(), state.setValue(ItemStockpileBlock.LARGE, radius > 2), 6);
+            assert level != null;
+            level.setBlock(getBlockPos(), state.setValue(ItemStockpileBlock.LARGE, radius > 2), 6);
 		}
 		itemCapability.invalidate();
 		setChanged();

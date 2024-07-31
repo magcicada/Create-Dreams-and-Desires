@@ -4,6 +4,7 @@ import com.simibubi.create.AllItems;
 import com.simibubi.create.foundation.ponder.PonderTag;
 import uwu.lopyluna.create_dd.DesiresCreate;
 
+@SuppressWarnings({"unused", "SameParameterValue"})
 public class DesirePonderTags {
 
 	public static final PonderTag

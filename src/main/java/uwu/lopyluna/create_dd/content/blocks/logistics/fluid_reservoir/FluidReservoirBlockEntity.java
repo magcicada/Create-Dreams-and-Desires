@@ -28,8 +28,10 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Objects;
 
-@SuppressWarnings({"removal", "deprecated", "unchecked", "all"})
+
+@SuppressWarnings({"removal", "deprecated", "unchecked", "unused"})
 public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMultiBlockEntityContainer.Fluid, IHaveGoggleInformation {
 
     private static final int MAX_SIZE = 3;
@@ -67,6 +69,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
 
     protected void updateConnectivity() {
         updateConnectivity = false;
+        assert level != null;
         if (level.isClientSide)
             return;
         if (!isController())
@@ -85,7 +88,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
 
         if (lastKnownPos == null)
             lastKnownPos = getBlockPos();
-        else if (!lastKnownPos.equals(worldPosition) && worldPosition != null) {
+        else if (!lastKnownPos.equals(worldPosition)) {
             onPositionChanged();
             return;
         }
@@ -109,6 +112,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
     public void initialize() {
         super.initialize();
         sendData();
+        assert level != null;
         if (level.isClientSide)
             invalidateRenderBoundingBox();
     }
@@ -135,6 +139,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
             for (int xOffset = 0; xOffset < width; xOffset++) {
                 for (int zOffset = 0; zOffset < width; zOffset++) {
                     BlockPos pos = this.worldPosition.offset(xOffset, yOffset, zOffset);
+                    assert level != null;
                     FluidReservoirBlockEntity tankAt = ConnectivityHandler.partAt(getType(), level, pos);
                     if (tankAt == null)
                         continue;
@@ -147,6 +152,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
             }
         }
 
+        assert level != null;
         if (!level.isClientSide) {
             setChanged();
             sendData();
@@ -154,6 +160,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
     }
 
     protected void setLuminosity(int luminosity) {
+        assert level != null;
         if (level.isClientSide)
             return;
         if (this.luminosity == luminosity)
@@ -171,6 +178,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
     public FluidReservoirBlockEntity getControllerBE() {
         if (isController())
             return this;
+        assert level != null;
         BlockEntity blockEntity = level.getBlockEntity(controller);
         if (blockEntity instanceof FluidReservoirBlockEntity)
             return (FluidReservoirBlockEntity) blockEntity;
@@ -185,6 +193,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
     }
 
     public void removeController(boolean keepFluids) {
+        assert level != null;
         if (level.isClientSide)
             return;
         updateConnectivity = true;
@@ -198,7 +207,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
         BlockState state = getBlockState();
         if (FluidReservoirBlock.isTank(state)) {
             state = state.setValue(FluidReservoirBlock.LARGE, false);
-            getLevel().setBlock(worldPosition, state, 22);
+            Objects.requireNonNull(getLevel()).setBlock(worldPosition, state, 22);
         }
 
         refreshCapability();
@@ -225,6 +234,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
 
     @Override
     public void setController(BlockPos controller) {
+        assert level != null;
         if (level.isClientSide && !isVirtual())
             return;
         if (controller.equals(this.controller))
@@ -237,7 +247,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
 
     private void refreshCapability() {
         LazyOptional<IFluidHandler> oldCap = fluidCapability;
-        fluidCapability = LazyOptional.of(() -> handlerForCapability());
+        fluidCapability = LazyOptional.of(this::handlerForCapability);
         oldCap.invalidate();
     }
 
@@ -261,6 +271,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
 
     @Nullable
     public FluidReservoirBlockEntity getOtherFluidTankBlockEntity(Direction direction) {
+        assert level != null;
         BlockEntity otherBE = level.getBlockEntity(worldPosition.relative(direction));
         if (otherBE instanceof FluidReservoirBlockEntity)
             return (FluidReservoirBlockEntity) otherBE;
@@ -310,19 +321,23 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
             return;
         
         boolean changeOfController =
-                controllerBefore == null ? controller != null : !controllerBefore.equals(controller);
+                !Objects.equals(controllerBefore, controller);
         if (changeOfController || prevSize != width || prevHeight != height) {
-            if (hasLevel()) 
+            if (hasLevel()) {
+                assert level != null;
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 16);
+            }
             if (isController()) 
                 tankInventory.setCapacity(getCapacityMultiplier() * getTotalTankSize());
             invalidateRenderBoundingBox();
         }
 
-        if (luminosity != prevLum && hasLevel())
+        if (luminosity != prevLum && hasLevel()) {
+            assert level != null;
             level.getChunkSource()
                     .getLightEngine()
                     .checkBlock(worldPosition);
+        }
     }
 
     public float getFillState() {
@@ -393,6 +408,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
     public void notifyMultiUpdated() {
         BlockState state = this.getBlockState();
         if (FluidReservoirBlock.isTank(state)) { // safety
+            assert level != null;
             level.setBlock(getBlockPos(), state.setValue(FluidReservoirBlock.LARGE, width > 2), 6);
         }
 

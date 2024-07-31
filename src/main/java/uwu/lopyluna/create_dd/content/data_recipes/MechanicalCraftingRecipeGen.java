@@ -7,6 +7,7 @@ import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
 import com.simibubi.create.foundation.data.recipe.MechanicalCraftingRecipeBuilder;
 import com.simibubi.create.foundation.utility.RegisteredObjects;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
@@ -19,7 +20,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.UnaryOperator;
 
 @ParametersAreNonnullByDefault
-@SuppressWarnings({"unused", "all"})
+@MethodsReturnNonnullByDefault
+@SuppressWarnings({"unused", "SameParameterValue"})
 public class MechanicalCraftingRecipeGen extends CreateRecipeProvider {
 
     GeneratedRecipe
@@ -139,7 +141,7 @@ public class MechanicalCraftingRecipeGen extends CreateRecipeProvider {
     class GeneratedRecipeBuilder {
 
         private String suffix;
-        private Supplier<ItemLike> result;
+        private final Supplier<ItemLike> result;
         private int amount;
 
         public GeneratedRecipeBuilder(Supplier<ItemLike> result) {

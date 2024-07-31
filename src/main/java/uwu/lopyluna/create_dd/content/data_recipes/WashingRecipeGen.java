@@ -3,11 +3,13 @@ package uwu.lopyluna.create_dd.content.data_recipes;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import uwu.lopyluna.create_dd.registry.DesiresPaletteStoneTypes;
 
+@MethodsReturnNonnullByDefault
 @SuppressWarnings({"unused"})
 public class WashingRecipeGen extends DesireProcessingRecipeGen {
 

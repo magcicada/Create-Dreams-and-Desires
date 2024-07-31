@@ -13,16 +13,11 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -48,15 +43,6 @@ public class CogCrankBlock extends HandCrankBlock
         return AllShapes.SMALL_GEAR.get(state.getValue(FACING).getAxis());
     }
 
-    public int getRotationSpeed() {
-        return 32;
-    }
-
-    @Override
-    public RenderShape getRenderShape(BlockState state) {
-        return RenderShape.ENTITYBLOCK_ANIMATED;
-    }
-
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn,
                                  BlockHitResult hit) {
@@ -77,30 +63,8 @@ public class CogCrankBlock extends HandCrankBlock
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-        Direction preferred = getPreferredFacing(context);
-        BlockState defaultBlockState = withWater(defaultBlockState(), context);
-        if (preferred == null || (context.getPlayer() != null && context.getPlayer()
-                .isShiftKeyDown()))
-            return defaultBlockState.setValue(FACING, context.getClickedFace());
-        return defaultBlockState.setValue(FACING, preferred.getOpposite());
-    }
-
-    @Override
     public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
         return isValidCogwheelPosition(ICogWheel.isLargeCog(state), worldIn, pos, state.getValue(FACING).getAxis());
-    }
-
-    @Override
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState,
-                                  LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-        updateWater(pLevel, pState, pCurrentPos);
-        return pState;
-    }
-
-    @Override
-    public FluidState getFluidState(BlockState pState) {
-        return fluidState(pState);
     }
 
     @Override
@@ -116,11 +80,6 @@ public class CogCrankBlock extends HandCrankBlock
     @Override
     public BlockEntityType<? extends CogCrankBlockEntity> getBlockEntityType() {
         return DesiresBlockEntityTypes.COG_CRANK.get();
-    }
-
-    @Override
-    public boolean isPathfindable(BlockState state, BlockGetter reader, BlockPos pos, PathComputationType type) {
-        return false;
     }
 
     public static Couple<Integer> getSpeedRange() {

@@ -2,11 +2,13 @@ package uwu.lopyluna.create_dd.content.data_recipes;
 
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Items;
 import uwu.lopyluna.create_dd.registry.DesiresFluids;
 import uwu.lopyluna.create_dd.registry.DesiresItems;
 
+@MethodsReturnNonnullByDefault
 @SuppressWarnings({"unused"})
 public class MixingRecipeGen extends DesireProcessingRecipeGen {
 

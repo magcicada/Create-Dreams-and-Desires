@@ -16,6 +16,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 @ParametersAreNonnullByDefault
+@SuppressWarnings({"removal", "unused", "all"})
+@Deprecated(forRemoval=true)
 public class MagnetItem extends Item {
     public MagnetItem(Properties pProperties) {
         super(pProperties.stacksTo(1).rarity(Rarity.RARE));

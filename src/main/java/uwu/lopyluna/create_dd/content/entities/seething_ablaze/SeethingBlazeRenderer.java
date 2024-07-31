@@ -27,11 +27,6 @@ public class SeethingBlazeRenderer extends BlazeRenderer {
     }
 
     @Override
-    protected int getBlockLightLevel(Blaze pEntity, BlockPos pPos) {
-        return 15;
-    }
-
-    @Override
     public @NotNull ResourceLocation getTextureLocation(Blaze pEntity) {
         return SEETHING_BLAZE_LOCATION;
     }

@@ -41,7 +41,7 @@ import java.util.function.Supplier;
 import static com.simibubi.create.compat.jei.CreateJEI.consumeTypedRecipes;
 
 @JeiPlugin
-@SuppressWarnings({"unused", "inline", "unchecked", "all"})
+@SuppressWarnings({"unused", "inline", "unchecked"})
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class DesiresJEI implements IModPlugin {
@@ -55,9 +55,8 @@ public class DesiresJEI implements IModPlugin {
 	}
 
 	private static final List<CreateRecipeCategory<?>> allCategories = new ArrayList<>();
-	private IIngredientManager ingredientManager;
 
-	private void loadCategories() {
+    private void loadCategories() {
 		allCategories.clear();
 
 		CreateRecipeCategory<?>
@@ -93,7 +92,7 @@ public class DesiresJEI implements IModPlugin {
 
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
-		ingredientManager = registration.getIngredientManager();
+        IIngredientManager ingredientManager = registration.getIngredientManager();
 		allCategories.forEach(c -> c.registerRecipes(registration));
 	}
 
@@ -275,9 +274,8 @@ public class DesiresJEI implements IModPlugin {
 					.asItem()));
 		}
 
-		public CategoryBuilder<T> icon(IDrawable icon) {
+		public void icon(IDrawable icon) {
 			this.icon = icon;
-			return this;
 		}
 
 		public CategoryBuilder<T> itemIcon(ItemLike item) {
@@ -290,9 +288,8 @@ public class DesiresJEI implements IModPlugin {
 			return this;
 		}
 
-		public CategoryBuilder<T> background(IDrawable background) {
+		public void background(IDrawable background) {
 			this.background = background;
-			return this;
 		}
 
 		public CategoryBuilder<T> emptyBackground(int width, int height) {

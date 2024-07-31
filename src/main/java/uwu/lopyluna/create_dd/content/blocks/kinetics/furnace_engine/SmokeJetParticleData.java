@@ -5,6 +5,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.simibubi.create.foundation.particle.ICustomParticleDataWithSprite;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
@@ -16,8 +17,9 @@ import uwu.lopyluna.create_dd.registry.DesiresParticleTypes;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Locale;
 
-@SuppressWarnings({"deprecation", "all"})
+@SuppressWarnings({"deprecation"})
 @ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class SmokeJetParticleData implements ParticleOptions, ICustomParticleDataWithSprite<SmokeJetParticleData> {
 
     public static final Codec<SmokeJetParticleData> CODEC = RecordCodecBuilder.create(i -> i
@@ -26,7 +28,7 @@ public class SmokeJetParticleData implements ParticleOptions, ICustomParticleDat
             .apply(i, SmokeJetParticleData::new));
 
     public static final ParticleOptions.Deserializer<SmokeJetParticleData> DESERIALIZER =
-            new ParticleOptions.Deserializer<SmokeJetParticleData>() {
+            new ParticleOptions.Deserializer<>() {
                 public SmokeJetParticleData fromCommand(ParticleType<SmokeJetParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
                     reader.expect(' ');
                     float speed = reader.readFloat();

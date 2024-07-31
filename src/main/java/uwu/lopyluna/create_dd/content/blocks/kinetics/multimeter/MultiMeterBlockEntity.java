@@ -21,7 +21,7 @@ import uwu.lopyluna.create_dd.registry.DesiresPackets;
 
 import java.util.List;
 
-@SuppressWarnings({"deprecation", "all"})
+@SuppressWarnings({"deprecation"})
 public class MultiMeterBlockEntity extends KineticBlockEntity implements IHaveGoggleInformation {
 
     public float dialTarget;
@@ -116,7 +116,7 @@ public class MultiMeterBlockEntity extends KineticBlockEntity implements IHaveGo
         color = compound.getInt("Color");
         super.read(compound, clientPacket);
 
-        if (clientPacket && worldPosition != null && worldPosition.equals(lastSent))
+        if (clientPacket && worldPosition.equals(lastSent))
             lastSent = null;
     }
 

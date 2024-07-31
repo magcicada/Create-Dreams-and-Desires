@@ -3,6 +3,7 @@ package uwu.lopyluna.create_dd.content.entities.seething_ablaze;
 import com.mojang.math.Vector3f;
 import com.simibubi.create.content.trains.CubeParticleData;
 import com.simibubi.create.foundation.utility.Color;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -29,7 +30,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumSet;
 
-@SuppressWarnings({"all"})
+@MethodsReturnNonnullByDefault
+@SuppressWarnings({"unused"})
 public class SeethingBlaze extends Blaze {
     private float allowedHeightOffset = 0.5F;
     private int nextHeightOffsetChangeTick;
@@ -80,23 +82,8 @@ public class SeethingBlaze extends Blaze {
     }
 
     @Override
-    protected SoundEvent getAmbientSound() {
-        return SoundEvents.BLAZE_AMBIENT;
-    }
-
-    @Override
     protected SoundEvent getHurtSound(@NotNull DamageSource pDamageSource) {
         return SoundEvents.BLAZE_HURT;
-    }
-
-    @Override
-    protected SoundEvent getDeathSound() {
-        return SoundEvents.BLAZE_DEATH;
-    }
-
-    @Override
-    public float getLightLevelDependentMagicValue() {
-        return 1.0F;
     }
 
     /**
@@ -138,11 +125,6 @@ public class SeethingBlaze extends Blaze {
         }
 
         super.aiStep();
-    }
-
-    @Override
-    public boolean isSensitiveToWater() {
-        return true;
     }
 
     @Override

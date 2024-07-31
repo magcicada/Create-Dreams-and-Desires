@@ -20,8 +20,8 @@ public class DesiresRegistrateTags {
 	public static void addGenerators() {
 		DesiresCreate.REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, DesiresRegistrateTags::genBlockTags);
 		DesiresCreate.REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, DesiresRegistrateTags::genItemTags);
-		//DesiresCreate.REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, DesiresRegistrateTags::genFluidTags);
-		//DesiresCreate.REGISTRATE.addDataGenerator(ProviderType.ENTITY_TAGS, DesiresRegistrateTags::genEntityTags);
+		//DesiresCreate.REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, DesiresRegistrateTags::genFluidTags);*
+		//DesiresCreate.REGISTRATE.addDataGenerator(ProviderType.ENTITY_TAGS, DesiresRegistrateTags::genEntityTags);*
 	}
 	private static void genItemTags(RegistrateTagsProvider<Item> prov) {
 

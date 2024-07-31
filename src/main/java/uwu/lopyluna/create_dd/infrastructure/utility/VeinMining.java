@@ -17,7 +17,6 @@ import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 
-@SuppressWarnings({"all"})
 public class VeinMining {
 
     public static final Vein NO_VEIN =

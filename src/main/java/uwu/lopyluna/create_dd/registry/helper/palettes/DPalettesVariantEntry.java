@@ -15,11 +15,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import uwu.lopyluna.create_dd.registry.DesiresPaletteStoneTypes;
 
-import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 
-@SuppressWarnings({"removal", "all"})
+@SuppressWarnings({"removal"})
 public class DPalettesVariantEntry {
 
 	public final ImmutableList<BlockEntry<? extends Block>> registeredBlocks;
@@ -54,8 +53,7 @@ public class DPalettesVariantEntry {
 			if (pattern.isTranslucent())
 				builder.addLayer(() -> RenderType::translucent);
 			pattern.createCTBehaviour(name)
-				.ifPresent(b -> builder.onRegister(connectedTextures(b)));
-
+				.ifPresent(b -> builder.onRegister(CreateRegistrate.connectedTextures(b)));
 			builder.recipe((c, p) -> {
 				p.stonecutting(DataIngredient.tag(paletteStoneVariants.materialTag), c);
 				pattern.addRecipes(baseBlock, c, p);

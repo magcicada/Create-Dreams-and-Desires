@@ -3,6 +3,7 @@ package uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
@@ -13,13 +14,13 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-
-
-@SuppressWarnings({"all"})
 @ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+@SuppressWarnings({"unused", "all"})
 public class SmokeJetParticle extends SimpleAnimatedParticle {
 
-    private float yaw, pitch;
+    private final float yaw;
+    private final float pitch;
 
     protected SmokeJetParticle(ClientLevel world, SmokeJetParticleData data, double x, double y, double z, double dx,
                                double dy, double dz, SpriteSet sprite) {
@@ -72,22 +73,22 @@ public class SmokeJetParticle extends SimpleAnimatedParticle {
             }
 
             int j = this.getLightColor(pPartialTicks);
-            pBuffer.vertex((double) avector3f[0].x(), (double) avector3f[0].y(), (double) avector3f[0].z())
+            pBuffer.vertex(avector3f[0].x(), avector3f[0].y(), avector3f[0].z())
                     .uv(f8, f6)
                     .color(this.rCol, this.gCol, this.bCol, this.alpha)
                     .uv2(j)
                     .endVertex();
-            pBuffer.vertex((double) avector3f[1].x(), (double) avector3f[1].y(), (double) avector3f[1].z())
+            pBuffer.vertex(avector3f[1].x(), avector3f[1].y(), avector3f[1].z())
                     .uv(f8, f5)
                     .color(this.rCol, this.gCol, this.bCol, this.alpha)
                     .uv2(j)
                     .endVertex();
-            pBuffer.vertex((double) avector3f[2].x(), (double) avector3f[2].y(), (double) avector3f[2].z())
+            pBuffer.vertex(avector3f[2].x(), avector3f[2].y(), avector3f[2].z())
                     .uv(f7, f5)
                     .color(this.rCol, this.gCol, this.bCol, this.alpha)
                     .uv2(j)
                     .endVertex();
-            pBuffer.vertex((double) avector3f[3].x(), (double) avector3f[3].y(), (double) avector3f[3].z())
+            pBuffer.vertex(avector3f[3].x(), avector3f[3].y(), avector3f[3].z())
                     .uv(f7, f6)
                     .color(this.rCol, this.gCol, this.bCol, this.alpha)
                     .uv2(j)

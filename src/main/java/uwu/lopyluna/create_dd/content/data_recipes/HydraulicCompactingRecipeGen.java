@@ -2,6 +2,7 @@ package uwu.lopyluna.create_dd.content.data_recipes;
 
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluids;
@@ -11,6 +12,7 @@ import uwu.lopyluna.create_dd.registry.DesiresRecipeTypes;
 
 import static uwu.lopyluna.create_dd.registry.DTags.tag;
 
+@MethodsReturnNonnullByDefault
 @SuppressWarnings({"unused"})
 public class HydraulicCompactingRecipeGen extends DesireProcessingRecipeGen {
     public HydraulicCompactingRecipeGen(DataGenerator generator) {

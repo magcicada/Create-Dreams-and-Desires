@@ -7,6 +7,7 @@ import com.simibubi.create.content.fluids.transfer.GenericItemFilling;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.fluid.FluidHelper;
 import com.simibubi.create.foundation.item.ItemHelper;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -54,6 +55,7 @@ import uwu.lopyluna.create_dd.registry.DesiresBlockEntityTypes;
 
 import javax.annotation.Nullable;
 
+@MethodsReturnNonnullByDefault
 @SuppressWarnings({"deprecation", "removal", "all"})
 public class FluidReservoirBlock extends Block implements IWrenchable, IBE<FluidReservoirBlockEntity> {
 
@@ -75,7 +77,7 @@ public class FluidReservoirBlock extends Block implements IWrenchable, IBE<Fluid
     }
 
     @Override
-    public void onPlace(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean moved) {
+    public void onPlace(BlockState state, @NotNull Level world, @NotNull BlockPos pos, BlockState oldState, boolean moved) {
         if (oldState.getBlock() == state.getBlock())
             return;
         if (moved)
@@ -114,43 +116,41 @@ public class FluidReservoirBlock extends Block implements IWrenchable, IBE<Fluid
                 .isVertical()) {
             BlockEntity be = context.getLevel()
                     .getBlockEntity(context.getClickedPos());
-            if (be instanceof FluidReservoirBlockEntity) {
-                FluidReservoirBlockEntity keg = (FluidReservoirBlockEntity) be;
+            if (be instanceof FluidReservoirBlockEntity keg) {
                 ConnectivityHandler.splitMulti(keg);
                 keg.removeController(true);
             }
             state = state.setValue(LARGE, false);
         }
-        InteractionResult onWrenched = IWrenchable.super.onWrenched(state, context);
-        return onWrenched;
+        return IWrenchable.super.onWrenched(state, context);
     }
 
     static final VoxelShape CAMPFIRE_SMOKE_CLIP = Block.box(0, 4, 0, 16, 16, 16);
 
     @Override
-    public VoxelShape getCollisionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos,
-                                        CollisionContext pContext) {
+    public VoxelShape getCollisionShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos,
+                                        @NotNull CollisionContext pContext) {
         if (pContext == CollisionContext.empty())
             return CAMPFIRE_SMOKE_CLIP;
         return pState.getShape(pLevel, pPos);
     }
 
     @Override
-    public VoxelShape getBlockSupportShape(BlockState pState, BlockGetter pReader, BlockPos pPos) {
+    public VoxelShape getBlockSupportShape(@NotNull BlockState pState, @NotNull BlockGetter pReader, @NotNull BlockPos pPos) {
         return Shapes.block();
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState,
-                                  LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
+    public BlockState updateShape(@NotNull BlockState pState, @NotNull Direction pDirection, @NotNull BlockState pNeighborState,
+                                  @NotNull LevelAccessor pLevel, @NotNull BlockPos pCurrentPos, @NotNull BlockPos pNeighborPos) {
         if (pDirection == Direction.DOWN && pNeighborState.getBlock() != this)
             withBlockEntityDo(pLevel, pCurrentPos, FluidReservoirBlockEntity::updateConnectivity);
         return pState;
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
-                                 BlockHitResult ray) {
+    public InteractionResult use(@NotNull BlockState state, Level world, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand,
+                                 @NotNull BlockHitResult ray) {
         ItemStack heldItem = player.getItemInHand(hand);
         boolean onClient = world.isClientSide;
 
@@ -212,7 +212,7 @@ public class FluidReservoirBlock extends Block implements IWrenchable, IBE<Fluid
             if (be instanceof FluidReservoirBlockEntity) {
                 FluidReservoirBlockEntity controllerBE = ((FluidReservoirBlockEntity) be).getControllerBE();
                 if (controllerBE != null) {
-                    if (fluidState != null && onClient) {
+                    if (onClient) {
                         BlockParticleOption blockParticleData =
                                 new BlockParticleOption(ParticleTypes.BLOCK, fluidState);
                         float level = (float) fluidInTank.getAmount() / fluidTank.getTankCapacity(0);
@@ -244,12 +244,11 @@ public class FluidReservoirBlock extends Block implements IWrenchable, IBE<Fluid
     }
 
     @Override
-    public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean pIsMoving) {
+    public void onRemove(BlockState state, @NotNull Level world, @NotNull BlockPos pos, @NotNull BlockState newState, boolean pIsMoving) {
         if (state.hasBlockEntity() && (state.getBlock() != newState.getBlock() || !newState.hasBlockEntity())) {
             BlockEntity be = world.getBlockEntity(pos);
-            if (!(be instanceof FluidReservoirBlockEntity))
+            if (!(be instanceof FluidReservoirBlockEntity kegBE))
                 return;
-            FluidReservoirBlockEntity kegBE = (FluidReservoirBlockEntity) be;
             world.removeBlockEntity(pos);
             ConnectivityHandler.splitMulti(kegBE);
         }
@@ -299,8 +298,8 @@ public class FluidReservoirBlock extends Block implements IWrenchable, IBE<Fluid
     @Override
     public SoundType getSoundType(BlockState state, LevelReader world, BlockPos pos, Entity entity) {
         SoundType soundType = super.getSoundType(state, world, pos, entity);
-        if (entity != null && entity.getPersistentData()
-                .contains("SilenceTankSound"))
+        if (entity.getPersistentData()
+                        .contains("SilenceTankSound"))
             return SILENCED_COPPER;
         return soundType;
     }

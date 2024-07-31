@@ -42,15 +42,15 @@ public enum DesiresPaletteStoneTypes {
             .register())
     ;
 
-    private Function<CreateRegistrate, NonNullSupplier<Block>> factory;
+    private final Function<CreateRegistrate, NonNullSupplier<Block>> factory;
     private DPalettesVariantEntry variants;
 
     public NonNullSupplier<Block> baseBlock;
-    public DPaletteBlockPattern[] variantTypes;
+    public final DPaletteBlockPattern[] variantTypes;
     public TagKey<Item> materialTag;
 
-    private DesiresPaletteStoneTypes(DPaletteBlockPattern[] variantTypes,
-                                     Function<CreateRegistrate, NonNullSupplier<Block>> factory) {
+    DesiresPaletteStoneTypes(DPaletteBlockPattern[] variantTypes,
+                             Function<CreateRegistrate, NonNullSupplier<Block>> factory) {
         this.factory = factory;
         this.variantTypes = variantTypes;
     }
@@ -65,8 +65,7 @@ public enum DesiresPaletteStoneTypes {
 
     public static void register(CreateRegistrate registrate) {
         for (DesiresPaletteStoneTypes paletteStoneVariants : values()) {
-            NonNullSupplier<Block> baseBlock = paletteStoneVariants.factory.apply(registrate);
-            paletteStoneVariants.baseBlock = baseBlock;
+            paletteStoneVariants.baseBlock = paletteStoneVariants.factory.apply(registrate);
             String id = Lang.asId(paletteStoneVariants.name());
             paletteStoneVariants.materialTag =
                     DesiresTags.optionalTag(ForgeRegistries.ITEMS, DesiresCreate.asResource("stone_types/" + id));

@@ -33,6 +33,7 @@ import uwu.lopyluna.create_dd.registry.DesiresTags;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -41,7 +42,6 @@ import static uwu.lopyluna.create_dd.registry.DesireTiers.Drill;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-@SuppressWarnings({"all"})
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ExcavationDrillItem extends BackTankPickaxeItem {
     private static final Set<BlockPos> hashedBlocks = new HashSet<>();
@@ -81,12 +81,12 @@ public class ExcavationDrillItem extends BackTankPickaxeItem {
         world.addFreshEntity(entity);
     }
 
-    public static boolean validBlocks(BlockState pState, BlockEvent.BreakEvent event, BlockPos blockPos) {
-        ItemStack heldItemMainhand = event.getPlayer().getItemInHand(InteractionHand.MAIN_HAND);
-        return pState.getDestroySpeed(event.getLevel(), blockPos) != 0.0F ||
-                    !pState.is(DesiresTags.forgeBlockTag("ores")) ||
-                    DesiresItems.EXCAVATION_DRILL.get().isCorrectToolForDrops(heldItemMainhand, pState);
-    }
+    //public static boolean validBlocks(BlockState pState, BlockEvent.BreakEvent event, BlockPos blockPos) {\
+    //    ItemStack heldItemMainhand = event.getPlayer().getItemInHand(InteractionHand.MAIN_HAND);
+    //    return pState.getDestroySpeed(event.getLevel(), blockPos) != 0.0F ||
+    //                !pState.is(DesiresTags.forgeBlockTag("ores")) ||
+    //                DesiresItems.EXCAVATION_DRILL.get().isCorrectToolForDrops(heldItemMainhand, pState);
+    //}
 
     @SubscribeEvent
     public static void onBlockDestroyed(BlockEvent.BreakEvent event) {
@@ -109,7 +109,7 @@ public class ExcavationDrillItem extends BackTankPickaxeItem {
                 return;
             }
 
-            for (BlockPos pos : BoreMining.getBlocksToBeDestroyed(1, initalBlockPos, serverPlayer)) {
+            for (BlockPos pos : Objects.requireNonNull(BoreMining.getBlocksToBeDestroyed(1, initalBlockPos, serverPlayer))) {
                 if(pos == initalBlockPos || !(event.getLevel().getBlockState(pos).getDestroySpeed(event.getLevel(), pos) != 0.0F) ||
                         event.getLevel().getBlockState(pos).is(DesiresTags.forgeBlockTag("ores")) ||
                         !DesiresItems.EXCAVATION_DRILL.get().isCorrectToolForDrops(heldItemMainhand, event.getLevel().getBlockState(pos))) {
@@ -142,9 +142,9 @@ public class ExcavationDrillItem extends BackTankPickaxeItem {
         return true;
     }
 
-    //@Override
-    //@OnlyIn(Dist.CLIENT)
-    //public HumanoidModel.ArmPose getArmPose(ItemStack stack, AbstractClientPlayer player, InteractionHand hand) {
+    //@Override;
+    //@OnlyIn(Dist.CLIENT);
+    //public HumanoidModel.ArmPose getArmPose(ItemStack stack, AbstractClientPlayer player, InteractionHand hand) {;l
     //    if (!player.swinging) {
     //        return HumanoidModel.ArmPose.CROSSBOW_HOLD;
     //    } else {

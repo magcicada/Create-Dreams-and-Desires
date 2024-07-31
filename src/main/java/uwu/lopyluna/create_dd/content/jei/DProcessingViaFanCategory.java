@@ -7,6 +7,7 @@ import com.simibubi.create.compat.jei.category.animations.AnimatedKinetics;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
+import org.jetbrains.annotations.NotNull;
 import uwu.lopyluna.create_dd.registry.helper.Lang;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -89,7 +90,7 @@ public abstract class DProcessingViaFanCategory<T extends Recipe<?>> extends Cre
         matrixStack.translate(56, 33, 0);
     }
 
-    protected abstract void renderAttachedBlock(IRecipeSlotsView iRecipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY);
+    protected abstract void renderAttachedBlock(@NotNull IRecipeSlotsView iRecipeSlotsView, @NotNull PoseStack matrixStack, double mouseX, double mouseY);
 
     public static abstract class MultiOutput<T extends ProcessingRecipe<?>> extends DProcessingViaFanCategory<T> {
 

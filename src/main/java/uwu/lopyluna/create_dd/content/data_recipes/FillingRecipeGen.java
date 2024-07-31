@@ -6,8 +6,10 @@ import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potions;
+import org.jetbrains.annotations.NotNull;
 import uwu.lopyluna.create_dd.registry.DesiresPaletteStoneTypes;
 
+@SuppressWarnings("unused")
 public class FillingRecipeGen extends DesireProcessingRecipeGen {
     public FillingRecipeGen(DataGenerator generator) {
         super(generator);
@@ -29,7 +31,7 @@ public class FillingRecipeGen extends DesireProcessingRecipeGen {
     );
 
     @Override
-    protected IRecipeTypeInfo getRecipeType() {
+    protected @NotNull IRecipeTypeInfo getRecipeType() {
         return AllRecipeTypes.FILLING;
     }
 }

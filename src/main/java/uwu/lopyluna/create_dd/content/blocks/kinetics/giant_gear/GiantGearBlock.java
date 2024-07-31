@@ -3,6 +3,7 @@ package uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear;
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.utility.Iterate;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -23,9 +24,11 @@ import uwu.lopyluna.create_dd.registry.DesiresBlockEntityTypes;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Objects;
 
 @ParametersAreNonnullByDefault
-@SuppressWarnings({"deprecation", "all"})
+@MethodsReturnNonnullByDefault
+@SuppressWarnings({"deprecation"})
 public class GiantGearBlock extends RotatedPillarKineticBlock implements IBE<GiantGearBlockEntity> {
 
     public static final BooleanProperty EXTENSION = BooleanProperty.create("extension");
@@ -40,7 +43,7 @@ public class GiantGearBlock extends RotatedPillarKineticBlock implements IBE<Gia
     }
 
     public Direction.Axis getAxisForPlacement(BlockPlaceContext context) {
-        return super.getStateForPlacement(context).getValue(AXIS);
+        return Objects.requireNonNull(super.getStateForPlacement(context)).getValue(AXIS);
     }
 
     @Override
@@ -96,10 +99,11 @@ public class GiantGearBlock extends RotatedPillarKineticBlock implements IBE<Gia
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockState stateForPlacement = super.getStateForPlacement(context);
         BlockPos pos = context.getClickedPos();
+        assert stateForPlacement != null;
         Direction.Axis axis = stateForPlacement.getValue(AXIS);
-        boolean axis_x = axis == axis.X;
-        boolean axis_y = axis == axis.Y;
-        boolean axis_z = axis == axis.Z;
+        boolean axis_x = axis == Direction.Axis.X;
+        boolean axis_y = axis == Direction.Axis.Y;
+        boolean axis_z = axis == Direction.Axis.Z;
 
         int inflate_yz = !axis_x ? 2 : 1;
         int inflate_xz = !axis_y ? 2 : 1;

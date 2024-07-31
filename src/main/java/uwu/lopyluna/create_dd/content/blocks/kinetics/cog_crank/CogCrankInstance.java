@@ -12,8 +12,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class CogCrankInstance extends SingleRotatingInstance<CogCrankBlockEntity> implements DynamicInstance {
 
-    private ModelData crank;
-    private Direction facing;
+    private final ModelData crank;
+    private final Direction facing;
 
     public CogCrankInstance(MaterialManager modelManager, CogCrankBlockEntity blockEntity) {
         super(modelManager, blockEntity);

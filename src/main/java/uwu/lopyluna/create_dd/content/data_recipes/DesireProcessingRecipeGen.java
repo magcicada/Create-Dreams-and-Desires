@@ -6,6 +6,7 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.foundation.utility.RegisteredObjects;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -14,12 +15,16 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import uwu.lopyluna.create_dd.DesiresCreate;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+@SuppressWarnings({"all"})
 public abstract class DesireProcessingRecipeGen extends CreateRecipeProvider {
 
     protected static final List<DesireProcessingRecipeGen> GENERATORS = new ArrayList<>();
@@ -118,14 +123,6 @@ public abstract class DesireProcessingRecipeGen extends CreateRecipeProvider {
 
     protected <T extends ProcessingRecipe<?>> ProcessingRecipeSerializer<T> getSerializer() {
         return getRecipeType().getSerializer();
-    }
-
-    protected Supplier<ResourceLocation> idWithSuffix(Supplier<ItemLike> item, String suffix) {
-        return () -> {
-            ResourceLocation registryName = RegisteredObjects.getKeyOrThrow(item.get()
-                    .asItem());
-            return DesiresCreate.asResource(registryName.getPath() + suffix);
-        };
     }
 
     @Override

@@ -16,7 +16,6 @@ import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.SmokeJetPar
 
 import java.util.function.Supplier;
 
-@SuppressWarnings({"all"})
 public enum DesiresParticleTypes {
 
     SMOKE_JET(SmokeJetParticleData::new);

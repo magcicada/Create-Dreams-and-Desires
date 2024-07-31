@@ -18,7 +18,7 @@ public class PoweredFlywheelInstance extends KineticBlockEntityInstance<PoweredF
 
     public PoweredFlywheelInstance(MaterialManager materialManager, PoweredFlywheelBlockEntity blockEntity) {
         super(materialManager, blockEntity);
-        this.wheel = (ModelData)this.getTransformMaterial().getModel(this.blockState).createInstance();
+        this.wheel = this.getTransformMaterial().getModel(this.blockState).createInstance();
         this.animate(blockEntity.angle);
     }
 

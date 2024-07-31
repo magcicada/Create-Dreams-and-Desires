@@ -10,17 +10,20 @@ import net.minecraft.tags.BiomeTags;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import uwu.lopyluna.create_dd.registry.DesiresPaletteStoneTypes;
 
-@SuppressWarnings({"all"})
+import java.util.Objects;
+
+@SuppressWarnings({"unused", "SameParameterValue"})
 @Mixin(value = AllOreFeatureConfigEntries.class, remap = false)
 public class MixinAllOreFeatureConfigEntries {
 
     @Final
     @Shadow
     public static final OreFeatureConfigEntry ZINC_ORE =
-            create("gabbro_blob", 64, 0.85F, -64, 0)
-                    .standardDatagenExt()
+            Objects.requireNonNull(create_DnD$create("gabbro_blob", 64, 0.85F, -64, 0)
+                            .standardDatagenExt())
                     .withBlocks(Couple.create(AllPaletteStoneTypes.GRANITE.baseBlock, DesiresPaletteStoneTypes.GABBRO.baseBlock))
                     .biomeTag(BiomeTags.IS_OVERWORLD)
                     .parent();
@@ -28,15 +31,15 @@ public class MixinAllOreFeatureConfigEntries {
     @Final
     @Shadow
     public static final OreFeatureConfigEntry STRIATED_ORES_OVERWORLD =
-            create("dolomite_blob", 64, 0.85F, -64, 0)
-                    .standardDatagenExt()
+            Objects.requireNonNull(create_DnD$create("dolomite_blob", 64, 0.85F, -64, 0)
+                            .standardDatagenExt())
                     .withBlocks(Couple.create(AllPaletteStoneTypes.DIORITE.baseBlock, DesiresPaletteStoneTypes.DOLOMITE.baseBlock))
                     .biomeTag(BiomeTags.IS_OVERWORLD)
                     .parent();
 
-    private static OreFeatureConfigEntry create(String name, int clusterSize, float frequency, int minHeight, int maxHeight) {
+    @Unique
+    private static OreFeatureConfigEntry create_DnD$create(String name, int clusterSize, float frequency, int minHeight, int maxHeight) {
         ResourceLocation id = Create.asResource(name);
-        OreFeatureConfigEntry configDrivenFeatureEntry = new OreFeatureConfigEntry(id, clusterSize, frequency, minHeight, maxHeight);
-        return configDrivenFeatureEntry;
+        return new OreFeatureConfigEntry(id, clusterSize, frequency, minHeight, maxHeight);
     }
 }

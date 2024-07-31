@@ -2,16 +2,17 @@ package uwu.lopyluna.create_dd.infrastructure.config;
 
 import com.simibubi.create.foundation.config.ConfigBase;
 
+@SuppressWarnings({"unused"})
 public class DRecipes extends ConfigBase {
 
 	public final ConfigBool hydraulicBulkPressing = b(true, "hydraulicBulkPressing", Comments.hydraulicBulkPressing);
 	public final ConfigInt hydraulicLavaDrainPressing = i(250, 1, 1000, "hydraulicLavaDrainPressing", Comments.hydraulicLavaDrainPressing);
 	public final ConfigInt hydraulicFluidDrainPressing = i(1000, 1, 1000, "hydraulicFluidDrainPressing", Comments.hydraulicFluidDrainPressing);
-	//public final ConfigBool lumberBulkCutting = b(true, "lumberBulkCutting", Comments.lumberBulkCutting);
-	//public final ConfigBool allowShapedSquareInHyPress = b(false, "allowShapedSquareInHyPress", Comments.allowShapedSquareInHyPress);
-	//public final ConfigBool allowStonecuttingOnLumberSaw = b(false, "allowStonecuttingOnLumberSaw", Comments.allowStonecuttingOnLumberSaw);
-	//public final ConfigBool allowWoodcuttingOnLumberSaw = b(true, "allowWoodcuttingOnLumberSaw", Comments.allowWoodcuttingOnLumberSaw);
-	//public final ConfigBool displayLogStrippingRecipes = b(true, "displayLogStrippingRecipes", Comments.displayLogStrippingRecipes);
+	//public final ConfigBool lumberBulkCutting = b(true, "lumberBulkCutting", Comments.lumberBulkCutting);*
+	//public final ConfigBool allowShapedSquareInHyPress = b(false, "allowShapedSquareInHyPress", Comments.allowShapedSquareInHyPress);*
+	//public final ConfigBool allowStonecuttingOnLumberSaw = b(false, "allowStonecuttingOnLumberSaw", Comments.allowStonecuttingOnLumberSaw);*
+	//public final ConfigBool allowWoodcuttingOnLumberSaw = b(true, "allowWoodcuttingOnLumberSaw", Comments.allowWoodcuttingOnLumberSaw);*
+	//public final ConfigBool displayLogStrippingRecipes = b(true, "displayLogStrippingRecipes", Comments.displayLogStrippingRecipes);*
 
 	@Override
 	public String getName() {

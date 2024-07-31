@@ -8,7 +8,7 @@ import com.simibubi.create.foundation.utility.Couple;
 import uwu.lopyluna.create_dd.DesiresCreate;
 
 
-@SuppressWarnings({"all"})
+@SuppressWarnings({"unused"})
 public class DesiresSpriteShifts {
 
 	public static final Couple<CTSpriteShiftEntry>
@@ -23,16 +23,16 @@ public class DesiresSpriteShifts {
 			KEG_SIDE = reservoir("side"),
 			KEG_BOTTOM = reservoir("bottom");
 
-	//public static final CTSpriteShiftEntry
+	//public static final CTSpriteShiftEntry*
 	//	HYDRAULIC_SCAFFOLD = horizontal("scaffold/hydraulic_scaffold");
-//
-	//public static final CTSpriteShiftEntry
+
+	//public static final CTSpriteShiftEntry*
 	//	HYDRAULIC_SCAFFOLD_INSIDE = horizontal("scaffold/hydraulic_scaffold_inside");
-//
-	//public static final CTSpriteShiftEntry
+
+	//public static final CTSpriteShiftEntry*
 	//	ORNATE_IRON_GLASS = getCT(AllCTTypes.OMNIDIRECTIONAL, "palettes/ornate_iron_glass", "palettes/ornate_iron_glass"),
 	//	ORNATE_IRON_GLASS_SIDE = getCT(AllCTTypes.OMNIDIRECTIONAL, "palettes/ornate_iron_glass_side", "palettes/ornate_iron_glass_side");
-//
+
 	public static final CTSpriteShiftEntry
 			HAZARD_BLOCK = omni("hazard_block"),
 			DARK_METAL_PLATING = omni("dark_metal_plating"),

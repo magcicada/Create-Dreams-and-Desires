@@ -23,14 +23,13 @@ import uwu.lopyluna.create_dd.content.items.equipment.clockwork_crossbow.Clockwo
 import uwu.lopyluna.create_dd.content.items.equipment.deforester_saw.DeforesterSawItem;
 import uwu.lopyluna.create_dd.content.items.equipment.excavation_drill.ExcavationDrillItem;
 import uwu.lopyluna.create_dd.content.items.equipment.gilded_rose_tools.*;
-import uwu.lopyluna.create_dd.content.items.equipment.magnet.MagnetItem;
 
 import static com.tterrag.registrate.providers.RegistrateRecipeProvider.has;
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 import static uwu.lopyluna.create_dd.registry.DesiresTags.forgeItemTag;
 import static uwu.lopyluna.create_dd.registry.DesiresTags.optionalTag;
 
-@SuppressWarnings({"unused", "deprecation", "all"})
+@SuppressWarnings({"unused", "deprecation", "removal", "SameParameterValue"})
 public class DesiresItems {
 
 	static {
@@ -168,7 +167,7 @@ public class DesiresItems {
 			})
 			.register();
 
-	public static final ItemEntry<MagnetItem> MAGNET = REGISTRATE.item("magnet", MagnetItem::new)
+	public static final ItemEntry<uwu.lopyluna.create_dd.content.items.equipment.magnet.MagnetItem> MAGNET = REGISTRATE.item("magnet", uwu.lopyluna.create_dd.content.items.equipment.magnet.MagnetItem::new)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/generated")).texture("layer0",
 					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))

@@ -2,17 +2,16 @@ package uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllShapes;
-import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.utility.Iterate;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.RenderShape;
@@ -25,6 +24,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import uwu.lopyluna.create_dd.registry.DesiresBlockEntityTypes;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+@SuppressWarnings({"deprecation", "unused"})
 public class PoweredFlywheelBlock extends RotatedPillarKineticBlock implements IBE<PoweredFlywheelBlockEntity> {
     public PoweredFlywheelBlock(BlockBehaviour.Properties properties) {
         super(properties);
@@ -84,7 +88,7 @@ public class PoweredFlywheelBlock extends RotatedPillarKineticBlock implements I
                 continue;
             BlockPos enginePos = pPos.relative(d, 2);
             BlockState engineState = pLevel.getBlockState(enginePos);
-            if (!(engineState.getBlock() instanceof FurnaceEngineBlock engine))
+            if (!(engineState.getBlock() instanceof FurnaceEngineBlock))
                 continue;
             if (!FurnaceEngineBlock.getFlywheelPos(engineState, enginePos)
                     .equals(pPos))

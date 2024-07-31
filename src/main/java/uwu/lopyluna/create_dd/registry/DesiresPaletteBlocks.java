@@ -366,7 +366,6 @@ public class DesiresPaletteBlocks {
 			CYAN_VELVET_BLOCK = velvetBlock("cyan", MaterialColor.COLOR_CYAN, Items.CYAN_DYE),
 			PURPLE_VELVET_BLOCK = velvetBlock("purple", MaterialColor.COLOR_PURPLE, Items.PURPLE_DYE),
 			ORANGE_VELVET_BLOCK = velvetBlock("orange", MaterialColor.COLOR_ORANGE, Items.ORANGE_DYE);
-	;
 
 	public static final BlockEntry<Block>
 			BLACK_RUBBER_BLOCKS = rubber_decor("black", MaterialColor.COLOR_BLACK, Items.BLACK_DYE),

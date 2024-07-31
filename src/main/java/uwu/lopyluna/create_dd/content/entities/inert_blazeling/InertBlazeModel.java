@@ -2,6 +2,7 @@ package uwu.lopyluna.create_dd.content.entities.inert_blazeling;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -14,7 +15,8 @@ import uwu.lopyluna.create_dd.DesiresCreate;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-@SuppressWarnings({"unused", "all"})
+@MethodsReturnNonnullByDefault
+@SuppressWarnings({"unused"})
 public class InertBlazeModel<T extends InertBlaze> extends HierarchicalModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(DesiresCreate.MOD_ID, "inert_blazeling"), "main");
@@ -22,16 +24,14 @@ public class InertBlazeModel<T extends InertBlaze> extends HierarchicalModel<T> 
 
 	private final ModelPart head;
 	private final ModelPart rods;
-	private final ModelPart rod1;
-	private final ModelPart rod2;
 
-	public InertBlazeModel(ModelPart root) {
+    public InertBlazeModel(ModelPart root) {
 		this.root = root;
 
 		this.head = this.root.getChild("head");
 		this.rods = this.root.getChild("rods");
-		this.rod1 = this.rods.getChild("rod1");
-		this.rod2 = this.rods.getChild("rod2");
+        ModelPart rod1 = this.rods.getChild("rod1");
+        ModelPart rod2 = this.rods.getChild("rod2");
 	}
 
 	public static LayerDefinition createBodyLayer() {

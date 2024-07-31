@@ -22,14 +22,15 @@ import net.minecraftforge.registries.IForgeRegistry;
 import uwu.lopyluna.create_dd.DesiresCreate;
 
 import java.util.Collections;
+import java.util.Objects;
 
 import static uwu.lopyluna.create_dd.registry.DesiresTags.NameSpace.FORGE;
 
-@SuppressWarnings({"all"})
+@SuppressWarnings({"unused"})
 public class DesiresTags {
 	public static <T> TagKey<T> optionalTag(IForgeRegistry<T> registry,
 		ResourceLocation id) {
-		return registry.tags()
+		return Objects.requireNonNull(registry.tags())
 			.createOptionalTagKey(id, Collections.emptySet());
 	}
 
