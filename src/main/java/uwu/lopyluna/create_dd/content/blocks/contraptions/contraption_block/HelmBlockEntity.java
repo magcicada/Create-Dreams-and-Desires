@@ -27,7 +27,6 @@ public class HelmBlockEntity extends SmartBlockEntity implements IDisplayAssembl
         lastException = null;
     }
 
-
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
     }
