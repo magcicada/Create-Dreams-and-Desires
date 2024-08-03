@@ -37,6 +37,7 @@ import net.minecraftforge.common.util.ForgeSoundType;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.content.blocks.contraptions.bore_block.BoreBlock;
 import uwu.lopyluna.create_dd.content.blocks.contraptions.bore_block.BoreBlockMovementBehaviour;
+import uwu.lopyluna.create_dd.content.blocks.contraptions.contraption_block.HelmBlock;
 import uwu.lopyluna.create_dd.content.blocks.functional.AxisBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.brass_gearbox.BrassGearboxBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.multimeter.MultiMeterBlock;
@@ -393,6 +394,16 @@ public class DesiresBlocks {
 			.properties(p -> p.noOcclusion().sound(SoundType.METAL).color(MaterialColor.COLOR_YELLOW))
 			.transform(pickaxeOnly())
 			.lang("Giant Gear")
+			.register();
+
+	public static final BlockEntry<HelmBlock> HELM = REGISTRATE.block("helm", HelmBlock::new)
+			.initialProperties(SharedProperties::copperMetal)
+			.properties(p -> p.noOcclusion().color(MaterialColor.COLOR_ORANGE))
+			.blockstate(BlockStateGen.horizontalBlockProvider(true))
+			.addLayer(() -> RenderType::cutoutMipped)
+			.item()
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.transform(customItemModel())
 			.register();
 
 	public static final BlockEntry<AxisBlock> INCOMPLETE_WATER_WHEEL = REGISTRATE.block("incomplete_water_wheel", AxisBlock::small)

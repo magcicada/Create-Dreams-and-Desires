@@ -4,6 +4,7 @@ import com.simibubi.create.content.kinetics.base.*;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftInstance;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
+import uwu.lopyluna.create_dd.content.blocks.contraptions.contraption_block.HelmBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.brass_gearbox.BrassGearboxBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.brass_gearbox.BrassGearboxInstance;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.brass_gearbox.BrassGearboxRenderer;
@@ -130,6 +131,11 @@ public class DesiresBlockEntityTypes {
 			.instance(() -> SingleRotatingInstance::new, false)
 			.validBlocks(DesiresBlocks.WORM_GEAR)
 			.renderer(() -> KineticBlockEntityRenderer::new)
+			.register();
+
+	public static final BlockEntityEntry<HelmBlockEntity> HELM = REGISTRATE
+			.blockEntity("helm", HelmBlockEntity::new)
+			.validBlocks(DesiresBlocks.HELM)
 			.register();
 
 	public static void register() {}

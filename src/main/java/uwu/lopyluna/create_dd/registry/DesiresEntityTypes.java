@@ -12,6 +12,8 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import uwu.lopyluna.create_dd.content.blocks.contraptions.contraption_block.BoatContraptionEntity;
+import uwu.lopyluna.create_dd.content.blocks.contraptions.contraption_block.BoatContraptionRenderer;
 import uwu.lopyluna.create_dd.content.entities.inert_blazeling.InertBlaze;
 import uwu.lopyluna.create_dd.content.entities.seething_ablaze.SeethingBlaze;
 import uwu.lopyluna.create_dd.content.entities.seething_ablaze.SeethingBlazeRenderer;
@@ -67,12 +69,16 @@ public class DesiresEntityTypes {
 			.attributes(InertBlaze::createAttributes)
 			.register();
 
+	public static final EntityEntry<BoatContraptionEntity> BOAT_CONTRAPTION = contraption("boat_contraption",
+			BoatContraptionEntity::new, () -> BoatContraptionRenderer::new,10, 3, true)
+			.register();
 
-	private static <T extends Entity> CreateEntityBuilder<T, ?> contraption(String name, EntityFactory<T> factory,
+
+	private static <T extends Entity> CreateEntityBuilder<T, ?> contraption(String name,  EntityFactory<T> factory,
 		NonNullSupplier<NonNullFunction<EntityRendererProvider.Context, EntityRenderer<? super T>>> renderer, int range,
 		int updateFrequency, boolean sendVelocity) {
 		return register(name, factory, renderer, MobCategory.MISC, range, updateFrequency, sendVelocity, true,
-			AbstractContraptionEntity::build);
+				AbstractContraptionEntity::build);
 	}
 
 	private static <T extends Entity> CreateEntityBuilder<T, ?> register(String name, EntityFactory<T> factory,
