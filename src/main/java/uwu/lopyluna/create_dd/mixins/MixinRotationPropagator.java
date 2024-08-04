@@ -17,12 +17,12 @@ import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 
 @Mixin(value = RotationPropagator.class, remap = false)
 public class MixinRotationPropagator {
-
+    
     @Inject(method = "getRotationSpeedModifier(Lcom/simibubi/create/content/kinetics/base/KineticBlockEntity;Lcom/simibubi/create/content/kinetics/base/KineticBlockEntity;)F",
             at = @At("TAIL"),
             cancellable = true
     )
-    private static void getRotationSpeedModifier(KineticBlockEntity from, KineticBlockEntity to, CallbackInfoReturnable<Float> cir) {
+    private static void giantGear$getRotationSpeedModifier(KineticBlockEntity from, KineticBlockEntity to, CallbackInfoReturnable<Float> cir) {
         final BlockState stateFrom = from.getBlockState();
         final BlockState stateTo = to.getBlockState();
 

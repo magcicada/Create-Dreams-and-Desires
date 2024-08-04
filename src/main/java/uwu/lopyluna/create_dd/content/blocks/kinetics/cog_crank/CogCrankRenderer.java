@@ -1,6 +1,6 @@
 package uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank;
 
-import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.AXIS;
 
 import com.jozufozu.flywheel.backend.Backend;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -26,9 +26,8 @@ public class CogCrankRenderer extends KineticBlockEntityRenderer<CogCrankBlockEn
         if (Backend.canUseInstancing(be.getLevel()))
             return;
 
-        Direction facing = be.getBlockState()
-                .getValue(FACING);
-        kineticRotationTransform(be.getRenderedHandle(), be, facing.getAxis(), be.getIndependentAngle(partialTicks),
+        Direction.Axis axis = be.getBlockState().getValue(AXIS);
+        kineticRotationTransform(be.getRenderedHandle(), be, axis, be.getIndependentAngle(partialTicks),
                 light).renderInto(ms, buffer.getBuffer(RenderType.solid()));
     }
 

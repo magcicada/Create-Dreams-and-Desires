@@ -202,6 +202,7 @@
     "create_dd:inverse_box",
     "create_dd:kinetic_motor",
     "create_dd:cog_crank",
+    "create_dd:large_cog_crank",
     "create_dd:worm_gear",
     "create_dd:furnace_engine",
     "create_dd:powered_flywheel",
