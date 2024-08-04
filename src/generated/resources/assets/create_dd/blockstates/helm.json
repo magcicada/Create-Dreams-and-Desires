@@ -1,0 +1,964 @@
+{
+  "variants": {
+    "assembled=false,assembling=false,disassembling=false,facing=east,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=east,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=east,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=east,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=east,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=east,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=east,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=east,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=north,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=north,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=north,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=north,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=north,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=north,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=north,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=north,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=south,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=south,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=south,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=south,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=south,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=south,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=south,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=south,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=west,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=west,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=west,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=west,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=west,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=west,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=west,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=false,disassembling=false,facing=west,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=east,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=east,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=east,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=east,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=east,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=east,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=east,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=east,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=north,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=north,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=north,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=north,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=north,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=north,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=north,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=north,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=south,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=south,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=south,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=south,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=south,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=south,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=south,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=south,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=west,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=west,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=west,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=west,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=west,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=west,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=west,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=false,disassembling=true,facing=west,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=east,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=east,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=east,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=east,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=east,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=east,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=east,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=east,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=north,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=north,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=north,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=north,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=north,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=north,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=north,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=north,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=south,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=south,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=south,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=south,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=south,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=south,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=south,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=south,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=west,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=west,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=west,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=west,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=west,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=west,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=west,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=true,disassembling=false,facing=west,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=east,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=east,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=east,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=east,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=east,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=east,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=east,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=east,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=north,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=north,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=north,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=north,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=north,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=north,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=north,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=north,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=south,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=south,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=south,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=south,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=south,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=south,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=south,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=south,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=west,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=west,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=west,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=west,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=west,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=west,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=west,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=false,assembling=true,disassembling=true,facing=west,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=east,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=east,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=east,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=east,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=east,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=east,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=east,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=east,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=north,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=north,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=north,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=north,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=north,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=north,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=north,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=north,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=south,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=south,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=south,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=south,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=south,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=south,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=south,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=south,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=west,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=west,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=west,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=west,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=west,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=west,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=west,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=false,disassembling=false,facing=west,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=east,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=east,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=east,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=east,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=east,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=east,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=east,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=east,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=north,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=north,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=north,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=north,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=north,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=north,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=north,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=north,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=south,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=south,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=south,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=south,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=south,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=south,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=south,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=south,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=west,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=west,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=west,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=west,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=west,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=west,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=west,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=false,disassembling=true,facing=west,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=east,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=east,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=east,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=east,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=east,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=east,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=east,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=east,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=north,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=north,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=north,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=north,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=north,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=north,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=north,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=north,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=south,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=south,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=south,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=south,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=south,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=south,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=south,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=south,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=west,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=west,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=west,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=west,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=west,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=west,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=west,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=true,disassembling=false,facing=west,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=east,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=east,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=east,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=east,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=east,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=east,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=east,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=east,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 90
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=north,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=north,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=north,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=north,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=north,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=north,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=north,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=north,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block"
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=south,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=south,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=south,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=south,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=south,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=south,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=south,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=south,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 180
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=west,open=false,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=west,open=false,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=west,open=false,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=west,open=false,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=west,open=true,virtual=false,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=west,open=true,virtual=false,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=west,open=true,virtual=true,waterlogged=false": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    },
+    "assembled=true,assembling=true,disassembling=true,facing=west,open=true,virtual=true,waterlogged=true": {
+      "model": "create_dd:block/helm/block",
+      "y": 270
+    }
+  }
+}

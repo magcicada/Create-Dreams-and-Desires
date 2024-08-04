@@ -21,6 +21,7 @@ public class DesiresSpriteShifts {
 			KEG_TOP = reservoir("top"),
 			KEG_FRONT = reservoir("front"),
 			KEG_SIDE = reservoir("side"),
+			KEG_SIDE_WINDOW = reservoir("side_window"),
 			KEG_BOTTOM = reservoir("bottom");
 
 	//public static final CTSpriteShiftEntry*

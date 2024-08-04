@@ -13,7 +13,7 @@ import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.PoweredFlyw
 @Mixin(value = RotatedPillarKineticBlock.class)
 public abstract class MixinRotatedPillarKineticBlock {
 
-    @Inject(at = @At("HEAD"), method = "getStateForPlacement",cancellable = true)
+    @Inject(at = @At("HEAD"), method = "getStateForPlacement", cancellable = true)
     private void getStateForPlacement(BlockPlaceContext context, CallbackInfoReturnable<BlockState> cir){
         if (AllBlocks.FLYWHEEL.is(context.getItemInHand().getItem()) && PoweredFlywheelBlock.stillValid(AllBlocks.FLYWHEEL.getDefaultState().setValue(RotatedPillarKineticBlock.AXIS, context.getNearestLookingDirection().getAxis()),context.getLevel(),context.getClickedPos())){
             cir.setReturnValue(PoweredFlywheelBlock.getEquivalent(AllBlocks.FLYWHEEL.getDefaultState(),context.getNearestLookingDirection().getAxis()));

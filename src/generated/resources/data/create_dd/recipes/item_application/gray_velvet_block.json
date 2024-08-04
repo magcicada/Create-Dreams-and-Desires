@@ -1,0 +1,16 @@
+{
+  "type": "create:item_application",
+  "ingredients": [
+    {
+      "item": "minecraft:gray_wool"
+    },
+    {
+      "tag": "forge:nuggets/gold"
+    }
+  ],
+  "results": [
+    {
+      "item": "create_dd:gray_velvet_block"
+    }
+  ]
+}
