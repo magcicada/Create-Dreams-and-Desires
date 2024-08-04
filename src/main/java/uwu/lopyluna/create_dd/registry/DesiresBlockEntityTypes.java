@@ -26,6 +26,7 @@ import uwu.lopyluna.create_dd.content.blocks.kinetics.redstone_divider.RedstoneD
 import uwu.lopyluna.create_dd.content.blocks.kinetics.transmission.InverseBoxBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.worm_gear.WormGearBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirBlockEntity;
+import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirRenderer;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileBlockEntity;
 
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
@@ -61,6 +62,7 @@ public class DesiresBlockEntityTypes {
 	public static final BlockEntityEntry<FluidReservoirBlockEntity> FLUID_RESERVOIR = REGISTRATE
 			.blockEntity("fluid_reservoir", FluidReservoirBlockEntity::new)
 			.validBlocks(DesiresBlocks.FLUID_RESERVOIR)
+			.renderer(() -> FluidReservoirRenderer::new)
 			.register();
 
 	public static final BlockEntityEntry<FurnaceEngineBlockEntity> FURNACE_ENGINE = REGISTRATE

@@ -17,7 +17,7 @@ public class MixinPlayerRenderer {
     @Inject(method = "getArmPose(Lnet/minecraft/client/player/AbstractClientPlayer;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/client/model/HumanoidModel$ArmPose;",
             at = @At(value = "INVOKE_ASSIGN",
                     target = "Lnet/minecraft/client/player/AbstractClientPlayer;getItemInHand(Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/item/ItemStack;"), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
-    private static void create$onGetArmPose(AbstractClientPlayer pPlayer, InteractionHand pHand, CallbackInfoReturnable<HumanoidModel.ArmPose> cir) {
+    private static void createDD$onGetArmPose(AbstractClientPlayer pPlayer, InteractionHand pHand, CallbackInfoReturnable<HumanoidModel.ArmPose> cir) {
         ItemStack itemstackM = pPlayer.getItemInHand(pHand);
         if (!pPlayer.swinging && itemstackM.getItem() instanceof ExcavationDrillItem) {
             cir.setReturnValue(HumanoidModel.ArmPose.CROSSBOW_HOLD);

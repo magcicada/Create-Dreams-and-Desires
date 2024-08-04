@@ -57,6 +57,7 @@ import uwu.lopyluna.create_dd.content.blocks.kinetics.transmission.InverseBoxBlo
 import uwu.lopyluna.create_dd.content.blocks.kinetics.worm_gear.WormGearBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirCTBehaviour;
+import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirGenerator;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirItem;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileCTBehaviour;
@@ -460,13 +461,11 @@ public class DesiresBlocks {
 			.initialProperties(SharedProperties::copperMetal)
 			.properties(p -> p.noOcclusion().isRedstoneConductor((p1, p2, p3) -> true))
 			.transform(pickaxeOnly())
-			.blockstate((c, p) -> p.getVariantBuilder(c.get())
-					.forAllStates(s -> ConfiguredModel.builder()
-							.modelFile(AssetLookup.standardModel(c, p))
-							.rotationY(s.getValue(FluidReservoirBlock.HORIZONTAL_AXIS) == Direction.Axis.X ? 90 : 0)
-							.build()))
+			.blockstate(new FluidReservoirGenerator()::generate)
 			.onRegister(connectedTextures(FluidReservoirCTBehaviour::new))
+			.addLayer(() -> RenderType::cutoutMipped)
 			.item(FluidReservoirItem::new)
+			.transform(b -> b.model((c, p) -> p.withExistingParent(c.getName(), p.modLoc("block/" + c.getName() + "_window"))))
 			.recipe((c, p) -> {
 				p.stonecutting(DataIngredient.items(AllBlocks.FLUID_TANK), c, 1);
 				p.stonecutting(DataIngredient.items(c), AllBlocks.FLUID_TANK, 1);

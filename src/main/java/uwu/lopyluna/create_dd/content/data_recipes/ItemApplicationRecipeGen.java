@@ -77,22 +77,22 @@ public class ItemApplicationRecipeGen extends DesireProcessingRecipeGen {
             .require(ItemTags.LOGS) //Item to Apply
             .output(AllBlocks.LARGE_WATER_WHEEL.get())); //Output
 
-    GeneratedRecipe DOWNGRADE_INCOMPLETE_WATERWHEEL = create("incomplete_water_wheel", b -> b
+    GeneratedRecipe DOWNGRADE_INCOMPLETE_WATERWHEEL = create("downgrade_incomplete_water_wheel", b -> b
             .require(DesiresBlocks.INCOMPLETE_WATER_WHEEL.get()) //Block
             .require(Items.COAL) //Item to Apply
             .output(AllBlocks.SHAFT.get())); //Output
 
-    GeneratedRecipe DOWNGRADE_WATERWHEEL = create("water_wheel", b -> b
+    GeneratedRecipe DOWNGRADE_WATERWHEEL = create("downgrade_water_wheel", b -> b
             .require(AllBlocks.WATER_WHEEL.get()) //Block
             .require(Items.COAL) //Item to Apply
             .output(DesiresBlocks.INCOMPLETE_WATER_WHEEL.get())); //Output
 
-    GeneratedRecipe DOWNGRADE_INCOMPLETE_LARGE_WATERWHEEL = create("incomplete_large_water_wheel", b -> b
+    GeneratedRecipe DOWNGRADE_INCOMPLETE_LARGE_WATERWHEEL = create("downgrade_incomplete_large_water_wheel", b -> b
             .require(DesiresBlocks.INCOMPLETE_LARGE_WATER_WHEEL.get()) //Block
             .require(Items.COAL) //Item to Apply
             .output(AllBlocks.WATER_WHEEL.get())); //Output
 
-    GeneratedRecipe DOWNGRADE_LARGE_WATERWHEEL = create("large_water_wheel", b -> b
+    GeneratedRecipe DOWNGRADE_LARGE_WATERWHEEL = create("downgrade_large_water_wheel", b -> b
             .require(AllBlocks.LARGE_WATER_WHEEL.get()) //Block
             .require(Items.COAL) //Item to Apply
             .output(DesiresBlocks.INCOMPLETE_LARGE_WATER_WHEEL.get())); //Output

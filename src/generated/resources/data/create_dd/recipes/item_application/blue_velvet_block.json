@@ -1,0 +1,16 @@
+{
+  "type": "create:item_application",
+  "ingredients": [
+    {
+      "item": "minecraft:blue_wool"
+    },
+    {
+      "tag": "forge:nuggets/gold"
+    }
+  ],
+  "results": [
+    {
+      "item": "create_dd:blue_velvet_block"
+    }
+  ]
+}

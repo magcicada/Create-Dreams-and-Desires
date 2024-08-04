@@ -61,7 +61,7 @@ public class HydraulicCompactingRecipeGen extends DesireProcessingRecipeGen {
             .require(Fluids.WATER, 500)
             .output(Items.STONE, 10)
     );
-    GeneratedRecipe BASALT_GENERATOR = create("stone_generator", b -> b
+    GeneratedRecipe BASALT_GENERATOR = create("basalt_generator", b -> b
             .requiresHeat(HeatCondition.HEATED)
             .require(Fluids.LAVA, 100)
             .require(Items.BLUE_ICE)

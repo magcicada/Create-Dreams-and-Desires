@@ -10,6 +10,7 @@
     "AccessorMountedFluidStorage",
     "MixinAllOreFeatureConfigEntries",
     "MixinBlock",
+    "MixinBlockFluidResBlock",
     "MixinBlockMovementChecks",
     "MixinClutchBlock",
     "MixinClutchBlockEntity",

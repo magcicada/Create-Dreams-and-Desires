@@ -25,14 +25,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -41,11 +35,14 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
@@ -65,11 +62,14 @@ public class FluidReservoirBlock extends Block implements IWrenchable, IBE<Fluid
     public static final BooleanProperty BOTTOM = BooleanProperty.create("bottom");
     
     public static final BooleanProperty LARGE = BooleanProperty.create("large");
+    
+    public static final BooleanProperty WINDOW = BooleanProperty.create("window");
 
     public FluidReservoirBlock(Properties p_i48440_1_) {
         super(p_i48440_1_);
         registerDefaultState(defaultBlockState().setValue(TOP, true)
-                .setValue(BOTTOM, true).setValue(LARGE, false));
+                .setValue(BOTTOM, true).setValue(LARGE, false)
+                .setValue(WINDOW, true));
     }
 
     public static boolean isTank(BlockState state) {
@@ -87,7 +87,7 @@ public class FluidReservoirBlock extends Block implements IWrenchable, IBE<Fluid
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_206840_1_) {
-        p_206840_1_.add(TOP, BOTTOM, HORIZONTAL_AXIS, LARGE);
+        p_206840_1_.add(TOP, BOTTOM, HORIZONTAL_AXIS, LARGE, WINDOW);
         super.createBlockStateDefinition(p_206840_1_);
     }
 
@@ -110,6 +110,59 @@ public class FluidReservoirBlock extends Block implements IWrenchable, IBE<Fluid
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
+    public boolean skipRendering(BlockState state, BlockState adjacentBlockState, Direction side) {
+        boolean skip = super.skipRendering(state, adjacentBlockState, side);
+        return adjacentBlockState.getBlock() instanceof FluidReservoirBlock && state.getValue(WINDOW) ? true : skip;
+    }
+
+    @Override
+    public VoxelShape getVisualShape(BlockState pState, BlockGetter pReader, BlockPos pPos, CollisionContext pContext) {
+        return pState.getValue(WINDOW) ? Shapes.empty() : super.getVisualShape(pState, pReader, pPos, pContext);
+    }
+
+    @Override
+    public float getShadeBrightness(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
+        return pState.getValue(WINDOW) ? 1.0F : super.getShadeBrightness(pState, pLevel, pPos);
+    }
+
+    @Override
+    public boolean shouldDisplayFluidOverlay(BlockState state, BlockAndTintGetter world, BlockPos pos, FluidState fluidState) {
+        return state.getValue(WINDOW) ? true : super.shouldDisplayFluidOverlay(state, world, pos, fluidState);
+    }
+
+    @Override
+    public boolean hidesNeighborFace(BlockGetter level, BlockPos pos, BlockState state, BlockState neighborState, Direction dir) {
+        return state.getValue(WINDOW) ? false : super.hidesNeighborFace(level, pos, state, neighborState, dir);
+    }
+
+    @Override
+    public boolean supportsExternalFaceHiding(BlockState state) {
+        return state.getValue(WINDOW) ? false : super.supportsExternalFaceHiding(state);
+    }
+
+    @Override
+    public boolean isOcclusionShapeFullBlock(BlockState pState, BlockGetter pReader, BlockPos pPos) {
+        return pState.getValue(WINDOW) ? false : super.isOcclusionShapeFullBlock(pState, pReader, pPos);
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState pState) {
+        return pState.getValue(WINDOW) ? RenderShape.MODEL : super.getRenderShape(pState);
+    }
+
+    @Override
+    public int getLightEmission(BlockState state, BlockGetter world, BlockPos pos) {
+        FluidReservoirBlockEntity tankAt = ConnectivityHandler.partAt(getBlockEntityType(), world, pos);
+        if (tankAt == null)
+            return 0;
+        FluidReservoirBlockEntity controllerBE = tankAt.getControllerBE();
+        if (controllerBE == null || !controllerBE.window)
+            return 0;
+        return tankAt.luminosity;
+    }
+
+    @Override
     public InteractionResult onWrenched(BlockState state, UseOnContext context) {
         if (context.getClickedFace()
                 .getAxis()
@@ -121,6 +174,9 @@ public class FluidReservoirBlock extends Block implements IWrenchable, IBE<Fluid
                 keg.removeController(true);
             }
             state = state.setValue(LARGE, false);
+        }
+        if (context.getClickedFace().getAxis().isHorizontal()) {
+            withBlockEntityDo(context.getLevel(), context.getClickedPos(), FluidReservoirBlockEntity::toggleWindows);
         }
         return IWrenchable.super.onWrenched(state, context);
     }
@@ -289,18 +345,17 @@ public class FluidReservoirBlock extends Block implements IWrenchable, IBE<Fluid
         return state.getValue(LARGE);
     }
 
-    // Vaults are less noisy when placed in batch
-    public static final SoundType SILENCED_COPPER =
-            new ForgeSoundType(0.1F, 1.5F, () -> SoundEvents.COPPER_BREAK, () -> SoundEvents.COPPER_STEP,
-                    () -> SoundEvents.COPPER_PLACE, () -> SoundEvents.COPPER_HIT,
-                    () -> SoundEvents.COPPER_FALL);
+    // Tanks are less noisy when placed in batch
+    public static final SoundType SILENCED_METAL =
+            new ForgeSoundType(0.1F, 1.5F, () -> SoundEvents.METAL_BREAK, () -> SoundEvents.METAL_STEP,
+                    () -> SoundEvents.METAL_PLACE, () -> SoundEvents.METAL_HIT, () -> SoundEvents.METAL_FALL);
 
     @Override
     public SoundType getSoundType(BlockState state, LevelReader world, BlockPos pos, Entity entity) {
         SoundType soundType = super.getSoundType(state, world, pos, entity);
-        if (entity.getPersistentData()
-                        .contains("SilenceTankSound"))
-            return SILENCED_COPPER;
+        if (entity != null && entity.getPersistentData()
+                .contains("SilenceTankSound"))
+            return SILENCED_METAL;
         return soundType;
     }
 
@@ -317,6 +372,4 @@ public class FluidReservoirBlock extends Block implements IWrenchable, IBE<Fluid
                         .orElse(0))
                 .orElse(0);
     }
-
-
 }

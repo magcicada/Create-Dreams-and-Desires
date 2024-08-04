@@ -1,6 +1,7 @@
 package uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir;
 
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
+import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.foundation.utility.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,6 +17,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 import uwu.lopyluna.create_dd.registry.DesiresBlockEntityTypes;
 
@@ -42,10 +44,18 @@ public class FluidReservoirItem extends BlockItem {
             return false;
         CompoundTag nbt = p_195943_4_.getTagElement("BlockEntityTag");
         if (nbt != null) {
-            nbt.remove("Length");
+            nbt.remove("Luminosity");
             nbt.remove("Size");
+            nbt.remove("Height");
             nbt.remove("Controller");
             nbt.remove("LastKnownPos");
+            if (nbt.contains("TankContent")) {
+                FluidStack fluid = FluidStack.loadFluidStackFromNBT(nbt.getCompound("TankContent"));
+                if (!fluid.isEmpty()) {
+                    fluid.setAmount(Math.min(FluidTankBlockEntity.getCapacityMultiplier(), fluid.getAmount()));
+                    nbt.put("TankContent", fluid.writeToNBT(new CompoundTag()));
+                }
+            }
         }
         return super.updateCustomBlockEntityTag(p_195943_1_, p_195943_2_, p_195943_3_, p_195943_4_, p_195943_5_);
     }
@@ -77,24 +87,24 @@ public class FluidReservoirItem extends BlockItem {
             return;
 
         int tanksToPlace = 0;
-        Axis vaultBlockAxis = FluidReservoirBlock.getKegAxis(placedOnState);
-        if (vaultBlockAxis == null)
+        Axis kegBlockAxis = FluidReservoirBlock.getKegAxis(placedOnState);
+        if (kegBlockAxis == null)
             return;
-        if (face.getAxis() != vaultBlockAxis)
+        if (face.getAxis() != kegBlockAxis)
             return;
 
-        Direction vaultFacing = Direction.fromAxisAndDirection(vaultBlockAxis, AxisDirection.POSITIVE);
+        Direction vaultFacing = Direction.fromAxisAndDirection(kegBlockAxis, AxisDirection.POSITIVE);
         BlockPos startPos = face == vaultFacing.getOpposite() ? controllerBE.getBlockPos()
                 .relative(vaultFacing.getOpposite())
                 : controllerBE.getBlockPos()
                 .relative(vaultFacing, controllerBE.height);
 
-        if (VecHelper.getCoordinate(startPos, vaultBlockAxis) != VecHelper.getCoordinate(pos, vaultBlockAxis))
+        if (VecHelper.getCoordinate(startPos, kegBlockAxis) != VecHelper.getCoordinate(pos, kegBlockAxis))
             return;
 
         for (int xOffset = 0; xOffset < width; xOffset++) {
             for (int zOffset = 0; zOffset < width; zOffset++) {
-                BlockPos offsetPos = vaultBlockAxis == Axis.X ? startPos.offset(0, xOffset, zOffset)
+                BlockPos offsetPos = kegBlockAxis == Axis.X ? startPos.offset(0, xOffset, zOffset)
                         : startPos.offset(xOffset, zOffset, 0);
                 BlockState blockState = world.getBlockState(offsetPos);
                 if (FluidReservoirBlock.isTank(blockState))
@@ -111,7 +121,7 @@ public class FluidReservoirItem extends BlockItem {
 
         for (int xOffset = 0; xOffset < width; xOffset++) {
             for (int zOffset = 0; zOffset < width; zOffset++) {
-                BlockPos offsetPos = vaultBlockAxis == Axis.X ? startPos.offset(0, xOffset, zOffset)
+                BlockPos offsetPos = kegBlockAxis == Axis.X ? startPos.offset(0, xOffset, zOffset)
                         : startPos.offset(xOffset, zOffset, 0);
                 BlockState blockState = world.getBlockState(offsetPos);
                 if (FluidReservoirBlock.isTank(blockState))

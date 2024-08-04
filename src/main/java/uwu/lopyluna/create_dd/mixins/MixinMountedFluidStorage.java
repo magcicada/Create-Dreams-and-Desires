@@ -2,6 +2,7 @@ package uwu.lopyluna.create_dd.mixins;
 
 import com.simibubi.create.content.contraptions.MountedFluidStorage;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
+import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
@@ -39,9 +40,15 @@ public class MixinMountedFluidStorage {
         tank.setFluid(fluid);
         if (!(blockEntity instanceof FluidReservoirBlockEntity tankR))
             return;
+        float fillState = tank.getFluidAmount() / (float) tank.getCapacity();
+        if (tankR.getFluidLevel() == null)
+            tankR.setFluidLevel(LerpedFloat.linear()
+                    .startWithValue(fillState));
+        tankR.getFluidLevel()
+                .chase(fillState, 0.5, LerpedFloat.Chaser.EXP);
         IFluidTank tankRInventory = tankR.getTankInventory();
-        if (tankRInventory instanceof SmartFluidTank)
-            ((SmartFluidTank) tankRInventory).setFluid(fluid);
+        if (tankRInventory instanceof SmartFluidTank smartTank)
+            smartTank.setFluid(fluid);
     }
 
     @Shadow

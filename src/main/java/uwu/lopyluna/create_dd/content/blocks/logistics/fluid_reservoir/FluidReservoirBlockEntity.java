@@ -6,6 +6,7 @@ import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
+import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -30,6 +31,8 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
+import static uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirBlock.*;
+
 
 @SuppressWarnings({"removal", "deprecated", "unchecked", "unused"})
 public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMultiBlockEntityContainer.Fluid, IHaveGoggleInformation {
@@ -37,10 +40,12 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
     private static final int MAX_SIZE = 3;
 
     protected LazyOptional<IFluidHandler> fluidCapability;
+    protected boolean forceFluidLevelUpdate;
     protected FluidTank tankInventory;
     protected BlockPos controller;
     protected BlockPos lastKnownPos;
     protected boolean updateConnectivity;
+    protected boolean window;
     protected int luminosity;
     protected int width;
     protected int height;
@@ -51,11 +56,15 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
     protected int syncCooldown;
     protected boolean queuedSync;
 
+    private LerpedFloat fluidLevel;
+
     public FluidReservoirBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         tankInventory = createInventory();
         fluidCapability = LazyOptional.of(() -> tankInventory);
+        forceFluidLevelUpdate = true;
         updateConnectivity = false;
+        window = state.getValue(WINDOW);
 
         width = 1;
         height = 1;
@@ -95,6 +104,8 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
 
         if (updateConnectivity)
             updateConnectivity();
+        if (fluidLevel != null)
+            fluidLevel.tickChaser();
     }
 
     @Override
@@ -157,6 +168,13 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
             setChanged();
             sendData();
         }
+
+        if (isVirtual()) {
+            if (fluidLevel == null)
+                fluidLevel = LerpedFloat.linear()
+                        .startWithValue(getFillState());
+            fluidLevel.chase(getFillState(), .5f, LerpedFloat.Chaser.EXP);
+        }
     }
 
     protected void setLuminosity(int luminosity) {
@@ -190,6 +208,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
         int overflow = tankInventory.getFluidAmount() - tankInventory.getCapacity();
         if (overflow > 0)
             tankInventory.drain(overflow, IFluidHandler.FluidAction.EXECUTE);
+        forceFluidLevelUpdate = true;
     }
 
     public void removeController(boolean keepFluids) {
@@ -205,8 +224,9 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
         onFluidStackChanged(tankInventory.getFluid());
 
         BlockState state = getBlockState();
-        if (FluidReservoirBlock.isTank(state)) {
+        if (isTank(state)) {
             state = state.setValue(FluidReservoirBlock.LARGE, false);
+            state = state.setValue(WINDOW, window);
             Objects.requireNonNull(getLevel()).setBlock(worldPosition, state, 22);
         }
 
@@ -317,6 +337,10 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
                 tankInventory.drain(-tankInventory.getSpace(), IFluidHandler.FluidAction.EXECUTE);
         }
 
+        if (compound.contains("ForceFluidLevel") || fluidLevel == null)
+            fluidLevel = LerpedFloat.linear()
+                    .startWithValue(getFillState());
+
         if (!clientPacket)
             return;
         
@@ -331,13 +355,22 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
                 tankInventory.setCapacity(getCapacityMultiplier() * getTotalTankSize());
             invalidateRenderBoundingBox();
         }
-
+        if (isController()) {
+            float fillState = getFillState();
+            if (compound.contains("ForceFluidLevel") || fluidLevel == null)
+                fluidLevel = LerpedFloat.linear()
+                        .startWithValue(fillState);
+            fluidLevel.chase(fillState, 0.5f, LerpedFloat.Chaser.EXP);
+        }
         if (luminosity != prevLum && hasLevel()) {
             assert level != null;
             level.getChunkSource()
                     .getLightEngine()
                     .checkBlock(worldPosition);
         }
+
+        if (compound.contains("LazySync"))
+            fluidLevel.chase(fluidLevel.getChaseTarget(), 0.125f, LerpedFloat.Chaser.EXP);
     }
 
     public float getFillState() {
@@ -362,8 +395,11 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
 
         if (!clientPacket)
             return;
+        if (forceFluidLevelUpdate)
+            compound.putBoolean("ForceFluidLevel", true);
         if (queuedSync)
             compound.putBoolean("LazySync", true);
+        forceFluidLevelUpdate = false;
     }
 
     @Nonnull
@@ -407,13 +443,45 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
     @Override
     public void notifyMultiUpdated() {
         BlockState state = this.getBlockState();
-        if (FluidReservoirBlock.isTank(state)) { // safety
+        if (isTank(state)) { // safety
             assert level != null;
             level.setBlock(getBlockPos(), state.setValue(FluidReservoirBlock.LARGE, width > 2), 6);
         }
-
+        if (isController())
+            setWindows(window);
         onFluidStackChanged(tankInventory.getFluid());
         setChanged();
+    }
+
+    public void toggleWindows() {
+        FluidReservoirBlockEntity be = getControllerBE();
+        if (be == null)
+            return;
+        be.setWindows(!be.window);
+    }
+
+    public void setWindows(boolean window) {
+        this.window = window;
+        boolean x = (getBlockState().getValue(HORIZONTAL_AXIS) == Axis.X);
+        boolean z = (getBlockState().getValue(HORIZONTAL_AXIS) == Axis.Z);
+
+        for (int yOffset = 0; yOffset < width; yOffset++) {
+            for (int xOffset = 0; xOffset < (x ? height : width); xOffset++) {
+                for (int zOffset = 0; zOffset < (z ? height : width); zOffset++) {
+
+                    BlockPos pos = this.worldPosition.offset(xOffset, yOffset, zOffset);
+                    BlockState blockState = Objects.requireNonNull(getLevel()).getBlockState(pos);
+                    if (!isTank(blockState))
+                        continue;
+
+
+                    getLevel().setBlock(pos, blockState.setValue(WINDOW, window), 22);
+                    getLevel().getChunkSource()
+                            .getLightEngine()
+                            .checkBlock(pos);
+                }
+            }
+        }
     }
 
     @Override
@@ -457,6 +525,14 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
     @Override
     public void setTankSize(int tank, int blocks) {
         applyFluidTankSize(blocks);
+    }
+
+    public LerpedFloat getFluidLevel() {
+        return fluidLevel;
+    }
+
+    public void setFluidLevel(LerpedFloat fluidLevel) {
+        this.fluidLevel = fluidLevel;
     }
 
     @Override
