@@ -9,8 +9,6 @@ import uwu.lopyluna.create_dd.registry.DesiresParticleTypes;
 @SuppressWarnings({"unused"})
 public class DesireClient {
 
-
-
     public static void onCtorClient(IEventBus modEventBus, IEventBus forgeEventBus) {
         modEventBus.addListener(DesireClient::clientInit);
         modEventBus.addListener(DesiresParticleTypes::registerFactories);
@@ -22,4 +20,5 @@ public class DesireClient {
         DesirePonderTags.register();
         DesiresPonderIndex.register();
     }
+
 }
