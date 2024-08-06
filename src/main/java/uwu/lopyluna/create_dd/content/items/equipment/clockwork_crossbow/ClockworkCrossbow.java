@@ -233,7 +233,9 @@ public class ClockworkCrossbow extends ProjectileWeaponItem implements Vanishabl
         int maxTicksInShots = maxTicksInShots(quickChargeLevel);
         int maxTicksInReloadShots = maxTicksInReloadShots(quickChargeLevel);
 
-        assert pLevel != null;
+        if (pLevel == null) {
+            return;
+        }
         if (pLevel.isClientSide() && (isPlayerCreative && DesiresConfigs.client().equipmentsDebug.get())) {
             pTooltipComponents.add(Component.literal("inaccuracy " + (0.5F + ((getCurrentTotalShots(pStack) / 10.0F) / (((powerLevel * 0.55F) + 1.0F))))).withStyle(ChatFormatting.GOLD));
             pTooltipComponents.add(Component.literal("velocity " + (1.0F + ((1.0F + (getCurrentTotalShots(pStack) / 2.0F)) * ((powerLevel * 0.35F) + 0.5F)))).withStyle(ChatFormatting.GOLD));

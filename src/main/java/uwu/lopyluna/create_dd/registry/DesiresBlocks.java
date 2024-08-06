@@ -22,6 +22,8 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.ItemLike;
@@ -40,6 +42,7 @@ import uwu.lopyluna.create_dd.content.blocks.contraptions.bore_block.BoreBlockMo
 import uwu.lopyluna.create_dd.content.blocks.contraptions.contraption_block.HelmBlock;
 import uwu.lopyluna.create_dd.content.blocks.functional.AxisBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.brass_gearbox.BrassGearboxBlock;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankBlockItem;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.multimeter.MultiMeterBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlockItem;
@@ -310,7 +313,7 @@ public class DesiresBlocks {
 			.transform(customItemModel())
 			.register();
 
-	public static final BlockEntry<CogCrankBlock> COG_CRANK = REGISTRATE.block("cog_crank", CogCrankBlock::new)
+	public static final BlockEntry<CogCrankBlock> COG_CRANK = REGISTRATE.block("cog_crank", CogCrankBlock::small)
 			.initialProperties(SharedProperties::wooden)
 			.properties(p -> p.color(MaterialColor.PODZOL))
 			.transform(axeOrPickaxe())
@@ -324,7 +327,31 @@ public class DesiresBlocks {
 					.unlockedBy("has_item", RegistrateRecipeProvider.has(ctx.get()))
 					.save(prov))
 			.onRegister(ItemUseOverrides::addBlock)
-			.item()
+			.item(CogCrankBlockItem::new)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.transform(customItemModel())
+			.register();
+	
+	public static final BlockEntry<CogCrankBlock> LARGE_COG_CRANK = REGISTRATE.block("large_cog_crank", CogCrankBlock::large)
+			.initialProperties(SharedProperties::wooden)
+			.properties(p -> p.color(MaterialColor.PODZOL))
+			.transform(axeOrPickaxe())
+			.blockstate(BlockStateGen.directionalBlockProvider(true))
+			.transform(BlockStressDefaults.setCapacity(12.0))
+			.transform(BlockStressDefaults.setGeneratorSpeed(CogCrankBlock::getSpeedRange))
+			.tag(AllTags.AllBlockTags.BRITTLE.tag)
+			.recipe((ctx, prov) -> ShapelessRecipeBuilder.shapeless(ctx.getEntry(), 1)
+					.requires(AllBlocks.HAND_CRANK.get())
+					.requires(AllBlocks.LARGE_COGWHEEL.get())
+					.unlockedBy("has_item", RegistrateRecipeProvider.has(ctx.get()))
+					.save(prov))
+			.recipe((ctx, prov) -> ShapelessRecipeBuilder.shapeless(ctx.getEntry(), 1)
+					.requires(COG_CRANK.get())
+					.requires(ItemTags.PLANKS)
+					.unlockedBy("has_item", RegistrateRecipeProvider.has(ctx.get()))
+					.save(prov))
+			.onRegister(ItemUseOverrides::addBlock)
+			.item(CogCrankBlockItem::new)
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.transform(customItemModel())
 			.register();

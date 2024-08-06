@@ -1,3 +1,4 @@
+// 1.19.2	2024-08-03T22:42:47.3079228	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 // 1.19.2	2024-08-04T01:16:29.2838278	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 9452bed2fb7ba829ea35644054add91456d3f5d9 assets/create_dd/blockstates/amethyst_block_pillar.json
 64dc32722d3ad05720fa9a200df1de7179cfd890 assets/create_dd/blockstates/basalt_pillar.json
@@ -120,7 +121,7 @@ aa8af5eaee62fbdbbffc23a1d41eadcba7843bdc assets/create_dd/blockstates/cyan_velve
 657d33c3ce64b88d21a8c75588a8ff30be7a8550 assets/create_dd/blockstates/dark_metal_plating.json
 ee3218b689199e06a9dde3b29440d2a0481fc833 assets/create_dd/blockstates/dolomite.json
 2349ae6e184298a0af25dbf376491a855cf2aa51 assets/create_dd/blockstates/dolomite_pillar.json
-5144eb109b2fb031552127ef56eb372f4fe4a217 assets/create_dd/blockstates/fluid_reservoir.json
+6ceb3aebd4f47b347cb7277079d168141e8690c8 assets/create_dd/blockstates/fluid_reservoir.json
 0d54b078b1539e54b9e745cb67b511dbb021b7fe assets/create_dd/blockstates/freezing_sail.json
 90f76de3b5f7448cf9e80233392a42216d233117 assets/create_dd/blockstates/furnace_engine.json
 c0c2af86fd7510e68ef4bb9826f310e7d2b0bad7 assets/create_dd/blockstates/gabbro.json
@@ -145,7 +146,6 @@ bcf5e406c6780b9988c31f424836873cb4e66238 assets/create_dd/blockstates/green_padd
 ca929302334b8221e620f660706850cf9ab90bb4 assets/create_dd/blockstates/green_velvet_block.json
 06a3c61c83f81a49277bcd3172a140d876958e5f assets/create_dd/blockstates/haunting_sail.json
 9a93296a66ed927dabb3f4f5d5ed9e76c5a0892f assets/create_dd/blockstates/hazard_block.json
-86c7fe6b4ee1630613749035622e1f47c34de04f assets/create_dd/blockstates/helm.json
 a8dc55ad9b32f7cd7da771d9543601fc8beb8866 assets/create_dd/blockstates/hydraulic_casing.json
 31b251c51ffc0f8f0cc04d6b5278075bce82805d assets/create_dd/blockstates/hydraulic_press.json
 962cd1f7ec8847bb84cc1e25a1597ff9b2099077 assets/create_dd/blockstates/incomplete_large_water_wheel.json
@@ -343,8 +343,8 @@ af62e1b2187e70334a3e36986b368feac281d63d assets/create_dd/blockstates/yellow_pad
 2736c91b94b9dd34ed0a702b4b538e6d63bc5c73 assets/create_dd/blockstates/yellow_padded_rubber_stairs.json
 7ac56fd4064658532ee94e7c8def9f604e9528aa assets/create_dd/blockstates/yellow_padded_tiled_rubber.json
 9952df2744c1791ecccc84a34a105cffe18b76d9 assets/create_dd/blockstates/yellow_velvet_block.json
-3ab53dc5cb2d74c80af4d80de4fe0d70c00a62b3 assets/create_dd/lang/en_ud.json
-7db9df7083c4523979cc63956c88a5cf808ee898 assets/create_dd/lang/en_us.json
+4b52919714031a50a5e7a1286aa44096acc43a14 assets/create_dd/lang/en_ud.json
+454ac74debefde71a94ec50f264bbd430451f579 assets/create_dd/lang/en_us.json
 186464982087eb2dd6aa9a5bf09cdb29e6326c49 assets/create_dd/models/block/amethyst_block_pillar.json
 37f5da0e49555aed59846ec90f8286e737feb179 assets/create_dd/models/block/amethyst_block_pillar_horizontal.json
 c9845fd31f14aa8e1a83ffc67249b5486a8ff5cc assets/create_dd/models/block/basalt_pillar.json
@@ -1055,7 +1055,7 @@ bc8e14143be413b6bd7afbbd7afbec2ee9bcc0c0 assets/create_dd/models/item/diamond_sh
 32a811db6ee121477779c6adb359ead431421465 assets/create_dd/models/item/dolomite.json
 7307187235ac5ed676584bdb4777ffd9c1c974a6 assets/create_dd/models/item/dolomite_pillar.json
 df3def8631c233b0f584370acb8b11519babb297 assets/create_dd/models/item/excavation_drill.json
-297dc2ef0bc66d4544f9fd8d8f41692c12549961 assets/create_dd/models/item/fluid_reservoir.json
+97f7b6714f7cc91c6da8aef36ff981bbb92b4779 assets/create_dd/models/item/fluid_reservoir.json
 e44cf9051e387285b08db6b04c903b2252891cda assets/create_dd/models/item/freezing_sail.json
 d45fb895dd210b9dfbed29211f532c26db7be85d assets/create_dd/models/item/furnace_engine.json
 6fed2f17716dc797f43efec04ef361a065d3417f assets/create_dd/models/item/gabbro.json
@@ -1085,7 +1085,6 @@ a3ee268f5a05d4aed2b7908d15725fe9cd7c02a3 assets/create_dd/models/item/green_padd
 9bf067add92f1dacfa85e22d064b7bb61e223bbf assets/create_dd/models/item/haunting_sail.json
 994076ecbe15fa52cca5b0f205547c76dc513475 assets/create_dd/models/item/hazard_block.json
 926b6634f4ede0d428bf4def980af6dee24446a5 assets/create_dd/models/item/hazard_block_r.json
-a17807cc3f3109b35d6c5d9b3677a4d926221d33 assets/create_dd/models/item/helm.json
 926b6634f4ede0d428bf4def980af6dee24446a5 assets/create_dd/models/item/horizontal_hazard_block.json
 926b6634f4ede0d428bf4def980af6dee24446a5 assets/create_dd/models/item/horizontal_hazard_block_r.json
 f568c2ccfb49e9bfd28a0400898540937cb4217b assets/create_dd/models/item/hydraulic_casing.json
@@ -1989,7 +1988,6 @@ be749a73964c47a1e028e1d9e35303e0f7aeaea3 data/create_dd/loot_tables/blocks/green
 7194dcba81a3a9146035fc5e3b021cdb9bd16faa data/create_dd/loot_tables/blocks/green_velvet_block.json
 e319b3fde1eee42c309dc856119eb7eb2dcc9d1e data/create_dd/loot_tables/blocks/haunting_sail.json
 e37a0f826ab090dcd74b0153811fd0a9a031bdb1 data/create_dd/loot_tables/blocks/hazard_block.json
-277871be826d7bbaf107f0766675092dc20e33a0 data/create_dd/loot_tables/blocks/helm.json
 faeb29559b9ce0a34001669efe6957b8f3735fc3 data/create_dd/loot_tables/blocks/hydraulic_casing.json
 052ebba647629203ee9ae060ce334b4aa53722e2 data/create_dd/loot_tables/blocks/hydraulic_press.json
 dbead11174b11da8b3a5d2ee02104e993ec19998 data/create_dd/loot_tables/blocks/incomplete_large_water_wheel.json

@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 public class CogCrankInstance extends SingleRotatingInstance<CogCrankBlockEntity> implements DynamicInstance {
 
     private final ModelData crank;
-    private final Direction facing;
+    private final Direction.Axis axis;
 
     public CogCrankInstance(MaterialManager modelManager, CogCrankBlockEntity blockEntity) {
         super(modelManager, blockEntity);
-        facing = blockState.getValue(BlockStateProperties.FACING);
+        axis = blockState.getValue(BlockStateProperties.AXIS);
         Instancer<ModelData> model = blockEntity.getRenderedHandleInstance(getTransformMaterial());
         crank = model.createInstance();
         rotateCrank();
@@ -32,7 +32,6 @@ public class CogCrankInstance extends SingleRotatingInstance<CogCrankBlockEntity
     }
 
     private void rotateCrank() {
-        Direction.Axis axis = facing.getAxis();
         float angle = blockEntity.getIndependentAngle(AnimationTickHolder.getPartialTicks());
 
         crank.loadIdentity()
