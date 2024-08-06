@@ -75,7 +75,7 @@ public class GiantGearStructuralBlock extends DirectionalBlock implements IWrenc
         Level level = context.getLevel();
 
         if (stillValid(level, clickedPos, state, false)) {
-            BlockPos masterPos = getMaster(level, clickedPos, state);
+            BlockPos masterPos = getOwner(level, clickedPos, state);
             context = new UseOnContext(level, context.getPlayer(), context.getHand(), context.getItemInHand(),
                     new BlockHitResult(context.getClickLocation(), context.getClickedFace(), masterPos,
                             context.isInside()));
@@ -84,32 +84,39 @@ public class GiantGearStructuralBlock extends DirectionalBlock implements IWrenc
 
         return IWrenchable.super.onSneakWrenched(state, context);
     }
-
+    
     @Override
-    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (stillValid(pLevel, pPos, pState, false))
-            pLevel.destroyBlock(getMaster(pLevel, pPos, pState), true);
-    }
-
     public void playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
-        if (stillValid(pLevel, pPos, pState, false)) {
-            BlockPos masterPos = getMaster(pLevel, pPos, pState);
-            pLevel.destroyBlockProgress(masterPos.hashCode(), masterPos, -1);
-            if (!pLevel.isClientSide() && pPlayer.isCreative())
-                pLevel.destroyBlock(masterPos, false);
-        }
+        destroyParentStructure(pState, pLevel, pPos, pPlayer.isCreative());
         super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
     }
-
+    
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+//        destroyParentStructure(pState, pLevel, pPos, true);
+        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+    }
+    
+    private void destroyParentStructure(BlockState pState, Level pLevel, BlockPos pPos, boolean drops) {
+        BlockPos parentPos = getOwner(pLevel, pPos, pState);
+        BlockState parent = pLevel.getBlockState(parentPos);
+        if (!parent.is(DesiresBlocks.GIANT_GEAR.get())) return;
+        Direction.Axis parentAxis = parent.getValue(GiantGearBlock.AXIS);
+        
+        GiantGearBlock.destroyStructure(parentPos, parentAxis, pLevel, drops);
+    }
+    
     @Override
     public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel,
                                   BlockPos pCurrentPos, BlockPos pFacingPos) {
         if (stillValid(pLevel, pCurrentPos, pState, false)) {
-            BlockPos masterPos = getMaster(pLevel, pCurrentPos, pState);
-            if (!pLevel.getBlockTicks()
-                    .hasScheduledTick(masterPos, DesiresBlocks.GIANT_GEAR.get()))
-                pLevel.scheduleTick(masterPos, DesiresBlocks.GIANT_GEAR.get(), 1);
+//            BlockPos masterPos = getOwner(pLevel, pCurrentPos, pState);
+//            if (!pLevel.getBlockTicks()
+//                    .hasScheduledTick(masterPos, DesiresBlocks.GIANT_GEAR.get()))
+//                pLevel.scheduleTick(masterPos, DesiresBlocks.GIANT_GEAR.get(), 1);
             return pState;
+        } else {
+//            pLevel.setBlock(pCurrentPos, Blocks.AIR.defaultBlockState(), 2);
         }
         if (!(pLevel instanceof Level level) || level.isClientSide())
             return pState;
@@ -119,12 +126,12 @@ public class GiantGearStructuralBlock extends DirectionalBlock implements IWrenc
         return pState;
     }
 
-    public static BlockPos getMaster(BlockGetter level, BlockPos pos, BlockState state) {
+    public static BlockPos getOwner(BlockGetter level, BlockPos pos, BlockState state) {
         Direction direction = state.getValue(FACING);
         BlockPos targetedPos = pos.relative(direction);
         BlockState targetedState = level.getBlockState(targetedPos);
         if (targetedState.is(DesiresBlocks.GIANT_GEAR_STRUCTURAL.get()))
-            return getMaster(level, targetedPos, targetedState);
+            return getOwner(level, targetedPos, targetedState);
         return targetedPos;
     }
 
@@ -142,11 +149,11 @@ public class GiantGearStructuralBlock extends DirectionalBlock implements IWrenc
                 && targetedState.getValue(GiantGearBlock.AXIS) != direction.getAxis();
     }
 
-    @Override
-    public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
-        if (!stillValid(pLevel, pPos, pState, false))
-            pLevel.setBlockAndUpdate(pPos, Blocks.AIR.defaultBlockState());
-    }
+//    @Override
+//    public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
+//        if (!stillValid(pLevel, pPos, pState, false))
+//            pLevel.setBlockAndUpdate(pPos, Blocks.AIR.defaultBlockState());
+//    }
 
     @OnlyIn(Dist.CLIENT)
     public void initializeClient(Consumer<IClientBlockExtensions> consumer) {
@@ -172,7 +179,7 @@ public class GiantGearStructuralBlock extends DirectionalBlock implements IWrenc
                 BlockPos targetPos = bhr.getBlockPos();
                 GiantGearStructuralBlock waterWheelStructuralBlock = DesiresBlocks.GIANT_GEAR_STRUCTURAL.get();
                 if (waterWheelStructuralBlock.stillValid(level, targetPos, state, false))
-                    manager.crack(GiantGearStructuralBlock.getMaster(level, targetPos, state), bhr.getDirection());
+                    manager.crack(GiantGearStructuralBlock.getOwner(level, targetPos, state), bhr.getDirection());
                 return true;
             }
             return IClientBlockExtensions.super.addHitEffects(state, level, target, manager);
@@ -185,14 +192,14 @@ public class GiantGearStructuralBlock extends DirectionalBlock implements IWrenc
             if (!waterWheelStructuralBlock.stillValid(level, pos, blockState, false))
                 return null;
             HashSet<BlockPos> set = new HashSet<>();
-            set.add(GiantGearStructuralBlock.getMaster(level, pos, blockState));
+            set.add(GiantGearStructuralBlock.getOwner(level, pos, blockState));
             return set;
         }
     }
 
     @Override
     public BlockPos getInformationSource(Level level, BlockPos pos, BlockState state) {
-        return stillValid(level, pos, state, false) ? getMaster(level, pos, state) : pos;
+        return stillValid(level, pos, state, false) ? getOwner(level, pos, state) : pos;
     }
 
 }
