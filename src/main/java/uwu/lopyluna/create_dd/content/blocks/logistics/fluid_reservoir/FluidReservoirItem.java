@@ -1,7 +1,6 @@
 package uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir;
 
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
-import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.foundation.utility.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -52,7 +51,7 @@ public class FluidReservoirItem extends BlockItem {
             if (nbt.contains("TankContent")) {
                 FluidStack fluid = FluidStack.loadFluidStackFromNBT(nbt.getCompound("TankContent"));
                 if (!fluid.isEmpty()) {
-                    fluid.setAmount(Math.min(FluidTankBlockEntity.getCapacityMultiplier(), fluid.getAmount()));
+                    fluid.setAmount(Math.min(FluidReservoirBlockEntity.getCapacityMultiplier(), fluid.getAmount()));
                     nbt.put("TankContent", fluid.writeToNBT(new CompoundTag()));
                 }
             }
@@ -64,9 +63,13 @@ public class FluidReservoirItem extends BlockItem {
         Player player = ctx.getPlayer();
         if (player == null)
             return;
+        if (player.isShiftKeyDown())
+            return;
         if (player.isSteppingCarefully())
             return;
         Direction face = ctx.getClickedFace();
+        if (!face.getAxis().isHorizontal())
+            return;
         ItemStack stack = ctx.getItemInHand();
         Level world = ctx.getLevel();
         BlockPos pos = ctx.getClickedPos();

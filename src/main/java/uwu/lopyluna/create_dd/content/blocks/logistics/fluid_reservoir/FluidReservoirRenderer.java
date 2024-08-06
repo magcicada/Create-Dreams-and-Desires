@@ -28,7 +28,7 @@ public class FluidReservoirRenderer extends SafeBlockEntityRenderer<FluidReservo
         float capHeight = 1 / 4f;
         float tankHullWidth = 1 / 16f + 1 / 128f;
         float minPuddleHeight = 1 / 16f;
-        float totalHeight = be.width - 2 * capHeight - minPuddleHeight;
+        float totalHeight = be.height - 2 * capHeight - minPuddleHeight;
 
         float level = fluidLevel.getValue(partialTicks);
         if (level < 1 / (512f * totalHeight))

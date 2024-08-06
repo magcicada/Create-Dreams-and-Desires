@@ -35,7 +35,7 @@ import static uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.Fl
 
 
 @SuppressWarnings({"removal", "deprecated", "unchecked", "unused"})
-public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMultiBlockEntityContainer.Fluid, IHaveGoggleInformation {
+public class FluidReservoirBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation, IMultiBlockEntityContainer.Fluid {
 
     private static final int MAX_SIZE = 3;
 
@@ -78,8 +78,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
 
     protected void updateConnectivity() {
         updateConnectivity = false;
-        assert level != null;
-        if (level.isClientSide)
+        if (Objects.requireNonNull(getLevel()).isClientSide())
             return;
         if (!isController())
             return;
@@ -115,16 +114,17 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
 
     @Override
     public boolean isController() {
-        return controller == null || worldPosition.getX() == controller.getX()
-                && worldPosition.getY() == controller.getY() && worldPosition.getZ() == controller.getZ();
+        return controller == null ||
+                worldPosition.getX() == controller.getX() &&
+                worldPosition.getY() == controller.getY() &&
+                worldPosition.getZ() == controller.getZ();
     }
 
     @Override
     public void initialize() {
         super.initialize();
         sendData();
-        assert level != null;
-        if (level.isClientSide)
+        if (Objects.requireNonNull(getLevel()).isClientSide)
             invalidateRenderBoundingBox();
     }
 
@@ -141,20 +141,20 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
                 .getFluidType();
         int luminosity = (int) (attributes.getLightLevel(newFluidStack) / 1.2f);
         boolean reversed = attributes.isLighterThanAir();
-        int maxY = (int) ((getFillState() * height) + 1);
+        int maxF = (int) ((getFillState() * height) + 1);
 
-        for (int yOffset = 0; yOffset < height; yOffset++) {
-            boolean isBright = reversed ? (height - yOffset <= maxY) : (yOffset < maxY);
+        for (int zxOffset = 0; zxOffset < height; zxOffset++) {
+            boolean isBright = reversed ? (height - zxOffset <= maxF) : (zxOffset < maxF);
             int actualLuminosity = isBright ? luminosity : luminosity > 0 ? 1 : 0;
 
-            for (int xOffset = 0; xOffset < width; xOffset++) {
-                for (int zOffset = 0; zOffset < width; zOffset++) {
-                    BlockPos pos = this.worldPosition.offset(xOffset, yOffset, zOffset);
-                    assert level != null;
-                    FluidReservoirBlockEntity tankAt = ConnectivityHandler.partAt(getType(), level, pos);
+            for (int yOffset = 0; yOffset < width; yOffset++) {
+                for (int xzOffset = 0; xzOffset < width; xzOffset++) {
+                    BlockPos pos = this.worldPosition.offset(isAxis(Axis.X) ? zxOffset : xzOffset, yOffset, isAxis(Axis.Z) ? zxOffset : xzOffset);
+
+                    FluidReservoirBlockEntity tankAt = ConnectivityHandler.partAt(getType(), Objects.requireNonNull(getLevel()), pos);
                     if (tankAt == null)
                         continue;
-                    level.updateNeighbourForOutputSignal(pos, tankAt.getBlockState()
+                    getLevel().updateNeighbourForOutputSignal(pos, tankAt.getBlockState()
                             .getBlock());
                     if (tankAt.luminosity == actualLuminosity)
                         continue;
@@ -163,8 +163,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
             }
         }
 
-        assert level != null;
-        if (!level.isClientSide) {
+        if (!Objects.requireNonNull(getLevel()).isClientSide) {
             setChanged();
             sendData();
         }
@@ -178,8 +177,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
     }
 
     protected void setLuminosity(int luminosity) {
-        assert level != null;
-        if (level.isClientSide)
+        if (Objects.requireNonNull(getLevel()).isClientSide)
             return;
         if (this.luminosity == luminosity)
             return;
@@ -196,10 +194,9 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
     public FluidReservoirBlockEntity getControllerBE() {
         if (isController())
             return this;
-        assert level != null;
-        BlockEntity blockEntity = level.getBlockEntity(controller);
-        if (blockEntity instanceof FluidReservoirBlockEntity)
-            return (FluidReservoirBlockEntity) blockEntity;
+        BlockEntity blockEntity = Objects.requireNonNull(getLevel()).getBlockEntity(controller);
+        if (blockEntity instanceof FluidReservoirBlockEntity be)
+            return be;
         return null;
     }
 
@@ -212,8 +209,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
     }
 
     public void removeController(boolean keepFluids) {
-        assert level != null;
-        if (level.isClientSide)
+        if (Objects.requireNonNull(getLevel()).isClientSide)
             return;
         updateConnectivity = true;
         if (!keepFluids)
@@ -225,14 +221,23 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
 
         BlockState state = getBlockState();
         if (isTank(state)) {
+            state = state.setValue(FluidReservoirBlock.BOTTOM, true);
+            state = state.setValue(FluidReservoirBlock.TOP, true);
             state = state.setValue(FluidReservoirBlock.LARGE, false);
             state = state.setValue(WINDOW, window);
-            Objects.requireNonNull(getLevel()).setBlock(worldPosition, state, 22);
+            getLevel().setBlock(worldPosition, state, 22);
         }
 
         refreshCapability();
         setChanged();
         sendData();
+    }
+
+    public void toggleWindows() {
+        FluidReservoirBlockEntity be = getControllerBE();
+        if (be == null)
+            return;
+        be.setWindows(!be.window);
     }
 
     public void sendDataImmediately() {
@@ -252,10 +257,30 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
         syncCooldown = SYNC_RATE;
     }
 
+    public void setWindows(boolean window) {
+        this.window = window;
+        for (int yOffset = 0; yOffset < width; yOffset++) {
+            for (int xOffset = 0; xOffset < (isAxis(Axis.X) ? height : width); xOffset++) {
+                for (int zOffset = 0; zOffset < (isAxis(Axis.Z) ? height : width); zOffset++) {
+
+                    BlockPos pos = this.worldPosition.offset(xOffset, yOffset, zOffset);
+                    BlockState blockState = Objects.requireNonNull(getLevel()).getBlockState(pos);
+                    if (!isTank(blockState))
+                        continue;
+
+
+                    getLevel().setBlock(pos, blockState.setValue(WINDOW, window), 22);
+                    getLevel().getChunkSource()
+                            .getLightEngine()
+                            .checkBlock(pos);
+                }
+            }
+        }
+    }
+
     @Override
     public void setController(BlockPos controller) {
-        assert level != null;
-        if (level.isClientSide && !isVirtual())
+        if (Objects.requireNonNull(getLevel()).isClientSide && !isVirtual())
             return;
         if (controller.equals(this.controller))
             return;
@@ -272,8 +297,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
     }
 
     private IFluidHandler handlerForCapability() {
-        return isController() ? tankInventory
-                : getControllerBE() != null ? getControllerBE().handlerForCapability() : new FluidTank(0);
+        return isController() ? tankInventory : getControllerBE() != null ? getControllerBE().handlerForCapability() : new FluidTank(0);
     }
 
     @Override
@@ -284,23 +308,21 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
     @Override
     protected AABB createRenderBoundingBox() {
         if (isController())
-            return super.createRenderBoundingBox().expandTowards(width - 1, height - 1, width - 1);
+            return super.createRenderBoundingBox().expandTowards(isAxis(Axis.X) ? height - 1 : width - 1, width - 1, isAxis(Axis.Z) ? height - 1 : width - 1);
         else
             return super.createRenderBoundingBox();
     }
 
     @Nullable
     public FluidReservoirBlockEntity getOtherFluidTankBlockEntity(Direction direction) {
-        assert level != null;
-        BlockEntity otherBE = level.getBlockEntity(worldPosition.relative(direction));
-        if (otherBE instanceof FluidReservoirBlockEntity)
-            return (FluidReservoirBlockEntity) otherBE;
+        BlockEntity otherBE = Objects.requireNonNull(getLevel()).getBlockEntity(worldPosition.relative(direction));
+        if (otherBE instanceof FluidReservoirBlockEntity be)
+            return be;
         return null;
     }
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-
         FluidReservoirBlockEntity controllerBE = getControllerBE();
         if (controllerBE == null)
             return false;
@@ -329,6 +351,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
             controller = NbtUtils.readBlockPos(compound.getCompound("Controller"));
 
         if (isController()) {
+            window = compound.getBoolean("Window");
             width = compound.getInt("Size");
             height = compound.getInt("Height");
             tankInventory.setCapacity(getTotalTankSize() * getCapacityMultiplier());
@@ -348,8 +371,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
                 !Objects.equals(controllerBefore, controller);
         if (changeOfController || prevSize != width || prevHeight != height) {
             if (hasLevel()) {
-                assert level != null;
-                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 16);
+                Objects.requireNonNull(getLevel()).sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 16);
             }
             if (isController()) 
                 tankInventory.setCapacity(getCapacityMultiplier() * getTotalTankSize());
@@ -363,8 +385,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
             fluidLevel.chase(fillState, 0.5f, LerpedFloat.Chaser.EXP);
         }
         if (luminosity != prevLum && hasLevel()) {
-            assert level != null;
-            level.getChunkSource()
+            Objects.requireNonNull(getLevel()).getChunkSource()
                     .getLightEngine()
                     .checkBlock(worldPosition);
         }
@@ -386,6 +407,7 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
         if (!isController())
             compound.put("Controller", NbtUtils.writeBlockPos(controller));
         if (isController()) {
+            compound.putBoolean("Window", window);
             compound.put("TankContent", tankInventory.writeToNBT(new CompoundTag()));
             compound.putInt("Size", width);
             compound.putInt("Height", height);
@@ -421,12 +443,12 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
         return tankInventory;
     }
 
-    public int getMaxSize() {
-        return MAX_SIZE;
-    }
-
     public int getTotalTankSize() {
         return width * width * height;
+    }
+
+    public int getMaxSize() {
+        return MAX_SIZE;
     }
 
     public static int getCapacityMultiplier() {
@@ -437,6 +459,14 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
         return AllConfigs.server().fluids.fluidTankMaxHeight.get();
     }
 
+    public LerpedFloat getFluidLevel() {
+        return fluidLevel;
+    }
+
+    public void setFluidLevel(LerpedFloat fluidLevel) {
+        this.fluidLevel = fluidLevel;
+    }
+
     @Override
     public void preventConnectivityUpdate() { updateConnectivity = false; }
 
@@ -444,8 +474,10 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
     public void notifyMultiUpdated() {
         BlockState state = this.getBlockState();
         if (isTank(state)) { // safety
-            assert level != null;
-            level.setBlock(getBlockPos(), state.setValue(FluidReservoirBlock.LARGE, width > 2), 6);
+            state = state.setValue(FluidReservoirBlock.LARGE, width > 2);
+            state = state.setValue(FluidReservoirBlock.BOTTOM, isAxis(Axis.X) ? getController().getX() == getBlockPos().getX() : getController().getZ() == getBlockPos().getZ());
+            state = state.setValue(FluidReservoirBlock.TOP, isAxis(Axis.X) ? getController().getX() + height - 1 == getBlockPos().getX() : getController().getZ() + height - 1 == getBlockPos().getZ());
+            Objects.requireNonNull(getLevel()).setBlock(getBlockPos(), state, 6);
         }
         if (isController())
             setWindows(window);
@@ -453,46 +485,43 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
         setChanged();
     }
 
-    public void toggleWindows() {
-        FluidReservoirBlockEntity be = getControllerBE();
-        if (be == null)
-            return;
-        be.setWindows(!be.window);
+    @Override
+    public void setExtraData(@Nullable Object data) {
+        if (data instanceof Boolean)
+            window = (boolean) data;
     }
 
-    public void setWindows(boolean window) {
-        this.window = window;
-        boolean x = (getBlockState().getValue(HORIZONTAL_AXIS) == Axis.X);
-        boolean z = (getBlockState().getValue(HORIZONTAL_AXIS) == Axis.Z);
+    @Override
+    @Nullable
+    public Object getExtraData() {
+        return window;
+    }
 
-        for (int yOffset = 0; yOffset < width; yOffset++) {
-            for (int xOffset = 0; xOffset < (x ? height : width); xOffset++) {
-                for (int zOffset = 0; zOffset < (z ? height : width); zOffset++) {
-
-                    BlockPos pos = this.worldPosition.offset(xOffset, yOffset, zOffset);
-                    BlockState blockState = Objects.requireNonNull(getLevel()).getBlockState(pos);
-                    if (!isTank(blockState))
-                        continue;
-
-
-                    getLevel().setBlock(pos, blockState.setValue(WINDOW, window), 22);
-                    getLevel().getChunkSource()
-                            .getLightEngine()
-                            .checkBlock(pos);
-                }
-            }
+    @Override
+    public Object modifyExtraData(Object data) {
+        if (data instanceof Boolean windows) {
+            windows |= window;
+            return windows;
         }
+        return data;
+    }
+
+    public boolean isAxis(Axis axis) {
+        return getAxis() == axis;
+    }
+
+    public Axis getAxis() {
+        return getBlockState().getValue(HORIZONTAL_AXIS);
     }
 
     @Override
     public Axis getMainConnectionAxis() {
-        return getMainAxisOf(this);
+        return getAxis();
     }
 
     @Override
     public int getMaxLength(Axis longAxis, int width) {
-        if (longAxis == Axis.Y) return getMaxWidth();
-        return getMaxHeight();
+        return longAxis == Axis.Z ? getMaxHeight() : longAxis == Axis.X ? getMaxHeight() : getMaxWidth();
     }
 
     @Override
@@ -525,14 +554,6 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IMult
     @Override
     public void setTankSize(int tank, int blocks) {
         applyFluidTankSize(blocks);
-    }
-
-    public LerpedFloat getFluidLevel() {
-        return fluidLevel;
-    }
-
-    public void setFluidLevel(LerpedFloat fluidLevel) {
-        this.fluidLevel = fluidLevel;
     }
 
     @Override

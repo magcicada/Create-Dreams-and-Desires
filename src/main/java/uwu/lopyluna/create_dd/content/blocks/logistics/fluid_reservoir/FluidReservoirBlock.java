@@ -5,8 +5,8 @@ import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.fluids.transfer.GenericItemEmptying;
 import com.simibubi.create.content.fluids.transfer.GenericItemFilling;
 import com.simibubi.create.foundation.block.IBE;
+import com.simibubi.create.foundation.blockEntity.ComparatorUtil;
 import com.simibubi.create.foundation.fluid.FluidHelper;
-import com.simibubi.create.foundation.item.ItemHelper;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -196,13 +196,13 @@ public class FluidReservoirBlock extends Block implements IWrenchable, IBE<Fluid
         return Shapes.block();
     }
 
-    @Override
-    public BlockState updateShape(@NotNull BlockState pState, @NotNull Direction pDirection, @NotNull BlockState pNeighborState,
-                                  @NotNull LevelAccessor pLevel, @NotNull BlockPos pCurrentPos, @NotNull BlockPos pNeighborPos) {
-        if (pDirection == Direction.DOWN && pNeighborState.getBlock() != this)
-            withBlockEntityDo(pLevel, pCurrentPos, FluidReservoirBlockEntity::updateConnectivity);
-        return pState;
-    }
+    //@Override
+    //public BlockState updateShape(@NotNull BlockState pState, @NotNull Direction pDirection, @NotNull BlockState pNeighborState,
+    //                              @NotNull LevelAccessor pLevel, @NotNull BlockPos pCurrentPos, @NotNull BlockPos pNeighborPos) {
+    //    if (pDirection == Direction.DOWN && pNeighborState.getBlock() != this)
+    //        withBlockEntityDo(pLevel, pCurrentPos, FluidReservoirBlockEntity::updateConnectivity);
+    //    return pState;
+    //}
 
     @Override
     public InteractionResult use(@NotNull BlockState state, Level world, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand,
@@ -211,6 +211,8 @@ public class FluidReservoirBlock extends Block implements IWrenchable, IBE<Fluid
         boolean onClient = world.isClientSide;
 
         if (heldItem.isEmpty())
+            return InteractionResult.PASS;
+        if (!player.isCreative())
             return InteractionResult.PASS;
 
         FluidHelper.FluidExchange exchange = null;
@@ -347,8 +349,8 @@ public class FluidReservoirBlock extends Block implements IWrenchable, IBE<Fluid
 
     // Tanks are less noisy when placed in batch
     public static final SoundType SILENCED_METAL =
-            new ForgeSoundType(0.1F, 1.5F, () -> SoundEvents.METAL_BREAK, () -> SoundEvents.METAL_STEP,
-                    () -> SoundEvents.METAL_PLACE, () -> SoundEvents.METAL_HIT, () -> SoundEvents.METAL_FALL);
+            new ForgeSoundType(0.1F, 1.5F, () -> SoundEvents.COPPER_BREAK, () -> SoundEvents.COPPER_STEP,
+                    () -> SoundEvents.COPPER_PLACE, () -> SoundEvents.COPPER_HIT, () -> SoundEvents.COPPER_FALL);
 
     @Override
     public SoundType getSoundType(BlockState state, LevelReader world, BlockPos pos, Entity entity) {
@@ -366,10 +368,8 @@ public class FluidReservoirBlock extends Block implements IWrenchable, IBE<Fluid
 
     @Override
     public int getAnalogOutputSignal(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos) {
-        return getBlockEntityOptional(pLevel, pPos)
-                .map(vte -> vte.getCapability(net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY))
-                .map(lo -> lo.map(ItemHelper::calcRedstoneFromInventory)
-                        .orElse(0))
+        return getBlockEntityOptional(pLevel, pPos).map(FluidReservoirBlockEntity::getControllerBE)
+                .map(be -> ComparatorUtil.fractionToRedstoneLevel(be.getFillState()))
                 .orElse(0);
     }
 }

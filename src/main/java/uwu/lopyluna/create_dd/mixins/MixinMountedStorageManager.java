@@ -30,6 +30,7 @@ public class MixinMountedStorageManager {
             IFluidTank tankInventory = tank.getTankInventory();
             if (tankInventory instanceof FluidTank)
                 ((FluidTank) tankInventory).setFluid(((AccessorMountedFluidStorage) mfs).create_dd$getTank().getFluid());
+            tank.getFluidLevel().startWithValue(tank.getFillState());
             mfs.assignBlockEntity(tank);
         });
     }

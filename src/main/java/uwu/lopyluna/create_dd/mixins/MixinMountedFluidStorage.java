@@ -3,6 +3,8 @@ package uwu.lopyluna.create_dd.mixins;
 import com.simibubi.create.content.contraptions.MountedFluidStorage;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
@@ -14,12 +16,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirBlockEntity;
 
+@SuppressWarnings({"all"})
 @Mixin(value = MountedFluidStorage.class, remap = false)
 public class MixinMountedFluidStorage {
 
     @Shadow SmartFluidTank tank;
     @Shadow private BlockEntity blockEntity;
     @Shadow private boolean sendPacket = false;
+
+    @Inject(at = @At("RETURN"), method = "tick(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/BlockPos;Z)V")
+    public void tick(Entity entity, BlockPos pos, boolean isRemote, CallbackInfo ci) {
+        if (blockEntity instanceof FluidReservoirBlockEntity tank) {
+            tank.getFluidLevel().tickChaser();
+        }
+    }
 
     @Inject(at = @At("HEAD"), method = "canUseAsStorage(Lnet/minecraft/world/level/block/entity/BlockEntity;)Z", cancellable = true)
     private static void canUseAsStorage(BlockEntity be, CallbackInfoReturnable<Boolean> cir) {
