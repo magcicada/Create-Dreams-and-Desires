@@ -1,6 +1,5 @@
 package uwu.lopyluna.create_dd.infrastructure.ponder;
 
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.foundation.ponder.PonderRegistry;
 import com.simibubi.create.foundation.ponder.PonderTag;
@@ -11,7 +10,7 @@ import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 public class DesirePonderTags {
 
 	public static final PonderTag
-			Desires = create("create_dd").item(AllItems.PRECISION_MECHANISM.get())
+		ALL_DESIRES_CONTENT = create("create_dd").item(AllItems.PRECISION_MECHANISM.get())
 			.defaultLang("Create: Dreams n' Desires", "Welcome to the mod!")
 			.addToIndex();
 
@@ -21,7 +20,7 @@ public class DesirePonderTags {
 
 	public static void register() {
 		// Add items to tags here
-		PonderRegistry.TAGS.forTag(Desires).add(DesiresBlocks.COG_CRANK.get());
+		PonderRegistry.TAGS.forTag(ALL_DESIRES_CONTENT).add(DesiresBlocks.COG_CRANK.get());
 	}
 
 }
