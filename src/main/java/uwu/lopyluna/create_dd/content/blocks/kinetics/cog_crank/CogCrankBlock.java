@@ -39,6 +39,7 @@ import org.checkerframework.checker.units.qual.A;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.worm_gear.WormGearBlock;
 import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
 import uwu.lopyluna.create_dd.registry.DesiresBlockEntityTypes;
+import uwu.lopyluna.create_dd.registry.DesiresShapes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -81,7 +82,7 @@ public class CogCrankBlock extends RotatedPillarKineticBlock implements IBE<CogC
     
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-        return (isLarge ? AllShapes.LARGE_GEAR : AllShapes.SMALL_GEAR).get(state.getValue(AXIS));
+        return (isLarge ? DesiresShapes.SMALL_COG_CRANK : DesiresShapes.LARGE_COG_CRANK).get(state.getValue(AXIS));
     }
     
     @Override

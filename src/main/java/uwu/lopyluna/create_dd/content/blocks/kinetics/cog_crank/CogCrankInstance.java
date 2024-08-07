@@ -37,6 +37,7 @@ public class CogCrankInstance extends SingleRotatingInstance<CogCrankBlockEntity
         crank.loadIdentity()
                 .translate(getInstancePosition())
                 .centre()
+                .rotateToFace(Direction.get(Direction.AxisDirection.POSITIVE, axis))
                 .rotate(Direction.get(Direction.AxisDirection.POSITIVE, axis), angle)
                 .unCentre();
     }
