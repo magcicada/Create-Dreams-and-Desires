@@ -3,18 +3,19 @@ package uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;
+import com.simibubi.create.foundation.utility.Color;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Vec3i;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import uwu.lopyluna.create_dd.DesireClient;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.AXIS;
 
@@ -32,7 +33,7 @@ public class GiantGearBlockEntity extends KineticBlockEntity {
         if (getBlockState().getValue(GiantGearBlock.AXIS) == direction.getAxis()) return 1;
         
         //Dont connect to shafts, they have 0 teeth and it breaks the system anyways
-        if (!ICogWheel.isSmallCog(stateTo) || !ICogWheel.isLargeCog(stateTo)) return 0;
+        if (!ICogWheel.isSmallCog(stateTo) && !ICogWheel.isLargeCog(stateTo)) return 0;
         
         int thisBlockTeeth = 64;
         int largeCogTeeth = 16;
@@ -87,6 +88,20 @@ public class GiantGearBlockEntity extends KineticBlockEntity {
     }
     
     @Override
+    public void tick() {
+        super.tick();
+        if (level.isClientSide) {
+            DesireClient.DEBUG_OUTLINER.showBlockPositions(
+                collectConnectionPositions(true, false), o -> o.colored(Color.RED)
+            );
+            
+            DesireClient.DEBUG_OUTLINER.showBlockPositions(
+                collectConnectionPositions(false, true), o -> o.colored(Color.BLACK)
+            );
+        }
+    }
+    
+    @Override
     public List<BlockPos> addPropagationLocations(IRotate block, BlockState state, List<BlockPos> neighbours) {
 //        if (!canPropagateDiagonally(block, state))
 //            return neighbours;
@@ -102,33 +117,65 @@ public class GiantGearBlockEntity extends KineticBlockEntity {
 //                });
 //        return neighbours;
         
+        ArrayList<BlockPos> locations = new ArrayList<>(neighbours);
+        
         Direction.Axis axis = getBlockState().getValue(GiantGearBlock.AXIS);
         
-        List<Direction.Axis> parallelAxis = Arrays.stream(Direction.Axis.values())
+        
+        return locations;
+    }
+    
+    private List<BlockPos> collectConnectionPositions(boolean collectSmallCogConnections, boolean collectLargeCogConnections) {
+        Direction.Axis axis = getBlockState().getValue(GiantGearBlock.AXIS);
+        List<BlockPos> locations = new ArrayList<>();
+        
+        if (collectSmallCogConnections)
+            forEachPerpendicularQuadrant(
+                axis, (d1, d2) -> {
+                    locations.add(getBlockPos()
+                        .relative(d1, 3)
+                        .relative(d2, 2)
+                    );
+                    locations.add(getBlockPos()
+                        .relative(d1, 2)
+                        .relative(d2, 3)
+                    );
+                }
+            );
+        
+        if (collectLargeCogConnections)
+            forEachPerpendicularDirection(
+                axis, (d1) -> {
+                    locations.add(getBlockPos()
+                        .relative(d1, 4)
+                    );
+                }
+            );
+        return locations;
+    }
+    
+    private static void forEachPerpendicularDirection(Direction.Axis axis, Consumer<Direction> directionConsumer) {
+        List<Direction> perpendicularDirections = Arrays.stream(Direction.values())
+            .filter(other -> other.getAxis() != axis)
+            .toList();
+        
+        for (Direction direction : perpendicularDirections)
+            directionConsumer.accept(direction);
+    }
+    
+    private static void forEachPerpendicularQuadrant(Direction.Axis axis, BiConsumer<Direction, Direction> quadrantConsumer) {
+        
+        List<Direction.Axis> perpendicularAxies = Arrays.stream(Direction.Axis.values())
             .filter(other -> other != axis)
             .toList();
         
-        ArrayList<BlockPos> positions = new ArrayList<>(neighbours);
-        
         for (Direction.AxisDirection axisDirectionA : Direction.AxisDirection.values()) {
             for (Direction.AxisDirection axisDirectionB : Direction.AxisDirection.values()) {
-                Direction directionA = Direction.fromAxisAndDirection(parallelAxis.get(0), axisDirectionA);
-                Direction directionB = Direction.fromAxisAndDirection(parallelAxis.get(1), axisDirectionB);
-                
-                positions.add(
-                    getBlockPos()
-                        .relative(directionA, 3)
-                        .relative(directionB, 2)
-                );
-                positions.add(
-                    getBlockPos()
-                        .relative(directionA, 2)
-                        .relative(directionB, 3)
-                );
+                Direction directionA = Direction.fromAxisAndDirection(perpendicularAxies.get(0), axisDirectionA);
+                Direction directionB = Direction.fromAxisAndDirection(perpendicularAxies.get(1), axisDirectionB);
+                quadrantConsumer.accept(directionA, directionB);
             }
         }
-        
-        return positions;
     }
     
 }
