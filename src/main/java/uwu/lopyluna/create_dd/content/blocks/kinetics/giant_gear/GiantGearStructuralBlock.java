@@ -9,8 +9,10 @@ import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -18,12 +20,17 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientBlockExtensions;
@@ -110,13 +117,7 @@ public class GiantGearStructuralBlock extends DirectionalBlock implements IWrenc
     public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel,
                                   BlockPos pCurrentPos, BlockPos pFacingPos) {
         if (stillValid(pLevel, pCurrentPos, pState, false)) {
-//            BlockPos masterPos = getOwner(pLevel, pCurrentPos, pState);
-//            if (!pLevel.getBlockTicks()
-//                    .hasScheduledTick(masterPos, DesiresBlocks.GIANT_GEAR.get()))
-//                pLevel.scheduleTick(masterPos, DesiresBlocks.GIANT_GEAR.get(), 1);
             return pState;
-        } else {
-//            pLevel.setBlock(pCurrentPos, Blocks.AIR.defaultBlockState(), 2);
         }
         if (!(pLevel instanceof Level level) || level.isClientSide())
             return pState;
@@ -149,23 +150,49 @@ public class GiantGearStructuralBlock extends DirectionalBlock implements IWrenc
                 && targetedState.getValue(GiantGearBlock.AXIS) != direction.getAxis();
     }
 
-//    @Override
-//    public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
-//        if (!stillValid(pLevel, pPos, pState, false))
-//            pLevel.setBlockAndUpdate(pPos, Blocks.AIR.defaultBlockState());
-//    }
-
     @OnlyIn(Dist.CLIENT)
     public void initializeClient(Consumer<IClientBlockExtensions> consumer) {
         consumer.accept(new GiantGearStructuralBlock.RenderProperties());
     }
-
+    
+    private static final SoundType silentSoundType = new SoundType(0F, 1.0F, SoundEvents.STONE_BREAK, SoundEvents.STONE_STEP, SoundEvents.STONE_PLACE, SoundEvents.STONE_HIT, SoundEvents.STONE_FALL);
+    
+    @Override
+    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
+        return silentSoundType;
+    }
+    
     @Override
     public boolean addLandingEffects(BlockState state1, ServerLevel level, BlockPos pos, BlockState state2,
                                      LivingEntity entity, int numberOfParticles) {
         return true;
     }
-
+    
+    @Override
+    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+        Vec3 min = new Vec3(0, 0, 0);
+        Vec3 max = new Vec3(1, 1, 1);
+        
+        BlockPos ownerPos = getOwner(pLevel, pPos, pState);
+        BlockState ownerState = pLevel.getBlockState(ownerPos);
+        if (!ownerState.is(DesiresBlocks.GIANT_GEAR.get())) return Shapes.block();
+        
+        Direction.Axis axis = ownerState.getValue(GiantGearBlock.AXIS);
+        
+        min = min.with(axis, 3/16f);
+        max = max.with(axis, 13/16f);
+        
+        return Shapes.box(
+            min.x, min.y, min.z,
+            max.x, max.y, max.z
+        );
+    }
+    
+    @Override
+    public boolean hasDynamicShape() {
+        return true;
+    }
+    
     public static class RenderProperties implements IClientBlockExtensions, MultiPosDestructionHandler {
 
         @Override

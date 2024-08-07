@@ -16,7 +16,7 @@ import java.util.function.Consumer;
 public class DebugOutliner extends Outliner {
     
     public Outline.OutlineParams showBlockPos(Object slot, BlockPos pos) {
-        return showAABB(slot, new AABB(pos, pos.offset(1, 1, 1)))
+        return showAABB(slot, new AABB(pos))
             .colored(Color.WHITE)
             .lineWidth(1 / 16f);
     }

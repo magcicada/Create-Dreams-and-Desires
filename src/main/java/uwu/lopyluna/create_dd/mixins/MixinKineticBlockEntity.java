@@ -47,8 +47,14 @@ public abstract class MixinKineticBlockEntity {
     @Inject(method = "propagateRotationTo(Lcom/simibubi/create/content/kinetics/base/KineticBlockEntity;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;ZZ)F", at = @At("HEAD"), cancellable = true)
     public void propagateRotationTo(KineticBlockEntity target, BlockState stateFrom, BlockState stateTo, BlockPos diff,
                                     boolean connectedViaAxes, boolean connectedViaCogs, CallbackInfoReturnable<Float> cir) {
-        if (DesiresBlockEntityTypes.GIANT_GEAR.is(target) && ICogWheel.isSmallCog(stateFrom))
+        if (!DesiresBlockEntityTypes.GIANT_GEAR.is(target)) return;
+        
+        if (connectedViaAxes)
+            cir.setReturnValue(1f);
+        else if (ICogWheel.isSmallCog(stateFrom))
             cir.setReturnValue(-1/8f);
+        else if (ICogWheel.isLargeCog(stateFrom))
+            cir.setReturnValue(-1/4f);
     }
     
 }

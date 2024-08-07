@@ -30,9 +30,9 @@ public class GiantGearBlockEntity extends KineticBlockEntity {
     public float propagateRotationTo(KineticBlockEntity target, BlockState stateFrom, BlockState stateTo, BlockPos diff, boolean connectedViaAxes, boolean connectedViaCogs) {
         final Direction direction = Direction.getNearest(diff.getX(), diff.getY(), diff.getZ());
         
-        if (getBlockState().getValue(GiantGearBlock.AXIS) == direction.getAxis()) return 1;
+        if (connectedViaAxes) return 1;
         
-        //Dont connect to shafts, they have 0 teeth and it breaks the system anyways
+        //Dont connect to shafts, they have 0 teeth and it breaks the system anyways - this is legacy and now just makes sure, but should not happen
         if (!ICogWheel.isSmallCog(stateTo) && !ICogWheel.isLargeCog(stateTo)) return 0;
         
         int thisBlockTeeth = 64;
@@ -88,55 +88,32 @@ public class GiantGearBlockEntity extends KineticBlockEntity {
     }
     
     @Override
-    public void tick() {
-        super.tick();
-        if (level.isClientSide) {
-            DesireClient.DEBUG_OUTLINER.showBlockPositions(
-                collectConnectionPositions(true, false), o -> o.colored(Color.RED)
-            );
-            
-            DesireClient.DEBUG_OUTLINER.showBlockPositions(
-                collectConnectionPositions(false, true), o -> o.colored(Color.BLACK)
-            );
-        }
-    }
-    
-    @Override
     public List<BlockPos> addPropagationLocations(IRotate block, BlockState state, List<BlockPos> neighbours) {
-//        if (!canPropagateDiagonally(block, state))
-//            return neighbours;
-//
-//        Direction.Axis axis = block.getRotationAxis(state);
-//        BlockPos.betweenClosedStream(new BlockPos(-3, -3, -3), new BlockPos(3, 3, 3))
-//                .forEach(offset -> {
-//                    if (axis.choose(offset.getX(), offset.getY(), offset.getZ()) != 2)
-//                        return;
-//                    if (offset.distSqr(BlockPos.ZERO) != 2)
-//                        return;
-//                    neighbours.add(worldPosition.offset(offset));
-//                });
-//        return neighbours;
-        
         ArrayList<BlockPos> locations = new ArrayList<>(neighbours);
-        
         Direction.Axis axis = getBlockState().getValue(GiantGearBlock.AXIS);
         
+        locations.addAll(collectConnectionPositions(true, true));
         
         return locations;
     }
     
     private List<BlockPos> collectConnectionPositions(boolean collectSmallCogConnections, boolean collectLargeCogConnections) {
         Direction.Axis axis = getBlockState().getValue(GiantGearBlock.AXIS);
+        return collectConnectionPositions(getBlockPos(), axis, collectSmallCogConnections, collectLargeCogConnections);
+    }
+    
+    public static List<BlockPos> collectConnectionPositions(BlockPos origin, Direction.Axis axis, boolean collectSmallCogConnections, boolean collectLargeCogConnections) {
+
         List<BlockPos> locations = new ArrayList<>();
         
         if (collectSmallCogConnections)
             forEachPerpendicularQuadrant(
                 axis, (d1, d2) -> {
-                    locations.add(getBlockPos()
+                    locations.add(origin
                         .relative(d1, 3)
                         .relative(d2, 2)
                     );
-                    locations.add(getBlockPos()
+                    locations.add(origin
                         .relative(d1, 2)
                         .relative(d2, 3)
                     );
@@ -146,7 +123,7 @@ public class GiantGearBlockEntity extends KineticBlockEntity {
         if (collectLargeCogConnections)
             forEachPerpendicularDirection(
                 axis, (d1) -> {
-                    locations.add(getBlockPos()
+                    locations.add(origin
                         .relative(d1, 4)
                     );
                 }

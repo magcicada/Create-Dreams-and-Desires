@@ -17,6 +17,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class GiantGearBlockItem extends BlockItem {
     public GiantGearBlockItem(Block pBlock, Properties pProperties) {
         super(pBlock, pProperties);
@@ -39,25 +42,40 @@ public class GiantGearBlockItem extends BlockItem {
 
     @OnlyIn(Dist.CLIENT)
     public void showBounds(BlockPlaceContext context) {
+        if (!(context.getPlayer() instanceof LocalPlayer localPlayer))
+            return;
         BlockPos pos = context.getClickedPos();
         Direction.Axis axis = ((GiantGearBlock) getBlock()).getAxisForPlacement(context);
-        Vec3 contract = Vec3.atLowerCornerOf(Direction.get(Direction.AxisDirection.POSITIVE, axis)
-                .getNormal());
-
-        boolean axis_x = axis == Direction.Axis.X;
-        boolean axis_y = axis == Direction.Axis.Y;
-        boolean axis_z = axis == Direction.Axis.Z;
-
-        int inflate_yz = !axis_x ? 2 : 1;
-        int inflate_xz = !axis_y ? 2 : 1;
-        int inflate_xy = !axis_z ? 2 : 1;
-
-        Vec3 inflateZAxis = new Vec3 (inflate_yz, inflate_xz, inflate_xy);
-        if (!(context.getPlayer()instanceof LocalPlayer localPlayer))
-            return;
-        CreateClient.OUTLINER.showAABB(Pair.of("waterwheel", pos), new AABB(pos).inflate(inflateZAxis.x, inflateZAxis.y, inflateZAxis.z)
-                        .deflate(contract.x, contract.y, contract.z))
+        
+        List<Direction.Axis> perpendicularDirections = Arrays.stream(Direction.Axis.values()).filter(other -> other != axis).toList();
+        
+        CreateClient.OUTLINER.showAABB(Pair.of("waterwheel-core", pos), new AABB(
+                pos
+                    .relative(perpendicularDirections.get(0), -2)
+                    .relative(perpendicularDirections.get(1), -2),
+                pos
+                    .relative(perpendicularDirections.get(0), 2)
+                    .relative(perpendicularDirections.get(1), 2)
+                    .offset(1, 1, 1)
+            ))
+            .colored(0xFF_ff5d6c);
+        
+        for (int i = 0; i < 2; i++) {
+            Direction.Axis primaryAxis = perpendicularDirections.get(i);
+            Direction.Axis secondaryAxis = perpendicularDirections.get(i == 0 ? 1 : 0);
+            
+            CreateClient.OUTLINER.showAABB(Pair.of("waterwheel-"+primaryAxis.getName(), pos), new AABB(
+                    pos
+                        .relative(primaryAxis, -3)
+                        .relative(secondaryAxis, -1),
+                    pos
+                        .relative(primaryAxis, 3)
+                        .relative(secondaryAxis, 1)
+                        .offset(1, 1, 1)
+                ))
                 .colored(0xFF_ff5d6c);
+        }
+        
         Lang.translate("large_water_wheel.not_enough_space")
                 .color(0xFF_ff5d6c)
                 .sendStatus(localPlayer);

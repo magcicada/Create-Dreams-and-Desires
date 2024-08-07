@@ -19,4 +19,5 @@ public abstract class MixinRotatedPillarKineticBlock {
             cir.setReturnValue(PoweredFlywheelBlock.getEquivalent(AllBlocks.FLYWHEEL.getDefaultState(),context.getNearestLookingDirection().getAxis()));
         }
     }
+    
 }
