@@ -1,7 +1,12 @@
 package uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear;
 
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
+import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;
 import com.simibubi.create.foundation.block.IBE;
+import com.simibubi.create.foundation.placement.IPlacementHelper;
+import com.simibubi.create.foundation.placement.PlacementHelpers;
+import com.simibubi.create.foundation.placement.PlacementOffset;
 import com.simibubi.create.foundation.utility.Iterate;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
@@ -11,6 +16,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -23,11 +29,15 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
+import uwu.lopyluna.create_dd.DesireClient;
 import uwu.lopyluna.create_dd.registry.DesiresBlockEntityTypes;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @ParametersAreNonnullByDefault
@@ -37,7 +47,9 @@ public class GiantGearBlock extends RotatedPillarKineticBlock implements IBE<Gia
     
     private static HashMap<Direction.Axis, HashMap<Vec3i, BlockState>> STRUCTURE_BY_AXIS;
     
-    /**Quick iteration of the structure, result is cached*/
+    /**
+     * Quick iteration of the structure, result is cached
+     */
     public static HashMap<Direction.Axis, HashMap<Vec3i, BlockState>> getStructureByAxis() {
         if (STRUCTURE_BY_AXIS == null)
             STRUCTURE_BY_AXIS = generateStructuresByAxis();
@@ -121,11 +133,8 @@ public class GiantGearBlock extends RotatedPillarKineticBlock implements IBE<Gia
         assert stateForPlacement != null;
         Direction.Axis axis = stateForPlacement.getValue(AXIS);
         
-        HashMap<Vec3i, BlockState> structure = getStructureByAxis().get(axis);
-        for (Map.Entry<Vec3i, BlockState> entry : structure.entrySet()) {
-            if (!context.getLevel().getBlockState(origin.offset(entry.getKey())).is(Blocks.AIR))
-                return null;
-        }
+        if (!isClearForStructure(axis, origin, context.getLevel()))
+            return null;
         
         return stateForPlacement;
     }
@@ -152,20 +161,36 @@ public class GiantGearBlock extends RotatedPillarKineticBlock implements IBE<Gia
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
     
+    public static boolean isClearForStructure(Direction.Axis axis, BlockPos origin, LevelReader level) {
+        HashMap<Vec3i, BlockState> structure = getStructureByAxis().get(axis);
+        for (Map.Entry<Vec3i, BlockState> entry : structure.entrySet()) {
+            if (!level.getBlockState(origin.offset(entry.getKey())).is(Blocks.AIR))
+                return false;
+        }
+        return true;
+    }
+    
     /**
      * @param pPos   the position of a block in the structure
      * @param pState the state of a block in the structure
+     *
      * @return whether the structure is valid
      */
     public static boolean structureStillValid(LevelReader pLevel, BlockPos pPos, BlockState pState) {
         Block block = pState.getBlock();
+        
         if (pState.is(DesiresBlocks.GIANT_GEAR_STRUCTURAL.get())
             && block instanceof GiantGearStructuralBlock) {
+            
+            //This is the parent, so check
             BlockPos ownerPos = GiantGearStructuralBlock.getOwner(pLevel, pPos, pState);
             BlockState ownerState = pLevel.getBlockState(ownerPos);
             return structureStillValid(pLevel, ownerPos, ownerState);
+            
         } else if (pState.is(DesiresBlocks.GIANT_GEAR.get())
             && block instanceof GiantGearBlock) {
+            
+            //Look for a parent to check for
             Direction.Axis axis = pState.getValue(AXIS);
             HashMap<Vec3i, BlockState> structure = getStructureByAxis().get(axis);
             for (Map.Entry<Vec3i, BlockState> entry : structure.entrySet()) {
@@ -174,12 +199,16 @@ public class GiantGearBlock extends RotatedPillarKineticBlock implements IBE<Gia
                 if (blockState != entry.getValue())
                     return false;
             }
+            
             return true;
         }
+        
         return false;
     }
     
-    /**Removes blocks in the associated axis' structure*/
+    /**
+     * Removes blocks in the associated axis' structure
+     */
     public static void destroyStructure(BlockPos origin, Direction.Axis axis, LevelAccessor level, boolean drops) {
         HashMap<Vec3i, BlockState> structure = getStructureByAxis().get(axis);
         for (Vec3i pos : structure.keySet()) {
@@ -225,7 +254,7 @@ public class GiantGearBlock extends RotatedPillarKineticBlock implements IBE<Gia
                     );
                     continue;
                 }
-     
+                
                 //Otherwise fill out the child blocks
                 result.put(
                     pos, DesiresBlocks.GIANT_GEAR_STRUCTURAL.get()
