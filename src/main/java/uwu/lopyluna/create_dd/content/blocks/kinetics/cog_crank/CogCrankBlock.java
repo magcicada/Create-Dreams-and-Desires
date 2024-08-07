@@ -48,7 +48,9 @@ import static com.simibubi.create.content.kinetics.simpleRelays.CogWheelBlock.is
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class CogCrankBlock extends RotatedPillarKineticBlock implements IBE<CogCrankBlockEntity>, ICogWheel, ProperWaterloggedBlock {
+    
     boolean isLarge;
+    
     public CogCrankBlock(boolean large, Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false));
@@ -76,11 +78,12 @@ public class CogCrankBlock extends RotatedPillarKineticBlock implements IBE<CogC
     public int getRotationSpeed() {
         return 32;
     }
+    
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         return (isLarge ? AllShapes.LARGE_GEAR : AllShapes.SMALL_GEAR).get(state.getValue(AXIS));
     }
-
+    
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn,
                                  BlockHitResult hit) {
@@ -90,26 +93,26 @@ public class CogCrankBlock extends RotatedPillarKineticBlock implements IBE<CogC
             return InteractionResult.PASS;
         withBlockEntityDo(worldIn, pos, be -> be.turn(player.isShiftKeyDown()));
         if (!player.getItemInHand(handIn)
-                .is(AllItems.EXTENDO_GRIP.get()))
+            .is(AllItems.EXTENDO_GRIP.get()))
             player.causeFoodExhaustion(getRotationSpeed() * DesiresConfigs.server().kinetics.cogCrankHungerMultiplier.getF());
-
+        
         if (player.getFoodData()
-                .getFoodLevel() == 0)
+            .getFoodLevel() == 0)
             AllAdvancements.HAND_CRANK.awardTo(player);
-
+        
         return InteractionResult.SUCCESS;
     }
-
+    
     @Override
     public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
         return isValidCogwheelPosition(ICogWheel.isLargeCog(state), worldIn, pos, state.getValue(AXIS));
     }
-
+    
     @Override
     public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
         return false;
     }
-
+    
     @Override
     public Direction.Axis getRotationAxis(BlockState state) {
         return state.getValue(AXIS);
@@ -119,6 +122,7 @@ public class CogCrankBlock extends RotatedPillarKineticBlock implements IBE<CogC
     public Class<CogCrankBlockEntity> getBlockEntityClass() {
         return CogCrankBlockEntity.class;
     }
+    
     @Override
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.ENTITYBLOCK_ANIMATED;
@@ -131,19 +135,19 @@ public class CogCrankBlock extends RotatedPillarKineticBlock implements IBE<CogC
     
     protected Direction.Axis getAxisForPlacement(BlockPlaceContext context) {
         if (context.getPlayer() != null && context.getPlayer()
-                .isShiftKeyDown())
+            .isShiftKeyDown())
             return context.getClickedFace().getAxis();
         
         Level world = context.getLevel();
         BlockState stateBelow = world.getBlockState(context.getClickedPos()
-                .below());
+            .below());
         
         if (AllBlocks.ROTATION_SPEED_CONTROLLER.has(stateBelow) && isLargeCog())
             return stateBelow.getValue(SpeedControllerBlock.HORIZONTAL_AXIS) == Direction.Axis.X ? Direction.Axis.X : Direction.Axis.Z;
         
         BlockPos placedOnPos = context.getClickedPos()
-                .relative(context.getClickedFace()
-                        .getOpposite());
+            .relative(context.getClickedFace()
+                .getOpposite());
         BlockState placedAgainst = world.getBlockState(placedOnPos);
         
         Block block = placedAgainst.getBlock();
@@ -152,7 +156,7 @@ public class CogCrankBlock extends RotatedPillarKineticBlock implements IBE<CogC
         
         Direction.Axis preferredAxis = getPreferredAxis(context);
         return preferredAxis != null ? preferredAxis
-                : context.getClickedFace().getAxis();
+            : context.getClickedFace().getAxis();
     }
     
     public static boolean isValidCogwheelPosition(boolean large, LevelReader worldIn, BlockPos pos, Direction.Axis cogAxis) {
@@ -174,13 +178,13 @@ public class CogCrankBlock extends RotatedPillarKineticBlock implements IBE<CogC
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         boolean shouldWaterlog = context.getLevel()
-                .getFluidState(context.getClickedPos())
-                .getType() == Fluids.WATER;
+            .getFluidState(context.getClickedPos())
+            .getType() == Fluids.WATER;
         return this.defaultBlockState()
-                .setValue(AXIS, getAxisForPlacement(context))
-                .setValue(BlockStateProperties.WATERLOGGED, shouldWaterlog);
+            .setValue(AXIS, getAxisForPlacement(context))
+            .setValue(BlockStateProperties.WATERLOGGED, shouldWaterlog);
     }
-
+    
     public static Couple<Integer> getSpeedRange() {
         return Couple.create(32, 32);
     }
@@ -204,5 +208,5 @@ public class CogCrankBlock extends RotatedPillarKineticBlock implements IBE<CogC
     public boolean isSmallCog() {
         return !isLarge;
     }
-
+    
 }
