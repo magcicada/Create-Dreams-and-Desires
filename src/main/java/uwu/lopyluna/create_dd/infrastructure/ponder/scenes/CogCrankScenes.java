@@ -10,6 +10,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.phys.Vec3;
 
 public class CogCrankScenes {
+    
     public static void cogCrank(SceneBuilder scene, SceneBuildingUtil util) {
         scene.title("cog_crank", "Generating Rotational Force using Cog Cranks");
         scene.configureBasePlate(0, 0, 5);
@@ -70,4 +71,5 @@ public class CogCrankScenes {
         scene.world.setKineticSpeed(util.select.everywhere(), 0);
         scene.idle(45);
     }
+    
 }

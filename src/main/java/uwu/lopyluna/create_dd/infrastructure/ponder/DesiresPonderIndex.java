@@ -12,6 +12,7 @@ public class DesiresPonderIndex {
 	public static final boolean REGISTER_DEBUG_SCENES = false;
 
 	public static void register() {
+		
 	}
 
 	public static boolean editingModeActive() {

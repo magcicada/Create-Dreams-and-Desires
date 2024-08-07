@@ -24,7 +24,8 @@
     "MixinMountedStorage",
     "MixinMountedStorageManager",
     "MixinRotatedPillarKineticBlock",
-    "MixinRotationPropagator"
+    "MixinRotationPropagator",
+    "MixinSimpleKineticBlockEntity"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -35,8 +35,8 @@ import java.util.Random;
 
 @SuppressWarnings({"removal","all"})
 @Mod(DesiresCreate.MOD_ID)
-public class DesiresCreate
-{
+public class DesiresCreate {
+    
     public static final String NAME = "Create: Dreams n' Desires";
     public static final String MOD_ID = "create_dd";
     public static final Logger LOGGER = LogUtils.getLogger();
