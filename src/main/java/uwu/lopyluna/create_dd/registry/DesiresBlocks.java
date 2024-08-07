@@ -408,6 +408,7 @@ public class DesiresBlocks {
 			.initialProperties(SharedProperties::netheriteMetal)
 			.properties(p -> p.noOcclusion().sound(SoundType.METAL).color(MaterialColor.COLOR_YELLOW))
 			.transform(pickaxeOnly())
+			.transform(BlockStressDefaults.setImpact(8.0))
 			.blockstate(BlockStateGen.axisBlockProvider(true))
 			.item(GiantGearBlockItem::new)
 			.tab(() -> DesiresCreativeModeTabs.BETA_CREATIVE_TAB)
