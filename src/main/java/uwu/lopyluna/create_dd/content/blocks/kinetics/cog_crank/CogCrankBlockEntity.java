@@ -7,13 +7,16 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.kinetics.RotationPropagator;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
+import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.crank.HandCrankBlockEntity;
+import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;
 import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.render.SuperByteBuffer;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -113,13 +116,7 @@ public class CogCrankBlockEntity extends GeneratingKineticBlockEntity {
     public boolean shouldRenderCog() {
         return true;
     }
-
-
-    @OnlyIn(Dist.CLIENT)
-    public boolean shouldRenderShaft() {
-        return false;
-    }
-
+    
     @Override
     protected Block getStressConfigKey() {
         return DesiresBlocks.COG_CRANK.has(getBlockState()) ? DesiresBlocks.COG_CRANK.get()
@@ -136,4 +133,10 @@ public class CogCrankBlockEntity extends GeneratingKineticBlockEntity {
             AllSoundEvents.CRANKING.playAt(level, worldPosition, (inUse) / 2.5f, .65f + (10 - inUse) / 10f, true);
         }
     }
+    
+    @Override
+    protected boolean canPropagateDiagonally(IRotate block, BlockState state) {
+        return ICogWheel.isLargeCog(state);
+    }
+    
 }
